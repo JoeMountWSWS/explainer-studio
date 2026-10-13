@@ -99,6 +99,7 @@ Read `brand/frame.md` first, and use the `hyperframes-core` and `hyperframes-ani
 - **HyperFrames** CLI pinned at `HF_VERSION` in `tools/studio/common.py` (override with `STUDIO_HF_VERSION`). To upgrade, bump it, run `studio check` on an episode, and compare a draft render.
 - **Kokoro-82M** TTS runs in-process from the studio venv; the model is cached in `~/.cache/hyperframes/tts`. English phonemes come from misaki plus spaCy `en_core_web_sm` (pinned in `pyproject.toml`; installed without `misaki[en]`, whose extra pulls in ~5 GB of torch for the unused transformer model). **Whisper** (`hyperframes transcribe`, small.en) gives word timings, which are aligned back onto the script text. `npx hyperframes models install parakeet` is faster and more accurate, and is used automatically once installed.
 - **ElevenLabs** (optional cloud TTS, `tts: elevenlabs`): stdlib HTTPS calls from `tools/studio/voice.py`, sending each paragraph with its neighbours' text so the delivery stays continuous.
+- **CI** (`.github/workflows/ci.yml`): `uv sync --locked`, ruff (`[tool.ruff]` in `pyproject.toml`), a CLI smoke test, and `hyperframes check` on every episode. It never narrates or renders, so commit `audio/vo/`, `timing.json` and `index.html` after `sync`.
 - ffmpeg 9, Chromium (thumbnails), uv (Python 3.12–3.13; `kokoro-onnx` needs <3.14).
 
 ## Gotchas

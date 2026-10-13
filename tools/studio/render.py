@@ -14,7 +14,6 @@ from .build import render_shell
 from .common import HF_VERSION, OUT, SAMPLE_RATE, die, ffprobe_duration, hf, info, run, sha, tree_hash
 from .script import Script
 
-
 # ---------------------------------------------------------------- video
 
 def render_scenes(ep: Path, timing: dict, quality: str, only: set[str] | None, force: bool) -> list[Path]:
