@@ -66,6 +66,7 @@ jobs:
       - uses: astral-sh/setup-uv@v10.3.0
         with:
           enable-cache: true
+          save-cache: false  # restore the cache the lint job saves; parallel saves race
       - run: uv sync --locked
       - name: Copy brand into the episode
         run: uv run python -c "from studio.build import sync_brand; from studio.common import EPISODES; sync_brand(EPISODES / '${{ matrix.slug }}')"
