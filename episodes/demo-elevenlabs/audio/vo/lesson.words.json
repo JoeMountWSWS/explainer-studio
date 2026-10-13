@@ -1,0 +1,148 @@
+{
+ "hash": "6467e6091c7e36ff6788",
+ "source": "tts",
+ "duration": 11.656,
+ "words": [
+  {
+   "text": "Karl",
+   "start": 0.07,
+   "end": 0.48
+  },
+  {
+   "text": "Marx",
+   "start": 0.48,
+   "end": 0.89
+  },
+  {
+   "text": "studied",
+   "start": 1.1,
+   "end": 1.81
+  },
+  {
+   "text": "it",
+   "start": 1.81,
+   "end": 2.05
+  },
+  {
+   "text": "closely.",
+   "start": 2.05,
+   "end": 3.0
+  },
+  {
+   "text": "He",
+   "start": 3.07,
+   "end": 3.1
+  },
+  {
+   "text": "concluded",
+   "start": 3.14,
+   "end": 3.63
+  },
+  {
+   "text": "that",
+   "start": 3.63,
+   "end": 3.86
+  },
+  {
+   "text": "the",
+   "start": 3.86,
+   "end": 3.92
+  },
+  {
+   "text": "working",
+   "start": 4.1,
+   "end": 4.44
+  },
+  {
+   "text": "class",
+   "start": 4.44,
+   "end": 4.61
+  },
+  {
+   "text": "cannot",
+   "start": 4.77,
+   "end": 5.2
+  },
+  {
+   "text": "simply",
+   "start": 5.2,
+   "end": 5.33
+  },
+  {
+   "text": "lay",
+   "start": 5.33,
+   "end": 5.99
+  },
+  {
+   "text": "hold",
+   "start": 5.99,
+   "end": 6.26
+  },
+  {
+   "text": "of",
+   "start": 6.32,
+   "end": 6.39
+  },
+  {
+   "text": "the",
+   "start": 6.39,
+   "end": 6.53
+  },
+  {
+   "text": "ready-made",
+   "start": 6.53,
+   "end": 7.02
+  },
+  {
+   "text": "state",
+   "start": 7.02,
+   "end": 7.56
+  },
+  {
+   "text": "machinery,",
+   "start": 7.56,
+   "end": 8.53
+  },
+  {
+   "text": "and",
+   "start": 8.63,
+   "end": 8.8
+  },
+  {
+   "text": "wield",
+   "start": 8.8,
+   "end": 9.19
+  },
+  {
+   "text": "it",
+   "start": 9.19,
+   "end": 9.27
+  },
+  {
+   "text": "for",
+   "start": 9.36,
+   "end": 9.48
+  },
+  {
+   "text": "its",
+   "start": 9.64,
+   "end": 9.84
+  },
+  {
+   "text": "own",
+   "start": 9.84,
+   "end": 10.07
+  },
+  {
+   "text": "purposes.",
+   "start": 10.08,
+   "end": 10.88
+  }
+ ],
+ "cues": {
+  "key": 3.86
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

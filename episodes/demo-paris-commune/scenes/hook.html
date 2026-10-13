@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #hook-stage { display: flex; flex-direction: column; justify-content: center; }
+        #hook-title { font-size: 132px; max-width: 1450px; margin-top: 44px; }
+        #hook-sub { margin-top: 40px; max-width: 1300px; }
+        #hook-rule { width: 100%; margin-top: 64px; transform-origin: left center; }
+        #hook-byline { margin-top: 28px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-hook" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="hook-stage" class="stage">
+          <div id="hook-tag" class="tag">History</div>
+          <h1 id="hook-title" class="headline">The Paris Commune</h1>
+          <p id="hook-sub" class="standfirst">The first workers’ government, Paris, March to May 1871</p>
+          <div id="hook-rule" class="hairline"></div>
+          <div id="hook-byline" class="byline">An explainer in five minutes or less</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 11.7, "voStart": 0.6, "voEnd": 10.801, "cues": {"sub": 8.07}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#hook-tag", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.2);
+          tl.fromTo("#hook-title", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 0.35);
+          tl.fromTo("#hook-sub", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, cue("sub", 1.2));
+          tl.fromTo("#hook-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power2.inOut" }, 1.0);
+          tl.fromTo("#hook-byline", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.6);
+
+          tl.to("#hook-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-hook"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

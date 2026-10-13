@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #__ID__-stage { display: flex; flex-direction: column; justify-content: center; }
+        #__ID__-head { width: 560px; }
+        #__ID__-headline { font-size: 88px; margin: 36px 0 52px; }
+        #__ID__-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+        #__ID__-list li { display: flex; align-items: baseline; gap: 36px; padding: 22px 0; border-top: var(--hairline); }
+        #__ID__-list .num { font-family: var(--font-sans); font-weight: 700; font-size: 34px; color: var(--red); min-width: 48px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-__ID__" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="__ID__-stage" class="stage">
+          <div id="__ID__-head" class="section-head">
+            <div id="__ID__-rule" class="section-rule"></div>
+            <div id="__ID__-label" class="label">__TITLE__</div>
+          </div>
+          <h2 id="__ID__-headline" class="headline">Heading for the list</h2>
+          <!-- Up to 4 items. Each appears on cue {p1}..{p4} in the narration. -->
+          <ol id="__ID__-list">
+            <li id="__ID__-p1" class="body"><span class="num">1</span><span>First point</span></li>
+            <li id="__ID__-p2" class="body"><span class="num">2</span><span>Second point</span></li>
+            <li id="__ID__-p3" class="body"><span class="num">3</span><span>Third point</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = { duration: 6, voStart: 0.5, voEnd: 5.5, cues: {}, paragraphs: [0.5] };
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#__ID__-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, 0.1);
+          tl.fromTo("#__ID__-label", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.4);
+          tl.fromTo("#__ID__-headline", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.45);
+          ["p1", "p2", "p3", "p4"].forEach((p, i) => {
+            if (!document.getElementById(`__ID__-${p}`)) return;
+            tl.fromTo(`#__ID__-${p}`, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, cue(p, 1.3 + i * 1.5));
+          });
+
+          tl.to("#__ID__-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-__ID__"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

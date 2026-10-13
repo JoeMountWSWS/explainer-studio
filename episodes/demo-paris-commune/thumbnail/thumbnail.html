@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- YouTube thumbnail, 1280x720. `studio thumbnail <slug>` screenshots this page.
+     Edit freely: it is copied into the episode once and never overwritten.
+     Thumbnails are read at ~320px wide, so: 3-6 words, huge type, one red element. -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../assets/brand/brand.css" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1280px; height: 720px; overflow: hidden; background: #ffffff; }
+      .frame { position: absolute; inset: 0; padding: 72px 88px; display: flex; flex-direction: column; justify-content: center; }
+      .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 28px; background: var(--red); }
+      .tag { font-size: 30px; padding: 12px 22px 11px; }
+      h1 { font-family: var(--font-serif); font-weight: 700; font-size: 112px; line-height: 1.04; color: var(--ink); margin-top: 36px; max-width: 1100px; }
+      h1 .red { color: var(--red); }
+      .rule { height: 8px; background: var(--ink); width: 240px; margin-top: 44px; }
+    </style>
+  </head>
+  <body>
+    <div class="bar"></div>
+    <div class="frame">
+      <div class="tag">History</div>
+      <h1>The <span class="red">72 days</span> that shook Paris</h1>
+      <div class="rule"></div>
+    </div>
+  </body>
+</html>

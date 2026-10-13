@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #lesson-stage { display: flex; flex-direction: column; justify-content: center; }
+        #lesson-quote { font-size: 68px; line-height: 1.3; max-width: 1420px; }
+        #lesson-who { margin-top: 52px; padding-left: 62px; }
+        #lesson-src { margin-top: 12px; padding-left: 62px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-lesson" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="lesson-stage" class="stage">
+          <blockquote id="lesson-quote" class="quote">“The working class cannot simply lay hold of the <span id="lesson-wash" class="hl">ready-made state machinery</span>, and wield it for its own purposes.”</blockquote>
+          <div id="lesson-who" class="label">Karl Marx</div>
+          <div id="lesson-src" class="byline"><span class="italic">The Civil War in France</span>, 1871</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 13.1667, "voStart": 0.6, "voEnd": 12.256, "cues": {"key": 4.46}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#lesson-quote", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 0.25);
+          tl.fromTo(["#lesson-who", "#lesson-src"], { opacity: 0 }, { opacity: 1, duration: 0.6, stagger: 0.12 }, 1.0);
+          tl.fromTo("#lesson-wash", { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, cue("key", 2.0));
+
+          tl.to("#lesson-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-lesson"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
