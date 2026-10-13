@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+# Narration is not regenerated here: the TTS cache is gitignored and ElevenLabs needs a paid key.
+# CI checks the committed artefacts (audio/vo, timing.json, index.html, scenes) instead.
+
+jobs:
+  python:
+    name: Lint and smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install (lockfile must be current)
+        run: uv sync --locked
+      - name: Ruff
+        run: uvx ruff@0.17.0 check tools/
+      - name: CLI smoke test
+        run: |
+          uv run studio --help
+          for script in episodes/*/script.md; do
+            uv run studio status "$(basename "$(dirname "$script")")"
+          done
+          uv run studio new ci-smoke "CI smoke"
+          uv run studio status ci-smoke
+
+  episodes:
+    name: Episodes
+    runs-on: ubuntu-latest
+    outputs:
+      slugs: ${{ steps.list.outputs.slugs }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list
+        run: |
+          slugs=$(for s in episodes/*/script.md; do basename "$(dirname "$s")"; done | jq -R . | jq -sc .)
+          echo "slugs=$slugs" >> "$GITHUB_OUTPUT"
+
+  check:
+    name: hyperframes check (${{ matrix.slug }})
+    needs: episodes
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        slug: ${{ fromJSON(needs.episodes.outputs.slugs) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --locked
+      - name: Copy brand into the episode
+        run: uv run python -c "from studio.build import sync_brand; from studio.common import EPISODES; sync_brand(EPISODES / '${{ matrix.slug }}')"
+      - name: Pinned HyperFrames version
+        id: hf
+        run: echo "version=$(uv run python -c 'from studio.common import HF_VERSION; print(HF_VERSION)')" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-hyperframes-${{ steps.hf.outputs.version }}
+      - name: Lint, layout and contrast audits
+        working-directory: episodes/${{ matrix.slug }}
+        run: npx --yes hyperframes@${{ steps.hf.outputs.version }} check
