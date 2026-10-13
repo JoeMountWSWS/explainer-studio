@@ -1,0 +1,159 @@
+{
+ "hash": "95698db9279c59e765df",
+ "source": "tts",
+ "duration": 10.952,
+ "words": [
+  {
+   "text": "The",
+   "start": 0.07,
+   "end": 0.24
+  },
+  {
+   "text": "campaign",
+   "start": 0.24,
+   "end": 0.82
+  },
+  {
+   "text": "to",
+   "start": 0.94,
+   "end": 1.05
+  },
+  {
+   "text": "free",
+   "start": 1.05,
+   "end": 1.33
+  },
+  {
+   "text": "Bogdan",
+   "start": 1.39,
+   "end": 1.88
+  },
+  {
+   "text": "defends",
+   "start": 1.92,
+   "end": 2.33
+  },
+  {
+   "text": "the",
+   "start": 2.41,
+   "end": 2.55
+  },
+  {
+   "text": "right",
+   "start": 2.55,
+   "end": 2.85
+  },
+  {
+   "text": "to",
+   "start": 2.92,
+   "end": 3.05
+  },
+  {
+   "text": "oppose",
+   "start": 3.05,
+   "end": 3.46
+  },
+  {
+   "text": "the",
+   "start": 3.55,
+   "end": 3.75
+  },
+  {
+   "text": "war",
+   "start": 3.75,
+   "end": 3.99
+  },
+  {
+   "text": "and",
+   "start": 4.0,
+   "end": 4.2
+  },
+  {
+   "text": "the",
+   "start": 4.28,
+   "end": 4.44
+  },
+  {
+   "text": "principle",
+   "start": 4.44,
+   "end": 4.83
+  },
+  {
+   "text": "on",
+   "start": 5.2,
+   "end": 5.24
+  },
+  {
+   "text": "which",
+   "start": 5.24,
+   "end": 5.48
+  },
+  {
+   "text": "any",
+   "start": 5.61,
+   "end": 5.82
+  },
+  {
+   "text": "anti-war",
+   "start": 5.82,
+   "end": 6.57
+  },
+  {
+   "text": "movement",
+   "start": 6.57,
+   "end": 7.13
+  },
+  {
+   "text": "must",
+   "start": 7.46,
+   "end": 7.7
+  },
+  {
+   "text": "stand,",
+   "start": 7.7,
+   "end": 8.23
+  },
+  {
+   "text": "the",
+   "start": 8.25,
+   "end": 8.39
+  },
+  {
+   "text": "unity",
+   "start": 8.47,
+   "end": 8.75
+  },
+  {
+   "text": "of",
+   "start": 8.75,
+   "end": 8.88
+  },
+  {
+   "text": "workers",
+   "start": 8.88,
+   "end": 9.33
+  },
+  {
+   "text": "across",
+   "start": 9.33,
+   "end": 9.71
+  },
+  {
+   "text": "national",
+   "start": 9.71,
+   "end": 10.21
+  },
+  {
+   "text": "borders.",
+   "start": 10.23,
+   "end": 10.9
+  }
+ ],
+ "cues": {
+  "right": 2.41,
+  "unity": 8.25
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

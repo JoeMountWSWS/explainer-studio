@@ -1,0 +1,545 @@
+{
+ "fps": 30,
+ "duration": 628.8,
+ "scenes": [
+  {
+   "id": "baltic",
+   "title": "A warning from Moscow",
+   "template": "blank",
+   "start": 0.0,
+   "duration": 24.033333333333335,
+   "voStart": 0.6,
+   "voEnd": 23.124,
+   "cues": {
+    "neighbours": 3.62,
+    "name": 9.4,
+    "pop": 10.53,
+    "fleet": 14.21,
+    "nato": 21.5
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "warning",
+   "title": "A warning from Moscow",
+   "template": "blank",
+   "start": 24.033333333333335,
+   "duration": 36.1,
+   "voStart": 0.6,
+   "voEnd": 35.216,
+   "cues": {
+    "nuclear": 4.89,
+    "embassies": 8.03,
+    "note": 14.71,
+    "quote": 22.87,
+    "key": 27.4,
+    "centres": 32.8
+   },
+   "paragraphs": [
+    0.6,
+    6.54
+   ]
+  },
+  {
+   "id": "putin",
+   "title": "A warning from Moscow",
+   "template": "quote",
+   "start": 60.13333333333333,
+   "duration": 12.366666666666667,
+   "voStart": 0.6,
+   "voEnd": 11.462,
+   "cues": {
+    "key": 9.41
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "cuba",
+   "title": "A warning from Moscow",
+   "template": "blank",
+   "start": 72.5,
+   "duration": 21.2,
+   "voStart": 0.6,
+   "voEnd": 20.294,
+   "cues": {
+    "tv": 9.81,
+    "now": 14.22,
+    "nyt": 17.13,
+    "not": 19.17
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "promise",
+   "title": "A warning from Moscow",
+   "template": "blank",
+   "start": 93.7,
+   "duration": 6.8,
+   "voStart": 0.6,
+   "voEnd": 5.898,
+   "cues": {
+    "how": 2.09,
+    "why": 3.27,
+    "stop": 4.89
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "baker",
+   "title": "How we got here",
+   "template": "blank",
+   "start": 100.5,
+   "duration": 20.4,
+   "voStart": 0.6,
+   "voEnd": 19.505,
+   "cues": {
+    "date": 3.9,
+    "key": 14.39,
+    "others": 16.94
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "ussr",
+   "title": "How we got here",
+   "template": "blank",
+   "start": 120.9,
+   "duration": 17.066666666666666,
+   "voStart": 0.6,
+   "voEnd": 16.177,
+   "cues": {
+    "year": 1.54,
+    "caste": 7.33,
+    "restored": 10.99,
+    "oligarchs": 13.44
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "expansion",
+   "title": "How we got here",
+   "template": "blank",
+   "start": 137.96666666666667,
+   "duration": 30.566666666666666,
+   "voStart": 0.6,
+   "voEnd": 29.652,
+   "cues": {
+    "w1999": 2.4,
+    "w2004": 6.58,
+    "w2023": 13.32,
+    "w2024": 15.68,
+    "lake": 19.66,
+    "potsdam": 24.86,
+    "island": 28.84
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "ukraine",
+   "title": "How we got here",
+   "template": "blank",
+   "start": 168.53333333333333,
+   "duration": 21.466666666666665,
+   "voStart": 0.6,
+   "voEnd": 20.568,
+   "cues": {
+    "decades": 2.51,
+    "arm": 7.64,
+    "intel": 8.6,
+    "drones": 10.53,
+    "aim": 15.17
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "regime",
+   "title": "How we got here",
+   "template": "blank",
+   "start": 190.0,
+   "duration": 20.766666666666666,
+   "voStart": 0.6,
+   "voEnd": 19.864,
+   "cues": {
+    "progressive": 2.93,
+    "oligarchy": 4.83,
+    "reactionary": 12.59,
+    "workers": 15.75
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "blockade",
+   "title": "The flashpoint",
+   "template": "title",
+   "start": 210.76666666666668,
+   "duration": 4.733333333333333,
+   "voStart": 0.6,
+   "voEnd": 3.85,
+   "cues": {
+    "sub": 2.83
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "timeline",
+   "title": "The flashpoint",
+   "template": "blank",
+   "start": 215.5,
+   "duration": 38.833333333333336,
+   "voStart": 0.6,
+   "voEnd": 37.925,
+   "cues": {
+    "summer": 2.78,
+    "august": 6.14,
+    "cut": 17.53,
+    "september": 21.92,
+    "sikorski": 33.35
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "law",
+   "title": "The flashpoint",
+   "template": "blank",
+   "start": 254.33333333333334,
+   "duration": 29.133333333333333,
+   "voStart": 0.6,
+   "voEnd": 28.244,
+   "cues": {
+    "act": 3.56,
+    "un": 7.47,
+    "listed": 9.68,
+    "doctrine": 14.84,
+    "conventional": 19.58,
+    "kal": 26.36
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "escalate",
+   "title": "Europe\u2019s answer",
+   "template": "title",
+   "start": 283.46666666666664,
+   "duration": 4.766666666666667,
+   "voStart": 0.6,
+   "voEnd": 3.872,
+   "cues": {
+    "sub": 2.85
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "leaders",
+   "title": "Europe\u2019s answer",
+   "template": "blank",
+   "start": 288.23333333333335,
+   "duration": 33.6,
+   "voStart": 0.6,
+   "voEnd": 32.689,
+   "cues": {
+    "rutte": 4.72,
+    "merz": 10.68,
+    "kyiv": 14.46,
+    "range": 22.63,
+    "kubilius": 30.29
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "log",
+   "title": "Europe\u2019s answer",
+   "template": "blank",
+   "start": 321.8333333333333,
+   "duration": 34.03333333333333,
+   "voStart": 0.6,
+   "voEnd": 33.133,
+   "cues": {
+    "sanctions": 0.81,
+    "noon": 14.01,
+    "countries": 20.06,
+    "lithuania": 24.33,
+    "wmd": 30.63
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "pattern",
+   "title": "Europe\u2019s answer",
+   "template": "blank",
+   "start": 355.8666666666667,
+   "duration": 11.3,
+   "voStart": 0.6,
+   "voEnd": 10.396,
+   "cues": {
+    "bluff": 3.72,
+    "crossed": 6.16,
+    "next": 8.13
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "north",
+   "title": "Europe\u2019s answer",
+   "template": "blank",
+   "start": 367.1666666666667,
+   "duration": 27.466666666666665,
+   "voStart": 0.6,
+   "voEnd": 26.558,
+   "cues": {
+    "years": 7.71,
+    "crises": 11.65,
+    "y1909": 16.54,
+    "y1914": 21.06,
+    "not": 25.77
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "why",
+   "title": "Why",
+   "template": "title",
+   "start": 394.6333333333333,
+   "duration": 6.466666666666667,
+   "voStart": 0.6,
+   "voEnd": 5.578,
+   "cues": {
+    "sub": 4.08
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "lenin",
+   "title": "Why",
+   "template": "blank",
+   "start": 401.1,
+   "duration": 19.7,
+   "voStart": 0.6,
+   "voEnd": 18.797,
+   "cues": {
+    "lenin": 6.08,
+    "imperialist": 8.9,
+    "monopolies": 10.67,
+    "divide": 14.27
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "trotsky",
+   "title": "Why",
+   "template": "blank",
+   "start": 420.8,
+   "duration": 27.066666666666666,
+   "voStart": 0.6,
+   "voEnd": 26.157,
+   "cues": {
+    "intl": 9.12,
+    "nations": 12.93,
+    "quote": 21.25
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "wars",
+   "title": "Why",
+   "template": "blank",
+   "start": 447.8666666666667,
+   "duration": 5.866666666666666,
+   "voStart": 0.6,
+   "voEnd": 4.96,
+   "cues": {
+    "two": 2.56,
+    "gone": 3.59
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "rivalry",
+   "title": "Why",
+   "template": "blank",
+   "start": 453.73333333333335,
+   "duration": 38.53333333333333,
+   "voStart": 0.6,
+   "voEnd": 37.622,
+   "cues": {
+    "germany": 0.67,
+    "wants": 6.0,
+    "washington": 12.44,
+    "deal": 18.97,
+    "betrayal": 30.79,
+    "sharpens": 33.55
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "home",
+   "title": "Why",
+   "template": "blank",
+   "start": 492.26666666666665,
+   "duration": 25.166666666666668,
+   "voStart": 0.6,
+   "voEnd": 24.28,
+   "cues": {
+    "home": 1.99,
+    "cuts": 5.38,
+    "resist": 9.88,
+    "france": 11.81,
+    "unity": 20.5,
+    "repression": 22.6
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "governments",
+   "title": "What can stop it",
+   "template": "blank",
+   "start": 517.4333333333333,
+   "duration": 21.966666666666665,
+   "voStart": 0.6,
+   "voEnd": 21.076,
+   "cues": {
+    "none": 0.63,
+    "europe": 4.55,
+    "putin": 7.97,
+    "fears": 18.27
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "workers",
+   "title": "What can stop it",
+   "template": "blank",
+   "start": 539.4,
+   "duration": 16.1,
+   "voStart": 0.6,
+   "voEnd": 15.192,
+   "cues": {
+    "wc": 2.6,
+    "list": 5.87,
+    "fight": 11.24,
+    "pay": 12.74
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "bogdan",
+   "title": "What can stop it",
+   "template": "blank",
+   "start": 555.5,
+   "duration": 30.666666666666668,
+   "voStart": 0.6,
+   "voEnd": 29.758,
+   "cues": {
+    "age": 4.68,
+    "arrested": 11.7,
+    "sentenced": 14.54,
+    "years": 19.29,
+    "offence": 23.03,
+    "appeal": 28.45
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "campaign",
+   "title": "What can stop it",
+   "template": "blank",
+   "start": 586.1666666666666,
+   "duration": 12.466666666666667,
+   "voStart": 0.6,
+   "voEnd": 11.552,
+   "cues": {
+    "right": 3.01,
+    "unity": 8.85
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "silence",
+   "title": "What can stop it",
+   "template": "blank",
+   "start": 598.6333333333333,
+   "duration": 12.266666666666667,
+   "voStart": 0.6,
+   "voEnd": 11.377,
+   "cues": {
+    "break": 2.15,
+    "gamble": 8.34,
+    "now": 9.96
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "outro",
+   "title": "What can stop it",
+   "template": "outro",
+   "start": 610.9,
+   "duration": 17.9,
+   "voStart": 0.6,
+   "voEnd": 16.984,
+   "cues": {
+    "share": 0.64,
+    "petition": 3.53,
+    "read": 6.23,
+    "join": 8.09
+   },
+   "paragraphs": [
+    0.6
+   ]
+  }
+ ]
+}

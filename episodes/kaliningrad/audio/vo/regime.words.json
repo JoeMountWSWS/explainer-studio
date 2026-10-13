@@ -1,0 +1,246 @@
+{
+ "hash": "015decd5955f62122ac5",
+ "source": "tts",
+ "duration": 19.264,
+ "words": [
+  {
+   "text": "None",
+   "start": 0.04,
+   "end": 0.32
+  },
+  {
+   "text": "of",
+   "start": 0.32,
+   "end": 0.41
+  },
+  {
+   "text": "this",
+   "start": 0.52,
+   "end": 0.79
+  },
+  {
+   "text": "makes",
+   "start": 0.82,
+   "end": 1.17
+  },
+  {
+   "text": "the",
+   "start": 1.23,
+   "end": 1.44
+  },
+  {
+   "text": "Putin",
+   "start": 1.44,
+   "end": 1.84
+  },
+  {
+   "text": "regime",
+   "start": 1.84,
+   "end": 2.33
+  },
+  {
+   "text": "progressive.",
+   "start": 2.33,
+   "end": 3.52
+  },
+  {
+   "text": "It",
+   "start": 3.52,
+   "end": 3.64
+  },
+  {
+   "text": "speaks",
+   "start": 3.64,
+   "end": 4.01
+  },
+  {
+   "text": "for",
+   "start": 4.07,
+   "end": 4.23
+  },
+  {
+   "text": "the",
+   "start": 4.23,
+   "end": 4.42
+  },
+  {
+   "text": "oligarchy",
+   "start": 4.42,
+   "end": 4.97
+  },
+  {
+   "text": "that",
+   "start": 5.25,
+   "end": 5.33
+  },
+  {
+   "text": "emerged",
+   "start": 5.33,
+   "end": 5.84
+  },
+  {
+   "text": "from",
+   "start": 5.84,
+   "end": 6.0
+  },
+  {
+   "text": "the",
+   "start": 6.05,
+   "end": 6.24
+  },
+  {
+   "text": "restoration",
+   "start": 6.24,
+   "end": 7.05
+  },
+  {
+   "text": "of",
+   "start": 7.13,
+   "end": 7.29
+  },
+  {
+   "text": "capitalism.",
+   "start": 7.29,
+   "end": 8.34
+  },
+  {
+   "text": "Its",
+   "start": 8.34,
+   "end": 8.58
+  },
+  {
+   "text": "invasion",
+   "start": 8.58,
+   "end": 8.85
+  },
+  {
+   "text": "of",
+   "start": 8.85,
+   "end": 9.43
+  },
+  {
+   "text": "Ukraine",
+   "start": 9.43,
+   "end": 9.94
+  },
+  {
+   "text": "in",
+   "start": 9.94,
+   "end": 10.1
+  },
+  {
+   "text": "February",
+   "start": 10.1,
+   "end": 10.72
+  },
+  {
+   "text": "2022",
+   "start": 10.78,
+   "end": 11.76
+  },
+  {
+   "text": "was",
+   "start": 11.76,
+   "end": 11.93
+  },
+  {
+   "text": "a",
+   "start": 11.99,
+   "end": 12.02
+  },
+  {
+   "text": "reactionary",
+   "start": 12.02,
+   "end": 12.79
+  },
+  {
+   "text": "response",
+   "start": 12.84,
+   "end": 13.38
+  },
+  {
+   "text": "to",
+   "start": 13.38,
+   "end": 13.52
+  },
+  {
+   "text": "NATO\u2019s",
+   "start": 13.52,
+   "end": 13.95
+  },
+  {
+   "text": "encirclement,",
+   "start": 13.95,
+   "end": 14.91
+  },
+  {
+   "text": "and",
+   "start": 14.95,
+   "end": 15.15
+  },
+  {
+   "text": "Ukrainian",
+   "start": 15.15,
+   "end": 15.62
+  },
+  {
+   "text": "and",
+   "start": 15.62,
+   "end": 15.83
+  },
+  {
+   "text": "Russian",
+   "start": 16.23,
+   "end": 16.48
+  },
+  {
+   "text": "workers",
+   "start": 16.55,
+   "end": 17.01
+  },
+  {
+   "text": "have",
+   "start": 17.01,
+   "end": 17.3
+  },
+  {
+   "text": "paid",
+   "start": 17.3,
+   "end": 17.58
+  },
+  {
+   "text": "for",
+   "start": 17.59,
+   "end": 17.77
+  },
+  {
+   "text": "it",
+   "start": 17.77,
+   "end": 18.05
+  },
+  {
+   "text": "with",
+   "start": 18.05,
+   "end": 18.32
+  },
+  {
+   "text": "their",
+   "start": 18.32,
+   "end": 18.55
+  },
+  {
+   "text": "lives.",
+   "start": 18.55,
+   "end": 19.44
+  }
+ ],
+ "cues": {
+  "progressive": 2.33,
+  "oligarchy": 4.23,
+  "reactionary": 11.99,
+  "workers": 15.15
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

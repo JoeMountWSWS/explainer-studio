@@ -1,0 +1,58 @@
+{
+ "hash": "ef787207670076a46d39",
+ "source": "tts",
+ "duration": 3.25,
+ "words": [
+  {
+   "text": "What",
+   "start": 0.05,
+   "end": 0.2
+  },
+  {
+   "text": "would",
+   "start": 0.24,
+   "end": 0.54
+  },
+  {
+   "text": "a",
+   "start": 0.54,
+   "end": 0.59
+  },
+  {
+   "text": "blockade",
+   "start": 0.66,
+   "end": 1.09
+  },
+  {
+   "text": "of",
+   "start": 1.09,
+   "end": 1.21
+  },
+  {
+   "text": "Kaliningrad",
+   "start": 1.21,
+   "end": 1.91
+  },
+  {
+   "text": "mean",
+   "start": 1.94,
+   "end": 2.22
+  },
+  {
+   "text": "in",
+   "start": 2.23,
+   "end": 2.37
+  },
+  {
+   "text": "practice?",
+   "start": 2.37,
+   "end": 3.06
+  }
+ ],
+ "cues": {
+  "sub": 2.23
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #campaign-stage { display: flex; flex-direction: column; justify-content: center; }
+        #campaign-head { width: 100%; }
+        #campaign-hl { font-size: 104px; margin-top: 40px; }
+        #campaign-rows .t { font-size: 52px; font-weight: 700; }
+        #campaign-url { margin-top: 48px; font-family: var(--font-sans); font-weight: 700; font-size: 60px; color: var(--red); }
+                #campaign-rows { list-style: none; margin: 40px 0 0; padding: 0; }
+                #campaign-rows li { display: flex; gap: 32px; align-items: baseline; padding: 24px 0; border-top: var(--hairline); }
+                #campaign-rows li:first-child { border-top: 0; }
+                #campaign-rows .k { font-family: var(--font-sans); font-weight: 700; font-size: 32px; letter-spacing: 0.04em; color: var(--red); min-width: 200px; flex: none; }
+                #campaign-rows .t { font-size: 52px; line-height: 1.28; color: var(--ink); }
+      </style>
+
+      <div id="root" data-composition-id="scene-campaign" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="campaign-stage" class="stage">
+          <div id="campaign-head" class="section-head"><div id="campaign-rule" class="section-rule"></div><div id="campaign-label" class="label">The campaign</div></div>
+          <h1 id="campaign-hl" class="headline">Free Bogdan Syrotiuk</h1>
+          <ul id="campaign-rows">
+            <li id="campaign-r1"><span class="k">Defends</span><span class="body t">the right to oppose the war</span></li>
+            <li id="campaign-r2"><span class="k">Principle</span><span class="body t"><span id="campaign-wash" class="hl">the unity of workers across national borders</span></span></li>
+          </ul>
+          <div id="campaign-url">freebogdan.org</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 12.4667, "voStart": 0.6, "voEnd": 11.552, "cues": {"right": 3.01, "unity": 8.85}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("campaign");
+          rise("#campaign-hl", 0.3, 40, 0.8);
+          fade("#campaign-url", 1.2);
+          rise("#campaign-r1", cue("right", 2) - 0.3, 20);
+          const u = cue("unity", 7);
+          rise("#campaign-r2", u - 0.4, 20);
+          wash("#campaign-wash", u + 0.3);
+
+          tl.to("#campaign-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-campaign"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

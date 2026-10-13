@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #ussr-stage { display: flex; flex-direction: column; justify-content: center; }
+        #ussr-top { display: flex; align-items: baseline; gap: 48px; }
+        #ussr-year { font-family: var(--font-serif); font-weight: 700; font-size: 220px; line-height: 1; color: var(--red); }
+        #ussr-hl { font-size: 84px; }
+                #ussr-rows { list-style: none; margin: 40px 0 0; padding: 0; }
+                #ussr-rows li { display: flex; gap: 32px; align-items: baseline; padding: 24px 0; border-top: var(--hairline); }
+                #ussr-rows li:first-child { border-top: 0; }
+                #ussr-rows .k { font-family: var(--font-sans); font-weight: 700; font-size: 32px; letter-spacing: 0.04em; color: var(--red); display: none; flex: none; }
+                #ussr-rows .t { font-size: 46px; line-height: 1.28; color: var(--ink); }
+      </style>
+
+      <div id="root" data-composition-id="scene-ussr" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="ussr-stage" class="stage">
+          <div id="ussr-top"><div id="ussr-year">1991</div><h1 id="ussr-hl" class="headline">The Soviet Union is dissolved</h1></div>
+          <ul id="ussr-rows">
+            <li id="ussr-r1"><span class="body t">The Stalinist bureaucracy, <span class="soft italic">a privileged caste that had ruled in the name of socialism,</span></span></li>
+            <li id="ussr-r2"><span class="body t"><span id="ussr-wash" class="hl">restores capitalism</span>.</span></li>
+            <li id="ussr-r3"><span class="body t">A new class of <strong>oligarchs</strong> seizes what had been state property.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 17.0667, "voStart": 0.6, "voEnd": 16.177, "cues": {"year": 1.54, "caste": 7.33, "restored": 10.99, "oligarchs": 13.44}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          const y = cue("year", 1);
+          rise("#ussr-year", y - 0.3, 40, 0.8);
+          rise("#ussr-hl", y + 0.3, 30);
+          rise("#ussr-r1", cue("caste", 3.5) - 0.8, 20);
+          rise("#ussr-r2", cue("restored", 6) - 0.2, 20);
+          wash("#ussr-wash", cue("restored", 6));
+          rise("#ussr-r3", cue("oligarchs", 8) - 0.5, 20);
+
+          tl.to("#ussr-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-ussr"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

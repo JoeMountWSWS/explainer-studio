@@ -1,0 +1,231 @@
+{
+ "hash": "38389b4721e43270d4ac",
+ "source": "tts",
+ "duration": 18.197,
+ "words": [
+  {
+   "text": "Marxists",
+   "start": 0.04,
+   "end": 0.58
+  },
+  {
+   "text": "answered",
+   "start": 0.58,
+   "end": 1.14
+  },
+  {
+   "text": "that",
+   "start": 1.22,
+   "end": 1.46
+  },
+  {
+   "text": "question",
+   "start": 1.46,
+   "end": 2.05
+  },
+  {
+   "text": "more",
+   "start": 2.05,
+   "end": 2.34
+  },
+  {
+   "text": "than",
+   "start": 2.34,
+   "end": 2.63
+  },
+  {
+   "text": "a",
+   "start": 2.63,
+   "end": 2.7
+  },
+  {
+   "text": "century",
+   "start": 2.7,
+   "end": 3.12
+  },
+  {
+   "text": "ago,",
+   "start": 3.48,
+   "end": 3.63
+  },
+  {
+   "text": "during",
+   "start": 3.63,
+   "end": 4.1
+  },
+  {
+   "text": "the",
+   "start": 4.1,
+   "end": 4.34
+  },
+  {
+   "text": "First",
+   "start": 4.34,
+   "end": 4.73
+  },
+  {
+   "text": "World",
+   "start": 4.73,
+   "end": 4.9
+  },
+  {
+   "text": "War.",
+   "start": 5.4,
+   "end": 5.44
+  },
+  {
+   "text": "Lenin",
+   "start": 5.48,
+   "end": 5.8
+  },
+  {
+   "text": "showed",
+   "start": 5.8,
+   "end": 6.26
+  },
+  {
+   "text": "that",
+   "start": 6.26,
+   "end": 6.56
+  },
+  {
+   "text": "capitalism",
+   "start": 6.56,
+   "end": 7.31
+  },
+  {
+   "text": "had",
+   "start": 7.31,
+   "end": 7.49
+  },
+  {
+   "text": "entered",
+   "start": 7.52,
+   "end": 8.06
+  },
+  {
+   "text": "its",
+   "start": 8.06,
+   "end": 8.24
+  },
+  {
+   "text": "imperialist",
+   "start": 8.3,
+   "end": 9.11
+  },
+  {
+   "text": "stage.",
+   "start": 9.11,
+   "end": 9.76
+  },
+  {
+   "text": "Giant",
+   "start": 9.76,
+   "end": 10.07
+  },
+  {
+   "text": "monopolies",
+   "start": 10.07,
+   "end": 10.7
+  },
+  {
+   "text": "and",
+   "start": 10.7,
+   "end": 10.88
+  },
+  {
+   "text": "banks,",
+   "start": 10.88,
+   "end": 11.5
+  },
+  {
+   "text": "fused",
+   "start": 11.54,
+   "end": 11.78
+  },
+  {
+   "text": "with",
+   "start": 11.85,
+   "end": 12.1
+  },
+  {
+   "text": "their",
+   "start": 12.22,
+   "end": 12.46
+  },
+  {
+   "text": "states,",
+   "start": 12.5,
+   "end": 13.04
+  },
+  {
+   "text": "compete",
+   "start": 13.04,
+   "end": 13.53
+  },
+  {
+   "text": "to",
+   "start": 13.53,
+   "end": 13.67
+  },
+  {
+   "text": "divide",
+   "start": 13.67,
+   "end": 14.08
+  },
+  {
+   "text": "and",
+   "start": 14.1,
+   "end": 14.3
+  },
+  {
+   "text": "redivide",
+   "start": 14.3,
+   "end": 14.93
+  },
+  {
+   "text": "the",
+   "start": 15.01,
+   "end": 15.14
+  },
+  {
+   "text": "world\u2019s",
+   "start": 15.14,
+   "end": 15.63
+  },
+  {
+   "text": "markets,",
+   "start": 15.63,
+   "end": 16.28
+  },
+  {
+   "text": "raw",
+   "start": 16.28,
+   "end": 16.4
+  },
+  {
+   "text": "materials",
+   "start": 16.94,
+   "end": 17.28
+  },
+  {
+   "text": "and",
+   "start": 17.32,
+   "end": 17.45
+  },
+  {
+   "text": "territory.",
+   "start": 17.45,
+   "end": 18.16
+  }
+ ],
+ "cues": {
+  "lenin": 5.48,
+  "imperialist": 8.3,
+  "monopolies": 10.07,
+  "divide": 13.67
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

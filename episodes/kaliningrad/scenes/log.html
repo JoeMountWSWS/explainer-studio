@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #log-stage { display: flex; flex-direction: column; justify-content: center; }
+        #log-head { width: 100%; }
+        #log-rows li { align-items: center; }
+        #log-rows .big { font-family: var(--font-serif); font-weight: 700; font-size: 96px; line-height: 1; color: var(--ink); min-width: 330px; font-variant-numeric: lining-nums tabular-nums; }
+        #log-rows .big.red { color: var(--red); }
+        #log-rows .t { font-size: 40px; }
+        #log-rows .t small { display: block; font-family: var(--font-sans); font-weight: 600; font-size: 28px; color: var(--ink-soft); margin-top: 6px; }
+        #log-src { position: absolute; left: 0; bottom: 0; font-size: 24px; }
+                #log-rows { list-style: none; margin: 40px 0 0; padding: 0; }
+                #log-rows li { display: flex; gap: 32px; align-items: baseline; padding: 24px 0; border-top: var(--hairline); }
+                #log-rows li:first-child { border-top: 0; }
+                #log-rows .k { font-family: var(--font-sans); font-weight: 700; font-size: 32px; letter-spacing: 0.04em; color: var(--red); min-width: 200px; flex: none; }
+                #log-rows .t { font-size: 40px; line-height: 1.28; color: var(--ink); }
+      </style>
+
+      <div id="root" data-composition-id="scene-log" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="log-stage" class="stage">
+          <div id="log-head" class="section-head"><div id="log-rule" class="section-rule"></div><div id="log-label" class="label">Five days in October</div></div>
+          <ul id="log-rows">
+            <li id="log-r1"><span class="k">12 Oct</span><span id="log-n1" class="big red">1,569</span><span class="body t">Russian companies and executives added to EU sanctions lists<small>Its largest single move yet against Russia’s arms industry</small></span></li>
+            <li id="log-r2"><span class="k">13 Oct</span><span id="log-n2" class="big">17</span><span class="body t">countries rehearse nuclear operations<small>Steadfast Noon, NATO’s annual nuclear exercise</small></span></li>
+            <li id="log-r3"><span class="k">Lithuania</span><span class="big">WMD</span><span class="body t">Moving to remove its constitutional ban on <span id="log-wash" class="hl">weapons of mass destruction</span><small>Amendment passed a first vote, 22 Sep</small></span></li>
+          </ul>
+          <div id="log-src" class="byline">Sources: WSWS, 1 and 12 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 34.0333, "voStart": 0.6, "voEnd": 33.133, "cues": {"sanctions": 0.81, "noon": 14.01, "countries": 20.06, "lithuania": 24.33, "wmd": 30.63}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("log");
+          const s = cue("sanctions", 0.6);
+          rise("#log-r1", s - 0.3, 20);
+          count("#log-n1", 1569, s + 0.4, (v) => Math.round(v).toLocaleString("en-GB"), 1.6);
+          const n = cue("noon", 9);
+          rise("#log-r2", n - 0.3, 20);
+          count("#log-n2", 17, cue("countries", n + 3) - 0.3, (v) => String(Math.round(v)), 0.9);
+          rise("#log-r3", cue("lithuania", 17) - 0.3, 20);
+          wash("#log-wash", cue("wmd", 22));
+          fade("#log-src", s + 1);
+
+          tl.to("#log-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-log"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

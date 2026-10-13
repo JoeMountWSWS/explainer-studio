@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #rivalry-stage { display: flex; flex-direction: column; }
+        #rivalry-head { width: 100%; }
+        #rivalry-rows .t small { display: block; font-family: var(--font-sans); font-weight: 600; font-size: 30px; line-height: 1.3; color: var(--ink-soft); margin-top: 8px; }
+        #rivalry-end { position: absolute; left: 0; right: 0; bottom: 0; font-size: 60px; }
+                #rivalry-rows { list-style: none; margin: 40px 0 0; padding: 0; }
+                #rivalry-rows li { display: flex; gap: 32px; align-items: baseline; padding: 24px 0; border-top: var(--hairline); }
+                #rivalry-rows li:first-child { border-top: 0; }
+                #rivalry-rows .k { font-family: var(--font-sans); font-weight: 700; font-size: 32px; letter-spacing: 0.04em; color: var(--red); min-width: 300px; flex: none; }
+                #rivalry-rows .t { font-size: 42px; line-height: 1.28; color: var(--ink); }
+      </style>
+
+      <div id="root" data-composition-id="scene-rivalry" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="rivalry-stage" class="stage">
+          <div id="rivalry-head" class="section-head"><div id="rivalry-rule" class="section-rule"></div><div id="rivalry-label" class="label">Rivalry among the imperialist powers</div></div>
+          <ul id="rivalry-rows">
+            <li id="rivalry-r1"><span class="k">Germany</span><span class="body t">Rearming to become Europe’s leading military power</span></li>
+            <li id="rivalry-r2"><span class="k">European powers</span><span class="body t">Want Ukraine’s land, minerals, energy and markets, and a dominant position in Eastern Europe</span></li>
+            <li id="rivalry-r3"><span class="k">Washington</span><span class="body t">Its own arrangement with Moscow<small id="rivalry-deal">9 Oct: Trump–Putin deal to resume Russian diesel exports; demands Ukraine replace Zelensky</small><small id="rivalry-betrayal">Europe calls it a <span class="red">betrayal</span> and steps up its own offensive</small></span></li>
+          </ul>
+          <p id="rivalry-end" class="headline">The rivalry <span id="rivalry-wash" class="hl">sharpens the danger</span>.</p>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 38.5333, "voStart": 0.6, "voEnd": 37.622, "cues": {"germany": 0.67, "wants": 6.0, "washington": 12.44, "deal": 18.97, "betrayal": 30.79, "sharpens": 33.55}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("rivalry");
+          rise("#rivalry-r1", cue("germany", 0.5), 20);
+          rise("#rivalry-r2", cue("wants", 4) - 1.2, 20);
+          rise("#rivalry-r3", cue("washington", 10) - 0.2, 20);
+          tl.set(["#rivalry-deal", "#rivalry-betrayal"], { opacity: 0 }, 0);
+          fade("#rivalry-deal", cue("deal", 15) - 0.2);
+          fade("#rivalry-betrayal", cue("betrayal", 22) - 0.3);
+          const s = cue("sharpens", 27);
+          rise("#rivalry-end", s - 0.2, 24);
+          wash("#rivalry-wash", s + 1.8);
+
+          tl.to("#rivalry-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-rivalry"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

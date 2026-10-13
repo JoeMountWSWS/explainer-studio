@@ -1,0 +1,230 @@
+{
+ "hash": "ade33562115b103e2094",
+ "source": "tts",
+ "duration": 18.905,
+ "words": [
+  {
+   "text": "The",
+   "start": 0.07,
+   "end": 0.23
+  },
+  {
+   "text": "story",
+   "start": 0.27,
+   "end": 0.69
+  },
+  {
+   "text": "begins",
+   "start": 0.75,
+   "end": 1.24
+  },
+  {
+   "text": "at",
+   "start": 1.24,
+   "end": 1.42
+  },
+  {
+   "text": "the",
+   "start": 1.42,
+   "end": 1.69
+  },
+  {
+   "text": "end",
+   "start": 1.69,
+   "end": 1.96
+  },
+  {
+   "text": "of",
+   "start": 1.96,
+   "end": 2.14
+  },
+  {
+   "text": "the",
+   "start": 2.14,
+   "end": 2.41
+  },
+  {
+   "text": "Cold",
+   "start": 2.41,
+   "end": 2.52
+  },
+  {
+   "text": "War.",
+   "start": 3.05,
+   "end": 3.16
+  },
+  {
+   "text": "In",
+   "start": 3.16,
+   "end": 3.3
+  },
+  {
+   "text": "February",
+   "start": 3.3,
+   "end": 3.82
+  },
+  {
+   "text": "1990,",
+   "start": 3.85,
+   "end": 4.81
+  },
+  {
+   "text": "during",
+   "start": 4.92,
+   "end": 5.19
+  },
+  {
+   "text": "talks",
+   "start": 5.23,
+   "end": 5.56
+  },
+  {
+   "text": "on",
+   "start": 5.56,
+   "end": 5.7
+  },
+  {
+   "text": "German",
+   "start": 5.7,
+   "end": 6.16
+  },
+  {
+   "text": "reunification,",
+   "start": 6.16,
+   "end": 7.18
+  },
+  {
+   "text": "US",
+   "start": 7.7,
+   "end": 7.79
+  },
+  {
+   "text": "Secretary",
+   "start": 7.79,
+   "end": 8.49
+  },
+  {
+   "text": "of",
+   "start": 8.49,
+   "end": 8.64
+  },
+  {
+   "text": "State",
+   "start": 8.64,
+   "end": 9.03
+  },
+  {
+   "text": "James",
+   "start": 9.03,
+   "end": 9.41
+  },
+  {
+   "text": "Baker",
+   "start": 9.42,
+   "end": 9.81
+  },
+  {
+   "text": "told",
+   "start": 9.81,
+   "end": 10.1
+  },
+  {
+   "text": "Soviet",
+   "start": 10.1,
+   "end": 10.18
+  },
+  {
+   "text": "leader",
+   "start": 10.7,
+   "end": 11.04
+  },
+  {
+   "text": "Mikhail",
+   "start": 11.04,
+   "end": 11.58
+  },
+  {
+   "text": "Gorbachev",
+   "start": 11.58,
+   "end": 12.11
+  },
+  {
+   "text": "that",
+   "start": 12.11,
+   "end": 12.56
+  },
+  {
+   "text": "NATO",
+   "start": 12.56,
+   "end": 12.78
+  },
+  {
+   "text": "would",
+   "start": 12.78,
+   "end": 13.08
+  },
+  {
+   "text": "not",
+   "start": 13.08,
+   "end": 13.28
+  },
+  {
+   "text": "move",
+   "start": 13.35,
+   "end": 13.79
+  },
+  {
+   "text": "\u201cone",
+   "start": 13.79,
+   "end": 14.17
+  },
+  {
+   "text": "inch",
+   "start": 14.17,
+   "end": 14.68
+  },
+  {
+   "text": "eastward.\u201d",
+   "start": 14.68,
+   "end": 15.8
+  },
+  {
+   "text": "Other",
+   "start": 16.34,
+   "end": 16.46
+  },
+  {
+   "text": "Western",
+   "start": 16.46,
+   "end": 16.93
+  },
+  {
+   "text": "leaders",
+   "start": 16.93,
+   "end": 17.4
+  },
+  {
+   "text": "gave",
+   "start": 17.4,
+   "end": 17.67
+  },
+  {
+   "text": "similar",
+   "start": 17.67,
+   "end": 17.76
+  },
+  {
+   "text": "assurances.",
+   "start": 18.2,
+   "end": 18.84
+  }
+ ],
+ "cues": {
+  "date": 3.3,
+  "key": 13.79,
+  "others": 16.34
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

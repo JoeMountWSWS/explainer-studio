@@ -1,0 +1,83 @@
+{
+ "hash": "098b6e5c3d2cd5162514",
+ "source": "tts",
+ "duration": 4.978,
+ "words": [
+  {
+   "text": "Why",
+   "start": 0.05,
+   "end": 0.22
+  },
+  {
+   "text": "do",
+   "start": 0.22,
+   "end": 0.37
+  },
+  {
+   "text": "governments",
+   "start": 0.37,
+   "end": 1.2
+  },
+  {
+   "text": "behave",
+   "start": 1.2,
+   "end": 1.65
+  },
+  {
+   "text": "like",
+   "start": 1.65,
+   "end": 1.94
+  },
+  {
+   "text": "this",
+   "start": 1.97,
+   "end": 2.07
+  },
+  {
+   "text": "when",
+   "start": 2.3,
+   "end": 2.52
+  },
+  {
+   "text": "the",
+   "start": 2.52,
+   "end": 2.7
+  },
+  {
+   "text": "stakes",
+   "start": 2.7,
+   "end": 3.06
+  },
+  {
+   "text": "include",
+   "start": 3.06,
+   "end": 3.48
+  },
+  {
+   "text": "the",
+   "start": 3.48,
+   "end": 3.66
+  },
+  {
+   "text": "survival",
+   "start": 3.66,
+   "end": 4.14
+  },
+  {
+   "text": "of",
+   "start": 4.14,
+   "end": 4.23
+  },
+  {
+   "text": "humanity?",
+   "start": 4.27,
+   "end": 4.86
+  }
+ ],
+ "cues": {
+  "sub": 3.48
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

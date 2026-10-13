@@ -1,0 +1,206 @@
+{
+ "hash": "54346c049bafd67c585c",
+ "source": "tts",
+ "duration": 15.577,
+ "words": [
+  {
+   "text": "At",
+   "start": 0.05,
+   "end": 0.14
+  },
+  {
+   "text": "the",
+   "start": 0.21,
+   "end": 0.47
+  },
+  {
+   "text": "end",
+   "start": 0.47,
+   "end": 0.75
+  },
+  {
+   "text": "of",
+   "start": 0.75,
+   "end": 0.94
+  },
+  {
+   "text": "1991",
+   "start": 0.94,
+   "end": 1.96
+  },
+  {
+   "text": "the",
+   "start": 2.33,
+   "end": 2.36
+  },
+  {
+   "text": "Soviet",
+   "start": 2.36,
+   "end": 2.93
+  },
+  {
+   "text": "Union",
+   "start": 2.93,
+   "end": 3.4
+  },
+  {
+   "text": "was",
+   "start": 3.4,
+   "end": 3.67
+  },
+  {
+   "text": "dissolved.",
+   "start": 3.67,
+   "end": 4.68
+  },
+  {
+   "text": "The",
+   "start": 4.68,
+   "end": 4.92
+  },
+  {
+   "text": "Stalinist",
+   "start": 4.92,
+   "end": 5.63
+  },
+  {
+   "text": "bureaucracy,",
+   "start": 5.63,
+   "end": 6.68
+  },
+  {
+   "text": "a",
+   "start": 6.73,
+   "end": 6.75
+  },
+  {
+   "text": "privileged",
+   "start": 6.75,
+   "end": 7.49
+  },
+  {
+   "text": "caste",
+   "start": 7.49,
+   "end": 7.79
+  },
+  {
+   "text": "that",
+   "start": 7.93,
+   "end": 8.17
+  },
+  {
+   "text": "had",
+   "start": 8.17,
+   "end": 8.39
+  },
+  {
+   "text": "ruled",
+   "start": 8.39,
+   "end": 8.73
+  },
+  {
+   "text": "in",
+   "start": 8.78,
+   "end": 8.9
+  },
+  {
+   "text": "the",
+   "start": 8.9,
+   "end": 9.12
+  },
+  {
+   "text": "name",
+   "start": 9.12,
+   "end": 9.41
+  },
+  {
+   "text": "of",
+   "start": 9.41,
+   "end": 9.55
+  },
+  {
+   "text": "socialism,",
+   "start": 9.55,
+   "end": 10.35
+  },
+  {
+   "text": "restored",
+   "start": 10.39,
+   "end": 10.94
+  },
+  {
+   "text": "capitalism,",
+   "start": 10.94,
+   "end": 11.82
+  },
+  {
+   "text": "and",
+   "start": 11.82,
+   "end": 12.02
+  },
+  {
+   "text": "a",
+   "start": 12.03,
+   "end": 12.04
+  },
+  {
+   "text": "new",
+   "start": 12.04,
+   "end": 12.54
+  },
+  {
+   "text": "class",
+   "start": 12.54,
+   "end": 12.7
+  },
+  {
+   "text": "of",
+   "start": 12.7,
+   "end": 12.84
+  },
+  {
+   "text": "oligarchs",
+   "start": 12.84,
+   "end": 13.5
+  },
+  {
+   "text": "seized",
+   "start": 13.5,
+   "end": 14.04
+  },
+  {
+   "text": "what",
+   "start": 14.07,
+   "end": 14.26
+  },
+  {
+   "text": "had",
+   "start": 14.26,
+   "end": 14.42
+  },
+  {
+   "text": "been",
+   "start": 14.42,
+   "end": 14.63
+  },
+  {
+   "text": "state",
+   "start": 14.69,
+   "end": 14.9
+  },
+  {
+   "text": "property.",
+   "start": 14.94,
+   "end": 15.56
+  }
+ ],
+ "cues": {
+  "year": 0.94,
+  "caste": 6.73,
+  "restored": 10.39,
+  "oligarchs": 12.84
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

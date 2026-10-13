@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #pattern-stage { display: flex; flex-direction: column; }
+        #pattern-head { width: 100%; }
+        #pattern-hl { font-size: 96px; margin-top: 40px; }
+        #pattern-steps { position: absolute; left: 0; right: 0; bottom: 40px; height: 520px; display: flex; align-items: flex-end; gap: 24px; }
+        #pattern-steps .st { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
+        #pattern-steps .blk { background: var(--ink); transform-origin: center bottom; }
+        #pattern-steps .cap { font-family: var(--font-sans); font-weight: 700; font-size: 30px; line-height: 1.2; color: var(--ink); margin-bottom: 16px; }
+        #pattern-s4 .blk { background: var(--red); }
+        #pattern-s4 .cap { color: var(--red); }
+      </style>
+
+      <div id="root" data-composition-id="scene-pattern" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="pattern-stage" class="stage">
+          <div id="pattern-head" class="section-head"><div id="pattern-rule" class="section-rule"></div><div id="pattern-label" class="label">The pattern</div></div>
+          <h1 id="pattern-hl" class="headline">Each threshold crossed is the argument for the next</h1>
+          <div id="pattern-steps">
+            <div id="pattern-s1" class="st"><div class="cap">Russian warning</div><div class="blk" style="height: 90px"></div></div>
+            <div id="pattern-s2" class="st"><div class="cap">Dismissed as bluff</div><div class="blk" style="height: 170px"></div></div>
+            <div id="pattern-s3" class="st"><div class="cap">Threshold crossed</div><div class="blk" style="height: 250px"></div></div>
+            <div id="pattern-s4" class="st"><div class="cap">The next one</div><div class="blk" style="height: 330px"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 11.3, "voStart": 0.6, "voEnd": 10.396, "cues": {"bluff": 3.72, "crossed": 6.16, "next": 8.13}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("pattern");
+          const st = (n, t) => { fade(`#pattern-s${n} .cap`, t + 0.2, 0.5); tl.fromTo(`#pattern-s${n} .blk`, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power2.out" }, t); };
+          st(1, 1.2);
+          st(2, cue("bluff", 3) - 0.2);
+          st(3, cue("crossed", 5));
+          const nx = cue("next", 7.5);
+          st(4, nx);
+          rise("#pattern-hl", nx - 0.4, 30, 0.8);
+
+          tl.to("#pattern-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-pattern"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

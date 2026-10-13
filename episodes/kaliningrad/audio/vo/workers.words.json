@@ -1,0 +1,221 @@
+{
+ "hash": "be077e2cefdfb5594d7a",
+ "source": "tts",
+ "duration": 14.592,
+ "words": [
+  {
+   "text": "The",
+   "start": 0.03,
+   "end": 0.12
+  },
+  {
+   "text": "force",
+   "start": 0.23,
+   "end": 0.48
+  },
+  {
+   "text": "that",
+   "start": 0.56,
+   "end": 0.84
+  },
+  {
+   "text": "can",
+   "start": 0.84,
+   "end": 1.02
+  },
+  {
+   "text": "stop",
+   "start": 1.16,
+   "end": 1.33
+  },
+  {
+   "text": "the",
+   "start": 1.33,
+   "end": 1.54
+  },
+  {
+   "text": "war",
+   "start": 1.54,
+   "end": 1.62
+  },
+  {
+   "text": "is",
+   "start": 1.8,
+   "end": 1.91
+  },
+  {
+   "text": "the",
+   "start": 2.0,
+   "end": 2.17
+  },
+  {
+   "text": "international",
+   "start": 2.17,
+   "end": 3.26
+  },
+  {
+   "text": "working",
+   "start": 3.26,
+   "end": 3.79
+  },
+  {
+   "text": "class.",
+   "start": 4.28,
+   "end": 4.71
+  },
+  {
+   "text": "Workers",
+   "start": 4.75,
+   "end": 5.15
+  },
+  {
+   "text": "in",
+   "start": 5.15,
+   "end": 5.27
+  },
+  {
+   "text": "Russia,",
+   "start": 5.27,
+   "end": 5.76
+  },
+  {
+   "text": "Ukraine,",
+   "start": 5.76,
+   "end": 6.34
+  },
+  {
+   "text": "Europe",
+   "start": 6.37,
+   "end": 6.81
+  },
+  {
+   "text": "and",
+   "start": 6.81,
+   "end": 7.03
+  },
+  {
+   "text": "the",
+   "start": 7.04,
+   "end": 7.27
+  },
+  {
+   "text": "United",
+   "start": 7.27,
+   "end": 7.74
+  },
+  {
+   "text": "States",
+   "start": 7.74,
+   "end": 8.21
+  },
+  {
+   "text": "have",
+   "start": 8.21,
+   "end": 8.52
+  },
+  {
+   "text": "no",
+   "start": 8.52,
+   "end": 8.67
+  },
+  {
+   "text": "interest",
+   "start": 8.67,
+   "end": 9.29
+  },
+  {
+   "text": "in",
+   "start": 9.29,
+   "end": 9.43
+  },
+  {
+   "text": "this",
+   "start": 9.46,
+   "end": 9.75
+  },
+  {
+   "text": "war.",
+   "start": 9.75,
+   "end": 10.14
+  },
+  {
+   "text": "They",
+   "start": 10.14,
+   "end": 10.39
+  },
+  {
+   "text": "do",
+   "start": 10.39,
+   "end": 10.64
+  },
+  {
+   "text": "the",
+   "start": 10.64,
+   "end": 10.66
+  },
+  {
+   "text": "fighting",
+   "start": 10.66,
+   "end": 11.02
+  },
+  {
+   "text": "and",
+   "start": 11.02,
+   "end": 11.15
+  },
+  {
+   "text": "the",
+   "start": 11.15,
+   "end": 11.32
+  },
+  {
+   "text": "dying,",
+   "start": 11.35,
+   "end": 11.66
+  },
+  {
+   "text": "and",
+   "start": 11.66,
+   "end": 11.79
+  },
+  {
+   "text": "they",
+   "start": 11.88,
+   "end": 12.13
+  },
+  {
+   "text": "pay",
+   "start": 12.14,
+   "end": 12.33
+  },
+  {
+   "text": "for",
+   "start": 12.33,
+   "end": 12.53
+  },
+  {
+   "text": "rearmament",
+   "start": 12.53,
+   "end": 13.2
+  },
+  {
+   "text": "through",
+   "start": 13.2,
+   "end": 13.68
+  },
+  {
+   "text": "austerity.",
+   "start": 13.68,
+   "end": 14.56
+  }
+ ],
+ "cues": {
+  "wc": 2.0,
+  "list": 5.27,
+  "fight": 10.64,
+  "pay": 12.14
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

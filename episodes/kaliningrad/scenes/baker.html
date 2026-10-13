@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #baker-stage { display: flex; flex-direction: column; }
+        #baker-head { width: 100%; }
+        #baker-body { position: absolute; left: 0; right: 0; top: 50%; margin-top: -250px; }
+        #baker-date { font-family: var(--font-sans); font-weight: 700; font-size: 34px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); }
+        #baker-quote { font-size: 80px; line-height: 1.22; margin-top: 30px; max-width: 1450px; }
+        #baker-who { margin-top: 40px; padding-left: 62px; }
+        #baker-others { margin-top: 48px; padding-left: 62px; font-size: 46px; }
+        #baker-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-baker" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="baker-stage" class="stage">
+          <div id="baker-head" class="section-head"><div id="baker-rule" class="section-rule"></div><div id="baker-label" class="label">Part 1 · How we got here</div></div>
+          <div id="baker-body">
+            <div id="baker-date">February 1990 · Talks on German reunification</div>
+            <blockquote id="baker-quote" class="quote">NATO would not move <span id="baker-wash" class="hl">“one inch eastward.”</span></blockquote>
+            <div id="baker-who" class="label">US Secretary of State James Baker to Mikhail Gorbachev</div>
+            <p id="baker-others" class="standfirst">Other Western leaders gave similar assurances.</p>
+          </div>
+          <div id="baker-src" class="byline">Source: US and Soviet records of the talks, Moscow, 9 February 1990</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 20.4, "voStart": 0.6, "voEnd": 19.505, "cues": {"date": 3.9, "key": 14.39, "others": 16.94}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("baker");
+          rise("#baker-date", cue("date", 3) - 0.3, 16);
+          tl.fromTo("#baker-quote", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, cue("date", 3) + 1.2);
+          fade("#baker-who", cue("date", 3) + 2);
+          wash("#baker-wash", cue("key", 9));
+          rise("#baker-others", cue("others", 12), 20);
+          fade("#baker-src", cue("key", 9) + 0.5);
+
+          tl.to("#baker-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-baker"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

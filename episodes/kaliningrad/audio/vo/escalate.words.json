@@ -1,0 +1,48 @@
+{
+ "hash": "54d44ca0871cefd77816",
+ "source": "tts",
+ "duration": 3.272,
+ "words": [
+  {
+   "text": "Europe\u2019s",
+   "start": 0.06,
+   "end": 0.47
+  },
+  {
+   "text": "governments",
+   "start": 0.54,
+   "end": 1.15
+  },
+  {
+   "text": "answered",
+   "start": 1.15,
+   "end": 1.64
+  },
+  {
+   "text": "the",
+   "start": 1.64,
+   "end": 1.82
+  },
+  {
+   "text": "warning",
+   "start": 1.82,
+   "end": 2.25
+  },
+  {
+   "text": "by",
+   "start": 2.25,
+   "end": 2.37
+  },
+  {
+   "text": "escalating.",
+   "start": 2.37,
+   "end": 3.13
+  }
+ ],
+ "cues": {
+  "sub": 2.25
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

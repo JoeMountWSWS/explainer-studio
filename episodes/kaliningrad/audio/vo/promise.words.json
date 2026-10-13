@@ -1,0 +1,100 @@
+{
+ "hash": "770ac3927eb3ab005bf6",
+ "source": "tts",
+ "duration": 5.298,
+ "words": [
+  {
+   "text": "This",
+   "start": 0.04,
+   "end": 0.35
+  },
+  {
+   "text": "video",
+   "start": 0.35,
+   "end": 0.78
+  },
+  {
+   "text": "explains",
+   "start": 0.79,
+   "end": 1.49
+  },
+  {
+   "text": "how",
+   "start": 1.49,
+   "end": 1.75
+  },
+  {
+   "text": "we",
+   "start": 1.75,
+   "end": 1.92
+  },
+  {
+   "text": "got",
+   "start": 1.92,
+   "end": 2.07
+  },
+  {
+   "text": "here,",
+   "start": 2.55,
+   "end": 2.67
+  },
+  {
+   "text": "why",
+   "start": 2.67,
+   "end": 2.79
+  },
+  {
+   "text": "the",
+   "start": 2.84,
+   "end": 3.01
+  },
+  {
+   "text": "danger",
+   "start": 3.01,
+   "end": 3.36
+  },
+  {
+   "text": "keeps",
+   "start": 3.36,
+   "end": 3.65
+  },
+  {
+   "text": "growing,",
+   "start": 3.65,
+   "end": 4.05
+  },
+  {
+   "text": "and",
+   "start": 4.11,
+   "end": 4.29
+  },
+  {
+   "text": "what",
+   "start": 4.29,
+   "end": 4.57
+  },
+  {
+   "text": "can",
+   "start": 4.57,
+   "end": 4.78
+  },
+  {
+   "text": "stop",
+   "start": 4.78,
+   "end": 5.02
+  },
+  {
+   "text": "it.",
+   "start": 5.09,
+   "end": 5.24
+  }
+ ],
+ "cues": {
+  "how": 1.49,
+  "why": 2.67,
+  "stop": 4.29
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

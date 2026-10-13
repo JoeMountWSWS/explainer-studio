@@ -1,0 +1,216 @@
+{
+ "hash": "8f9426f2e56ad648d3bb",
+ "source": "tts",
+ "duration": 16.384,
+ "words": [
+  {
+   "text": "Share",
+   "start": 0.04,
+   "end": 0.45
+  },
+  {
+   "text": "this",
+   "start": 0.45,
+   "end": 0.81
+  },
+  {
+   "text": "video.",
+   "start": 0.81,
+   "end": 1.44
+  },
+  {
+   "text": "Sign",
+   "start": 1.47,
+   "end": 1.79
+  },
+  {
+   "text": "the",
+   "start": 1.8,
+   "end": 2.06
+  },
+  {
+   "text": "petition",
+   "start": 2.06,
+   "end": 2.71
+  },
+  {
+   "text": "at",
+   "start": 2.78,
+   "end": 2.93
+  },
+  {
+   "text": "freebogdan.org.",
+   "start": 2.93,
+   "end": 4.53
+  },
+  {
+   "text": "Read",
+   "start": 4.53,
+   "end": 4.79
+  },
+  {
+   "text": "the",
+   "start": 4.79,
+   "end": 4.98
+  },
+  {
+   "text": "analysis",
+   "start": 4.98,
+   "end": 5.43
+  },
+  {
+   "text": "on",
+   "start": 5.51,
+   "end": 5.63
+  },
+  {
+   "text": "the",
+   "start": 5.63,
+   "end": 5.82
+  },
+  {
+   "text": "World",
+   "start": 5.82,
+   "end": 6.13
+  },
+  {
+   "text": "Socialist",
+   "start": 6.13,
+   "end": 6.73
+  },
+  {
+   "text": "Web",
+   "start": 6.73,
+   "end": 6.936
+  },
+  {
+   "text": "Site.",
+   "start": 6.936,
+   "end": 7.28
+  },
+  {
+   "text": "And",
+   "start": 7.28,
+   "end": 7.49
+  },
+  {
+   "text": "join",
+   "start": 7.49,
+   "end": 7.75
+  },
+  {
+   "text": "the",
+   "start": 7.75,
+   "end": 8.16
+  },
+  {
+   "text": "fight",
+   "start": 8.16,
+   "end": 8.36
+  },
+  {
+   "text": "to",
+   "start": 8.36,
+   "end": 8.49
+  },
+  {
+   "text": "build",
+   "start": 8.55,
+   "end": 8.86
+  },
+  {
+   "text": "an",
+   "start": 8.86,
+   "end": 9.0
+  },
+  {
+   "text": "international",
+   "start": 9.0,
+   "end": 9.93
+  },
+  {
+   "text": "socialist",
+   "start": 9.96,
+   "end": 10.54
+  },
+  {
+   "text": "movement",
+   "start": 11.16,
+   "end": 11.2
+  },
+  {
+   "text": "of",
+   "start": 11.2,
+   "end": 11.34
+  },
+  {
+   "text": "the",
+   "start": 11.34,
+   "end": 11.56
+  },
+  {
+   "text": "working",
+   "start": 11.56,
+   "end": 12.07
+  },
+  {
+   "text": "class",
+   "start": 12.07,
+   "end": 12.43
+  },
+  {
+   "text": "against",
+   "start": 12.43,
+   "end": 13.04
+  },
+  {
+   "text": "war",
+   "start": 13.08,
+   "end": 13.27
+  },
+  {
+   "text": "and",
+   "start": 13.27,
+   "end": 13.49
+  },
+  {
+   "text": "the",
+   "start": 13.49,
+   "end": 13.71
+  },
+  {
+   "text": "capitalist",
+   "start": 13.72,
+   "end": 14.44
+  },
+  {
+   "text": "system",
+   "start": 14.51,
+   "end": 14.97
+  },
+  {
+   "text": "that",
+   "start": 15.0,
+   "end": 15.29
+  },
+  {
+   "text": "produces",
+   "start": 15.29,
+   "end": 15.92
+  },
+  {
+   "text": "it.",
+   "start": 15.92,
+   "end": 16.35
+  }
+ ],
+ "cues": {
+  "share": 0.04,
+  "petition": 2.93,
+  "read": 5.63,
+  "join": 7.49
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

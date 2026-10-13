@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #wars-stage { display: flex; flex-direction: column; }
+        #wars-row { display: flex; gap: 56px; }
+        #wars-row .w { flex: 1; }
+        #wars-row .yr { font-family: var(--font-serif); font-weight: 700; font-size: 110px; line-height: 1; color: var(--ink); }
+        #wars-row .ph { position: relative; height: 420px; overflow: hidden; margin-top: 20px; }
+        #wars-row .ph img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+        #wars-row .cr { margin-top: 10px; font-size: 22px; }
+        #wars-gone { margin-top: 36px; font-size: 88px; color: var(--red); }
+      </style>
+
+      <div id="root" data-composition-id="scene-wars" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="wars-stage" class="stage">
+          <div id="wars-row">
+            <div id="wars-w1" class="w"><div class="yr">1914</div><div class="ph"><img id="wars-i1" src="assets/media/war-1914.jpg" alt="" style="object-position: 50% 40%" /></div><div class="cr byline">German soldiers on the way to the front, 1914. Public domain</div></div>
+            <div id="wars-w2" class="w"><div class="yr">1939</div><div class="ph"><img id="wars-i2" src="assets/media/war-1939.jpg" alt="" style="object-position: 50% 45%" /></div><div class="cr byline">German soldiers remove a Polish border barrier, 1939. Hans Sönnke, Bundesarchiv, CC BY-SA 3.0 de</div></div>
+          </div>
+          <h1 id="wars-gone" class="headline">It has not gone away.</h1>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 5.8667, "voStart": 0.6, "voEnd": 4.96, "cues": {"two": 2.56, "gone": 3.59}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          const t = cue("two", 1.2);
+          rise("#wars-w1", t - 0.6, 30);
+          rise("#wars-w2", t, 30);
+          tl.fromTo(["#wars-i1", "#wars-i2"], { scale: 1.06 }, { scale: 1, duration: T.duration, ease: "none" }, 0);
+          rise("#wars-gone", cue("gone", 2.6) - 0.1, 24, 0.6);
+
+          tl.to("#wars-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-wars"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

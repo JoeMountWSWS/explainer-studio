@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #putin-photo { position: absolute; left: 0; top: 0; bottom: 0; width: 600px; overflow: hidden; }
+        #putin-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; filter: grayscale(1) contrast(1.05); }
+        #putin-credit { position: absolute; left: 32px; bottom: 120px; width: 540px; color: #ffffff; font-size: 22px; background: rgba(20,20,20,0.78); padding: 6px 12px; }
+        #putin-stage { left: 720px; right: 150px; display: flex; flex-direction: column; justify-content: center; }
+        #putin-quote { font-size: 70px; line-height: 1.3; }
+        #putin-who { margin-top: 48px; padding-left: 62px; }
+        #putin-src { margin-top: 12px; padding-left: 62px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-putin" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="putin-photo"><img id="putin-img" data-layout-allow-overflow src="assets/media/putin.jpg" alt="" /><div id="putin-credit" class="byline">Vladimir Putin, December 2025. Photo: Kremlin.ru, CC BY 4.0</div></div>
+        <div id="putin-stage" class="stage">
+          <blockquote id="putin-quote" class="quote"><span class="soft">An escalating cycle of retaliation leads to</span> “<span id="putin-wash" class="hl">a fatal point of no return</span>.”</blockquote>
+          <div id="putin-who" class="label">Vladimir Putin</div>
+          <div id="putin-src" class="byline">Valdai Discussion Club, 1 October 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 12.3667, "voStart": 0.6, "voEnd": 11.462, "cues": {"key": 9.41}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#putin-photo", 0, 0.5);
+          tl.fromTo("#putin-img", { scale: 1.06 }, { scale: 1, duration: T.duration, ease: "none" }, 0);
+          tl.fromTo("#putin-quote", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 0.3);
+          fade(["#putin-who", "#putin-src"], 1.0);
+          wash("#putin-wash", cue("key", 2.0));
+
+          tl.to("#putin-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-putin"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

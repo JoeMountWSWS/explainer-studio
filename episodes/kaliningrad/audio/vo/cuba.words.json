@@ -1,0 +1,271 @@
+{
+ "hash": "4dbfc56465b99005797d",
+ "source": "tts",
+ "duration": 19.694,
+ "words": [
+  {
+   "text": "In",
+   "start": 0.03,
+   "end": 0.21
+  },
+  {
+   "text": "October",
+   "start": 0.32,
+   "end": 0.99
+  },
+  {
+   "text": "1962,",
+   "start": 0.99,
+   "end": 2.43
+  },
+  {
+   "text": "when",
+   "start": 2.43,
+   "end": 2.65
+  },
+  {
+   "text": "the",
+   "start": 2.65,
+   "end": 2.82
+  },
+  {
+   "text": "United",
+   "start": 2.82,
+   "end": 3.16
+  },
+  {
+   "text": "States",
+   "start": 3.16,
+   "end": 3.52
+  },
+  {
+   "text": "and",
+   "start": 3.52,
+   "end": 3.71
+  },
+  {
+   "text": "the",
+   "start": 3.71,
+   "end": 3.9
+  },
+  {
+   "text": "Soviet",
+   "start": 3.9,
+   "end": 4.29
+  },
+  {
+   "text": "Union",
+   "start": 4.29,
+   "end": 4.64
+  },
+  {
+   "text": "came",
+   "start": 4.64,
+   "end": 4.87
+  },
+  {
+   "text": "to",
+   "start": 4.87,
+   "end": 4.99
+  },
+  {
+   "text": "the",
+   "start": 4.99,
+   "end": 5.12
+  },
+  {
+   "text": "brink",
+   "start": 5.18,
+   "end": 5.44
+  },
+  {
+   "text": "over",
+   "start": 5.48,
+   "end": 5.69
+  },
+  {
+   "text": "missiles",
+   "start": 5.69,
+   "end": 6.09
+  },
+  {
+   "text": "in",
+   "start": 6.15,
+   "end": 6.47
+  },
+  {
+   "text": "Cuba,",
+   "start": 6.5,
+   "end": 7.84
+  },
+  {
+   "text": "President",
+   "start": 7.84,
+   "end": 7.94
+  },
+  {
+   "text": "Kennedy",
+   "start": 8.47,
+   "end": 8.84
+  },
+  {
+   "text": "went",
+   "start": 8.84,
+   "end": 9.09
+  },
+  {
+   "text": "on",
+   "start": 9.09,
+   "end": 9.21
+  },
+  {
+   "text": "national",
+   "start": 9.21,
+   "end": 9.71
+  },
+  {
+   "text": "television",
+   "start": 9.71,
+   "end": 10.48
+  },
+  {
+   "text": "and",
+   "start": 10.48,
+   "end": 10.64
+  },
+  {
+   "text": "the",
+   "start": 10.64,
+   "end": 10.76
+  },
+  {
+   "text": "world",
+   "start": 10.8,
+   "end": 11.06
+  },
+  {
+   "text": "followed",
+   "start": 11.08,
+   "end": 11.49
+  },
+  {
+   "text": "every",
+   "start": 11.5,
+   "end": 11.77
+  },
+  {
+   "text": "hour",
+   "start": 11.77,
+   "end": 11.98
+  },
+  {
+   "text": "of",
+   "start": 12.05,
+   "end": 12.23
+  },
+  {
+   "text": "the",
+   "start": 12.34,
+   "end": 12.53
+  },
+  {
+   "text": "crisis.",
+   "start": 12.58,
+   "end": 13.62
+  },
+  {
+   "text": "This",
+   "start": 13.62,
+   "end": 13.84
+  },
+  {
+   "text": "time,",
+   "start": 14.22,
+   "end": 14.37
+  },
+  {
+   "text": "days",
+   "start": 14.37,
+   "end": 14.67
+  },
+  {
+   "text": "after",
+   "start": 14.67,
+   "end": 15.0
+  },
+  {
+   "text": "Moscow\u2019s",
+   "start": 15.07,
+   "end": 15.64
+  },
+  {
+   "text": "warning,",
+   "start": 15.64,
+   "end": 16.31
+  },
+  {
+   "text": "the",
+   "start": 16.31,
+   "end": 16.53
+  },
+  {
+   "text": "New",
+   "start": 16.53,
+   "end": 16.72
+  },
+  {
+   "text": "York",
+   "start": 16.75,
+   "end": 17.05
+  },
+  {
+   "text": "Times",
+   "start": 17.05,
+   "end": 17.41
+  },
+  {
+   "text": "and",
+   "start": 17.45,
+   "end": 17.62
+  },
+  {
+   "text": "CNN",
+   "start": 17.66,
+   "end": 17.85
+  },
+  {
+   "text": "had",
+   "start": 17.86,
+   "end": 18.08
+  },
+  {
+   "text": "still",
+   "start": 18.08,
+   "end": 18.54
+  },
+  {
+   "text": "not",
+   "start": 18.57,
+   "end": 18.75
+  },
+  {
+   "text": "reported",
+   "start": 18.75,
+   "end": 19.3
+  },
+  {
+   "text": "it.",
+   "start": 19.3,
+   "end": 19.64
+  }
+ ],
+ "cues": {
+  "tv": 9.21,
+  "now": 13.62,
+  "nyt": 16.53,
+  "not": 18.57
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

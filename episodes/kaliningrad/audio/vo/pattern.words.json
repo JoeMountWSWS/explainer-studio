@@ -1,0 +1,130 @@
+{
+ "hash": "ca9aaed6e980cb681a31",
+ "source": "tts",
+ "duration": 9.796,
+ "words": [
+  {
+   "text": "The",
+   "start": 0.04,
+   "end": 0.24
+  },
+  {
+   "text": "pattern",
+   "start": 0.24,
+   "end": 0.8
+  },
+  {
+   "text": "repeats.",
+   "start": 0.8,
+   "end": 1.52
+  },
+  {
+   "text": "Each",
+   "start": 1.53,
+   "end": 1.84
+  },
+  {
+   "text": "Russian",
+   "start": 1.84,
+   "end": 2.4
+  },
+  {
+   "text": "warning",
+   "start": 2.4,
+   "end": 2.92
+  },
+  {
+   "text": "is",
+   "start": 3.0,
+   "end": 3.12
+  },
+  {
+   "text": "dismissed",
+   "start": 3.12,
+   "end": 3.82
+  },
+  {
+   "text": "as",
+   "start": 3.85,
+   "end": 4.0
+  },
+  {
+   "text": "bluff.",
+   "start": 4.0,
+   "end": 4.68
+  },
+  {
+   "text": "Each",
+   "start": 4.74,
+   "end": 4.96
+  },
+  {
+   "text": "threshold",
+   "start": 4.96,
+   "end": 5.48
+  },
+  {
+   "text": "crossed",
+   "start": 5.56,
+   "end": 5.94
+  },
+  {
+   "text": "without",
+   "start": 6.0,
+   "end": 6.44
+  },
+  {
+   "text": "a",
+   "start": 6.44,
+   "end": 6.5
+  },
+  {
+   "text": "response",
+   "start": 6.5,
+   "end": 6.91
+  },
+  {
+   "text": "becomes",
+   "start": 7.02,
+   "end": 7.53
+  },
+  {
+   "text": "the",
+   "start": 7.53,
+   "end": 7.73
+  },
+  {
+   "text": "argument",
+   "start": 7.73,
+   "end": 8.28
+  },
+  {
+   "text": "for",
+   "start": 8.28,
+   "end": 8.48
+  },
+  {
+   "text": "crossing",
+   "start": 8.48,
+   "end": 9.03
+  },
+  {
+   "text": "the",
+   "start": 9.03,
+   "end": 9.23
+  },
+  {
+   "text": "next.",
+   "start": 9.23,
+   "end": 9.76
+  }
+ ],
+ "cues": {
+  "bluff": 3.12,
+  "crossed": 5.56,
+  "next": 7.53
+ },
+ "paragraphs": [
+  0.0
+ ]
+}
