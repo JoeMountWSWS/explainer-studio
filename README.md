@@ -1,4 +1,4 @@
-# explainer-studio
+# Explainer Studio
 
 [![CI](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml)
 
