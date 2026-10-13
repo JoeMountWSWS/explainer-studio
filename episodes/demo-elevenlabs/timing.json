@@ -1,0 +1,66 @@
+{
+ "fps": 30,
+ "duration": 41.6,
+ "scenes": [
+  {
+   "id": "hook",
+   "title": "Seventy-two days",
+   "template": "title",
+   "start": 0.0,
+   "duration": 12.166666666666666,
+   "voStart": 0.6,
+   "voEnd": 11.281,
+   "cues": {
+    "sub": 8.08
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "days",
+   "title": "Seventy-two days",
+   "template": "stat",
+   "start": 12.166666666666666,
+   "duration": 8.966666666666667,
+   "voStart": 0.6,
+   "voEnd": 8.077,
+   "cues": {
+    "figure": 2.42
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "lesson",
+   "title": "The lesson Marx drew",
+   "template": "quote",
+   "start": 21.133333333333333,
+   "duration": 13.166666666666666,
+   "voStart": 0.6,
+   "voEnd": 12.256,
+   "cues": {
+    "key": 4.46
+   },
+   "paragraphs": [
+    0.6
+   ]
+  },
+  {
+   "id": "outro",
+   "title": "Further reading",
+   "template": "outro",
+   "start": 34.3,
+   "duration": 7.3,
+   "voStart": 0.6,
+   "voEnd": 6.405,
+   "cues": {
+    "next": 0.66
+   },
+   "paragraphs": [
+    0.6
+   ]
+  }
+ ]
+}

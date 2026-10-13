@@ -1,0 +1,153 @@
+{
+ "hash": "e315a9ff6e8aab73f75c",
+ "source": "tts",
+ "duration": 10.201,
+ "words": [
+  {
+   "text": "In",
+   "start": 0.03,
+   "end": 0.18
+  },
+  {
+   "text": "the",
+   "start": 0.18,
+   "end": 0.45
+  },
+  {
+   "text": "spring",
+   "start": 0.45,
+   "end": 0.99
+  },
+  {
+   "text": "of",
+   "start": 0.99,
+   "end": 1.17
+  },
+  {
+   "text": "1871,",
+   "start": 1.17,
+   "end": 2.46
+  },
+  {
+   "text": "for",
+   "start": 2.51,
+   "end": 2.63
+  },
+  {
+   "text": "the",
+   "start": 2.63,
+   "end": 2.8
+  },
+  {
+   "text": "first",
+   "start": 2.8,
+   "end": 3.07
+  },
+  {
+   "text": "time",
+   "start": 3.08,
+   "end": 3.32
+  },
+  {
+   "text": "in",
+   "start": 3.32,
+   "end": 3.54
+  },
+  {
+   "text": "history,",
+   "start": 3.54,
+   "end": 4.32
+  },
+  {
+   "text": "the",
+   "start": 4.35,
+   "end": 4.56
+  },
+  {
+   "text": "working",
+   "start": 4.56,
+   "end": 5.11
+  },
+  {
+   "text": "class",
+   "start": 5.11,
+   "end": 5.5
+  },
+  {
+   "text": "took",
+   "start": 5.5,
+   "end": 5.82
+  },
+  {
+   "text": "power",
+   "start": 5.82,
+   "end": 6.21
+  },
+  {
+   "text": "in",
+   "start": 6.21,
+   "end": 6.37
+  },
+  {
+   "text": "a",
+   "start": 6.37,
+   "end": 6.43
+  },
+  {
+   "text": "major",
+   "start": 6.83,
+   "end": 6.84
+  },
+  {
+   "text": "city.",
+   "start": 6.84,
+   "end": 7.44
+  },
+  {
+   "text": "This",
+   "start": 7.47,
+   "end": 7.72
+  },
+  {
+   "text": "is",
+   "start": 7.81,
+   "end": 7.93
+  },
+  {
+   "text": "the",
+   "start": 7.93,
+   "end": 8.12
+  },
+  {
+   "text": "story",
+   "start": 8.22,
+   "end": 8.6
+  },
+  {
+   "text": "of",
+   "start": 8.6,
+   "end": 8.75
+  },
+  {
+   "text": "the",
+   "start": 8.76,
+   "end": 9.01
+  },
+  {
+   "text": "Paris",
+   "start": 9.01,
+   "end": 9.43
+  },
+  {
+   "text": "Commune.",
+   "start": 9.43,
+   "end": 10.3
+  }
+ ],
+ "cues": {
+  "sub": 7.47
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

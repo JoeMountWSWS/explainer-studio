@@ -1,0 +1,135 @@
+/* Explainer house style, after wsws.org. Tokens mirror brand/frame.md.
+   `studio sync` copies this file (with fonts/ and gsap) into each episode's assets/brand/. */
+
+@font-face { font-family: "PT Serif"; src: url("fonts/PTSerif-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "PT Serif"; src: url("fonts/PTSerif-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "PT Serif"; src: url("fonts/PTSerif-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "PT Serif"; src: url("fonts/PTSerif-BoldItalic.ttf") format("truetype"); font-weight: 700; font-style: italic; }
+@font-face { font-family: "Source Sans 3"; src: url("fonts/SourceSans3.ttf") format("truetype"); font-weight: 200 900; font-style: normal; }
+@font-face { font-family: "Source Sans 3"; src: url("fonts/SourceSans3-Italic.ttf") format("truetype"); font-weight: 200 900; font-style: italic; }
+@font-face { font-family: "JetBrains Mono"; src: url("fonts/JetBrainsMono.ttf") format("truetype"); font-weight: 100 800; }
+
+:root {
+  --paper: #ffffff;
+  --panel: #f4f4f4;
+  --ink: #231f20;
+  --ink-2: #333333;
+  --ink-soft: #555555;
+  --rule: #cccccc;
+  --red: #e71e25;
+  --red-wash: #ffdfdf;
+  --tag: #1b2129;
+
+  --font-serif: "PT Serif", Georgia, serif;
+  --font-sans: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --safe-x: 192px;   /* title-safe inset (10%) */
+  --safe-y: 108px;
+  --hairline: 2px solid var(--rule);
+}
+
+/* Full-bleed white page. */
+.paper { position: absolute; inset: 0; background: var(--paper); }
+
+/* Title-safe content box. Put scene content inside one of these. */
+.stage {
+  position: absolute;
+  inset: var(--safe-y) var(--safe-x);
+  color: var(--ink-2);
+  font-family: var(--font-serif);
+}
+
+/* Heavy ink rule + uppercase label, like the site's "TOP STORIES" head.
+   <div class="section-head"><div class="section-rule"></div><div class="label">History</div></div>
+   Draw the rule on with scaleX (transform-origin is left). */
+.section-head { display: flex; flex-direction: column; gap: 18px; }
+.section-rule { height: 6px; background: var(--ink); transform-origin: left center; }
+
+.label {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* Dark category tag ("PERSPECTIVE"). */
+.tag {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--tag);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 18px 9px;
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 104px;
+  line-height: 1.12;
+  color: var(--ink);
+  margin: 0;
+}
+
+.standfirst {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.body {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+/* Source / byline / date line. */
+.byline {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--ink-soft);
+}
+
+/* Blockquote with red left rule. */
+.quote {
+  border-left: 6px solid var(--red);
+  padding-left: 56px;
+  font-family: var(--font-serif);
+  color: var(--ink);
+}
+
+.italic { font-style: italic; }
+.soft { color: var(--ink-soft); }
+.red { color: var(--red); }
+.sans { font-family: var(--font-sans); }
+.mono { font-family: var(--font-mono); font-weight: 500; }
+.hairline { height: 0; border-top: var(--hairline); }
+.panel { background: var(--panel); padding: 40px 48px; }
+
+/* Highlight wash: <span id="x-key" class="hl">phrase</span>
+   Sweep it in on a cue: tl.to("#x-key", { backgroundSize: "100% 82%", duration: 0.5 }, cue("key")) */
+.hl {
+  background-image: linear-gradient(var(--red-wash), var(--red-wash));
+  background-repeat: no-repeat;
+  background-position: left 70%;
+  background-size: 0% 82%;
+  padding: 0 0.06em;
+  margin: 0 -0.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}

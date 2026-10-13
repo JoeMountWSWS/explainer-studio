@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #resistance-mapbox { position: absolute; left: 0; top: 0; bottom: 0; width: 860px; overflow: hidden; }
+        #resistance-mapbox img { position: absolute; left: -240px; top: 40px; width: 1500px; }
+        #resistance-stage { left: 940px; display: flex; flex-direction: column; }
+        #resistance-head { width: 100%; }
+        #resistance-list { list-style: none; margin: 44px 0 0; padding: 0; }
+        #resistance-list li { padding: 26px 0; border-top: var(--hairline); }
+        #resistance-list li:first-child { border-top: 0; }
+        #resistance-list .amt { font-family: var(--font-serif); font-weight: 700; font-size: 76px; line-height: 1.05; color: var(--ink); }
+        #resistance-list .t { font-size: 40px; margin-top: 6px; }
+        #resistance-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-resistance" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="resistance-mapbox" data-layout-allow-overflow>
+          <img src="assets/media/maps/europe-base.png" alt="" />
+          <img id="resistance-fr" src="assets/media/maps/europe-fr.png" alt="" />
+          <img id="resistance-be" src="assets/media/maps/europe-be.png" alt="" />
+          <img id="resistance-de" src="assets/media/maps/europe-de.png" alt="" />
+        </div>
+        <div id="resistance-stage" class="stage">
+          <div id="resistance-head" class="section-head"><div id="resistance-rule" class="section-rule"></div><div id="resistance-label" class="label">The other road</div></div>
+          <ul id="resistance-list">
+            <li id="resistance-l1"><div class="amt"><span class="red">~500,000</span> march</div><p class="standfirst t">France: youth and workers against austerity and militarism</p></li>
+            <li id="resistance-l2"><div class="amt">School strikes</div><p class="standfirst t">Belgium and Germany: against conscription</p></li>
+            <li id="resistance-l3"><div class="amt">175,000 protest</div><p class="standfirst t">Germany: against the government’s social cuts</p></li>
+          </ul>
+          <div id="resistance-src" class="byline">Sources: WSWS, 1–9 Oct 2026; 5 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 20.5, "voStart": 0.4, "voEnd": 19.792, "cues": {"france": 3.26, "schools": 9.42, "berlin": 14.37}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#resistance-mapbox > img:first-child", 0, 0.8);
+          head("resistance");
+          const f = cue("france", 3);
+          fade("#resistance-fr", f);
+          rise("#resistance-l1", f, 20);
+          const s = cue("schools", 9);
+          fade(["#resistance-be", "#resistance-de"], s);
+          rise("#resistance-l2", s, 20);
+          rise("#resistance-l3", cue("berlin", 14), 20);
+          fade("#resistance-src", f + 1);
+
+          tl.to("#resistance-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-resistance"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

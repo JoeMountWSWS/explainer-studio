@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #trotsky-photo { position: absolute; left: 0; top: 0; bottom: 0; width: 600px; overflow: hidden; }
+        #trotsky-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; filter: grayscale(1) contrast(1.05); }
+        #trotsky-credit { position: absolute; left: 32px; bottom: 120px; width: 540px; color: #ffffff; font-size: 22px; background: rgba(20,20,20,0.78); padding: 6px 12px; }
+        #trotsky-stage { left: 720px; right: 150px; display: flex; flex-direction: column; justify-content: center; }
+        #trotsky-quote { font-size: 62px; line-height: 1.3; }
+        #trotsky-who { margin-top: 48px; padding-left: 62px; }
+        #trotsky-src { margin-top: 12px; padding-left: 62px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-trotsky" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="trotsky-photo"><img id="trotsky-img" data-layout-allow-overflow src="assets/media/trotsky.jpg" alt="" /><div id="trotsky-credit" class="byline">Leon Trotsky, 1930s. Public domain</div></div>
+        <div id="trotsky-stage" class="stage">
+          <blockquote id="trotsky-quote" class="quote">“The world political situation as a whole is chiefly characterized by a <span id="trotsky-wash" class="hl">historical crisis of the leadership of the proletariat</span>.”</blockquote>
+          <div id="trotsky-who" class="label">Leon Trotsky</div>
+          <div id="trotsky-src" class="byline"><span class="italic">The Transitional Programme</span>, 1938</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 12.1, "voStart": 0.4, "voEnd": 11.408, "cues": {"key": 5.44}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#trotsky-photo", 0, 0.5);
+          tl.fromTo("#trotsky-img", { scale: 1.06 }, { scale: 1, duration: T.duration, ease: "none" }, 0);
+          tl.fromTo("#trotsky-quote", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 0.3);
+          fade(["#trotsky-who", "#trotsky-src"], 1.0);
+          wash("#trotsky-wash", cue("key", 2.0));
+
+          tl.to("#trotsky-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-trotsky"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

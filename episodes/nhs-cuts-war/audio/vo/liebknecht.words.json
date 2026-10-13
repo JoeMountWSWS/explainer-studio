@@ -1,0 +1,128 @@
+{
+ "hash": "0d398cbaebe4d184d662",
+ "source": "tts",
+ "duration": 9.6,
+ "words": [
+  {
+   "text": "In",
+   "start": 0.04,
+   "end": 0.23
+  },
+  {
+   "text": "1915,",
+   "start": 0.23,
+   "end": 1.86
+  },
+  {
+   "text": "the",
+   "start": 1.9,
+   "end": 2.06
+  },
+  {
+   "text": "German",
+   "start": 2.06,
+   "end": 2.44
+  },
+  {
+   "text": "socialist",
+   "start": 2.45,
+   "end": 2.93
+  },
+  {
+   "text": "Karl",
+   "start": 3.08,
+   "end": 3.34
+  },
+  {
+   "text": "Liebknecht",
+   "start": 3.34,
+   "end": 3.85
+  },
+  {
+   "text": "put",
+   "start": 4.11,
+   "end": 4.25
+  },
+  {
+   "text": "it",
+   "start": 4.39,
+   "end": 4.44
+  },
+  {
+   "text": "plainly:",
+   "start": 4.44,
+   "end": 5.0
+  },
+  {
+   "text": "the",
+   "start": 5.22,
+   "end": 5.28
+  },
+  {
+   "text": "main",
+   "start": 5.28,
+   "end": 5.66
+  },
+  {
+   "text": "enemy",
+   "start": 5.66,
+   "end": 6.14
+  },
+  {
+   "text": "is",
+   "start": 6.14,
+   "end": 6.33
+  },
+  {
+   "text": "at",
+   "start": 6.33,
+   "end": 6.52
+  },
+  {
+   "text": "home.",
+   "start": 6.52,
+   "end": 7.22
+  },
+  {
+   "text": "The",
+   "start": 7.26,
+   "end": 7.42
+  },
+  {
+   "text": "same",
+   "start": 7.42,
+   "end": 7.69
+  },
+  {
+   "text": "holds",
+   "start": 7.69,
+   "end": 8.02
+  },
+  {
+   "text": "for",
+   "start": 8.02,
+   "end": 8.22
+  },
+  {
+   "text": "British",
+   "start": 8.22,
+   "end": 8.69
+  },
+  {
+   "text": "workers",
+   "start": 8.69,
+   "end": 9.16
+  },
+  {
+   "text": "today.",
+   "start": 9.16,
+   "end": 9.7
+  }
+ ],
+ "cues": {
+  "key": 5.22
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

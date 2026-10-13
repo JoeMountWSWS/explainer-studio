@@ -1,0 +1,133 @@
+{
+ "hash": "5fdc2eb0bee6c33dac83",
+ "source": "tts",
+ "duration": 9.963,
+ "words": [
+  {
+   "text": "Lenin",
+   "start": 0.03,
+   "end": 0.46
+  },
+  {
+   "text": "defined",
+   "start": 0.46,
+   "end": 1.1
+  },
+  {
+   "text": "imperialism",
+   "start": 1.1,
+   "end": 1.87
+  },
+  {
+   "text": "as",
+   "start": 2.14,
+   "end": 2.38
+  },
+  {
+   "text": "the",
+   "start": 2.38,
+   "end": 2.77
+  },
+  {
+   "text": "stage",
+   "start": 2.77,
+   "end": 3.01
+  },
+  {
+   "text": "\"in",
+   "start": 3.46,
+   "end": 3.54
+  },
+  {
+   "text": "which",
+   "start": 3.54,
+   "end": 3.77
+  },
+  {
+   "text": "the",
+   "start": 3.84,
+   "end": 3.97
+  },
+  {
+   "text": "division",
+   "start": 3.97,
+   "end": 4.44
+  },
+  {
+   "text": "of",
+   "start": 4.44,
+   "end": 4.52
+  },
+  {
+   "text": "all",
+   "start": 4.63,
+   "end": 4.8
+  },
+  {
+   "text": "territories",
+   "start": 4.8,
+   "end": 5.52
+  },
+  {
+   "text": "of",
+   "start": 5.52,
+   "end": 5.6
+  },
+  {
+   "text": "the",
+   "start": 5.6,
+   "end": 5.66
+  },
+  {
+   "text": "globe",
+   "start": 5.69,
+   "end": 6.04
+  },
+  {
+   "text": "among",
+   "start": 6.04,
+   "end": 6.42
+  },
+  {
+   "text": "the",
+   "start": 6.42,
+   "end": 6.64
+  },
+  {
+   "text": "biggest",
+   "start": 6.65,
+   "end": 7.18
+  },
+  {
+   "text": "capitalist",
+   "start": 7.18,
+   "end": 7.91
+  },
+  {
+   "text": "powers",
+   "start": 7.97,
+   "end": 8.41
+  },
+  {
+   "text": "has",
+   "start": 8.41,
+   "end": 8.64
+  },
+  {
+   "text": "been",
+   "start": 8.64,
+   "end": 8.69
+  },
+  {
+   "text": "completed.\"",
+   "start": 9.12,
+   "end": 9.9
+  }
+ ],
+ "cues": {
+  "key": 3.46
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #usa-mapbox { position: absolute; top: 0; right: 0; bottom: 0; width: 920px; overflow: hidden; }
+        #usa-mapbox img { position: absolute; left: -120px; top: 150px; width: 1900px; }
+        #usa-stage { right: 1000px; display: flex; flex-direction: column; }
+        #usa-head { width: 100%; }
+        #usa-row { display: flex; flex-direction: column; gap: 56px; margin-top: 64px; }
+        #usa-row .amt { font-family: var(--font-serif); font-weight: 700; font-size: 140px; line-height: 1; color: var(--ink); }
+        #usa-row .what { font-size: 44px; margin-top: 12px; color: var(--ink); max-width: 700px; }
+        #usa-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-usa" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="usa-mapbox" data-layout-allow-overflow><img src="assets/media/maps/world-base.png" alt="" /><img id="usa-hl" src="assets/media/maps/world-us.png" alt="" /></div>
+        <div id="usa-stage" class="stage">
+          <div id="usa-head" class="section-head"><div id="usa-rule" class="section-rule"></div><div id="usa-label" class="label">United States</div></div>
+          <div id="usa-row">
+            <div id="usa-a"><div class="amt red">$1.5tn</div><p class="body what">requested for the military, up 42%</p></div>
+            <div id="usa-b"><div class="amt">−$73bn</div><p class="body what">cut from everything else, including an eighth of the health budget</p></div>
+          </div>
+          <div id="usa-src" class="byline">Source: FY2027 budget request, reported by Yahoo Finance, April 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 11.8333, "voStart": 0.4, "voEnd": 11.131, "cues": {"mil": 4.68, "cuts": 8.69}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#usa-mapbox", 0, 0.8);
+          fade("#usa-hl", 0.5, 0.8);
+          head("usa");
+          rise("#usa-a", cue("mil", 3), 30);
+          rise("#usa-b", cue("cuts", 7), 30);
+          fade("#usa-src", cue("mil", 3) + 1);
+
+          tl.to("#usa-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-usa"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

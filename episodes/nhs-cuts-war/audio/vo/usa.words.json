@@ -1,0 +1,129 @@
+{
+ "hash": "944ab4032762dfb95294",
+ "source": "tts",
+ "duration": 10.731,
+ "words": [
+  {
+   "text": "In",
+   "start": 0.02,
+   "end": 0.15
+  },
+  {
+   "text": "the",
+   "start": 0.15,
+   "end": 0.38
+  },
+  {
+   "text": "United",
+   "start": 0.38,
+   "end": 0.84
+  },
+  {
+   "text": "States,",
+   "start": 0.84,
+   "end": 1.48
+  },
+  {
+   "text": "the",
+   "start": 1.5,
+   "end": 1.68
+  },
+  {
+   "text": "Trump",
+   "start": 1.68,
+   "end": 2.01
+  },
+  {
+   "text": "administration",
+   "start": 2.01,
+   "end": 2.74
+  },
+  {
+   "text": "has",
+   "start": 2.99,
+   "end": 3.11
+  },
+  {
+   "text": "asked",
+   "start": 3.16,
+   "end": 3.34
+  },
+  {
+   "text": "Congress",
+   "start": 3.49,
+   "end": 3.95
+  },
+  {
+   "text": "for",
+   "start": 4.24,
+   "end": 4.28
+  },
+  {
+   "text": "$1.5",
+   "start": 4.28,
+   "end": 5.71
+  },
+  {
+   "text": "trillion",
+   "start": 5.79,
+   "end": 6.2
+  },
+  {
+   "text": "for",
+   "start": 6.2,
+   "end": 6.4
+  },
+  {
+   "text": "the",
+   "start": 6.4,
+   "end": 6.48
+  },
+  {
+   "text": "military,",
+   "start": 6.5,
+   "end": 7.46
+  },
+  {
+   "text": "while",
+   "start": 7.51,
+   "end": 7.62
+  },
+  {
+   "text": "cutting",
+   "start": 7.98,
+   "end": 8.29
+  },
+  {
+   "text": "$73",
+   "start": 8.29,
+   "end": 8.72
+  },
+  {
+   "text": "billion",
+   "start": 8.8,
+   "end": 9.22
+  },
+  {
+   "text": "from",
+   "start": 9.22,
+   "end": 9.49
+  },
+  {
+   "text": "everything",
+   "start": 9.49,
+   "end": 10.2
+  },
+  {
+   "text": "else.",
+   "start": 10.2,
+   "end": 10.72
+  }
+ ],
+ "cues": {
+  "mil": 4.28,
+  "cuts": 8.29
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

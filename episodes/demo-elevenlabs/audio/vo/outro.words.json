@@ -1,0 +1,78 @@
+{
+ "hash": "065b2c32c2f82173f452",
+ "source": "tts",
+ "duration": 5.805,
+ "words": [
+  {
+   "text": "To",
+   "start": 0.06,
+   "end": 0.19
+  },
+  {
+   "text": "read",
+   "start": 0.19,
+   "end": 0.57
+  },
+  {
+   "text": "more,",
+   "start": 0.57,
+   "end": 1.13
+  },
+  {
+   "text": "start",
+   "start": 1.13,
+   "end": 1.6
+  },
+  {
+   "text": "with",
+   "start": 1.6,
+   "end": 1.98
+  },
+  {
+   "text": "Marx's",
+   "start": 1.98,
+   "end": 2.54
+  },
+  {
+   "text": "own",
+   "start": 2.54,
+   "end": 2.74
+  },
+  {
+   "text": "account,",
+   "start": 2.77,
+   "end": 3.68
+  },
+  {
+   "text": "The",
+   "start": 3.68,
+   "end": 3.91
+  },
+  {
+   "text": "Civil",
+   "start": 3.94,
+   "end": 4.32
+  },
+  {
+   "text": "War",
+   "start": 4.32,
+   "end": 4.51
+  },
+  {
+   "text": "in",
+   "start": 4.69,
+   "end": 4.7
+  },
+  {
+   "text": "France.",
+   "start": 4.72,
+   "end": 5.46
+  }
+ ],
+ "cues": {
+  "next": 0.06
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #question-stage { display: flex; flex-direction: column; justify-content: center; }
+        #question-title { font-size: 104px; max-width: 1450px; margin-top: 44px; }
+        #question-sub { margin-top: 44px; max-width: 1300px; font-size: 56px; }
+        #question-rule { width: 100%; margin-top: 64px; transform-origin: left center; }
+      </style>
+
+      <div id="root" data-composition-id="scene-question" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="question-stage" class="stage">
+          <div id="question-tag" class="tag">Perspective</div>
+          <h1 id="question-title" class="headline">A hospital in Kent. A feeding centre in Zimbabwe.</h1>
+          <p id="question-sub" class="standfirst">Two stories with <span id="question-wash" class="hl" style="color: var(--ink)">one cause</span>.</p>
+          <div id="question-rule" class="hairline"></div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 9.6, "voStart": 0.4, "voEnd": 8.912, "cues": {"sub": 6.0}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          rise("#question-tag", 0.2, 16, 0.5);
+          rise("#question-title", 0.35, 50, 0.9);
+          grow("#question-rule", 1.0);
+          rise("#question-sub", cue("sub", 4.5), 24);
+          wash("#question-wash", cue("sub", 4.5) + 0.8);
+
+          tl.to("#question-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-question"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #germany-mapbox { position: absolute; left: 0; top: 0; bottom: 0; width: 860px; overflow: hidden; }
+        #germany-mapbox img { position: absolute; left: -240px; top: 40px; width: 1500px; }
+        #germany-stage { left: 940px; display: flex; flex-direction: column; }
+        #germany-head { width: 100%; }
+        #germany-a, #germany-b { position: absolute; left: 0; right: 0; top: 140px; }
+        #germany-bars { display: flex; align-items: flex-end; gap: 56px; height: 470px; }
+        #germany-bars .col { display: flex; flex-direction: column; align-items: center; width: 220px; }
+        #germany-bars .val { font-family: var(--font-serif); font-weight: 700; font-size: 60px; color: var(--ink); margin-bottom: 12px; }
+        #germany-bars .bar { width: 100%; transform-origin: center bottom; }
+        #germany-bars .yr { font-family: var(--font-sans); font-weight: 700; font-size: 30px; color: var(--ink-soft); margin-top: 12px; }
+        #germany-a .standfirst { font-size: 44px; margin-top: 28px; }
+        #germany-b .card { padding: 28px 0; border-top: var(--hairline); }
+        #germany-b .card:first-child { border-top: 0; }
+        #germany-b .amt { font-family: var(--font-serif); font-weight: 700; font-size: 120px; line-height: 1.05; color: var(--ink); }
+        #germany-b .what { font-size: 44px; color: var(--ink); }
+        #germany-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-germany" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="germany-mapbox" data-layout-allow-overflow><img src="assets/media/maps/europe-base.png" alt="" /><img id="germany-de" src="assets/media/maps/europe-de.png" alt="" /></div>
+        <div id="germany-stage" class="stage">
+          <div id="germany-head" class="section-head"><div id="germany-rule" class="section-rule"></div><div id="germany-label" class="label">Germany</div></div>
+          <div id="germany-a">
+            <div id="germany-bars">
+              <div class="col"><div class="val">€82bn</div><div id="germany-b1" class="bar" style="height: 190px; background: var(--ink)"></div><div class="yr">2025</div></div>
+              <div class="col"><div class="val red">€180bn</div><div id="germany-b2" class="bar" style="height: 400px; background: var(--red)"></div><div class="yr">2030</div></div>
+            </div>
+            <p class="standfirst">Military spending, more than doubled</p>
+          </div>
+          <div id="germany-b">
+            <div id="germany-k1" class="card"><div class="amt">€11.6bn</div><p class="body what">for a new frigate order</p></div>
+            <div id="germany-k2" class="card"><div class="amt red">−€8bn</div><p class="body what">cut from care for the elderly</p></div>
+          </div>
+          <div id="germany-src" class="byline">Sources: WSWS, 5 and 11 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 20.2667, "voStart": 0.4, "voEnd": 19.557, "cues": {"double": 2.64, "frigates": 9.8, "care": 16.22}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#germany-mapbox", 0, 0.8);
+          fade("#germany-de", 0.8, 0.8);
+          head("germany");
+          const d = cue("double", 3);
+          fade("#germany-a .col:first-child", 0.8);
+          tl.fromTo("#germany-b1", { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power2.out" }, 0.8);
+          fade("#germany-a .col:nth-child(2)", d);
+          tl.fromTo("#germany-b2", { scaleY: 0 }, { scaleY: 1, duration: 1.2, ease: "power2.out" }, d);
+          fade("#germany-a .standfirst", d + 0.8);
+          const f = cue("frigates", 8.5);
+          out("#germany-a", f - 0.5);
+          rise("#germany-k1", f, 30);
+          rise("#germany-k2", cue("care", 13), 30);
+          fade("#germany-src", 1.2);
+
+          tl.to("#germany-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-germany"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

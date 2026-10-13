@@ -1,0 +1,225 @@
+{
+ "hash": "97da7e618ddcb4c97fbc",
+ "source": "tts",
+ "duration": 19.392,
+ "words": [
+  {
+   "text": "The",
+   "start": 0.02,
+   "end": 0.25
+  },
+  {
+   "text": "other",
+   "start": 0.25,
+   "end": 0.66
+  },
+  {
+   "text": "road",
+   "start": 0.67,
+   "end": 1.01
+  },
+  {
+   "text": "is",
+   "start": 1.01,
+   "end": 1.18
+  },
+  {
+   "text": "visible",
+   "start": 1.18,
+   "end": 1.58
+  },
+  {
+   "text": "too.",
+   "start": 1.58,
+   "end": 2.08
+  },
+  {
+   "text": "This",
+   "start": 2.08,
+   "end": 2.35
+  },
+  {
+   "text": "month,",
+   "start": 2.35,
+   "end": 2.86
+  },
+  {
+   "text": "nearly",
+   "start": 2.86,
+   "end": 3.17
+  },
+  {
+   "text": "half",
+   "start": 3.17,
+   "end": 3.36
+  },
+  {
+   "text": "a",
+   "start": 3.36,
+   "end": 3.42
+  },
+  {
+   "text": "million",
+   "start": 3.42,
+   "end": 3.64
+  },
+  {
+   "text": "young",
+   "start": 3.64,
+   "end": 4.14
+  },
+  {
+   "text": "people",
+   "start": 4.14,
+   "end": 4.44
+  },
+  {
+   "text": "and",
+   "start": 4.46,
+   "end": 4.68
+  },
+  {
+   "text": "workers",
+   "start": 4.68,
+   "end": 5.24
+  },
+  {
+   "text": "marched",
+   "start": 5.24,
+   "end": 5.8
+  },
+  {
+   "text": "in",
+   "start": 5.8,
+   "end": 5.96
+  },
+  {
+   "text": "France",
+   "start": 5.96,
+   "end": 6.02
+  },
+  {
+   "text": "against",
+   "start": 6.48,
+   "end": 7.01
+  },
+  {
+   "text": "austerity",
+   "start": 7.01,
+   "end": 7.69
+  },
+  {
+   "text": "and",
+   "start": 7.74,
+   "end": 7.95
+  },
+  {
+   "text": "militarism.",
+   "start": 7.95,
+   "end": 8.92
+  },
+  {
+   "text": "School",
+   "start": 9.02,
+   "end": 9.4
+  },
+  {
+   "text": "students",
+   "start": 9.4,
+   "end": 9.94
+  },
+  {
+   "text": "in",
+   "start": 9.94,
+   "end": 10.07
+  },
+  {
+   "text": "Belgium",
+   "start": 10.07,
+   "end": 10.55
+  },
+  {
+   "text": "and",
+   "start": 10.55,
+   "end": 10.6
+  },
+  {
+   "text": "Germany",
+   "start": 11.08,
+   "end": 11.46
+  },
+  {
+   "text": "are",
+   "start": 11.52,
+   "end": 11.71
+  },
+  {
+   "text": "striking",
+   "start": 11.71,
+   "end": 12.29
+  },
+  {
+   "text": "against",
+   "start": 12.29,
+   "end": 12.73
+  },
+  {
+   "text": "conscription,",
+   "start": 12.78,
+   "end": 13.68
+  },
+  {
+   "text": "and",
+   "start": 13.7,
+   "end": 13.97
+  },
+  {
+   "text": "175,000",
+   "start": 13.97,
+   "end": 15.89
+  },
+  {
+   "text": "workers",
+   "start": 15.92,
+   "end": 16.6
+  },
+  {
+   "text": "protested",
+   "start": 16.6,
+   "end": 17.16
+  },
+  {
+   "text": "in",
+   "start": 17.16,
+   "end": 17.36
+  },
+  {
+   "text": "Germany",
+   "start": 17.36,
+   "end": 18.06
+  },
+  {
+   "text": "against",
+   "start": 18.06,
+   "end": 18.27
+  },
+  {
+   "text": "social",
+   "start": 18.27,
+   "end": 18.43
+  },
+  {
+   "text": "cuts.",
+   "start": 18.52,
+   "end": 18.68
+  }
+ ],
+ "cues": {
+  "france": 2.86,
+  "schools": 9.02,
+  "berlin": 13.97
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

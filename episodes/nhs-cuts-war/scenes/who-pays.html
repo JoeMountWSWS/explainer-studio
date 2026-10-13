@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #who-pays-stage { display: flex; flex-direction: column; }
+        #who-pays-head { width: 640px; }
+        #who-pays-flow { display: flex; align-items: center; gap: 0; margin-top: 56px; }
+        #who-pays-flow .box { padding: 30px 40px; font-family: var(--font-serif); font-weight: 700; font-size: 56px; line-height: 1.15; color: var(--ink); }
+        #who-pays-from { background: var(--panel); }
+        #who-pays-to { border: 4px solid var(--red); color: var(--red) !important; }
+        #who-pays-arrow { width: 240px; height: 40px; flex: none; }
+        #who-pays-arrow .shaft { position: absolute; left: 20px; right: 46px; top: 17px; height: 6px; background: var(--ink); transform-origin: left center; }
+        #who-pays-arrow { position: relative; }
+        #who-pays-head2 { position: absolute; right: 20px; top: 0; width: 0; height: 0; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 32px solid var(--ink); }
+        #who-pays-rich { display: flex; align-items: flex-end; gap: 64px; margin-top: 80px; padding-top: 40px; border-top: var(--hairline); }
+        #who-pays-rich .amt { font-family: var(--font-serif); font-weight: 700; font-size: 96px; line-height: 1; color: var(--ink); }
+        #who-pays-rich .what { font-size: 40px; margin-top: 10px; max-width: 560px; }
+        #who-pays-six { font-family: var(--font-serif); font-weight: 700; font-size: 200px; line-height: 0.85; color: var(--red); }
+        #who-pays-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-who-pays" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="who-pays-stage" class="stage">
+          <div id="who-pays-head" class="section-head"><div id="who-pays-rule" class="section-rule"></div><div id="who-pays-label" class="label">Who pays?</div></div>
+          <div id="who-pays-flow">
+            <div id="who-pays-from" class="box">Arms budgets</div>
+            <div id="who-pays-arrow"><div class="shaft"></div><div id="who-pays-head2"></div></div>
+            <div id="who-pays-to" class="box">Cuts: hospitals, care, pensions, welfare</div>
+          </div>
+          <div id="who-pays-rich">
+            <div id="who-pays-r1"><div class="amt">€460–520bn</div><p class="standfirst what">one year’s wealth growth of Germany’s 5,000 super-rich</p></div>
+            <div id="who-pays-r2"><div id="who-pays-six">×6</div><p class="standfirst what">the cost of long-term care (€73.8bn)</p></div>
+          </div>
+          <div id="who-pays-src" class="byline">Source: WSWS, 5 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 18.7333, "voStart": 0.4, "voEnd": 18.021, "cues": {"arrow": 1.87, "rich": 9.4, "six": 14.83, "instead": 16.12}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("who-pays");
+          const a = cue("arrow", 2);
+          rise("#who-pays-from", a, 20);
+          grow("#who-pays-arrow .shaft", a + 0.4, 0.6);
+          fade("#who-pays-head2", a + 0.9, 0.3);
+          rise("#who-pays-to", a + 1.0, 20);
+          rise("#who-pays-r1", cue("rich", 8), 24);
+          rise("#who-pays-r2", cue("six", 12), 24);
+          fade("#who-pays-src", cue("rich", 8) + 1);
+
+          tl.to("#who-pays-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-who-pays"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+# Studio-wide TTS respellings: word as written -> how the voice should say it.
+# Applies to Kokoro TTS only. Captions and on-screen text keep the original spelling.
+# Episode-specific entries go under `pronounce:` in that episode's script.md front matter.
+# Test a respelling with:  uv run studio voices <slug> --scene <id>   (same voice and phonemizer as sync)
+WSWS: W S W S
+ICFI: I C F I
+SEP: S E P
+IYSSE: I Y S S E

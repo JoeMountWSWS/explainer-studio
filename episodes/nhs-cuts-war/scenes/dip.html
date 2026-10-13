@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #dip-stage { display: flex; flex-direction: column; }
+        #dip-head { width: 640px; }
+        #dip-list { margin-top: 56px; display: flex; flex-direction: column; }
+        #dip-list .item { display: flex; align-items: baseline; gap: 56px; padding: 34px 0; border-top: var(--hairline); }
+        #dip-list .item:first-child { border-top: 0; }
+        #dip-list .amt { font-family: var(--font-serif); font-weight: 700; font-size: 120px; line-height: 1; min-width: 520px; color: var(--ink); }
+        #dip-list .what { font-size: 46px; color: var(--ink); max-width: 900px; }
+        #dip-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-dip" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="dip-stage" class="stage">
+          <div id="dip-head" class="section-head"><div id="dip-rule" class="section-rule"></div><div id="dip-label" class="label">Where the money goes</div></div>
+          <div id="dip-list">
+            <div id="dip-i1" class="item"><span class="amt">£298bn</span><span class="body what">military spending to 2029/30</span></div>
+            <div id="dip-i2" class="item"><span class="amt red">−£570m</span><span class="body what">taken from health’s building budget</span></div>
+            <div id="dip-i3" class="item"><span class="amt">18</span><span class="body what">hospital building projects at risk</span></div>
+          </div>
+          <div id="dip-src" class="byline">Source: Defence Investment Plan, 30 June 2026, via WSWS, 3 July 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 18.3, "voStart": 0.4, "voEnd": 17.595, "cues": {"dip": 5.97, "health": 11.56, "projects": 15.54}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("dip");
+          rise("#dip-i1", cue("dip", 5), 30);
+          rise("#dip-i2", cue("health", 10), 30);
+          rise("#dip-i3", cue("projects", 14), 30);
+          fade("#dip-src", cue("dip", 5) + 1);
+
+          tl.to("#dip-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-dip"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

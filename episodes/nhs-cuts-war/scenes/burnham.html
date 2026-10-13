@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #burnham-stage { display: flex; flex-direction: column; }
+        #burnham-head { width: 640px; }
+        #burnham-top { display: flex; align-items: center; gap: 64px; margin-top: 44px; }
+        #burnham-pct { font-family: var(--font-serif); font-weight: 700; font-size: 240px; line-height: 1; color: var(--red); }
+        #burnham-what { font-size: 48px; max-width: 820px; color: var(--ink); }
+        #burnham-list { list-style: none; margin: 56px 0 0; padding: 0; }
+        #burnham-list li { display: flex; align-items: baseline; gap: 36px; padding: 24px 0; border-top: var(--hairline); }
+        #burnham-list .who { font-family: var(--font-sans); font-weight: 700; font-size: 30px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); min-width: 220px; }
+        #burnham-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-burnham" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="burnham-stage" class="stage">
+          <div id="burnham-head" class="section-head"><div id="burnham-rule" class="section-rule"></div><div id="burnham-label" class="label">The Burnham government</div></div>
+          <div id="burnham-top">
+            <div id="burnham-pct">5%</div>
+            <p id="burnham-what" class="body">of national income for the military and related spending by 2035: NATO’s target</p>
+          </div>
+          <ul id="burnham-list">
+            <li id="burnham-l1" class="body"><span class="who">The Times</span><span>Cut pensions and welfare to pay for it</span></li>
+            <li id="burnham-l2" class="body"><span class="who">UNISON</span><span>Figures published. No opposition organised.</span></li>
+          </ul>
+          <div id="burnham-src" class="byline">Sources: WSWS, 3 July and 12 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 17.3333, "voStart": 0.4, "voEnd": 16.635, "cues": {"target": 3.73, "times": 9.6, "unison": 14.94}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("burnham");
+          const g = cue("target", 3.5);
+          rise("#burnham-pct", g, 30);
+          rise("#burnham-what", g + 0.4, 20);
+          rise("#burnham-l1", cue("times", 9), 20);
+          rise("#burnham-l2", cue("unison", 14), 20);
+          fade("#burnham-src", g + 1);
+
+          tl.to("#burnham-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-burnham"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

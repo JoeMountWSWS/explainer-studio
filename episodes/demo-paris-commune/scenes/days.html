@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #days-stage { display: flex; flex-direction: column; justify-content: center; }
+        #days-head { width: 560px; }
+        #days-figure { font-family: var(--font-serif); font-weight: 700; font-size: 300px; line-height: 1; color: var(--red); margin-top: 48px; font-variant-numeric: lining-nums tabular-nums; }
+        #days-what { max-width: 1300px; margin-top: 28px; color: var(--ink); }
+        #days-src { margin-top: 48px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-days" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="days-stage" class="stage">
+          <div id="days-head" class="section-head">
+            <div id="days-rule" class="section-rule"></div>
+            <div id="days-label" class="label">Seventy-two days</div>
+          </div>
+          <!-- data-to is the number the counter lands on; data-suffix/prefix are added around it. -->
+          <div id="days-figure" data-to="72" data-prefix="" data-suffix=" days">0 days</div>
+          <p id="days-what" class="standfirst">From 18 March to 28 May 1871: the life of the Paris Commune.</p>
+          <div id="days-src" class="byline">The Commune was crushed in the “Bloody Week” of 21–28 May</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 6.9, "voStart": 0.6, "voEnd": 6.005, "cues": {"figure": 1.95}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const fig = document.getElementById("days-figure");
+          const to = Number(fig.dataset.to), pre = fig.dataset.prefix || "", suf = fig.dataset.suffix || "";
+          const counter = { v: 0 };
+          const fmt = (v) => pre + Math.round(v).toLocaleString("en-US") + suf;
+          fig.textContent = fmt(0);
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#days-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, 0.1);
+          tl.fromTo("#days-label", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.4);
+          const at = cue("figure", 0.7);
+          tl.fromTo("#days-figure", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, at);
+          tl.fromTo(counter, { v: 0 }, { v: to, duration: 1.4, ease: "power2.out", onUpdate: () => (fig.textContent = fmt(counter.v)) }, at);
+          tl.fromTo("#days-what", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, at + 0.9);
+          tl.fromTo("#days-src", { opacity: 0 }, { opacity: 1, duration: 0.6 }, at + 1.4);
+
+          tl.to("#days-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-days"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

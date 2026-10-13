@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #outro-stage { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        #outro-head { width: 560px; }
+        #outro-line { font-size: 88px; max-width: 900px; margin-top: 40px; }
+        #outro-next { max-width: 860px; margin-top: 40px; }
+        #outro-url { margin-top: 48px; color: var(--red); font-size: 56px; font-weight: 700; }
+        #outro-orgs { margin-top: 16px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-outro" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="outro-stage" class="stage">
+          <div id="outro-head" class="section-head"><div id="outro-rule" class="section-rule"></div><div id="outro-label" class="label">Read more</div></div>
+          <h2 id="outro-line" class="headline">The fight against cuts is the fight against war.</h2>
+          <p id="outro-next" class="standfirst">The reporting behind this video, and how to join the fight:</p>
+          <div id="outro-url" class="sans">wsws.org</div>
+          <div id="outro-orgs" class="byline">World Socialist Web Site · NHS FightBack · Socialist Equality Party</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 12.0, "voStart": 0.4, "voEnd": 10.747, "cues": {"url": 9.36}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("outro");
+          rise("#outro-line", 0.45, 40, 0.8);
+          rise("#outro-next", 1.6, 24);
+          const u = cue("url", 6);
+          rise("#outro-url", u - 0.2, 20);
+          fade("#outro-orgs", u + 0.5);
+
+          // No exit fade: the video ends on this frame.
+          window.__timelines["scene-outro"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

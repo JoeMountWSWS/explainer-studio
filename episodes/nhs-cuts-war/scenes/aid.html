@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #aid-map { position: absolute; left: 0; right: 0; bottom: 60px; width: 100%; opacity: 0.35; }
+        #aid-stage { display: flex; flex-direction: column; }
+        #aid-head { width: 640px; }
+        #aid-cols { display: flex; align-items: flex-end; gap: 72px; margin-top: 48px; height: 520px; }
+        #aid-cols .col { display: flex; flex-direction: column; align-items: center; width: 240px; }
+        #aid-cols .val { font-family: var(--font-serif); font-weight: 700; font-size: 60px; color: var(--ink); margin-bottom: 14px; }
+        #aid-cols .bar { width: 100%; transform-origin: center bottom; }
+        #aid-cols .yr { font-family: var(--font-sans); font-weight: 700; font-size: 30px; color: var(--ink-soft); margin-top: 14px; }
+        #aid-b1 { height: 380px; background: var(--ink); }
+        #aid-b2 { height: 266px; background: var(--red); }
+        #aid-right { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 60px; margin-left: 48px; }
+        #aid-pct { font-family: var(--font-serif); font-weight: 700; font-size: 220px; line-height: 1; color: var(--red); }
+        #aid-pct-what { font-size: 44px; margin-top: 8px; }
+        #aid-people { font-size: 48px; margin-top: 40px; color: var(--ink); max-width: 760px; }
+        #aid-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-aid" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <img id="aid-map" src="assets/media/maps/world-base.png" alt="" />
+        <div id="aid-stage" class="stage">
+          <div id="aid-head" class="section-head"><div id="aid-rule" class="section-rule"></div><div id="aid-label" class="label">Humanitarian aid from the major powers</div></div>
+          <div id="aid-cols">
+            <div class="col"><div class="val">$47.5bn</div><div id="aid-b1" class="bar"></div><div class="yr">2022</div></div>
+            <div class="col"><div id="aid-v2" class="val">$33.3bn</div><div id="aid-b2" class="bar"></div><div class="yr">2025</div></div>
+            <div id="aid-right">
+              <div id="aid-pct">−30%</div>
+              <p id="aid-pct-what" class="standfirst">in three years</p>
+              <p id="aid-people" class="body"><b>64 million</b> fewer people received help in 2025.</p>
+            </div>
+          </div>
+          <div id="aid-src" class="byline">Source: ALNAP, State of the Humanitarian System 2026, via WSWS, 12 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 17.1333, "voStart": 0.4, "voEnd": 16.421, "cues": {"aid": 6.47, "people": 13.59}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#aid-map", 0, 1.0);
+          head("aid");
+          tl.fromTo("#aid-b1", { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power2.out" }, 0.8);
+          fade("#aid-cols .col:first-child .val, #aid-cols .col:first-child .yr", 1.0);
+          const a = cue("aid", 6);
+          tl.fromTo("#aid-b2", { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power2.out" }, a - 0.6);
+          fade("#aid-v2, #aid-cols .col:nth-child(2) .yr", a - 0.4);
+          rise("#aid-pct", a, 30);
+          fade("#aid-pct-what", a + 0.5);
+          rise("#aid-people", cue("people", 13), 20);
+          fade("#aid-src", a + 1);
+
+          tl.to("#aid-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-aid"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+episodes/*/build/
+episodes/*/audio/tts/
+episodes/*/assets/brand/
+episodes/*/.hyperframes/
+episodes/*/_render_*.html
+out/
+.env

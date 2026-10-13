@@ -1,0 +1,210 @@
+{
+ "hash": "fe453668ca47c0d75ae3",
+ "source": "tts",
+ "duration": 16.235,
+ "words": [
+  {
+   "text": "Andy",
+   "start": 0.03,
+   "end": 0.23
+  },
+  {
+   "text": "Burnham",
+   "start": 0.23,
+   "end": 0.63
+  },
+  {
+   "text": "has",
+   "start": 0.63,
+   "end": 0.8
+  },
+  {
+   "text": "committed",
+   "start": 0.8,
+   "end": 1.32
+  },
+  {
+   "text": "Britain",
+   "start": 1.32,
+   "end": 1.76
+  },
+  {
+   "text": "to",
+   "start": 1.76,
+   "end": 1.84
+  },
+  {
+   "text": "NATO's",
+   "start": 1.84,
+   "end": 2.0
+  },
+  {
+   "text": "target",
+   "start": 2.0,
+   "end": 2.73
+  },
+  {
+   "text": "of",
+   "start": 3.09,
+   "end": 3.33
+  },
+  {
+   "text": "5",
+   "start": 3.33,
+   "end": 3.91
+  },
+  {
+   "text": "percent",
+   "start": 3.91,
+   "end": 3.93
+  },
+  {
+   "text": "of",
+   "start": 3.93,
+   "end": 4.07
+  },
+  {
+   "text": "national",
+   "start": 4.07,
+   "end": 4.66
+  },
+  {
+   "text": "income",
+   "start": 4.66,
+   "end": 4.99
+  },
+  {
+   "text": "by",
+   "start": 5.33,
+   "end": 5.45
+  },
+  {
+   "text": "2035.",
+   "start": 5.45,
+   "end": 7.84
+  },
+  {
+   "text": "The",
+   "start": 7.87,
+   "end": 8.08
+  },
+  {
+   "text": "Times",
+   "start": 8.08,
+   "end": 8.48
+  },
+  {
+   "text": "told",
+   "start": 8.48,
+   "end": 8.8
+  },
+  {
+   "text": "him",
+   "start": 8.8,
+   "end": 9.04
+  },
+  {
+   "text": "to",
+   "start": 9.04,
+   "end": 9.2
+  },
+  {
+   "text": "cut",
+   "start": 9.2,
+   "end": 9.4
+  },
+  {
+   "text": "pensions",
+   "start": 9.47,
+   "end": 10.09
+  },
+  {
+   "text": "and",
+   "start": 10.09,
+   "end": 10.33
+  },
+  {
+   "text": "welfare",
+   "start": 10.33,
+   "end": 10.58
+  },
+  {
+   "text": "to",
+   "start": 10.93,
+   "end": 11.05
+  },
+  {
+   "text": "pay",
+   "start": 11.16,
+   "end": 11.3
+  },
+  {
+   "text": "for",
+   "start": 11.3,
+   "end": 11.54
+  },
+  {
+   "text": "it.",
+   "start": 11.54,
+   "end": 12.0
+  },
+  {
+   "text": "UNISON's",
+   "start": 12.0,
+   "end": 12.39
+  },
+  {
+   "text": "leaders",
+   "start": 12.39,
+   "end": 12.85
+  },
+  {
+   "text": "have",
+   "start": 12.85,
+   "end": 13.11
+  },
+  {
+   "text": "published",
+   "start": 13.11,
+   "end": 13.7
+  },
+  {
+   "text": "the",
+   "start": 13.7,
+   "end": 13.89
+  },
+  {
+   "text": "figures",
+   "start": 13.89,
+   "end": 14.31
+  },
+  {
+   "text": "and",
+   "start": 14.37,
+   "end": 14.54
+  },
+  {
+   "text": "organised",
+   "start": 14.54,
+   "end": 15.13
+  },
+  {
+   "text": "no",
+   "start": 15.13,
+   "end": 15.19
+  },
+  {
+   "text": "opposition.",
+   "start": 15.32,
+   "end": 16.16
+  }
+ ],
+ "cues": {
+  "target": 3.33,
+  "times": 9.2,
+  "unison": 14.54
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

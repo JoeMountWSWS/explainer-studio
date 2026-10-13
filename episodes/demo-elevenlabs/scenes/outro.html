@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        /* YouTube end-screen elements need the right ~45% clear for the last 5-20s,
+           so content keeps to the left. */
+        #outro-stage { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        #outro-head { width: 560px; }
+        #outro-line { font-size: 96px; max-width: 900px; margin-top: 40px; }
+        #outro-next { max-width: 860px; margin-top: 40px; }
+        #outro-url { margin-top: 48px; color: var(--red); font-size: 34px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-outro" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="outro-stage" class="stage">
+          <div id="outro-head" class="section-head">
+            <div id="outro-rule" class="section-rule"></div>
+            <div id="outro-label" class="label">Further reading</div>
+          </div>
+          <h2 id="outro-line" class="headline">The state had to be broken, not simply taken over.</h2>
+          <p id="outro-next" class="standfirst">Read next: Karl Marx, <span class="italic">The Civil War in France</span> (1871).</p>
+          <div id="outro-url" class="byline">marxists.org</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 7.3, "voStart": 0.6, "voEnd": 6.405, "cues": {"next": 0.66}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#outro-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, 0.1);
+          tl.fromTo("#outro-label", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.4);
+          tl.fromTo("#outro-line", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.45);
+          tl.fromTo("#outro-next", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, cue("next", 1.4));
+          tl.fromTo("#outro-url", { opacity: 0 }, { opacity: 1, duration: 0.6 }, cue("url", 2.2));
+
+          // No exit fade: the video ends on this frame.
+          window.__timelines["scene-outro"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #__ID__-stage { display: flex; flex-direction: column; justify-content: center; }
+        #__ID__-head { width: 560px; }
+        #__ID__-figure { font-family: var(--font-serif); font-weight: 700; font-size: 300px; line-height: 1; color: var(--red); margin-top: 48px; font-variant-numeric: lining-nums tabular-nums; }
+        #__ID__-what { max-width: 1300px; margin-top: 28px; color: var(--ink); }
+        #__ID__-src { margin-top: 48px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-__ID__" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="__ID__-stage" class="stage">
+          <div id="__ID__-head" class="section-head">
+            <div id="__ID__-rule" class="section-rule"></div>
+            <div id="__ID__-label" class="label">__TITLE__</div>
+          </div>
+          <!-- data-to is the number the counter lands on; data-suffix/prefix are added around it. -->
+          <div id="__ID__-figure" data-to="42" data-prefix="" data-suffix="%">0%</div>
+          <p id="__ID__-what" class="standfirst">What the figure measures, in one line.</p>
+          <div id="__ID__-src" class="byline">Source: Organisation, report title, year</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = { duration: 6, voStart: 0.5, voEnd: 5.5, cues: {}, paragraphs: [0.5] };
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const fig = document.getElementById("__ID__-figure");
+          const to = Number(fig.dataset.to), pre = fig.dataset.prefix || "", suf = fig.dataset.suffix || "";
+          const counter = { v: 0 };
+          const fmt = (v) => pre + Math.round(v).toLocaleString("en-US") + suf;
+          fig.textContent = fmt(0);
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#__ID__-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, 0.1);
+          tl.fromTo("#__ID__-label", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.4);
+          const at = cue("figure", 0.7);
+          tl.fromTo("#__ID__-figure", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, at);
+          tl.fromTo(counter, { v: 0 }, { v: to, duration: 1.4, ease: "power2.out", onUpdate: () => (fig.textContent = fmt(counter.v)) }, at);
+          tl.fromTo("#__ID__-what", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, at + 0.9);
+          tl.fromTo("#__ID__-src", { opacity: 0 }, { opacity: 1, duration: 0.6 }, at + 1.4);
+
+          tl.to("#__ID__-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-__ID__"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

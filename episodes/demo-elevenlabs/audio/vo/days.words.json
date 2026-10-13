@@ -1,0 +1,88 @@
+{
+ "hash": "3c766ffcd6d334fcb94c",
+ "source": "tts",
+ "duration": 7.477,
+ "words": [
+  {
+   "text": "It",
+   "start": 0.08,
+   "end": 0.3
+  },
+  {
+   "text": "lasted",
+   "start": 0.3,
+   "end": 1.21
+  },
+  {
+   "text": "just",
+   "start": 1.21,
+   "end": 1.82
+  },
+  {
+   "text": "seventy-two",
+   "start": 1.82,
+   "end": 2.73
+  },
+  {
+   "text": "days,",
+   "start": 2.73,
+   "end": 3.4
+  },
+  {
+   "text": "from",
+   "start": 3.54,
+   "end": 3.64
+  },
+  {
+   "text": "the",
+   "start": 3.64,
+   "end": 3.82
+  },
+  {
+   "text": "eighteenth",
+   "start": 3.82,
+   "end": 4.32
+  },
+  {
+   "text": "of",
+   "start": 4.32,
+   "end": 4.53
+  },
+  {
+   "text": "March",
+   "start": 4.53,
+   "end": 4.88
+  },
+  {
+   "text": "to",
+   "start": 5.19,
+   "end": 5.32
+  },
+  {
+   "text": "the",
+   "start": 5.32,
+   "end": 5.63
+  },
+  {
+   "text": "twenty-eighth",
+   "start": 5.63,
+   "end": 6.45
+  },
+  {
+   "text": "of",
+   "start": 6.45,
+   "end": 6.65
+  },
+  {
+   "text": "May.",
+   "start": 6.65,
+   "end": 7.0
+  }
+ ],
+ "cues": {
+  "figure": 1.82
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

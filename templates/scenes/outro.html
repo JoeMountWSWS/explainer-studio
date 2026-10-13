@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        /* YouTube end-screen elements need the right ~45% clear for the last 5-20s,
+           so content keeps to the left. */
+        #__ID__-stage { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        #__ID__-head { width: 560px; }
+        #__ID__-line { font-size: 96px; max-width: 900px; margin-top: 40px; }
+        #__ID__-next { max-width: 860px; margin-top: 40px; }
+        #__ID__-url { margin-top: 48px; color: var(--red); font-size: 34px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-__ID__" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="__ID__-stage" class="stage">
+          <div id="__ID__-head" class="section-head">
+            <div id="__ID__-rule" class="section-rule"></div>
+            <div id="__ID__-label" class="label">Further reading</div>
+          </div>
+          <h2 id="__ID__-line" class="headline">The last idea, in one line.</h2>
+          <p id="__ID__-next" class="standfirst">What to read or watch next.</p>
+          <div id="__ID__-url" class="byline">example.org/further-reading</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = { duration: 6, voStart: 0.5, voEnd: 5.5, cues: {}, paragraphs: [0.5] };
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#__ID__-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, 0.1);
+          tl.fromTo("#__ID__-label", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.4);
+          tl.fromTo("#__ID__-line", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.45);
+          tl.fromTo("#__ID__-next", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, cue("next", 1.4));
+          tl.fromTo("#__ID__-url", { opacity: 0 }, { opacity: 1, duration: 0.6 }, cue("url", 2.2));
+
+          // No exit fade: the video ends on this frame.
+          window.__timelines["scene-__ID__"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

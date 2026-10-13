@@ -1,0 +1,209 @@
+{
+ "hash": "3327b51b0d9f53bb23a8",
+ "source": "tts",
+ "duration": 17.131,
+ "words": [
+  {
+   "text": "The",
+   "start": 0.03,
+   "end": 0.18
+  },
+  {
+   "text": "government's",
+   "start": 0.18,
+   "end": 0.88
+  },
+  {
+   "text": "Defence",
+   "start": 0.88,
+   "end": 1.3
+  },
+  {
+   "text": "Investment",
+   "start": 1.3,
+   "end": 1.89
+  },
+  {
+   "text": "Plan,",
+   "start": 1.89,
+   "end": 2.28
+  },
+  {
+   "text": "published",
+   "start": 2.34,
+   "end": 3.07
+  },
+  {
+   "text": "in",
+   "start": 3.07,
+   "end": 3.24
+  },
+  {
+   "text": "June,",
+   "start": 3.24,
+   "end": 3.64
+  },
+  {
+   "text": "sets",
+   "start": 3.67,
+   "end": 3.97
+  },
+  {
+   "text": "aside",
+   "start": 3.97,
+   "end": 4.4
+  },
+  {
+   "text": "more",
+   "start": 4.4,
+   "end": 4.68
+  },
+  {
+   "text": "than",
+   "start": 4.68,
+   "end": 5.1
+  },
+  {
+   "text": "\u00a363",
+   "start": 5.1,
+   "end": 5.95
+  },
+  {
+   "text": "billion",
+   "start": 5.96,
+   "end": 6.39
+  },
+  {
+   "text": "over",
+   "start": 6.73,
+   "end": 6.94
+  },
+  {
+   "text": "four",
+   "start": 7.08,
+   "end": 7.24
+  },
+  {
+   "text": "years",
+   "start": 7.24,
+   "end": 7.71
+  },
+  {
+   "text": "for",
+   "start": 7.86,
+   "end": 8.03
+  },
+  {
+   "text": "nuclear",
+   "start": 8.03,
+   "end": 8.67
+  },
+  {
+   "text": "weapons",
+   "start": 8.67,
+   "end": 9.19
+  },
+  {
+   "text": "alone.",
+   "start": 9.8,
+   "end": 9.88
+  },
+  {
+   "text": "At",
+   "start": 9.91,
+   "end": 10.03
+  },
+  {
+   "text": "that",
+   "start": 10.03,
+   "end": 10.34
+  },
+  {
+   "text": "rate,",
+   "start": 10.34,
+   "end": 10.8
+  },
+  {
+   "text": "Medway's",
+   "start": 10.8,
+   "end": 11.4
+  },
+  {
+   "text": "entire",
+   "start": 11.41,
+   "end": 11.87
+  },
+  {
+   "text": "five-year",
+   "start": 11.87,
+   "end": 12.51
+  },
+  {
+   "text": "savings",
+   "start": 12.59,
+   "end": 13.12
+  },
+  {
+   "text": "target",
+   "start": 13.12,
+   "end": 13.68
+  },
+  {
+   "text": "would",
+   "start": 13.68,
+   "end": 13.98
+  },
+  {
+   "text": "cover",
+   "start": 14.02,
+   "end": 14.28
+  },
+  {
+   "text": "less",
+   "start": 14.28,
+   "end": 14.52
+  },
+  {
+   "text": "than",
+   "start": 14.52,
+   "end": 14.72
+  },
+  {
+   "text": "four",
+   "start": 14.78,
+   "end": 15.0
+  },
+  {
+   "text": "days",
+   "start": 15.0,
+   "end": 15.22
+  },
+  {
+   "text": "of",
+   "start": 15.24,
+   "end": 15.36
+  },
+  {
+   "text": "Britain's",
+   "start": 15.36,
+   "end": 15.83
+  },
+  {
+   "text": "nuclear",
+   "start": 15.88,
+   "end": 16.27
+  },
+  {
+   "text": "programme.",
+   "start": 16.61,
+   "end": 17.04
+  }
+ ],
+ "cues": {
+  "nukes": 4.4,
+  "days": 14.28
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

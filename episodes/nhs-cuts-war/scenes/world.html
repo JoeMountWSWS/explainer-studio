@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #world-stage { display: flex; flex-direction: column; }
+        #world-head { width: 640px; }
+        #world-a, #world-b { position: absolute; left: 0; right: 0; top: 150px; }
+        #world-n { font-family: var(--font-serif); font-weight: 700; font-size: 300px; line-height: 1; color: var(--red); margin-top: 40px; font-variant-numeric: lining-nums; }
+        #world-what { margin-top: 24px; }
+        #world-parties { display: flex; gap: 0; margin-top: 30px; }
+        #world-parties .p { flex: 1; padding: 0 40px; border-left: var(--hairline); }
+        #world-parties .p:first-child { border-left: 0; padding-left: 0; }
+        #world-parties .name { font-family: var(--font-serif); font-weight: 700; font-size: 60px; color: var(--ink); line-height: 1.1; }
+        #world-parties .where { margin-top: 12px; }
+        #world-line { margin-top: 90px; font-size: 76px; max-width: 1500px; }
+        #world-src { position: absolute; left: 0; bottom: 0; }
+      </style>
+
+      <div id="root" data-composition-id="scene-world" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="world-stage" class="stage">
+          <div id="world-head" class="section-head"><div id="world-rule" class="section-rule"></div><div id="world-label" class="label">Every government, one direction</div></div>
+          <div id="world-a">
+            <div id="world-n">$2.9tn</div>
+            <p id="world-what" class="standfirst">World military spending, a record</p>
+          </div>
+          <div id="world-b">
+            <div id="world-parties">
+              <div class="p" id="world-p1"><div class="name">Labour</div><div class="label where">Britain</div></div>
+              <div class="p" id="world-p2"><div class="name">Christian &amp; Social Democrats</div><div class="label where">Germany</div></div>
+              <div class="p" id="world-p3"><div class="name">Republicans</div><div class="label where">United States</div></div>
+            </div>
+            <h2 id="world-line" class="headline">The cause lies in the <span class="red">system</span> they all serve.</h2>
+          </div>
+          <div id="world-src" class="byline">Source: ALNAP / WSWS, 12 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 17.5667, "voStart": 0.4, "voEnd": 16.869, "cues": {"record": 3.81, "parties": 5.74, "system": 11.12}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("world");
+          rise("#world-n", cue("record", 3), 30);
+          rise("#world-what", cue("record", 3) + 0.6, 20);
+          fade("#world-src", cue("record", 3) + 1);
+          const p = cue("parties", 6.5);
+          out(["#world-a", "#world-src"], p - 0.5);
+          ["#world-p1", "#world-p2", "#world-p3"].forEach((s, i) => rise(s, p + i * 0.9, 24));
+          rise("#world-line", cue("system", 11), 30);
+
+          tl.to("#world-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-world"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

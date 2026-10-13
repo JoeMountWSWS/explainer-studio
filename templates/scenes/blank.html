@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #__ID__-stage { display: flex; flex-direction: column; justify-content: center; gap: 44px; }
+        #__ID__-head { width: 560px; }
+        #__ID__-headline { max-width: 1400px; }
+        #__ID__-line { max-width: 1250px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-__ID__" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="__ID__-stage" class="stage">
+          <div id="__ID__-head" class="section-head">
+            <div id="__ID__-rule" class="section-rule"></div>
+            <div id="__ID__-label" class="label">__TITLE__</div>
+          </div>
+          <h1 id="__ID__-headline" class="headline">__TITLE__</h1>
+          <p id="__ID__-line" class="standfirst">Replace with this scene's visual. See frame.md.</p>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = { duration: 6, voStart: 0.5, voEnd: 5.5, cues: {}, paragraphs: [0.5] };
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#__ID__-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, 0.1);
+          tl.fromTo("#__ID__-label", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.4);
+          tl.fromTo("#__ID__-headline", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.45);
+          tl.fromTo("#__ID__-line", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, cue("line", 1.3));
+
+          // Scene exit: fade the stage over the last 0.5s (the white page stays).
+          tl.to("#__ID__-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-__ID__"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

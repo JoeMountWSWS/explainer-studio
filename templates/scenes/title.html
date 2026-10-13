@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #__ID__-stage { display: flex; flex-direction: column; justify-content: center; }
+        #__ID__-title { font-size: 132px; max-width: 1450px; margin-top: 44px; }
+        #__ID__-sub { margin-top: 40px; max-width: 1300px; }
+        #__ID__-rule { width: 100%; margin-top: 64px; transform-origin: left center; }
+        #__ID__-byline { margin-top: 28px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-__ID__" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="__ID__-stage" class="stage">
+          <div id="__ID__-tag" class="tag">Explainer</div>
+          <h1 id="__ID__-title" class="headline">__EPISODE__</h1>
+          <p id="__ID__-sub" class="standfirst">__TITLE__</p>
+          <div id="__ID__-rule" class="hairline"></div>
+          <div id="__ID__-byline" class="byline">Byline or series name</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = { duration: 6, voStart: 0.5, voEnd: 5.5, cues: {}, paragraphs: [0.5] };
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#__ID__-tag", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.2);
+          tl.fromTo("#__ID__-title", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 0.35);
+          tl.fromTo("#__ID__-sub", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, cue("sub", 1.2));
+          tl.fromTo("#__ID__-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power2.inOut" }, 1.0);
+          tl.fromTo("#__ID__-byline", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.6);
+
+          tl.to("#__ID__-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-__ID__"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

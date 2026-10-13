@@ -1,0 +1,169 @@
+{
+ "hash": "8d5632161dc775bd8694",
+ "source": "tts",
+ "duration": 15.232,
+ "words": [
+  {
+   "text": "Medway",
+   "start": 0.04,
+   "end": 0.52
+  },
+  {
+   "text": "is",
+   "start": 0.52,
+   "end": 0.69
+  },
+  {
+   "text": "the",
+   "start": 0.69,
+   "end": 0.95
+  },
+  {
+   "text": "sharp",
+   "start": 0.95,
+   "end": 1.37
+  },
+  {
+   "text": "end",
+   "start": 1.53,
+   "end": 1.65
+  },
+  {
+   "text": "of",
+   "start": 1.65,
+   "end": 1.82
+  },
+  {
+   "text": "a",
+   "start": 1.82,
+   "end": 1.9
+  },
+  {
+   "text": "national",
+   "start": 1.9,
+   "end": 2.61
+  },
+  {
+   "text": "policy.",
+   "start": 2.61,
+   "end": 3.2
+  },
+  {
+   "text": "UNISON",
+   "start": 3.24,
+   "end": 3.56
+  },
+  {
+   "text": "found",
+   "start": 3.56,
+   "end": 3.86
+  },
+  {
+   "text": "that",
+   "start": 3.86,
+   "end": 4.1
+  },
+  {
+   "text": "trusts",
+   "start": 4.1,
+   "end": 4.48
+  },
+  {
+   "text": "plan",
+   "start": 4.48,
+   "end": 4.84
+  },
+  {
+   "text": "to",
+   "start": 4.84,
+   "end": 4.99
+  },
+  {
+   "text": "cut",
+   "start": 4.99,
+   "end": 5.22
+  },
+  {
+   "text": "at",
+   "start": 5.22,
+   "end": 5.32
+  },
+  {
+   "text": "least",
+   "start": 5.32,
+   "end": 5.58
+  },
+  {
+   "text": "21,663",
+   "start": 5.58,
+   "end": 8.24
+  },
+  {
+   "text": "NHS",
+   "start": 8.24,
+   "end": 8.7
+  },
+  {
+   "text": "posts",
+   "start": 8.85,
+   "end": 9.6
+  },
+  {
+   "text": "by",
+   "start": 9.6,
+   "end": 9.88
+  },
+  {
+   "text": "2028,",
+   "start": 9.88,
+   "end": 11.62
+  },
+  {
+   "text": "while",
+   "start": 11.62,
+   "end": 11.77
+  },
+  {
+   "text": "the",
+   "start": 11.79,
+   "end": 11.87
+  },
+  {
+   "text": "waiting",
+   "start": 11.87,
+   "end": 12.12
+  },
+  {
+   "text": "list",
+   "start": 12.16,
+   "end": 12.53
+  },
+  {
+   "text": "stands",
+   "start": 12.58,
+   "end": 13.11
+  },
+  {
+   "text": "at",
+   "start": 13.2,
+   "end": 13.41
+  },
+  {
+   "text": "7.33",
+   "start": 13.41,
+   "end": 14.48
+  },
+  {
+   "text": "million.",
+   "start": 14.48,
+   "end": 15.16
+  }
+ ],
+ "cues": {
+  "total": 5.22,
+  "wait": 13.41
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #programme-stage { display: flex; flex-direction: column; justify-content: center; }
+        #programme-head { width: 640px; }
+        #programme-headline { font-size: 88px; margin: 36px 0 52px; }
+        #programme-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+        #programme-list li { display: flex; align-items: baseline; gap: 36px; padding: 24px 0; border-top: var(--hairline); color: var(--ink); }
+        #programme-list .num { font-family: var(--font-sans); font-weight: 700; font-size: 34px; color: var(--red); min-width: 48px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-programme" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="programme-stage" class="stage">
+          <div id="programme-head" class="section-head"><div id="programme-rule" class="section-rule"></div><div id="programme-label" class="label">Socialism or barbarism</div></div>
+          <h2 id="programme-headline" class="headline">A movement of the working class</h2>
+          <ol id="programme-list">
+            <li id="programme-p1" class="body"><span class="num">1</span><span>Rank-and-file committees in every hospital</span></li>
+            <li id="programme-p2" class="body"><span class="num">2</span><span>Linked with workers across Europe and internationally</span></li>
+            <li id="programme-p3" class="body"><span class="num">3</span><span>A socialist programme: society’s wealth under workers’ democratic control</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 21.7, "voStart": 0.4, "voEnd": 21.008, "cues": {"p1": 7.27, "p2": 10.53, "p3": 14.12}, "paragraphs": [0.4]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("programme");
+          rise("#programme-headline", 0.45, 36, 0.8);
+          ["p1", "p2", "p3"].forEach((p, i) => rise(`#programme-${p}`, cue(p, 7 + i * 4), 24, 0.6));
+
+          tl.to("#programme-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-programme"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
