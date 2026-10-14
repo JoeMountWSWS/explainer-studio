@@ -7,7 +7,7 @@
     uv run studio check <slug>            HyperFrames lint + layout/contrast audits
     uv run studio render <slug> [--draft] render changed scenes, assemble, master -> out/
     uv run studio thumbnail <slug>        screenshot thumbnail/thumbnail.html -> out/
-    uv run studio voices <slug>           audition Kokoro voice blends on one scene -> out/voice-samples/
+    uv run studio voices <slug>           audition Kokoro blends or Chatterbox clips on one scene -> out/voice-samples/
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ import soundfile as sf
 from . import build as builder
 from . import render as renderer
 from . import voice
-from .common import EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_tools
+from .common import BRAND, EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_tools
 from .script import Script, parse
 
 AUDITION = [
@@ -150,22 +150,34 @@ def cmd_voices(a):
     table = voice.load_pronunciations(script)
     dst = OUT / "voice-samples"
     dst.mkdir(parents=True, exist_ok=True)
+    if voice.engine_class(script) is voice.Chatterbox:
+        # One worker for every clip: the model loads once and only the conditioning changes.
+        specs = a.voices or [str(p.relative_to(ROOT)) for p in sorted((BRAND / "voices").glob("*.wav"))] + ["default"]
+        tts = voice.Chatterbox(Script({**script.meta, "voice": "default"}, script.scenes))
+        for n, spec in enumerate(specs, 1):
+            ref = voice.chatterbox_ref(Script({**script.meta, "voice": spec}, script.scenes))
+            tts.ref = str(ref) if ref else None
+            audition(tts, scene, table, dst / f"{n}-{ref.stem if ref else 'default'}.wav")
+        return
     for n, spec in enumerate(a.voices or AUDITION, 1):
         meta = {**script.meta, "tts": "kokoro", "voice": spec, **({"speed": a.speed} if a.speed else {})}
         tts = voice.Kokoro(Script(meta, script.scenes))
-        with tempfile.TemporaryDirectory() as tmp:
-            pieces = []
-            for i, chunk in enumerate(scene.chunks):
-                wav = Path(tmp) / f"{i}.wav"
-                tts.synth_to(voice.respell(" ".join(chunk.words), table), wav)
-                pieces += [voice.read_mono(wav), np.zeros(int(chunk.gap_after * voice.SAMPLE_RATE), np.float32)]
-            raw = Path(tmp) / "all.wav"
-            sf.write(str(raw), np.concatenate(pieces), voice.SAMPLE_RATE)
-            name = re.sub(r"[^a-z0-9]+", "-", voice.voice_spec(spec).lower()).strip("-")
-            out = dst / f"{n}-{name}.wav"
-            subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(raw), "-af", "loudnorm=I=-16:TP=-1.5",
-                            "-ar", str(voice.SAMPLE_RATE), str(out)], check=True)
-        info(f"  {out.relative_to(ROOT)}")
+        name = re.sub(r"[^a-z0-9]+", "-", voice.voice_spec(spec).lower()).strip("-")
+        audition(tts, scene, table, dst / f"{n}-{name}.wav")
+
+
+def audition(tts, scene, table: dict, out: Path) -> None:
+    with tempfile.TemporaryDirectory() as tmp:
+        pieces = []
+        for i, chunk in enumerate(scene.chunks):
+            wav = Path(tmp) / f"{i}.wav"
+            tts.synth_to(voice.respell(" ".join(chunk.words), table), wav)
+            pieces += [voice.read_mono(wav), np.zeros(int(chunk.gap_after * voice.SAMPLE_RATE), np.float32)]
+        raw = Path(tmp) / "all.wav"
+        sf.write(str(raw), np.concatenate(pieces), voice.SAMPLE_RATE)
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(raw), "-af", "loudnorm=I=-16:TP=-1.5",
+                        "-ar", str(voice.SAMPLE_RATE), str(out)], check=True)
+    info(f"  {out.relative_to(ROOT)}")
 
 
 def main():
@@ -206,10 +218,10 @@ def main():
     s.add_argument("slug")
     s.set_defaults(fn=cmd_thumbnail)
 
-    s = sub.add_parser("voices", help="audition Kokoro voice blends on one scene -> out/voice-samples/")
+    s = sub.add_parser("voices", help="audition Kokoro blends (or Chatterbox clips, with tts: chatterbox) -> out/voice-samples/")
     s.add_argument("slug")
     s.add_argument("--scene", help="scene id (default: the first narrated scene)")
-    s.add_argument("--voices", nargs="+", metavar="SPEC", help="voices or blends, e.g. 'bf_emma*0.6 + bf_lily*0.4'")
+    s.add_argument("--voices", nargs="+", metavar="SPEC", help="voices or blends, e.g. 'bf_emma*0.6 + bf_lily*0.4'; for Chatterbox, clip paths or 'default'")
     s.add_argument("--speed", type=float, help="override the script's speed for these samples")
     s.set_defaults(fn=cmd_voices)
 

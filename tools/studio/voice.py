@@ -1,4 +1,4 @@
-"""Narration: TTS (Kokoro in-process, or ElevenLabs) or a recorded take, then word timings by ASR + alignment.
+"""Narration: TTS (Kokoro in-process, Chatterbox in a worker, or ElevenLabs) or a recorded take, then word timings by ASR + alignment.
 
 Per scene this writes, inside the episode:
     audio/tts/<hash>.wav        cached TTS chunk (48 kHz mono); unchanged text is never re-synthesised
@@ -10,14 +10,19 @@ episode. It replaces the TTS for that scene and is aligned to the script text th
 
 The engine is the script's `tts:` setting. ElevenLabs needs ELEVENLABS_API_KEY (environment or
 the studio's .env); each chunk is sent with its neighbours as context so prosody carries across.
+Chatterbox pins torch and numpy<2, so it runs in its own venv (built on first use) as a
+subprocess worker (chatterbox_worker.py), cloning the voice from a reference clip.
 """
 
 from __future__ import annotations
 
+import atexit
 import difflib
 import json
 import os
 import re
+import shutil
+import subprocess
 import tempfile
 import time
 import urllib.error
@@ -28,10 +33,11 @@ import numpy as np
 import soundfile as sf
 import yaml
 
-from .common import BRAND, SAMPLE_RATE, die, hf, hf_env, info, load_env, run, sha
+from .common import BRAND, CHATTERBOX_VERSION, ROOT, SAMPLE_RATE, die, hf, hf_env, info, load_env, run, sha
 from .script import Scene, Script
 
 KOKORO_DIR = Path.home() / ".cache" / "hyperframes" / "tts"
+CHATTERBOX_DIR = Path.home() / ".cache" / "hyperframes" / "chatterbox" / CHATTERBOX_VERSION
 RECORDED_EXT = (".wav", ".flac", ".m4a", ".mp3", ".ogg")
 # Kokoro voice-id prefix -> phonemizer language (af_heart -> en-us, bm_george -> en-gb, ...)
 LANGS = {"a": "en-us", "b": "en-gb", "e": "es", "f": "fr-fr", "h": "hi", "i": "it", "p": "pt-br", "j": "ja", "z": "zh"}
@@ -232,6 +238,122 @@ class ElevenLabs:
         self.chars += len(text)
 
 
+class Chatterbox:
+    """Chatterbox (Resemble AI) on the CPU, in its own venv: voice cloned from a reference clip."""
+
+    WORKER = Path(__file__).with_name("chatterbox_worker.py")
+    MAX_CHARS = 280  # Chatterbox drifts on long inputs, so sentences are grouped up to about this length
+
+    def __init__(self, script: Script):
+        self.model = self.cache_tag(script)[1]
+        ref = chatterbox_ref(script)
+        self.ref = str(ref) if ref else None
+        self.sentence_pause = float(script.setting("sentence_pause"))
+        self.fx = bool(script.setting("voice_fx"))
+        self.params = {k: script.setting(k) for k in ("exaggeration", "cfg_weight", "temperature", "seed")}
+        self.chars = 0
+        python = self.ensure_env()
+        info(f"  starting Chatterbox {self.model} on the CPU (first run downloads the model)...")
+        self.proc = subprocess.Popen([str(python), "-I", str(self.WORKER), self.model],
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, bufsize=1)
+        atexit.register(self.close)
+        self.request(None)  # wait for the model to load
+
+    @staticmethod
+    def ensure_env() -> Path:
+        python, stamp = CHATTERBOX_DIR / "bin" / "python", CHATTERBOX_DIR / ".installed"
+        # resemble-perth (the watermarker) still imports pkg_resources, which setuptools 81 dropped.
+        reqs = [f"chatterbox-tts=={CHATTERBOX_VERSION}", "soundfile", "setuptools<81"]
+        if stamp.exists() and stamp.read_text().split() == reqs:
+            return python
+        if not shutil.which("uv"):
+            die("tts: chatterbox needs uv on PATH to build its environment")
+        info(f"  installing chatterbox-tts {CHATTERBOX_VERSION} with CPU torch into {CHATTERBOX_DIR} (first run only)...")
+        run(["uv", "venv", "--clear", "--python", "3.12", str(CHATTERBOX_DIR)])
+        run(["uv", "pip", "install", "--python", str(python), "--torch-backend", "cpu", *reqs])
+        stamp.write_text("\n".join(reqs))
+        return python
+
+    @staticmethod
+    def cache_tag(script: Script) -> tuple:
+        model = str(script.setting("chatterbox_model")).lower()
+        if model not in ("turbo", "standard"):
+            die(f"unknown chatterbox_model '{model}' (choose: turbo, standard)")
+        ref = chatterbox_ref(script)
+        params = [float(script.setting(k)) for k in ("temperature", "seed")]
+        if model == "standard":
+            params += [float(script.setting(k)) for k in ("exaggeration", "cfg_weight")]
+        return ("chatterbox", model, sha(ref) if ref else "default", CHATTERBOX_VERSION, *params,
+                float(script.setting("sentence_pause")), bool(script.setting("voice_fx")) and VOICE_FX)
+
+    def request(self, req: dict | None) -> dict:
+        if req is not None:
+            self.proc.stdin.write(json.dumps(req) + "\n")
+            self.proc.stdin.flush()
+        line = self.proc.stdout.readline()
+        if not line:
+            die("Chatterbox worker exited (see the error above)")
+        reply = json.loads(line)
+        if "error" in reply:
+            die(f"Chatterbox: {reply['error']}")
+        return reply
+
+    def synth_to(self, text: str, dst: Path, prev_text: str = "", next_text: str = "") -> None:
+        parts, rate = [], 24000
+        with tempfile.TemporaryDirectory() as tmp:
+            for i, group in enumerate(text_groups(text, self.MAX_CHARS)):
+                wav = Path(tmp) / f"{i}.wav"
+                self.request({"text": group, "out": str(wav), "ref": self.ref, **self.params})
+                samples, rate = sf.read(str(wav), dtype="float32")
+                if parts:
+                    parts.append(np.zeros(int(self.sentence_pause * rate), dtype=np.float32))
+                parts.append(trim_silence(samples, rate))
+        raw = dst.with_name(f".{dst.stem}.raw.wav")
+        sf.write(str(raw), np.concatenate(parts), rate)
+        to_48k_mono(raw, dst, VOICE_FX if self.fx else "")
+        raw.unlink()
+        self.chars += len(text)
+
+    def close(self) -> None:
+        if self.proc.poll() is None:
+            self.proc.stdin.close()
+            try:
+                self.proc.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                self.proc.kill()
+
+
+def chatterbox_ref(script: Script) -> Path | None:
+    """The reference clip named by `voice:` (relative to the studio root), or None for the built-in voice."""
+    spec = str(script.meta.get("voice") or "default").strip()
+    if spec == "default":
+        return None
+    path = Path(spec) if Path(spec).is_absolute() else ROOT / spec
+    if not path.exists():
+        die(f"Chatterbox voice clip not found: {path} (voice: is a 5-15s WAV, or 'default')")
+    return path
+
+
+def text_groups(text: str, max_chars: int) -> list[str]:
+    """Split text at sentence ends into groups of whole sentences up to max_chars."""
+    groups: list[str] = []
+    for sent in SENTENCE_END.split(" ".join(text.split())):
+        if groups and len(groups[-1]) + 1 + len(sent) <= max_chars:
+            groups[-1] += " " + sent
+        else:
+            groups.append(sent)
+    return groups
+
+
+def trim_silence(samples: np.ndarray, rate: int, floor_db: float = -45, margin: float = 0.03) -> np.ndarray:
+    """Drop leading and trailing near-silence, keeping a short margin."""
+    loud = np.flatnonzero(np.abs(samples) > 10 ** (floor_db / 20))
+    if not len(loud):
+        return samples
+    pad = int(margin * rate)
+    return samples[max(0, loud[0] - pad):loud[-1] + pad]
+
+
 def _api_error(e: urllib.error.HTTPError) -> str:
     try:
         detail = json.loads(e.read().decode()).get("detail")
@@ -242,7 +364,7 @@ def _api_error(e: urllib.error.HTTPError) -> str:
     return str(detail)
 
 
-ENGINES = {"kokoro": Kokoro, "elevenlabs": ElevenLabs}
+ENGINES = {"kokoro": Kokoro, "chatterbox": Chatterbox, "elevenlabs": ElevenLabs}
 
 
 def engine_class(script: Script):
