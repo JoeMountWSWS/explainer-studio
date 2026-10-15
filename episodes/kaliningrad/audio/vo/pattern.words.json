@@ -1,128 +1,128 @@
 {
- "hash": "ca9aaed6e980cb681a31",
+ "hash": "6cdb5bf6887243e7d6f5",
  "source": "tts",
- "duration": 9.796,
+ "duration": 11.517,
  "words": [
   {
    "text": "The",
-   "start": 0.04,
-   "end": 0.24
+   "start": 0.08,
+   "end": 0.26
   },
   {
    "text": "pattern",
-   "start": 0.24,
-   "end": 0.8
+   "start": 0.26,
+   "end": 0.85
   },
   {
    "text": "repeats.",
-   "start": 0.8,
+   "start": 0.85,
    "end": 1.52
   },
   {
    "text": "Each",
-   "start": 1.53,
-   "end": 1.84
+   "start": 1.57,
+   "end": 1.89
   },
   {
    "text": "Russian",
-   "start": 1.84,
-   "end": 2.4
+   "start": 1.89,
+   "end": 2.54
   },
   {
    "text": "warning",
-   "start": 2.4,
-   "end": 2.92
+   "start": 2.54,
+   "end": 2.85
   },
   {
    "text": "is",
-   "start": 3.0,
-   "end": 3.12
+   "start": 3.32,
+   "end": 3.36
   },
   {
    "text": "dismissed",
-   "start": 3.12,
-   "end": 3.82
+   "start": 3.36,
+   "end": 3.93
   },
   {
    "text": "as",
-   "start": 3.85,
-   "end": 4.0
+   "start": 4.2,
+   "end": 4.37
   },
   {
    "text": "bluff.",
-   "start": 4.0,
-   "end": 4.68
+   "start": 4.37,
+   "end": 5.32
   },
   {
    "text": "Each",
-   "start": 4.74,
-   "end": 4.96
+   "start": 5.4,
+   "end": 5.62
   },
   {
    "text": "threshold",
-   "start": 4.96,
-   "end": 5.48
+   "start": 5.62,
+   "end": 6.3
   },
   {
    "text": "crossed",
-   "start": 5.56,
-   "end": 5.94
+   "start": 6.3,
+   "end": 6.51
   },
   {
    "text": "without",
-   "start": 6.0,
-   "end": 6.44
+   "start": 6.89,
+   "end": 7.36
   },
   {
    "text": "a",
-   "start": 6.44,
-   "end": 6.5
+   "start": 7.36,
+   "end": 7.42
   },
   {
    "text": "response",
-   "start": 6.5,
-   "end": 6.91
+   "start": 7.44,
+   "end": 8.08
   },
   {
    "text": "becomes",
-   "start": 7.02,
-   "end": 7.53
+   "start": 8.08,
+   "end": 8.17
   },
   {
    "text": "the",
-   "start": 7.53,
-   "end": 7.73
+   "start": 8.64,
+   "end": 8.7
   },
   {
    "text": "argument",
-   "start": 7.73,
-   "end": 8.28
+   "start": 8.7,
+   "end": 9.19
   },
   {
    "text": "for",
-   "start": 8.28,
-   "end": 8.48
+   "start": 9.52,
+   "end": 9.56
   },
   {
    "text": "crossing",
-   "start": 8.48,
-   "end": 9.03
+   "start": 9.56,
+   "end": 9.91
   },
   {
    "text": "the",
-   "start": 9.03,
-   "end": 9.23
+   "start": 9.91,
+   "end": 10.76
   },
   {
    "text": "next.",
-   "start": 9.23,
-   "end": 9.76
+   "start": 10.76,
+   "end": 11.16
   }
  ],
  "cues": {
-  "bluff": 3.12,
-  "crossed": 5.56,
-  "next": 7.53
+  "bluff": 3.36,
+  "crossed": 6.3,
+  "next": 8.64
  },
  "paragraphs": [
   0.0

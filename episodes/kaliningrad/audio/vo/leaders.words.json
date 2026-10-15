@@ -1,390 +1,390 @@
 {
- "hash": "62d9ecea1da6c16a479a",
+ "hash": "296d10464aeef11714e3",
  "source": "tts",
- "duration": 32.089,
+ "duration": 37.477,
  "words": [
   {
    "text": "NATO",
-   "start": 0.04,
-   "end": 0.25
+   "start": 0.05,
+   "end": 0.35
   },
   {
    "text": "Secretary",
-   "start": 0.25,
-   "end": 0.936
+   "start": 0.35,
+   "end": 1.194
   },
   {
    "text": "General",
-   "start": 0.936,
-   "end": 1.47
+   "start": 1.194,
+   "end": 1.85
   },
   {
    "text": "Mark",
-   "start": 1.47,
-   "end": 1.75
+   "start": 1.85,
+   "end": 2.2
   },
   {
    "text": "Rutte",
-   "start": 1.75,
-   "end": 2.17
+   "start": 2.2,
+   "end": 2.67
   },
   {
    "text": "told",
-   "start": 2.17,
-   "end": 2.45
+   "start": 2.67,
+   "end": 2.9
   },
   {
    "text": "a",
-   "start": 2.45,
-   "end": 2.52
+   "start": 2.9,
+   "end": 2.94
   },
   {
    "text": "conference",
-   "start": 2.52,
-   "end": 3.21
+   "start": 3.03,
+   "end": 3.6
   },
   {
    "text": "in",
-   "start": 3.23,
-   "end": 3.36
+   "start": 3.82,
+   "end": 3.98
   },
   {
    "text": "Brussels,",
-   "start": 3.36,
-   "end": 3.92
+   "start": 3.98,
+   "end": 5.04
   },
   {
    "text": "\u201cI",
-   "start": 4.12,
-   "end": 4.19
+   "start": 5.09,
+   "end": 5.14
   },
   {
    "text": "don\u2019t",
-   "start": 4.19,
-   "end": 4.76
+   "start": 5.14,
+   "end": 5.64
   },
   {
    "text": "take",
-   "start": 4.76,
-   "end": 5.22
+   "start": 5.71,
+   "end": 6.04
   },
   {
    "text": "this",
-   "start": 5.22,
-   "end": 5.68
+   "start": 6.04,
+   "end": 6.44
   },
   {
    "text": "seriously.\u201d",
-   "start": 5.68,
-   "end": 6.76
+   "start": 6.44,
+   "end": 7.36
   },
   {
    "text": "German",
-   "start": 6.8,
-   "end": 7.14
+   "start": 7.41,
+   "end": 7.83
   },
   {
    "text": "Chancellor",
-   "start": 7.14,
-   "end": 7.77
+   "start": 7.85,
+   "end": 8.63
   },
   {
    "text": "Friedrich",
-   "start": 7.77,
-   "end": 8.34
+   "start": 8.63,
+   "end": 9.32
   },
   {
    "text": "Merz",
-   "start": 8.34,
-   "end": 8.65
+   "start": 9.32,
+   "end": 10.03
   },
   {
    "text": "pledged",
-   "start": 8.65,
-   "end": 8.88
+   "start": 10.03,
+   "end": 10.24
   },
   {
    "text": "to",
-   "start": 8.88,
-   "end": 8.98
+   "start": 10.24,
+   "end": 10.29
   },
   {
    "text": "support",
-   "start": 8.98,
-   "end": 9.36
+   "start": 10.39,
+   "end": 10.84
   },
   {
    "text": "Ukraine",
-   "start": 9.36,
-   "end": 10.08
+   "start": 10.84,
+   "end": 11.68
   },
   {
    "text": "\u201cwith",
-   "start": 10.08,
-   "end": 10.43
+   "start": 11.68,
+   "end": 11.87
   },
   {
    "text": "all",
-   "start": 10.43,
-   "end": 10.66
+   "start": 11.87,
+   "end": 12.5
   },
   {
    "text": "our",
-   "start": 10.66,
-   "end": 10.69
+   "start": 12.5,
+   "end": 12.64
   },
   {
    "text": "strength.\u201d",
-   "start": 11.25,
-   "end": 11.96
+   "start": 12.64,
+   "end": 13.98
   },
   {
    "text": "On",
-   "start": 12.0,
-   "end": 12.1
+   "start": 14.05,
+   "end": 14.14
   },
   {
    "text": "4",
-   "start": 12.1,
-   "end": 12.29
+   "start": 14.14,
+   "end": 14.86
   },
   {
    "text": "October",
-   "start": 12.32,
-   "end": 12.97
+   "start": 14.86,
+   "end": 15.56
   },
   {
    "text": "he",
-   "start": 12.97,
-   "end": 13.11
+   "start": 15.56,
+   "end": 15.63
   },
   {
    "text": "travelled",
-   "start": 13.16,
-   "end": 13.76
+   "start": 15.77,
+   "end": 16.22
   },
   {
    "text": "to",
-   "start": 13.76,
-   "end": 13.86
+   "start": 16.67,
+   "end": 16.68
   },
   {
    "text": "Kyiv",
-   "start": 13.86,
-   "end": 14.19
+   "start": 16.68,
+   "end": 17.04
   },
   {
    "text": "with",
-   "start": 14.19,
-   "end": 14.48
+   "start": 17.04,
+   "end": 17.24
   },
   {
    "text": "German",
-   "start": 14.48,
-   "end": 14.83
+   "start": 17.31,
+   "end": 17.6
   },
   {
    "text": "corporate",
-   "start": 14.94,
-   "end": 15.55
+   "start": 17.82,
+   "end": 18.36
   },
   {
    "text": "executives,",
-   "start": 15.55,
-   "end": 16.44
+   "start": 18.36,
+   "end": 19.12
   },
   {
    "text": "including",
-   "start": 16.45,
-   "end": 17.21
+   "start": 19.17,
+   "end": 19.88
   },
   {
    "text": "arms",
-   "start": 17.21,
-   "end": 17.55
+   "start": 19.92,
+   "end": 20.25
   },
   {
    "text": "manufacturers,",
-   "start": 17.55,
-   "end": 18.8
+   "start": 20.25,
+   "end": 21.47
   },
   {
    "text": "and",
-   "start": 18.84,
-   "end": 18.98
+   "start": 21.47,
+   "end": 21.79
   },
   {
    "text": "announced",
-   "start": 18.98,
-   "end": 19.52
+   "start": 21.79,
+   "end": 21.92
   },
   {
    "text": "the",
-   "start": 19.59,
-   "end": 19.72
+   "start": 21.92,
+   "end": 22.05
   },
   {
    "text": "joint",
-   "start": 19.72,
-   "end": 20.03
+   "start": 22.15,
+   "end": 22.35
   },
   {
    "text": "development",
-   "start": 20.03,
-   "end": 20.7
+   "start": 22.35,
+   "end": 22.96
   },
   {
    "text": "of",
-   "start": 20.75,
-   "end": 20.84
+   "start": 22.96,
+   "end": 23.04
   },
   {
    "text": "weapons",
-   "start": 20.84,
-   "end": 21.28
+   "start": 23.04,
+   "end": 23.61
   },
   {
    "text": "with",
-   "start": 21.28,
-   "end": 21.53
+   "start": 23.89,
+   "end": 24.17
   },
   {
    "text": "a",
-   "start": 21.53,
-   "end": 21.59
+   "start": 24.17,
+   "end": 24.25
   },
   {
    "text": "range",
-   "start": 21.59,
-   "end": 21.9
+   "start": 24.25,
+   "end": 24.67
   },
   {
    "text": "of",
-   "start": 21.9,
-   "end": 22.01
+   "start": 24.67,
+   "end": 24.83
   },
   {
    "text": "more",
-   "start": 22.03,
-   "end": 22.27
+   "start": 24.83,
+   "end": 25.16
   },
   {
    "text": "than",
-   "start": 22.27,
-   "end": 22.52
+   "start": 25.16,
+   "end": 25.47
   },
   {
    "text": "1,000",
-   "start": 22.52,
-   "end": 23.38
+   "start": 25.61,
+   "end": 26.65
   },
   {
    "text": "kilometres.",
-   "start": 23.38,
-   "end": 24.3
-  },
-  {
-   "text": "The",
-   "start": 24.34,
-   "end": 24.53
-  },
-  {
-   "text": "European",
-   "start": 24.53,
-   "end": 25.14
-  },
-  {
-   "text": "Union\u2019s",
-   "start": 25.14,
-   "end": 25.67
-  },
-  {
-   "text": "defence",
-   "start": 25.67,
-   "end": 26.12
-  },
-  {
-   "text": "commissioner,",
-   "start": 26.19,
-   "end": 27.17
-  },
-  {
-   "text": "Andrius",
-   "start": 27.17,
+   "start": 26.65,
    "end": 27.8
   },
   {
+   "text": "The",
+   "start": 27.85,
+   "end": 28.0
+  },
+  {
+   "text": "European",
+   "start": 28.0,
+   "end": 28.54
+  },
+  {
+   "text": "Union\u2019s",
+   "start": 28.54,
+   "end": 29.0
+  },
+  {
+   "text": "defence",
+   "start": 29.0,
+   "end": 29.43
+  },
+  {
+   "text": "commissioner,",
+   "start": 29.57,
+   "end": 30.44
+  },
+  {
+   "text": "Andrius",
+   "start": 30.44,
+   "end": 31.11
+  },
+  {
    "text": "Kubilius,",
-   "start": 27.8,
-   "end": 28.5
+   "start": 31.11,
+   "end": 31.88
   },
   {
    "text": "said",
-   "start": 28.79,
-   "end": 28.84
+   "start": 31.93,
+   "end": 32.27
   },
   {
    "text": "Putin",
-   "start": 28.84,
-   "end": 29.09
+   "start": 32.27,
+   "end": 32.76
   },
   {
    "text": "needed",
-   "start": 29.15,
-   "end": 29.51
+   "start": 32.76,
+   "end": 33.35
   },
   {
    "text": "to",
-   "start": 29.51,
-   "end": 29.62
+   "start": 33.35,
+   "end": 33.51
   },
   {
    "text": "\u201cfeel",
-   "start": 29.69,
-   "end": 29.9
+   "start": 33.65,
+   "end": 33.98
   },
   {
    "text": "that",
-   "start": 29.94,
-   "end": 30.15
+   "start": 33.98,
+   "end": 34.1
   },
   {
    "text": "war",
-   "start": 30.21,
-   "end": 30.35
+   "start": 34.55,
+   "end": 34.71
   },
   {
    "text": "is",
-   "start": 30.35,
-   "end": 30.47
+   "start": 34.71,
+   "end": 34.81
   },
   {
    "text": "coming",
-   "start": 30.47,
-   "end": 30.87
+   "start": 34.91,
+   "end": 35.48
   },
   {
    "text": "to",
-   "start": 30.87,
-   "end": 31.0
+   "start": 35.7,
+   "end": 35.76
   },
   {
    "text": "Russia",
-   "start": 31.0,
-   "end": 31.39
+   "start": 35.76,
+   "end": 36.36
   },
   {
    "text": "itself.\u201d",
-   "start": 31.39,
-   "end": 32.02
+   "start": 36.36,
+   "end": 37.34
   }
  ],
  "cues": {
-  "rutte": 4.12,
-  "merz": 10.08,
-  "kyiv": 13.86,
-  "range": 22.03,
-  "kubilius": 29.69
+  "rutte": 5.09,
+  "merz": 11.68,
+  "kyiv": 16.68,
+  "range": 24.83,
+  "kubilius": 33.65
  },
  "paragraphs": [
   0.0

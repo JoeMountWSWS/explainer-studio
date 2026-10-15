@@ -1,259 +1,259 @@
 {
- "hash": "c54b0281c622ca2f50c1",
+ "hash": "650cdcb4308d03854117",
  "source": "tts",
- "duration": 20.476,
+ "duration": 23.545,
  "words": [
   {
    "text": "No",
-   "start": 0.03,
+   "start": 0.01,
    "end": 0.16
   },
   {
    "text": "government",
    "start": 0.16,
-   "end": 0.99
+   "end": 0.95
   },
   {
    "text": "involved",
-   "start": 0.99,
-   "end": 1.65
+   "start": 0.95,
+   "end": 1.58
   },
   {
    "text": "in",
-   "start": 1.65,
-   "end": 1.8
+   "start": 1.58,
+   "end": 1.66
   },
   {
    "text": "this",
-   "start": 1.81,
-   "end": 2.14
+   "start": 1.75,
+   "end": 2.06
   },
   {
    "text": "conflict",
-   "start": 2.14,
-   "end": 2.8
+   "start": 2.06,
+   "end": 2.23
   },
   {
    "text": "will",
-   "start": 2.8,
-   "end": 3.07
+   "start": 2.75,
+   "end": 3.27
   },
   {
    "text": "end",
-   "start": 3.07,
-   "end": 3.6
+   "start": 3.27,
+   "end": 3.41
   },
   {
    "text": "it.",
-   "start": 3.6,
-   "end": 3.72
+   "start": 4.0,
+   "end": 4.04
   },
   {
    "text": "The",
-   "start": 3.75,
-   "end": 3.95
+   "start": 4.05,
+   "end": 4.27
   },
   {
    "text": "European",
-   "start": 3.95,
-   "end": 4.54
+   "start": 4.27,
+   "end": 4.87
   },
   {
    "text": "powers",
-   "start": 4.57,
-   "end": 5.02
+   "start": 4.88,
+   "end": 5.34
   },
   {
    "text": "are",
-   "start": 5.02,
-   "end": 5.25
+   "start": 5.34,
+   "end": 5.57
   },
   {
    "text": "committed",
-   "start": 5.25,
-   "end": 5.92
+   "start": 5.57,
+   "end": 6.25
   },
   {
    "text": "to",
-   "start": 6.02,
-   "end": 6.05
+   "start": 6.25,
+   "end": 6.3
   },
   {
    "text": "escalation.",
-   "start": 6.11,
-   "end": 7.12
+   "start": 6.79,
+   "end": 7.32
   },
   {
    "text": "The",
-   "start": 7.15,
-   "end": 7.37
+   "start": 7.45,
+   "end": 7.73
   },
   {
    "text": "Putin",
-   "start": 7.37,
-   "end": 7.79
+   "start": 7.73,
+   "end": 8.21
   },
   {
    "text": "regime",
-   "start": 7.79,
-   "end": 8.29
-  },
-  {
-   "text": "offers",
-   "start": 8.29,
+   "start": 8.21,
    "end": 8.79
   },
   {
-   "text": "nationalism",
+   "text": "offers",
    "start": 8.79,
-   "end": 9.71
+   "end": 9.37
+  },
+  {
+   "text": "nationalism",
+   "start": 9.37,
+   "end": 10.44
   },
   {
    "text": "and",
-   "start": 9.71,
-   "end": 9.96
+   "start": 10.44,
+   "end": 10.71
   },
   {
    "text": "nuclear",
-   "start": 9.96,
-   "end": 10.2
+   "start": 10.77,
+   "end": 10.85
   },
   {
    "text": "threats.",
-   "start": 10.79,
-   "end": 11.42
+   "start": 11.51,
+   "end": 12.44
   },
   {
    "text": "It",
-   "start": 11.45,
-   "end": 11.56
+   "start": 12.45,
+   "end": 12.57
   },
   {
    "text": "cannot",
-   "start": 11.56,
-   "end": 11.91
+   "start": 12.57,
+   "end": 12.98
   },
   {
    "text": "appeal",
-   "start": 11.98,
-   "end": 12.4
+   "start": 12.98,
+   "end": 13.39
   },
   {
    "text": "to",
-   "start": 12.4,
-   "end": 12.54
+   "start": 13.39,
+   "end": 13.52
   },
   {
    "text": "the",
-   "start": 12.54,
-   "end": 12.74
+   "start": 13.52,
+   "end": 13.72
   },
   {
    "text": "workers",
-   "start": 12.78,
-   "end": 13.24
+   "start": 13.72,
+   "end": 14.24
   },
   {
    "text": "of",
-   "start": 13.24,
-   "end": 13.38
+   "start": 14.24,
+   "end": 14.47
   },
   {
    "text": "Europe",
-   "start": 13.38,
-   "end": 13.75
+   "start": 14.47,
+   "end": 14.67
   },
   {
    "text": "and",
-   "start": 13.81,
-   "end": 14.01
+   "start": 15.19,
+   "end": 15.48
   },
   {
    "text": "America",
-   "start": 14.01,
-   "end": 14.48
+   "start": 15.48,
+   "end": 15.82
   },
   {
    "text": "against",
-   "start": 14.48,
-   "end": 14.51
+   "start": 16.25,
+   "end": 16.73
   },
   {
    "text": "their",
-   "start": 15.11,
-   "end": 15.34
+   "start": 16.73,
+   "end": 17.07
   },
   {
    "text": "own",
-   "start": 15.34,
-   "end": 15.49
+   "start": 17.08,
+   "end": 17.29
   },
   {
    "text": "governments,",
-   "start": 15.55,
-   "end": 16.39
+   "start": 17.29,
+   "end": 18.08
   },
   {
    "text": "because",
-   "start": 16.43,
-   "end": 16.87
+   "start": 18.09,
+   "end": 18.64
   },
   {
    "text": "it",
-   "start": 16.87,
-   "end": 17.0
+   "start": 18.64,
+   "end": 18.8
   },
   {
    "text": "represents",
-   "start": 17.0,
-   "end": 17.67
+   "start": 18.8,
+   "end": 19.61
   },
   {
    "text": "an",
-   "start": 17.67,
-   "end": 17.76
+   "start": 19.61,
+   "end": 19.74
   },
   {
    "text": "oligarchy",
-   "start": 17.8,
-   "end": 18.38
+   "start": 19.84,
+   "end": 20.32
   },
   {
    "text": "that",
-   "start": 18.47,
-   "end": 18.6
+   "start": 20.53,
+   "end": 20.85
   },
   {
    "text": "fears",
-   "start": 18.7,
-   "end": 18.98
+   "start": 20.85,
+   "end": 21.26
   },
   {
    "text": "its",
-   "start": 18.98,
-   "end": 19.18
+   "start": 21.26,
+   "end": 21.51
   },
   {
    "text": "own",
-   "start": 19.18,
-   "end": 19.31
+   "start": 21.51,
+   "end": 21.76
   },
   {
    "text": "working",
-   "start": 19.39,
-   "end": 19.49
+   "start": 21.76,
+   "end": 22.34
   },
   {
    "text": "class.",
-   "start": 20.06,
-   "end": 20.44
+   "start": 22.34,
+   "end": 22.78
   }
  ],
  "cues": {
-  "none": 0.03,
-  "europe": 3.95,
-  "putin": 7.37,
-  "fears": 17.67
+  "none": 0.01,
+  "europe": 4.27,
+  "putin": 7.73,
+  "fears": 19.61
  },
  "paragraphs": [
   0.0

@@ -1,229 +1,229 @@
 {
- "hash": "38389b4721e43270d4ac",
+ "hash": "27b42944554ac6842fab",
  "source": "tts",
- "duration": 18.197,
+ "duration": 21.409,
  "words": [
   {
    "text": "Marxists",
    "start": 0.04,
-   "end": 0.58
+   "end": 0.52
   },
   {
    "text": "answered",
-   "start": 0.58,
-   "end": 1.14
+   "start": 0.52,
+   "end": 1.02
   },
   {
    "text": "that",
-   "start": 1.22,
-   "end": 1.46
+   "start": 1.04,
+   "end": 1.29
   },
   {
    "text": "question",
-   "start": 1.46,
-   "end": 2.05
+   "start": 1.47,
+   "end": 1.84
   },
   {
    "text": "more",
-   "start": 2.05,
-   "end": 2.34
+   "start": 1.84,
+   "end": 2.19
   },
   {
    "text": "than",
-   "start": 2.34,
-   "end": 2.63
+   "start": 2.19,
+   "end": 2.54
   },
   {
    "text": "a",
-   "start": 2.63,
-   "end": 2.7
+   "start": 2.54,
+   "end": 2.62
   },
   {
    "text": "century",
-   "start": 2.7,
-   "end": 3.12
+   "start": 2.62,
+   "end": 3.18
   },
   {
    "text": "ago,",
-   "start": 3.48,
-   "end": 3.63
+   "start": 3.18,
+   "end": 3.61
   },
   {
    "text": "during",
-   "start": 3.63,
-   "end": 4.1
+   "start": 3.61,
+   "end": 3.87
   },
   {
    "text": "the",
-   "start": 4.1,
-   "end": 4.34
+   "start": 3.87,
+   "end": 3.96
   },
   {
    "text": "First",
-   "start": 4.34,
-   "end": 4.73
+   "start": 4.08,
+   "end": 4.33
   },
   {
    "text": "World",
-   "start": 4.73,
-   "end": 4.9
+   "start": 4.33,
+   "end": 4.62
   },
   {
    "text": "War.",
-   "start": 5.4,
-   "end": 5.44
+   "start": 4.62,
+   "end": 5.0
   },
   {
    "text": "Lenin",
-   "start": 5.48,
-   "end": 5.8
+   "start": 5.0,
+   "end": 5.52
   },
   {
    "text": "showed",
-   "start": 5.8,
-   "end": 6.26
+   "start": 5.52,
+   "end": 6.04
   },
   {
    "text": "that",
-   "start": 6.26,
-   "end": 6.56
+   "start": 6.04,
+   "end": 6.38
   },
   {
    "text": "capitalism",
-   "start": 6.56,
-   "end": 7.31
+   "start": 6.38,
+   "end": 7.29
   },
   {
    "text": "had",
    "start": 7.31,
-   "end": 7.49
+   "end": 7.57
   },
   {
    "text": "entered",
-   "start": 7.52,
-   "end": 8.06
+   "start": 7.57,
+   "end": 8.21
   },
   {
    "text": "its",
-   "start": 8.06,
-   "end": 8.24
+   "start": 8.21,
+   "end": 8.48
   },
   {
    "text": "imperialist",
-   "start": 8.3,
-   "end": 9.11
+   "start": 8.48,
+   "end": 9.18
   },
   {
    "text": "stage.",
-   "start": 9.11,
-   "end": 9.76
+   "start": 9.61,
+   "end": 10.0
   },
   {
    "text": "Giant",
-   "start": 9.76,
-   "end": 10.07
+   "start": 10.0,
+   "end": 11.04
   },
   {
    "text": "monopolies",
-   "start": 10.07,
-   "end": 10.7
-  },
-  {
-   "text": "and",
-   "start": 10.7,
-   "end": 10.88
-  },
-  {
-   "text": "banks,",
-   "start": 10.88,
-   "end": 11.5
-  },
-  {
-   "text": "fused",
-   "start": 11.54,
+   "start": 11.04,
    "end": 11.78
   },
   {
+   "text": "and",
+   "start": 11.78,
+   "end": 12.14
+  },
+  {
+   "text": "banks,",
+   "start": 12.14,
+   "end": 13.0
+  },
+  {
+   "text": "fused",
+   "start": 13.0,
+   "end": 13.5
+  },
+  {
    "text": "with",
-   "start": 11.85,
-   "end": 12.1
+   "start": 13.5,
+   "end": 13.89
   },
   {
    "text": "their",
-   "start": 12.22,
-   "end": 12.46
+   "start": 13.89,
+   "end": 14.19
   },
   {
    "text": "states,",
-   "start": 12.5,
-   "end": 13.04
+   "start": 14.61,
+   "end": 15.11
   },
   {
    "text": "compete",
-   "start": 13.04,
-   "end": 13.53
+   "start": 15.11,
+   "end": 15.52
   },
   {
    "text": "to",
-   "start": 13.53,
-   "end": 13.67
-  },
-  {
-   "text": "divide",
-   "start": 13.67,
-   "end": 14.08
-  },
-  {
-   "text": "and",
-   "start": 14.1,
-   "end": 14.3
-  },
-  {
-   "text": "redivide",
-   "start": 14.3,
-   "end": 14.93
-  },
-  {
-   "text": "the",
-   "start": 15.01,
-   "end": 15.14
-  },
-  {
-   "text": "world\u2019s",
-   "start": 15.14,
+   "start": 15.52,
    "end": 15.63
   },
   {
-   "text": "markets,",
+   "text": "divide",
    "start": 15.63,
-   "end": 16.28
-  },
-  {
-   "text": "raw",
-   "start": 16.28,
-   "end": 16.4
-  },
-  {
-   "text": "materials",
-   "start": 16.94,
-   "end": 17.28
+   "end": 16.0
   },
   {
    "text": "and",
-   "start": 17.32,
-   "end": 17.45
+   "start": 16.0,
+   "end": 16.15
+  },
+  {
+   "text": "redivide",
+   "start": 16.41,
+   "end": 17.0
+  },
+  {
+   "text": "the",
+   "start": 17.04,
+   "end": 17.3
+  },
+  {
+   "text": "world\u2019s",
+   "start": 17.3,
+   "end": 17.97
+  },
+  {
+   "text": "markets,",
+   "start": 18.13,
+   "end": 18.7
+  },
+  {
+   "text": "raw",
+   "start": 18.7,
+   "end": 18.84
+  },
+  {
+   "text": "materials",
+   "start": 19.16,
+   "end": 19.79
+  },
+  {
+   "text": "and",
+   "start": 19.79,
+   "end": 20.02
   },
   {
    "text": "territory.",
-   "start": 17.45,
-   "end": 18.16
+   "start": 20.02,
+   "end": 21.0
   }
  ],
  "cues": {
-  "lenin": 5.48,
-  "imperialist": 8.3,
-  "monopolies": 10.07,
-  "divide": 13.67
+  "lenin": 5.0,
+  "imperialist": 8.48,
+  "monopolies": 11.04,
+  "divide": 15.63
  },
  "paragraphs": [
   0.0

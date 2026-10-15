@@ -1,157 +1,157 @@
 {
- "hash": "95698db9279c59e765df",
+ "hash": "3878645d9c81c6cb0378",
  "source": "tts",
- "duration": 10.952,
+ "duration": 12.399,
  "words": [
   {
    "text": "The",
    "start": 0.07,
-   "end": 0.24
+   "end": 0.26
   },
   {
    "text": "campaign",
-   "start": 0.24,
-   "end": 0.82
+   "start": 0.26,
+   "end": 0.95
   },
   {
    "text": "to",
-   "start": 0.94,
-   "end": 1.05
+   "start": 0.95,
+   "end": 1.12
   },
   {
    "text": "free",
-   "start": 1.05,
-   "end": 1.33
+   "start": 1.12,
+   "end": 1.46
   },
   {
    "text": "Bogdan",
-   "start": 1.39,
-   "end": 1.88
+   "start": 1.46,
+   "end": 2.0
   },
   {
    "text": "defends",
-   "start": 1.92,
-   "end": 2.33
+   "start": 2.02,
+   "end": 2.4
   },
   {
    "text": "the",
-   "start": 2.41,
+   "start": 2.4,
    "end": 2.55
   },
   {
    "text": "right",
    "start": 2.55,
-   "end": 2.85
+   "end": 2.73
   },
   {
    "text": "to",
-   "start": 2.92,
-   "end": 3.05
+   "start": 2.89,
+   "end": 2.95
   },
   {
    "text": "oppose",
-   "start": 3.05,
-   "end": 3.46
+   "start": 2.95,
+   "end": 3.4
   },
   {
    "text": "the",
-   "start": 3.55,
-   "end": 3.75
+   "start": 3.4,
+   "end": 3.81
   },
   {
    "text": "war",
-   "start": 3.75,
-   "end": 3.99
+   "start": 3.81,
+   "end": 3.92
   },
   {
    "text": "and",
-   "start": 4.0,
-   "end": 4.2
+   "start": 4.31,
+   "end": 4.4
   },
   {
    "text": "the",
-   "start": 4.28,
-   "end": 4.44
+   "start": 4.4,
+   "end": 4.5
   },
   {
    "text": "principle",
-   "start": 4.44,
-   "end": 4.83
+   "start": 4.59,
+   "end": 4.96
   },
   {
    "text": "on",
-   "start": 5.2,
-   "end": 5.24
+   "start": 4.96,
+   "end": 5.12
   },
   {
    "text": "which",
-   "start": 5.24,
-   "end": 5.48
+   "start": 5.12,
+   "end": 5.34
   },
   {
    "text": "any",
-   "start": 5.61,
-   "end": 5.82
+   "start": 5.49,
+   "end": 5.72
   },
   {
    "text": "anti-war",
-   "start": 5.82,
-   "end": 6.57
+   "start": 5.72,
+   "end": 6.53
   },
   {
    "text": "movement",
-   "start": 6.57,
-   "end": 7.13
+   "start": 6.53,
+   "end": 7.01
   },
   {
    "text": "must",
-   "start": 7.46,
-   "end": 7.7
+   "start": 7.44,
+   "end": 7.76
   },
   {
    "text": "stand,",
-   "start": 7.7,
-   "end": 8.23
+   "start": 7.76,
+   "end": 8.36
   },
   {
    "text": "the",
-   "start": 8.25,
-   "end": 8.39
+   "start": 8.43,
+   "end": 8.59
   },
   {
    "text": "unity",
-   "start": 8.47,
-   "end": 8.75
+   "start": 8.59,
+   "end": 8.98
   },
   {
    "text": "of",
-   "start": 8.75,
-   "end": 8.88
+   "start": 8.98,
+   "end": 9.11
   },
   {
    "text": "workers",
-   "start": 8.88,
-   "end": 9.33
+   "start": 9.19,
+   "end": 9.68
   },
   {
    "text": "across",
-   "start": 9.33,
-   "end": 9.71
+   "start": 9.68,
+   "end": 9.95
   },
   {
    "text": "national",
-   "start": 9.71,
-   "end": 10.21
+   "start": 10.38,
+   "end": 10.77
   },
   {
    "text": "borders.",
-   "start": 10.23,
-   "end": 10.9
+   "start": 10.8,
+   "end": 11.6
   }
  ],
  "cues": {
-  "right": 2.41,
-  "unity": 8.25
+  "right": 2.4,
+  "unity": 8.43
  },
  "paragraphs": [
   0.0

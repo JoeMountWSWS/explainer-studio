@@ -1,204 +1,204 @@
 {
- "hash": "54346c049bafd67c585c",
+ "hash": "ab4a8edfc90314e19a76",
  "source": "tts",
- "duration": 15.577,
+ "duration": 17.276,
  "words": [
   {
    "text": "At",
-   "start": 0.05,
-   "end": 0.14
+   "start": 0.09,
+   "end": 0.17
   },
   {
    "text": "the",
-   "start": 0.21,
-   "end": 0.47
+   "start": 0.17,
+   "end": 0.43
   },
   {
    "text": "end",
-   "start": 0.47,
-   "end": 0.75
+   "start": 0.43,
+   "end": 0.69
   },
   {
    "text": "of",
-   "start": 0.75,
-   "end": 0.94
+   "start": 0.69,
+   "end": 0.86
   },
   {
    "text": "1991",
-   "start": 0.94,
-   "end": 1.96
+   "start": 0.86,
+   "end": 1.69
   },
   {
    "text": "the",
-   "start": 2.33,
-   "end": 2.36
+   "start": 2.05,
+   "end": 2.15
   },
   {
    "text": "Soviet",
-   "start": 2.36,
-   "end": 2.93
+   "start": 2.15,
+   "end": 2.66
   },
   {
    "text": "Union",
-   "start": 2.93,
-   "end": 3.4
+   "start": 2.66,
+   "end": 3.04
   },
   {
    "text": "was",
-   "start": 3.4,
-   "end": 3.67
+   "start": 3.24,
+   "end": 3.34
   },
   {
    "text": "dissolved.",
-   "start": 3.67,
-   "end": 4.68
+   "start": 3.34,
+   "end": 4.02
   },
   {
    "text": "The",
-   "start": 4.68,
-   "end": 4.92
+   "start": 4.73,
+   "end": 4.91
   },
   {
    "text": "Stalinist",
-   "start": 4.92,
-   "end": 5.63
+   "start": 4.91,
+   "end": 5.73
   },
   {
    "text": "bureaucracy,",
-   "start": 5.63,
-   "end": 6.68
+   "start": 5.73,
+   "end": 6.89
   },
   {
    "text": "a",
-   "start": 6.73,
-   "end": 6.75
+   "start": 6.89,
+   "end": 6.95
   },
   {
    "text": "privileged",
-   "start": 6.75,
-   "end": 7.49
+   "start": 6.95,
+   "end": 7.63
   },
   {
    "text": "caste",
-   "start": 7.49,
-   "end": 7.79
+   "start": 7.63,
+   "end": 8.0
   },
   {
    "text": "that",
-   "start": 7.93,
-   "end": 8.17
+   "start": 8.0,
+   "end": 8.16
   },
   {
    "text": "had",
-   "start": 8.17,
-   "end": 8.39
+   "start": 8.16,
+   "end": 8.34
   },
   {
    "text": "ruled",
-   "start": 8.39,
-   "end": 8.73
+   "start": 8.34,
+   "end": 8.56
   },
   {
    "text": "in",
-   "start": 8.78,
-   "end": 8.9
+   "start": 8.59,
+   "end": 8.64
   },
   {
    "text": "the",
-   "start": 8.9,
-   "end": 9.12
+   "start": 8.64,
+   "end": 8.8
   },
   {
    "text": "name",
-   "start": 9.12,
-   "end": 9.41
+   "start": 8.8,
+   "end": 9.12
   },
   {
    "text": "of",
-   "start": 9.41,
-   "end": 9.55
+   "start": 9.12,
+   "end": 9.28
   },
   {
    "text": "socialism,",
-   "start": 9.55,
-   "end": 10.35
+   "start": 9.43,
+   "end": 10.32
   },
   {
    "text": "restored",
-   "start": 10.39,
-   "end": 10.94
+   "start": 10.41,
+   "end": 11.2
   },
   {
    "text": "capitalism,",
-   "start": 10.94,
-   "end": 11.82
+   "start": 11.2,
+   "end": 12.47
   },
   {
    "text": "and",
-   "start": 11.82,
-   "end": 12.02
-  },
-  {
-   "text": "a",
-   "start": 12.03,
-   "end": 12.04
-  },
-  {
-   "text": "new",
-   "start": 12.04,
-   "end": 12.54
-  },
-  {
-   "text": "class",
-   "start": 12.54,
+   "start": 12.47,
    "end": 12.7
   },
   {
-   "text": "of",
+   "text": "a",
    "start": 12.7,
-   "end": 12.84
+   "end": 12.77
+  },
+  {
+   "text": "new",
+   "start": 12.77,
+   "end": 13.0
+  },
+  {
+   "text": "class",
+   "start": 13.0,
+   "end": 13.36
+  },
+  {
+   "text": "of",
+   "start": 13.36,
+   "end": 13.56
   },
   {
    "text": "oligarchs",
-   "start": 12.84,
-   "end": 13.5
+   "start": 13.56,
+   "end": 14.2
   },
   {
    "text": "seized",
-   "start": 13.5,
-   "end": 14.04
+   "start": 14.2,
+   "end": 14.32
   },
   {
    "text": "what",
-   "start": 14.07,
-   "end": 14.26
+   "start": 14.32,
+   "end": 15.1
   },
   {
    "text": "had",
-   "start": 14.26,
-   "end": 14.42
+   "start": 15.1,
+   "end": 15.23
   },
   {
    "text": "been",
-   "start": 14.42,
-   "end": 14.63
+   "start": 15.3,
+   "end": 15.56
   },
   {
    "text": "state",
-   "start": 14.69,
-   "end": 14.9
+   "start": 15.56,
+   "end": 15.95
   },
   {
    "text": "property.",
-   "start": 14.94,
-   "end": 15.56
+   "start": 15.95,
+   "end": 16.88
   }
  ],
  "cues": {
-  "year": 0.94,
-  "caste": 6.73,
-  "restored": 10.39,
-  "oligarchs": 12.84
+  "year": 0.86,
+  "caste": 6.89,
+  "restored": 10.41,
+  "oligarchs": 13.56
  },
  "paragraphs": [
   0.0

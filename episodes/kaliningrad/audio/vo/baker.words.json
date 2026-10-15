@@ -1,228 +1,228 @@
 {
- "hash": "ade33562115b103e2094",
+ "hash": "8649873db66f08a65ad7",
  "source": "tts",
- "duration": 18.905,
+ "duration": 21.966,
  "words": [
   {
    "text": "The",
-   "start": 0.07,
-   "end": 0.23
+   "start": 0.08,
+   "end": 0.2
   },
   {
    "text": "story",
-   "start": 0.27,
-   "end": 0.69
+   "start": 0.26,
+   "end": 0.65
   },
   {
    "text": "begins",
-   "start": 0.75,
-   "end": 1.24
+   "start": 0.65,
+   "end": 1.06
   },
   {
    "text": "at",
-   "start": 1.24,
-   "end": 1.42
+   "start": 1.06,
+   "end": 1.32
   },
   {
    "text": "the",
-   "start": 1.42,
-   "end": 1.69
+   "start": 1.32,
+   "end": 1.54
   },
   {
    "text": "end",
-   "start": 1.69,
-   "end": 1.96
+   "start": 1.54,
+   "end": 1.78
   },
   {
    "text": "of",
-   "start": 1.96,
-   "end": 2.14
+   "start": 1.78,
+   "end": 1.94
   },
   {
    "text": "the",
-   "start": 2.14,
-   "end": 2.41
+   "start": 1.94,
+   "end": 2.18
   },
   {
    "text": "Cold",
-   "start": 2.41,
-   "end": 2.52
+   "start": 2.18,
+   "end": 2.5
   },
   {
    "text": "War.",
-   "start": 3.05,
-   "end": 3.16
+   "start": 2.5,
+   "end": 3.44
   },
   {
    "text": "In",
-   "start": 3.16,
-   "end": 3.3
+   "start": 3.52,
+   "end": 3.62
   },
   {
    "text": "February",
-   "start": 3.3,
-   "end": 3.82
+   "start": 3.62,
+   "end": 4.34
   },
   {
    "text": "1990,",
-   "start": 3.85,
-   "end": 4.81
+   "start": 4.34,
+   "end": 5.62
   },
   {
    "text": "during",
-   "start": 4.92,
-   "end": 5.19
+   "start": 5.7,
+   "end": 6.19
   },
   {
    "text": "talks",
-   "start": 5.23,
-   "end": 5.56
+   "start": 6.19,
+   "end": 6.66
   },
   {
    "text": "on",
-   "start": 5.56,
-   "end": 5.7
+   "start": 6.66,
+   "end": 6.73
   },
   {
    "text": "German",
-   "start": 5.7,
-   "end": 6.16
+   "start": 6.94,
+   "end": 7.42
   },
   {
    "text": "reunification,",
-   "start": 6.16,
-   "end": 7.18
+   "start": 7.42,
+   "end": 8.68
   },
   {
    "text": "US",
-   "start": 7.7,
-   "end": 7.79
+   "start": 8.76,
+   "end": 8.88
   },
   {
    "text": "Secretary",
-   "start": 7.79,
-   "end": 8.49
+   "start": 8.93,
+   "end": 9.74
   },
   {
    "text": "of",
-   "start": 8.49,
-   "end": 8.64
+   "start": 10.0,
+   "end": 10.06
   },
   {
    "text": "State",
-   "start": 8.64,
-   "end": 9.03
+   "start": 10.06,
+   "end": 10.59
   },
   {
    "text": "James",
-   "start": 9.03,
-   "end": 9.41
+   "start": 10.59,
+   "end": 11.12
   },
   {
    "text": "Baker",
-   "start": 9.42,
-   "end": 9.81
+   "start": 11.12,
+   "end": 11.36
   },
   {
    "text": "told",
-   "start": 9.81,
-   "end": 10.1
+   "start": 11.76,
+   "end": 12.02
   },
   {
    "text": "Soviet",
-   "start": 10.1,
-   "end": 10.18
+   "start": 12.02,
+   "end": 12.53
   },
   {
    "text": "leader",
-   "start": 10.7,
-   "end": 11.04
+   "start": 12.53,
+   "end": 13.04
   },
   {
    "text": "Mikhail",
-   "start": 11.04,
-   "end": 11.58
+   "start": 13.04,
+   "end": 13.63
   },
   {
    "text": "Gorbachev",
-   "start": 11.58,
-   "end": 12.11
+   "start": 13.63,
+   "end": 14.36
   },
   {
    "text": "that",
-   "start": 12.11,
-   "end": 12.56
+   "start": 14.48,
+   "end": 14.81
   },
   {
    "text": "NATO",
-   "start": 12.56,
-   "end": 12.78
+   "start": 14.81,
+   "end": 15.22
   },
   {
    "text": "would",
-   "start": 12.78,
-   "end": 13.08
+   "start": 15.22,
+   "end": 15.73
   },
   {
    "text": "not",
-   "start": 13.08,
-   "end": 13.28
+   "start": 15.73,
+   "end": 16.04
   },
   {
    "text": "move",
-   "start": 13.35,
-   "end": 13.79
+   "start": 16.04,
+   "end": 16.42
   },
   {
    "text": "\u201cone",
-   "start": 13.79,
-   "end": 14.17
+   "start": 16.48,
+   "end": 16.81
   },
   {
    "text": "inch",
-   "start": 14.17,
-   "end": 14.68
+   "start": 16.81,
+   "end": 17.08
   },
   {
    "text": "eastward.\u201d",
-   "start": 14.68,
-   "end": 15.8
+   "start": 17.69,
+   "end": 18.5
   },
   {
    "text": "Other",
-   "start": 16.34,
-   "end": 16.46
+   "start": 18.58,
+   "end": 18.82
   },
   {
    "text": "Western",
-   "start": 16.46,
-   "end": 16.93
+   "start": 18.82,
+   "end": 19.27
   },
   {
    "text": "leaders",
-   "start": 16.93,
-   "end": 17.4
+   "start": 19.27,
+   "end": 19.59
   },
   {
    "text": "gave",
-   "start": 17.4,
-   "end": 17.67
+   "start": 19.82,
+   "end": 19.97
   },
   {
    "text": "similar",
-   "start": 17.67,
-   "end": 17.76
+   "start": 19.97,
+   "end": 20.42
   },
   {
    "text": "assurances.",
-   "start": 18.2,
-   "end": 18.84
+   "start": 20.42,
+   "end": 21.18
   }
  ],
  "cues": {
-  "date": 3.3,
-  "key": 13.79,
-  "others": 16.34
+  "date": 3.62,
+  "key": 16.48,
+  "others": 18.58
  },
  "paragraphs": [
   0.0

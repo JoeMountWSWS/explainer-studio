@@ -1,15 +1,16 @@
 ---
 title: Kaliningrad and the Danger of Nuclear War
-voice: bf_emma*0.6 + bf_isabella*0.4
-speed: 0.85
+tts: elevenlabs
+voice: onwK4e9ZLuTAKqWW03F9   # Daniel (British, steady broadcaster)
+speed: 1.0
 pronounce:
   "wsws.org": W S W S dot org
   "freebogdan.org": free Bogdan dot org
-  Syrotiuk: "[Syrotiuk](/sɪɹˈɒtjʊk/)"
-  Rutte: "[Rutte](/ɹˈʌtə/)"
+  Syrotiuk: Sirotyuk
+  Rutte: Ruttuh
   Kubilius: Koobilius
   Kyiv: Keev
-  Radosław: "[Radosław](/ɹadˈɒswaf/)"
+  Radosław: Radoswaff
   "28 and 29 September": the twenty-eighth and twenty-ninth of September
   "1 October": the first of October
   "4 October": the fourth of October

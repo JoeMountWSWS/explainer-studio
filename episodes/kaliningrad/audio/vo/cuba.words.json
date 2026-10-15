@@ -1,269 +1,269 @@
 {
- "hash": "4dbfc56465b99005797d",
+ "hash": "40ca7e0443a0375c8851",
  "source": "tts",
- "duration": 19.694,
+ "duration": 22.198,
  "words": [
   {
    "text": "In",
-   "start": 0.03,
-   "end": 0.21
+   "start": 0.08,
+   "end": 0.17
   },
   {
    "text": "October",
-   "start": 0.32,
-   "end": 0.99
+   "start": 0.17,
+   "end": 0.77
   },
   {
    "text": "1962,",
-   "start": 0.99,
-   "end": 2.43
+   "start": 0.77,
+   "end": 2.0
   },
   {
    "text": "when",
-   "start": 2.43,
-   "end": 2.65
+   "start": 2.14,
+   "end": 2.29
   },
   {
    "text": "the",
-   "start": 2.65,
-   "end": 2.82
+   "start": 2.29,
+   "end": 2.51
   },
   {
    "text": "United",
-   "start": 2.82,
-   "end": 3.16
+   "start": 2.51,
+   "end": 2.95
   },
   {
    "text": "States",
-   "start": 3.16,
-   "end": 3.52
+   "start": 2.95,
+   "end": 3.2
   },
   {
    "text": "and",
-   "start": 3.52,
-   "end": 3.71
+   "start": 3.51,
+   "end": 3.6
   },
   {
    "text": "the",
-   "start": 3.71,
-   "end": 3.9
+   "start": 3.6,
+   "end": 3.84
   },
   {
    "text": "Soviet",
-   "start": 3.9,
-   "end": 4.29
+   "start": 3.84,
+   "end": 4.33
   },
   {
    "text": "Union",
-   "start": 4.29,
-   "end": 4.64
+   "start": 4.33,
+   "end": 4.5
   },
   {
    "text": "came",
-   "start": 4.64,
-   "end": 4.87
-  },
-  {
-   "text": "to",
-   "start": 4.87,
-   "end": 4.99
-  },
-  {
-   "text": "the",
-   "start": 4.99,
+   "start": 4.88,
    "end": 5.12
   },
   {
+   "text": "to",
+   "start": 5.12,
+   "end": 5.26
+  },
+  {
+   "text": "the",
+   "start": 5.26,
+   "end": 5.47
+  },
+  {
    "text": "brink",
-   "start": 5.18,
-   "end": 5.44
+   "start": 5.47,
+   "end": 5.65
   },
   {
    "text": "over",
-   "start": 5.48,
-   "end": 5.69
+   "start": 5.91,
+   "end": 6.1
   },
   {
    "text": "missiles",
-   "start": 5.69,
-   "end": 6.09
+   "start": 6.1,
+   "end": 6.64
   },
   {
    "text": "in",
-   "start": 6.15,
-   "end": 6.47
+   "start": 6.64,
+   "end": 6.8
   },
   {
    "text": "Cuba,",
-   "start": 6.5,
-   "end": 7.84
+   "start": 6.8,
+   "end": 7.68
   },
   {
    "text": "President",
-   "start": 7.84,
-   "end": 7.94
+   "start": 7.76,
+   "end": 8.38
   },
   {
    "text": "Kennedy",
-   "start": 8.47,
-   "end": 8.84
+   "start": 8.38,
+   "end": 8.86
   },
   {
    "text": "went",
-   "start": 8.84,
-   "end": 9.09
+   "start": 8.92,
+   "end": 9.23
   },
   {
    "text": "on",
-   "start": 9.09,
-   "end": 9.21
+   "start": 9.23,
+   "end": 9.34
   },
   {
    "text": "national",
-   "start": 9.21,
-   "end": 9.71
+   "start": 9.82,
+   "end": 10.0
   },
   {
    "text": "television",
-   "start": 9.71,
-   "end": 10.48
+   "start": 10.0,
+   "end": 10.89
   },
   {
    "text": "and",
-   "start": 10.48,
-   "end": 10.64
+   "start": 11.19,
+   "end": 11.22
   },
   {
    "text": "the",
-   "start": 10.64,
-   "end": 10.76
+   "start": 11.22,
+   "end": 11.47
   },
   {
    "text": "world",
-   "start": 10.8,
-   "end": 11.06
+   "start": 11.47,
+   "end": 11.89
   },
   {
    "text": "followed",
-   "start": 11.08,
-   "end": 11.49
+   "start": 11.89,
+   "end": 12.57
   },
   {
    "text": "every",
-   "start": 11.5,
-   "end": 11.77
+   "start": 12.57,
+   "end": 12.99
   },
   {
    "text": "hour",
-   "start": 11.77,
-   "end": 11.98
+   "start": 12.99,
+   "end": 13.32
   },
   {
    "text": "of",
-   "start": 12.05,
-   "end": 12.23
+   "start": 13.32,
+   "end": 13.33
   },
   {
    "text": "the",
-   "start": 12.34,
-   "end": 12.53
+   "start": 13.59,
+   "end": 13.75
   },
   {
    "text": "crisis.",
-   "start": 12.58,
-   "end": 13.62
+   "start": 13.75,
+   "end": 14.5
   },
   {
    "text": "This",
-   "start": 13.62,
-   "end": 13.84
+   "start": 14.64,
+   "end": 14.9
   },
   {
    "text": "time,",
-   "start": 14.22,
-   "end": 14.37
+   "start": 14.9,
+   "end": 15.35
   },
   {
    "text": "days",
-   "start": 14.37,
-   "end": 14.67
+   "start": 15.41,
+   "end": 15.74
   },
   {
    "text": "after",
-   "start": 14.67,
-   "end": 15.0
+   "start": 15.8,
+   "end": 16.18
   },
   {
    "text": "Moscow\u2019s",
-   "start": 15.07,
-   "end": 15.64
+   "start": 16.18,
+   "end": 16.87
   },
   {
    "text": "warning,",
-   "start": 15.64,
-   "end": 16.31
+   "start": 16.87,
+   "end": 17.68
   },
   {
    "text": "the",
-   "start": 16.31,
-   "end": 16.53
+   "start": 17.68,
+   "end": 17.77
   },
   {
    "text": "New",
-   "start": 16.53,
-   "end": 16.72
+   "start": 18.07,
+   "end": 18.2
   },
   {
    "text": "York",
-   "start": 16.75,
-   "end": 17.05
-  },
-  {
-   "text": "Times",
-   "start": 17.05,
-   "end": 17.41
-  },
-  {
-   "text": "and",
-   "start": 17.45,
-   "end": 17.62
-  },
-  {
-   "text": "CNN",
-   "start": 17.66,
-   "end": 17.85
-  },
-  {
-   "text": "had",
-   "start": 17.86,
-   "end": 18.08
-  },
-  {
-   "text": "still",
-   "start": 18.08,
+   "start": 18.2,
    "end": 18.54
   },
   {
+   "text": "Times",
+   "start": 18.54,
+   "end": 18.97
+  },
+  {
+   "text": "and",
+   "start": 18.97,
+   "end": 19.07
+  },
+  {
+   "text": "CNN",
+   "start": 19.4,
+   "end": 19.49
+  },
+  {
+   "text": "had",
+   "start": 19.49,
+   "end": 19.75
+  },
+  {
+   "text": "still",
+   "start": 19.75,
+   "end": 20.18
+  },
+  {
    "text": "not",
-   "start": 18.57,
-   "end": 18.75
+   "start": 20.18,
+   "end": 20.21
   },
   {
    "text": "reported",
-   "start": 18.75,
-   "end": 19.3
+   "start": 20.47,
+   "end": 21.13
   },
   {
    "text": "it.",
-   "start": 19.3,
-   "end": 19.64
+   "start": 21.13,
+   "end": 21.6
   }
  ],
  "cues": {
-  "tv": 9.21,
-  "now": 13.62,
-  "nyt": 16.53,
-  "not": 18.57
+  "tv": 9.82,
+  "now": 14.64,
+  "nyt": 18.07,
+  "not": 20.18
  },
  "paragraphs": [
   0.0

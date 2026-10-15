@@ -1,244 +1,244 @@
 {
- "hash": "015decd5955f62122ac5",
+ "hash": "8abfb939cffe7f39bd41",
  "source": "tts",
- "duration": 19.264,
+ "duration": 20.759,
  "words": [
   {
    "text": "None",
-   "start": 0.04,
-   "end": 0.32
+   "start": 0.03,
+   "end": 0.33
   },
   {
    "text": "of",
-   "start": 0.32,
-   "end": 0.41
+   "start": 0.33,
+   "end": 0.49
   },
   {
    "text": "this",
-   "start": 0.52,
-   "end": 0.79
+   "start": 0.49,
+   "end": 0.8
   },
   {
    "text": "makes",
-   "start": 0.82,
-   "end": 1.17
+   "start": 0.84,
+   "end": 1.24
   },
   {
    "text": "the",
-   "start": 1.23,
-   "end": 1.44
+   "start": 1.24,
+   "end": 1.49
   },
   {
    "text": "Putin",
-   "start": 1.44,
-   "end": 1.84
+   "start": 1.49,
+   "end": 1.91
   },
   {
    "text": "regime",
-   "start": 1.84,
-   "end": 2.33
+   "start": 1.91,
+   "end": 2.4
   },
   {
    "text": "progressive.",
-   "start": 2.33,
+   "start": 2.4,
    "end": 3.52
   },
   {
    "text": "It",
-   "start": 3.52,
-   "end": 3.64
+   "start": 3.55,
+   "end": 3.63
   },
   {
    "text": "speaks",
-   "start": 3.64,
-   "end": 4.01
+   "start": 3.63,
+   "end": 3.97
   },
   {
    "text": "for",
-   "start": 4.07,
-   "end": 4.23
+   "start": 3.97,
+   "end": 4.09
   },
   {
    "text": "the",
-   "start": 4.23,
-   "end": 4.42
+   "start": 4.14,
+   "end": 4.31
   },
   {
    "text": "oligarchy",
-   "start": 4.42,
-   "end": 4.97
+   "start": 4.31,
+   "end": 4.82
   },
   {
    "text": "that",
-   "start": 5.25,
-   "end": 5.33
+   "start": 4.82,
+   "end": 5.05
   },
   {
    "text": "emerged",
-   "start": 5.33,
-   "end": 5.84
+   "start": 5.05,
+   "end": 5.48
   },
   {
    "text": "from",
-   "start": 5.84,
-   "end": 6.0
+   "start": 5.48,
+   "end": 5.81
   },
   {
    "text": "the",
-   "start": 6.05,
-   "end": 6.24
+   "start": 5.81,
+   "end": 6.06
   },
   {
    "text": "restoration",
-   "start": 6.24,
-   "end": 7.05
+   "start": 6.06,
+   "end": 6.99
   },
   {
    "text": "of",
-   "start": 7.13,
-   "end": 7.29
+   "start": 6.99,
+   "end": 7.13
   },
   {
    "text": "capitalism.",
-   "start": 7.29,
-   "end": 8.34
+   "start": 7.2,
+   "end": 8.28
   },
   {
    "text": "Its",
-   "start": 8.34,
-   "end": 8.58
+   "start": 8.31,
+   "end": 8.54
   },
   {
    "text": "invasion",
-   "start": 8.58,
-   "end": 8.85
+   "start": 8.54,
+   "end": 9.17
   },
   {
    "text": "of",
-   "start": 8.85,
-   "end": 9.43
+   "start": 9.25,
+   "end": 9.41
   },
   {
    "text": "Ukraine",
-   "start": 9.43,
-   "end": 9.94
+   "start": 9.41,
+   "end": 10.02
   },
   {
    "text": "in",
-   "start": 9.94,
-   "end": 10.1
+   "start": 10.02,
+   "end": 10.19
   },
   {
    "text": "February",
-   "start": 10.1,
-   "end": 10.72
+   "start": 10.19,
+   "end": 10.89
   },
   {
    "text": "2022",
-   "start": 10.78,
-   "end": 11.76
+   "start": 10.89,
+   "end": 12.0
   },
   {
    "text": "was",
-   "start": 11.76,
-   "end": 11.93
+   "start": 12.0,
+   "end": 12.2
   },
   {
    "text": "a",
-   "start": 11.99,
-   "end": 12.02
+   "start": 12.27,
+   "end": 12.34
   },
   {
    "text": "reactionary",
-   "start": 12.02,
-   "end": 12.79
+   "start": 12.34,
+   "end": 13.3
   },
   {
    "text": "response",
-   "start": 12.84,
-   "end": 13.38
+   "start": 13.3,
+   "end": 14.0
   },
   {
    "text": "to",
-   "start": 13.38,
-   "end": 13.52
+   "start": 14.0,
+   "end": 14.17
   },
   {
    "text": "NATO\u2019s",
-   "start": 13.52,
-   "end": 13.95
+   "start": 14.17,
+   "end": 14.69
   },
   {
    "text": "encirclement,",
-   "start": 13.95,
-   "end": 14.91
+   "start": 14.69,
+   "end": 15.88
   },
   {
    "text": "and",
-   "start": 14.95,
-   "end": 15.15
+   "start": 15.91,
+   "end": 16.09
   },
   {
    "text": "Ukrainian",
-   "start": 15.15,
-   "end": 15.62
+   "start": 16.09,
+   "end": 16.72
   },
   {
    "text": "and",
-   "start": 15.62,
-   "end": 15.83
+   "start": 16.72,
+   "end": 16.92
   },
   {
    "text": "Russian",
-   "start": 16.23,
-   "end": 16.48
+   "start": 16.99,
+   "end": 17.44
   },
   {
    "text": "workers",
-   "start": 16.55,
-   "end": 17.01
+   "start": 17.44,
+   "end": 17.92
   },
   {
    "text": "have",
-   "start": 17.01,
-   "end": 17.3
+   "start": 17.99,
+   "end": 18.22
   },
   {
    "text": "paid",
-   "start": 17.3,
-   "end": 17.58
+   "start": 18.22,
+   "end": 18.5
   },
   {
    "text": "for",
-   "start": 17.59,
-   "end": 17.77
+   "start": 18.5,
+   "end": 18.61
   },
   {
    "text": "it",
-   "start": 17.77,
-   "end": 18.05
+   "start": 18.61,
+   "end": 18.95
   },
   {
    "text": "with",
-   "start": 18.05,
-   "end": 18.32
+   "start": 18.95,
+   "end": 19.13
   },
   {
    "text": "their",
-   "start": 18.32,
-   "end": 18.55
+   "start": 19.3,
+   "end": 19.48
   },
   {
    "text": "lives.",
-   "start": 18.55,
-   "end": 19.44
+   "start": 19.48,
+   "end": 20.12
   }
  ],
  "cues": {
-  "progressive": 2.33,
-  "oligarchy": 4.23,
-  "reactionary": 11.99,
-  "workers": 15.15
+  "progressive": 2.4,
+  "oligarchy": 4.14,
+  "reactionary": 12.27,
+  "workers": 16.09
  },
  "paragraphs": [
   0.0

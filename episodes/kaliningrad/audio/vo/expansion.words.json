@@ -1,297 +1,297 @@
 {
- "hash": "62c6ddab4568248183c2",
+ "hash": "9c437b4e564abd079e9d",
  "source": "tts",
- "duration": 29.052,
+ "duration": 29.582,
  "words": [
   {
    "text": "NATO",
-   "start": 0.04,
-   "end": 0.39
+   "start": 0.05,
+   "end": 0.42
   },
   {
    "text": "moved",
-   "start": 0.45,
-   "end": 0.99
+   "start": 0.42,
+   "end": 0.94
   },
   {
    "text": "east.",
-   "start": 0.99,
-   "end": 1.8
+   "start": 0.94,
+   "end": 1.68
   },
   {
    "text": "Poland,",
-   "start": 1.8,
-   "end": 2.26
+   "start": 1.73,
+   "end": 2.2
   },
   {
    "text": "Hungary",
-   "start": 2.26,
-   "end": 2.67
+   "start": 2.37,
+   "end": 2.66
   },
   {
    "text": "and",
-   "start": 2.67,
-   "end": 2.84
+   "start": 2.66,
+   "end": 2.85
   },
   {
    "text": "the",
-   "start": 2.84,
-   "end": 3.01
+   "start": 2.85,
+   "end": 3.04
   },
   {
    "text": "Czech",
-   "start": 3.01,
-   "end": 3.21
+   "start": 3.04,
+   "end": 3.36
   },
   {
    "text": "Republic",
-   "start": 3.29,
-   "end": 3.72
+   "start": 3.36,
+   "end": 3.56
   },
   {
    "text": "joined",
-   "start": 3.78,
-   "end": 4.16
+   "start": 4.0,
+   "end": 4.32
   },
   {
    "text": "in",
-   "start": 4.16,
-   "end": 4.35
+   "start": 4.32,
+   "end": 4.5
   },
   {
    "text": "1999.",
-   "start": 4.35,
-   "end": 5.84
+   "start": 4.5,
+   "end": 5.92
   },
   {
    "text": "The",
-   "start": 5.98,
-   "end": 6.02
+   "start": 6.13,
+   "end": 6.16
   },
   {
    "text": "three",
-   "start": 6.02,
-   "end": 6.33
+   "start": 6.16,
+   "end": 6.32
   },
   {
    "text": "Baltic",
-   "start": 6.33,
-   "end": 6.72
+   "start": 6.32,
+   "end": 6.69
   },
   {
    "text": "states,",
-   "start": 6.72,
-   "end": 7.32
+   "start": 6.71,
+   "end": 7.28
   },
   {
    "text": "Romania,",
-   "start": 7.57,
-   "end": 8.23
+   "start": 7.33,
+   "end": 7.99
   },
   {
    "text": "Bulgaria,",
-   "start": 8.26,
-   "end": 9.07
+   "start": 7.99,
+   "end": 8.77
   },
   {
    "text": "Slovakia",
-   "start": 9.29,
-   "end": 9.74
+   "start": 9.01,
+   "end": 9.34
   },
   {
    "text": "and",
-   "start": 9.74,
-   "end": 9.99
+   "start": 9.34,
+   "end": 9.67
   },
   {
    "text": "Slovenia",
-   "start": 9.99,
-   "end": 10.64
+   "start": 9.67,
+   "end": 10.26
   },
   {
    "text": "followed",
-   "start": 10.64,
-   "end": 11.3
+   "start": 10.27,
+   "end": 10.83
   },
   {
    "text": "in",
-   "start": 11.38,
-   "end": 11.47
+   "start": 10.83,
+   "end": 11.28
   },
   {
    "text": "2004.",
-   "start": 11.47,
-   "end": 12.72
+   "start": 11.28,
+   "end": 12.32
   },
   {
    "text": "Finland",
-   "start": 12.72,
-   "end": 12.99
+   "start": 12.32,
+   "end": 12.75
   },
   {
    "text": "joined",
-   "start": 13.5,
-   "end": 13.8
+   "start": 12.75,
+   "end": 12.86
   },
   {
    "text": "in",
-   "start": 13.8,
-   "end": 13.96
+   "start": 12.93,
+   "end": 13.28
   },
   {
    "text": "2023",
-   "start": 13.96,
-   "end": 14.83
+   "start": 13.42,
+   "end": 14.38
   },
   {
    "text": "and",
-   "start": 15.08,
-   "end": 15.31
+   "start": 14.69,
+   "end": 14.91
   },
   {
    "text": "Sweden",
-   "start": 15.31,
-   "end": 15.86
+   "start": 14.91,
+   "end": 15.45
   },
   {
    "text": "in",
-   "start": 15.86,
-   "end": 16.04
+   "start": 15.45,
+   "end": 15.63
   },
   {
    "text": "2024.",
-   "start": 16.04,
-   "end": 17.42
+   "start": 15.63,
+   "end": 16.99
   },
   {
    "text": "The",
-   "start": 17.42,
-   "end": 17.69
+   "start": 17.03,
+   "end": 17.26
   },
   {
    "text": "Baltic",
-   "start": 17.69,
-   "end": 18.23
+   "start": 17.26,
+   "end": 17.78
   },
   {
    "text": "Sea",
-   "start": 18.23,
-   "end": 18.45
+   "start": 17.88,
+   "end": 18.07
   },
   {
    "text": "became",
-   "start": 18.51,
-   "end": 19.06
+   "start": 18.07,
+   "end": 18.2
   },
   {
    "text": "a",
-   "start": 19.06,
-   "end": 19.15
+   "start": 18.64,
+   "end": 18.7
   },
   {
    "text": "NATO",
-   "start": 19.15,
-   "end": 19.51
+   "start": 18.7,
+   "end": 19.06
   },
   {
    "text": "lake.",
-   "start": 19.51,
-   "end": 20.24
+   "start": 19.06,
+   "end": 19.69
   },
   {
    "text": "Kaliningrad,",
-   "start": 20.24,
-   "end": 21.28
+   "start": 19.69,
+   "end": 20.96
   },
   {
    "text": "recognised",
-   "start": 21.28,
-   "end": 22.01
+   "start": 20.96,
+   "end": 21.62
   },
   {
    "text": "as",
-   "start": 22.01,
-   "end": 22.15
+   "start": 21.62,
+   "end": 21.74
   },
   {
    "text": "Russian",
-   "start": 22.25,
-   "end": 22.36
+   "start": 22.05,
+   "end": 22.16
   },
   {
    "text": "territory",
-   "start": 22.72,
-   "end": 23.44
+   "start": 22.16,
+   "end": 23.12
   },
   {
    "text": "since",
-   "start": 23.48,
-   "end": 23.95
+   "start": 23.17,
+   "end": 23.48
   },
   {
    "text": "the",
-   "start": 23.95,
-   "end": 24.26
+   "start": 23.48,
+   "end": 23.56
   },
   {
    "text": "Potsdam",
-   "start": 24.26,
-   "end": 24.69
+   "start": 23.7,
+   "end": 24.17
   },
   {
    "text": "Conference",
-   "start": 25.21,
-   "end": 25.99
+   "start": 24.17,
+   "end": 24.9
   },
   {
    "text": "of",
-   "start": 25.99,
-   "end": 26.19
+   "start": 24.9,
+   "end": 25.04
   },
   {
    "text": "1945,",
-   "start": 26.19,
-   "end": 27.61
+   "start": 25.04,
+   "end": 26.04
   },
   {
    "text": "became",
-   "start": 27.62,
-   "end": 28.24
+   "start": 26.04,
+   "end": 26.44
   },
   {
    "text": "an",
-   "start": 28.24,
-   "end": 28.44
+   "start": 26.47,
+   "end": 26.61
   },
   {
    "text": "island",
-   "start": 28.44,
-   "end": 28.91
+   "start": 26.61,
+   "end": 26.68
   },
   {
    "text": "inside",
-   "start": 29.42,
-   "end": 29.68
+   "start": 27.12,
+   "end": 27.45
   },
   {
    "text": "the",
-   "start": 29.68,
-   "end": 29.99
+   "start": 27.52,
+   "end": 27.68
   },
   {
    "text": "alliance.",
-   "start": 29.99,
-   "end": 30.96
+   "start": 27.68,
+   "end": 28.55
   }
  ],
  "cues": {
-  "w1999": 1.8,
-  "w2004": 5.98,
-  "w2023": 12.72,
-  "w2024": 15.08,
-  "lake": 19.06,
-  "potsdam": 24.26,
-  "island": 28.24
+  "w1999": 1.73,
+  "w2004": 6.13,
+  "w2023": 12.32,
+  "w2024": 14.69,
+  "lake": 18.64,
+  "potsdam": 23.7,
+  "island": 26.47
  },
  "paragraphs": [
   0.0
