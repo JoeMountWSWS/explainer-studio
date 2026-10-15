@@ -1,0 +1,69 @@
+{
+ "hash": "52edd7a70df5f4eeb36d",
+ "source": "tts",
+ "duration": 6.362,
+ "words": [
+  {
+   "text": "That",
+   "start": 0.09,
+   "end": 0.39
+  },
+  {
+   "text": "contradiction",
+   "start": 0.39,
+   "end": 1.68
+  },
+  {
+   "text": "produced",
+   "start": 1.68,
+   "end": 2.47
+  },
+  {
+   "text": "two",
+   "start": 2.47,
+   "end": 2.76
+  },
+  {
+   "text": "world",
+   "start": 2.76,
+   "end": 3.25
+  },
+  {
+   "text": "wars.",
+   "start": 3.25,
+   "end": 4.0
+  },
+  {
+   "text": "It",
+   "start": 4.0,
+   "end": 4.25
+  },
+  {
+   "text": "has",
+   "start": 4.25,
+   "end": 4.41
+  },
+  {
+   "text": "not",
+   "start": 4.41,
+   "end": 4.66
+  },
+  {
+   "text": "gone",
+   "start": 4.66,
+   "end": 4.75
+  },
+  {
+   "text": "away.",
+   "start": 5.04,
+   "end": 5.6
+  }
+ ],
+ "cues": {
+  "two": 2.47,
+  "gone": 4.0
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #cuba-doc { position: absolute; left: 0; top: 0; bottom: 0; width: 760px; overflow: hidden; background: var(--panel); }
+        #cuba-doc img { position: absolute; left: 50%; top: 90px; width: 640px; margin-left: -320px; }
+        #cuba-credit { position: absolute; left: 32px; right: 32px; bottom: 120px; color: #ffffff; font-size: 22px; background: rgba(20,20,20,0.78); padding: 6px 12px; }
+        #cuba-stage { left: 860px; right: 130px; display: flex; flex-direction: column; justify-content: center; }
+        #cuba-1962 .k, #cuba-2026 .k { font-family: var(--font-sans); font-weight: 700; font-size: 30px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+        #cuba-1962 .t { font-size: 46px; line-height: 1.3; color: var(--ink); margin-top: 14px; }
+        #cuba-2026 { margin-top: 64px; padding-top: 40px; border-top: 6px solid var(--ink); }
+        #cuba-2026 .k { color: var(--red); }
+        #cuba-outlets { margin-top: 20px; }
+        #cuba-outlets .o { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; border-top: var(--hairline); }
+        #cuba-outlets .o:first-child { border-top: 0; }
+        #cuba-outlets .n { font-size: 46px; font-weight: 700; color: var(--ink); }
+        #cuba-outlets .x { font-family: var(--font-sans); font-weight: 700; font-size: 32px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); }
+        #cuba-src { position: absolute; left: 0; bottom: 0; font-size: 24px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-cuba" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="cuba-doc"><img id="cuba-img" data-layout-allow-overflow src="assets/media/kennedy-1962.jpg" alt="" /><div id="cuba-credit" class="byline">Reading copy of Kennedy’s television address, 22 October 1962. JFK Library, public domain</div></div>
+        <div id="cuba-stage" class="stage">
+          <div id="cuba-1962"><div class="k">October 1962 · Cuba</div><p class="body t">President Kennedy goes on national television. The world follows every hour of the crisis.</p></div>
+          <div id="cuba-2026">
+            <div class="k">October 2026 · Kaliningrad</div>
+            <div id="cuba-outlets">
+              <div id="cuba-o1" class="o"><span class="n italic">The New York Times</span><span id="cuba-x1" class="x">Not reported</span></div>
+              <div id="cuba-o2" class="o"><span class="n">CNN</span><span id="cuba-x2" class="x">Not reported</span></div>
+            </div>
+          </div>
+          <div id="cuba-src" class="byline">Days after Moscow’s warning. Source: WSWS, 30 Sep 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 23.7, "voStart": 0.6, "voEnd": 22.798, "cues": {"tv": 10.42, "now": 15.24, "nyt": 18.67, "not": 20.78}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#cuba-doc", 0, 0.6);
+          tl.fromTo("#cuba-img", { y: 0 }, { y: -260, duration: T.duration, ease: "none" }, 0);
+          rise("#cuba-1962", 0.4, 24);
+          const now = cue("now", 9);
+          tl.to("#cuba-1962", { opacity: 0.45, duration: 0.5 }, now);
+          rise("#cuba-2026", now, 24);
+          fade(["#cuba-o1 .n", "#cuba-o2 .n"], cue("nyt", now + 2));
+          const x = cue("not", now + 4);
+          rise("#cuba-x1", x, 12, 0.5);
+          rise("#cuba-x2", x + 0.2, 12, 0.5);
+          fade("#cuba-src", x + 0.6);
+
+          tl.to("#cuba-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-cuba"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #north-stage { display: flex; flex-direction: column; }
+        #north-head { width: 100%; }
+        #north-hl { font-size: 84px; margin-top: 40px; max-width: 1500px; }
+        #north-crises { margin-top: 20px; font-size: 44px; }
+        #north-line { position: absolute; left: 0; right: 0; top: 520px; height: 6px; background: var(--ink); transform-origin: left center; }
+        #north-e1, #north-e2, #north-e3 { position: absolute; top: 470px; width: 500px; }
+        #north-e1 { left: 0; } #north-e2 { left: 560px; } #north-e3 { left: 1120px; width: 416px; }
+        #north-line .dot { position: absolute; top: -11px; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); }
+        .north-yr { font-family: var(--font-sans); font-weight: 700; font-size: 38px; color: var(--red); margin-top: 96px; }
+        .north-t { font-size: 40px; line-height: 1.28; color: var(--ink); margin-top: 8px; }
+        #north-not { font-size: 68px; color: var(--red); margin-top: 92px; white-space: nowrap; }
+        #north-src { position: absolute; left: 0; bottom: 0; font-size: 24px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-north" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="north-stage" class="stage">
+          <div id="north-head" class="section-head"><div id="north-rule" class="section-rule"></div><div id="north-label" class="label">David North, WSWS International Editorial Board</div></div>
+          <h1 id="north-hl" class="headline">Like the years before 1914</h1>
+          <p id="north-crises" class="standfirst">One crisis after another, each ending short of general war</p>
+          <div id="north-line"><span class="dot" style="left: 0"></span><span class="dot" style="left: 560px"></span><span id="north-d3" class="dot" style="left: 1120px; background: var(--red)"></span></div>
+          <div id="north-e1"><div class="north-yr">1909</div><p class="body north-t">A weakened Russia backs down before Germany</p></div>
+          <div id="north-e2"><div class="north-yr">July 1914</div><p class="body north-t">Berlin assumes Russia will back down again</p></div>
+          <div id="north-e3"><div id="north-not" class="headline">It did not.</div></div>
+          <div id="north-src" class="byline">David North, “Playing Russian Roulette with nuclear weapons”, WSWS, 6 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 30.8667, "voStart": 0.6, "voEnd": 29.95, "cues": {"years": 8.17, "crises": 12.81, "y1909": 17.86, "y1914": 23.14, "not": 28.48}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("north");
+          rise("#north-hl", cue("years", 5) - 0.6, 30, 0.8);
+          fade("#north-src", 1.5);
+          rise("#north-crises", cue("crises", 8), 20);
+          grow("#north-line", cue("y1909", 13) - 0.8, 1.0);
+          rise("#north-e1", cue("y1909", 13), 20);
+          rise("#north-e2", cue("y1914", 18), 20);
+          tl.set("#north-d3", { opacity: 0 }, 0);
+          fade("#north-d3", cue("not", 22) - 0.1, 0.3);
+          rise("#north-e3", cue("not", 22) - 0.1, 30, 0.6);
+
+          tl.to("#north-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-north"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

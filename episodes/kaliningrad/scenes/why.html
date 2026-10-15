@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #why-stage { display: flex; flex-direction: column; justify-content: center; }
+        #why-title { font-size: 132px; margin-top: 40px; }
+        #why-rule { width: 100%; margin-top: 56px; transform-origin: left center; }
+        #why-sub { margin-top: 48px; max-width: 1400px; font-size: 56px; color: var(--ink); }
+      </style>
+
+      <div id="root" data-composition-id="scene-why" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="why-stage" class="stage">
+          <div id="why-tag" class="tag">Part 4</div>
+          <h1 id="why-title" class="headline">Why?</h1>
+          <div id="why-rule" class="hairline"></div>
+          <p id="why-sub" class="standfirst">Why do governments behave like this when the stakes include <span id="why-wash" class="hl">the survival of humanity</span>?</p>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 8.2333, "voStart": 0.6, "voEnd": 7.334, "cues": {"sub": 4.68}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          rise("#why-tag", 0.1, 16, 0.5);
+          rise("#why-title", 0.25, 50, 0.9);
+          grow("#why-rule", 0.7);
+          rise("#why-sub", 1.0, 24);
+          wash("#why-wash", cue("sub", 2.5));
+
+          tl.to("#why-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-why"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

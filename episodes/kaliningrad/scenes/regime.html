@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #regime-stage { display: flex; flex-direction: column; justify-content: center; }
+        #regime-head { width: 100%; }
+        #regime-hl { font-size: 96px; margin-top: 44px; }
+                #regime-rows { list-style: none; margin: 40px 0 0; padding: 0; }
+                #regime-rows li { display: flex; gap: 32px; align-items: baseline; padding: 24px 0; border-top: var(--hairline); }
+                #regime-rows li:first-child { border-top: 0; }
+                #regime-rows .k { font-family: var(--font-sans); font-weight: 700; font-size: 32px; letter-spacing: 0.04em; color: var(--red); min-width: 300px; flex: none; }
+                #regime-rows .t { font-size: 44px; line-height: 1.28; color: var(--ink); }
+      </style>
+
+      <div id="root" data-composition-id="scene-regime" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="regime-stage" class="stage">
+          <div id="regime-head" class="section-head"><div id="regime-rule" class="section-rule"></div><div id="regime-label" class="label">The Putin regime</div></div>
+          <h1 id="regime-hl" class="headline">Not <span id="regime-wash" class="hl">progressive</span></h1>
+          <ul id="regime-rows">
+            <li id="regime-r1"><span class="k">Speaks for</span><span class="body t">the oligarchy that emerged from the restoration of capitalism</span></li>
+            <li id="regime-r2"><span class="k">February 2022</span><span class="body t">Its invasion of Ukraine: a reactionary response to NATO’s encirclement</span></li>
+            <li id="regime-r3"><span class="k">The cost</span><span class="body t">paid by Ukrainian and Russian workers with their lives</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 22.2667, "voStart": 0.6, "voEnd": 21.359, "cues": {"progressive": 3.0, "oligarchy": 4.74, "reactionary": 12.87, "workers": 16.69}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("regime");
+          rise("#regime-hl", 0.4, 36, 0.8);
+          wash("#regime-wash", cue("progressive", 1.5));
+          rise("#regime-r1", cue("oligarchy", 3) - 0.3, 20);
+          rise("#regime-r2", cue("reactionary", 7) - 1.2, 20);
+          rise("#regime-r3", cue("workers", 11) - 0.2, 20);
+
+          tl.to("#regime-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-regime"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

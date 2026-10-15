@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #outro-stage { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        #outro-head { width: 820px; }
+        #outro-list { list-style: none; margin: 32px 0 0; padding: 0; width: 900px; }
+        #outro-list li { display: flex; gap: 32px; align-items: baseline; padding: 24px 0; border-top: var(--hairline); }
+        #outro-list li:first-child { border-top: 0; }
+        #outro-list .n { font-family: var(--font-sans); font-weight: 700; font-size: 40px; color: var(--red); width: 40px; flex: none; }
+        #outro-list .t { font-size: 54px; line-height: 1.2; color: var(--ink); font-weight: 700; font-family: var(--font-serif); }
+        #outro-list .u { display: block; font-family: var(--font-sans); font-weight: 700; font-size: 36px; color: var(--red); margin-top: 6px; }
+        #outro-list .s { display: block; font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 34px; line-height: 1.3; color: var(--ink-soft); margin-top: 8px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-outro" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="outro-stage" class="stage">
+          <div id="outro-head" class="section-head"><div id="outro-rule" class="section-rule"></div><div id="outro-label" class="label">What you can do</div></div>
+          <ol id="outro-list">
+            <li id="outro-l1"><span class="n">1</span><span class="t">Share this video</span></li>
+            <li id="outro-l2"><span class="n">2</span><span class="t">Sign the petition<span class="u">freebogdan.org</span></span></li>
+            <li id="outro-l3"><span class="n">3</span><span class="t">Read the analysis<span class="u">wsws.org</span></span></li>
+            <li id="outro-l4"><span class="n">4</span><span class="t">Join the fight<span class="s">for an international socialist movement of the working class against war</span></span></li>
+          </ol>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 19.6667, "voStart": 0.6, "voEnd": 18.758, "cues": {"share": 0.63, "petition": 3.64, "read": 7.42, "join": 9.87}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          head("outro");
+          rise("#outro-l1", cue("share", 0.6), 20);
+          rise("#outro-l2", cue("petition", 2) - 0.8, 20);
+          rise("#outro-l3", cue("read", 4.5) - 0.3, 20);
+          rise("#outro-l4", cue("join", 7) - 0.2, 20);
+
+          // No exit fade: the video ends on this frame.
+          window.__timelines["scene-outro"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #timeline-map { position: absolute; left: 0; top: 0; bottom: 0; width: 760px; overflow: hidden; }
+        #timeline-map img { position: absolute; left: -220px; top: 0; width: 1100px; height: 1080px; }
+        #timeline-ring { position: absolute; left: 227px; top: 563px; width: 220px; height: 220px; border: 4px dashed var(--red); border-radius: 50%; }
+        #timeline-stage { left: 850px; right: 120px; display: flex; flex-direction: column; justify-content: center; }
+        #timeline-head { width: 100%; }
+        #timeline-rows .t { font-size: 38px; }
+        #timeline-rows .q { display: block; font-size: 30px; margin-top: 10px; color: var(--ink-soft); font-family: var(--font-sans); font-weight: 600; }
+        #timeline-src { position: absolute; left: 0; bottom: 0; font-size: 24px; }
+                #timeline-rows { list-style: none; margin: 40px 0 0; padding: 0; }
+                #timeline-rows li { display: flex; gap: 32px; align-items: baseline; padding: 24px 0; border-top: var(--hairline); }
+                #timeline-rows li:first-child { border-top: 0; }
+                #timeline-rows .k { font-family: var(--font-sans); font-weight: 700; font-size: 32px; letter-spacing: 0.04em; color: var(--red); min-width: 190px; flex: none; }
+                #timeline-rows .t { font-size: 38px; line-height: 1.28; color: var(--ink); }
+      </style>
+
+      <div id="root" data-composition-id="scene-timeline" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="timeline-map" data-layout-allow-overflow>
+          <img src="assets/media/maps/baltic-base.png" alt="" />
+          <img src="assets/media/maps/baltic-nato.png" alt="" />
+          <img src="assets/media/maps/baltic-kal.png" alt="" />
+          <div id="timeline-ring"></div>
+        </div>
+        <div id="timeline-stage" class="stage">
+          <div id="timeline-head" class="section-head"><div id="timeline-rule" class="section-rule"></div><div id="timeline-label" class="label">Around Kaliningrad, 2026</div></div>
+          <ul id="timeline-rows">
+            <li id="timeline-r1"><span class="k">Summer</span><span class="body t">NATO air and naval exercises around the territory</span></li>
+            <li id="timeline-r2"><span class="k">Mid-August</span><span class="body t">Dozens of NATO aircraft fly an unannounced operation. They show they could <span id="timeline-wash" class="hl">cut its radio and radar links and disable its air defences</span>.<span class="q">Western military source, via Reuters</span></span></li>
+            <li id="timeline-r3"><span class="k">September</span><span class="body t">Poland’s Sikorski: Russia has moved most of its troops out. NATO should exercise so aggressively that Putin cannot be sure what it intends.</span></li>
+          </ul>
+          <div id="timeline-src" class="byline">Sources: Reuters; WSWS, 30 Sep and 1 Oct 2026</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 46.7667, "voStart": 0.6, "voEnd": 45.879, "cues": {"summer": 3.31, "august": 7.32, "cut": 20.04, "september": 25.17, "sikorski": 39.4}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#timeline-map", 0, 0.7);
+          head("timeline", 0.2);
+          rise("#timeline-r1", cue("summer", 1.5) - 0.4, 20);
+          const a = cue("august", 6);
+          rise("#timeline-r2", a - 0.2, 20);
+          tl.fromTo("#timeline-ring", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" }, a);
+          wash("#timeline-wash", cue("cut", a + 6));
+          rise("#timeline-r3", cue("september", 20) - 0.2, 20);
+          fade("#timeline-src", a + 1);
+
+          tl.to("#timeline-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-timeline"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

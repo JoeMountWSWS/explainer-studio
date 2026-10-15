@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #baltic-map { position: absolute; left: 0; top: 0; width: 1100px; height: 1080px; }
+        #baltic-map img { position: absolute; left: 0; top: 0; width: 1100px; height: 1080px; }
+        .maplabel { position: absolute; transform: translate(-50%, -50%); font-family: var(--font-sans); font-weight: 700; font-size: 24px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+        #baltic-map .on { color: #ffffff; }
+        #baltic-kal-l { color: var(--red); font-size: 30px; background: rgba(255,255,255,0.88); padding: 2px 8px; }
+        #baltic-sea { font-style: italic; font-family: var(--font-serif); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 30px; }
+        #baltic-stage { left: 1180px; right: 110px; display: flex; flex-direction: column; justify-content: center; }
+        #baltic-title { font-size: 104px; margin-top: 28px; }
+        #baltic-rows { list-style: none; margin: 36px 0 0; padding: 0; }
+        #baltic-rows li { padding: 20px 0; border-top: var(--hairline); font-size: 40px; line-height: 1.25; color: var(--ink); }
+        #baltic-nato-l { font-weight: 700; color: var(--red) !important; }
+        #baltic-src { position: absolute; left: 0; bottom: 0; font-size: 22px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-baltic" data-width="1920" data-height="1080">
+        <div class="paper"></div>
+        <div id="baltic-map">
+          <img id="baltic-base" src="assets/media/maps/baltic-base.png" alt="" />
+          <img id="baltic-nato" src="assets/media/maps/baltic-nato.png" alt="" />
+          <img id="baltic-kal" src="assets/media/maps/baltic-kal.png" alt="" />
+          <div id="baltic-sea" class="maplabel " style="left: 473px; top: 537px">Baltic Sea</div>
+          <div id="baltic-pol" class="maplabel " style="left: 486px; top: 828px">Poland</div>
+          <div id="baltic-ltu" class="maplabel " style="left: 755px; top: 633px">Lithuania</div>
+          <div id="baltic-rus" class="maplabel " style="left: 891px; top: 445px">Russia</div>
+          <div id="baltic-kal-l" class="maplabel " style="left: 437px; top: 593px">Kaliningrad</div>
+        </div>
+        <div id="baltic-stage" class="stage">
+          <div id="baltic-tag" class="tag">Explainer</div>
+          <h1 id="baltic-title" class="headline">Kaliningrad</h1>
+          <ul id="baltic-rows">
+            <li id="baltic-r1">About a million people</li>
+            <li id="baltic-r2">Headquarters of Russia’s Baltic Fleet; a base for nuclear-capable missiles</li>
+            <li id="baltic-r3"><span id="baltic-nato-l">Surrounded by NATO</span>, by land and by sea</li>
+          </ul>
+          <div id="baltic-src" class="byline">Map: Natural Earth. NATO members shaded</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 26.8, "voStart": 0.6, "voEnd": 25.91, "cues": {"neighbours": 3.88, "name": 10.71, "pop": 12.39, "fleet": 15.71, "nato": 23.38}, "paragraphs": [0.6]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.7) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.6) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const out = (s, t, d = 0.4) => tl.to(s, { opacity: 0, duration: d, ease: "power2.in" }, t);
+          const grow = (s, t, d = 0.9) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.inOut" }, t);
+          const wash = (s, t) => tl.fromTo(s, { backgroundSize: "0% 82%" }, { backgroundSize: "100% 82%", duration: 0.6, ease: "power2.out" }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power2.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+          const head = (id, t = 0.1) => { grow(`#${id}-rule`, t, 0.7); fade(`#${id}-label`, t + 0.3, 0.5); };
+
+          fade("#baltic-base", 0, 0.8);
+          fade("#baltic-sea", 0.6);
+          fade(["#baltic-pol", "#baltic-ltu"], cue("neighbours", 2.5));
+          fade("#baltic-rus", cue("neighbours", 2.5) + 1.2);
+          const n = cue("name", 6);
+          fade("#baltic-kal", n - 0.3, 0.6);
+          rise("#baltic-kal-l", n - 0.1, 14);
+          rise("#baltic-tag", n, 16, 0.5);
+          rise("#baltic-title", n + 0.1, 40, 0.8);
+          rise("#baltic-r1", cue("pop", 8), 20);
+          rise("#baltic-r2", cue("fleet", 11), 20);
+          const s = cue("nato", 16);
+          fade("#baltic-nato", s - 0.2, 0.9);
+          tl.to(["#baltic-pol", "#baltic-ltu"], { color: "#ffffff", duration: 0.5 }, s);
+          rise("#baltic-r3", s, 20);
+          fade("#baltic-src", s + 0.6);
+
+          tl.to("#baltic-stage", { opacity: 0, duration: 0.45, ease: "power2.in" }, T.duration - 0.5);
+          window.__timelines["scene-baltic"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

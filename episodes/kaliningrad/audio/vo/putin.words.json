@@ -1,0 +1,138 @@
+{
+ "hash": "38cd5999e71e2caa77b7",
+ "source": "tts",
+ "duration": 13.886,
+ "words": [
+  {
+   "text": "On",
+   "start": 0.1,
+   "end": 0.21
+  },
+  {
+   "text": "1",
+   "start": 0.21,
+   "end": 1.24
+  },
+  {
+   "text": "October,",
+   "start": 1.24,
+   "end": 2.19
+  },
+  {
+   "text": "Vladimir",
+   "start": 2.19,
+   "end": 2.95
+  },
+  {
+   "text": "Putin",
+   "start": 2.95,
+   "end": 3.14
+  },
+  {
+   "text": "repeated",
+   "start": 3.56,
+   "end": 4.0
+  },
+  {
+   "text": "the",
+   "start": 4.0,
+   "end": 4.19
+  },
+  {
+   "text": "warning",
+   "start": 4.19,
+   "end": 4.55
+  },
+  {
+   "text": "in",
+   "start": 4.69,
+   "end": 4.8
+  },
+  {
+   "text": "person.",
+   "start": 4.8,
+   "end": 5.36
+  },
+  {
+   "text": "An",
+   "start": 6.27,
+   "end": 6.32
+  },
+  {
+   "text": "escalating",
+   "start": 6.32,
+   "end": 7.1
+  },
+  {
+   "text": "cycle",
+   "start": 7.14,
+   "end": 7.51
+  },
+  {
+   "text": "of",
+   "start": 7.51,
+   "end": 7.53
+  },
+  {
+   "text": "retaliation,",
+   "start": 8.33,
+   "end": 8.72
+  },
+  {
+   "text": "he",
+   "start": 8.72,
+   "end": 8.96
+  },
+  {
+   "text": "said,",
+   "start": 8.96,
+   "end": 9.68
+  },
+  {
+   "text": "leads",
+   "start": 9.72,
+   "end": 10.36
+  },
+  {
+   "text": "to",
+   "start": 10.36,
+   "end": 10.64
+  },
+  {
+   "text": "\u201ca",
+   "start": 10.64,
+   "end": 10.72
+  },
+  {
+   "text": "fatal",
+   "start": 10.85,
+   "end": 11.25
+  },
+  {
+   "text": "point",
+   "start": 11.25,
+   "end": 11.51
+  },
+  {
+   "text": "of",
+   "start": 11.62,
+   "end": 11.96
+  },
+  {
+   "text": "no",
+   "start": 11.96,
+   "end": 12.16
+  },
+  {
+   "text": "return.\u201d",
+   "start": 12.4,
+   "end": 13.12
+  }
+ ],
+ "cues": {
+  "key": 10.64
+ },
+ "paragraphs": [
+  0.0
+ ]
+}
