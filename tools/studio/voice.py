@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import atexit
 import difflib
+import functools
 import json
 import os
 import re
@@ -73,6 +74,7 @@ VOICE_FX = ",".join([
     "aecho=1.0:1.0:11|19|29:0.05|0.035|0.02",
 ])
 SENTENCE_END = re.compile(r"(?<=[.!?…])\s+")
+CLAUSE_END = re.compile(r"(?<=[,;:—])\s+")
 MIN_UTTERANCE = 40  # phonemes; Kokoro garbles very short inputs, so tiny sentences ride with the next
 
 
@@ -141,7 +143,7 @@ class Kokoro:
         self.sentence_pause = float(script.setting("sentence_pause"))
         self.clause_pause = float(script.setting("clause_pause"))
         self.fx = bool(script.setting("voice_fx"))
-        self.chars = 0
+        self.chars, self.seconds = 0, 0.0
         model = KOKORO_DIR / "models" / "kokoro-v1.0.onnx"
         voices = KOKORO_DIR / "voices" / "voices-v1.0.bin"
         if not (model.exists() and voices.exists()):
@@ -176,17 +178,12 @@ class Kokoro:
             samples, rate = self.model.create(group, voice=self.style, speed=self.speed, lang=self.lang,
                                               is_phonemes=True, trim=True, sentence_pause=self.sentence_pause,
                                               clause_pause=self.clause_pause)
-            if parts:
-                parts.append(np.zeros(int(self.sentence_pause * rate), dtype=np.float32))
-            parts.append(np.asarray(samples, dtype=np.float32))
-        return np.concatenate(parts), rate
+            parts.append((np.asarray(samples, dtype=np.float32), self.sentence_pause))
+        return join_parts(parts, rate), rate
 
     def synth_to(self, text: str, dst: Path, prev_text: str = "", next_text: str = "") -> None:
-        samples, rate = self.synth(text)
-        raw = dst.with_name(f".{dst.stem}.raw.wav")
-        sf.write(str(raw), samples, rate)
-        to_48k_mono(raw, dst, VOICE_FX if self.fx else "")
-        raw.unlink()
+        finish(*self.synth(text), dst, self.fx)
+        self.chars += len(text)
 
 
 class ElevenLabs:
@@ -200,7 +197,7 @@ class ElevenLabs:
         if not self.key:
             die("tts: elevenlabs needs ELEVENLABS_API_KEY (put it in .env at the studio root)")
         _, self.voice, self.model, self.settings = self.cache_tag(script)
-        self.chars = 0
+        self.chars, self.seconds = 0, 0.0
 
     @staticmethod
     def cache_tag(script: Script) -> tuple:
@@ -245,13 +242,14 @@ class Chatterbox:
     MAX_CHARS = 280  # Chatterbox drifts on long inputs, so sentences are grouped up to about this length
 
     def __init__(self, script: Script):
-        self.model = self.cache_tag(script)[1]
+        self.model = chatterbox_model(script)
         ref = chatterbox_ref(script)
         self.ref = str(ref) if ref else None
         self.sentence_pause = float(script.setting("sentence_pause"))
+        self.clause_pause = float(script.setting("clause_pause"))
         self.fx = bool(script.setting("voice_fx"))
         self.params = {k: script.setting(k) for k in ("exaggeration", "cfg_weight", "temperature", "seed")}
-        self.chars = 0
+        self.chars, self.seconds = 0, 0.0
         python = self.ensure_env()
         info(f"  starting Chatterbox {self.model} on the CPU (first run downloads the model)...")
         self.proc = subprocess.Popen([str(python), "-I", str(self.WORKER), self.model],
@@ -276,15 +274,14 @@ class Chatterbox:
 
     @staticmethod
     def cache_tag(script: Script) -> tuple:
-        model = str(script.setting("chatterbox_model")).lower()
-        if model not in ("turbo", "standard"):
-            die(f"unknown chatterbox_model '{model}' (choose: turbo, standard)")
+        model = chatterbox_model(script)
         ref = chatterbox_ref(script)
         params = [float(script.setting(k)) for k in ("temperature", "seed")]
         if model == "standard":
             params += [float(script.setting(k)) for k in ("exaggeration", "cfg_weight")]
-        return ("chatterbox", model, sha(ref) if ref else "default", CHATTERBOX_VERSION, *params,
-                float(script.setting("sentence_pause")), bool(script.setting("voice_fx")) and VOICE_FX)
+        return ("chatterbox", model, clip_hash(ref) if ref else "default", CHATTERBOX_VERSION, *params,
+                float(script.setting("sentence_pause")), float(script.setting("clause_pause")),
+                bool(script.setting("voice_fx")) and VOICE_FX)
 
     def request(self, req: dict | None) -> dict:
         if req is not None:
@@ -293,7 +290,10 @@ class Chatterbox:
         line = self.proc.stdout.readline()
         if not line:
             die("Chatterbox worker exited (see the error above)")
-        reply = json.loads(line)
+        try:
+            reply = json.loads(line)
+        except json.JSONDecodeError:
+            die(f"Chatterbox worker sent a non-JSON reply: {line[:200]!r}")
         if "error" in reply:
             die(f"Chatterbox: {reply['error']}")
         return reply
@@ -301,17 +301,12 @@ class Chatterbox:
     def synth_to(self, text: str, dst: Path, prev_text: str = "", next_text: str = "") -> None:
         parts, rate = [], 24000
         with tempfile.TemporaryDirectory() as tmp:
-            for i, group in enumerate(text_groups(text, self.MAX_CHARS)):
+            for i, (group, whole) in enumerate(text_groups(text, self.MAX_CHARS)):
                 wav = Path(tmp) / f"{i}.wav"
                 self.request({"text": group, "out": str(wav), "ref": self.ref, **self.params})
                 samples, rate = sf.read(str(wav), dtype="float32")
-                if parts:
-                    parts.append(np.zeros(int(self.sentence_pause * rate), dtype=np.float32))
-                parts.append(trim_silence(samples, rate))
-        raw = dst.with_name(f".{dst.stem}.raw.wav")
-        sf.write(str(raw), np.concatenate(parts), rate)
-        to_48k_mono(raw, dst, VOICE_FX if self.fx else "")
-        raw.unlink()
+                parts.append((trim_silence(samples, rate), self.sentence_pause if whole else self.clause_pause))
+        finish(join_parts(parts, rate), rate, dst, self.fx)
         self.chars += len(text)
 
     def close(self) -> None:
@@ -321,6 +316,24 @@ class Chatterbox:
                 self.proc.wait(timeout=10)
             except subprocess.TimeoutExpired:
                 self.proc.kill()
+
+
+def chatterbox_model(script: Script) -> str:
+    model = str(script.setting("chatterbox_model")).lower()
+    if model not in ("turbo", "standard"):
+        die(f"unknown chatterbox_model '{model}' (choose: turbo, standard)")
+    return model
+
+
+def clip_hash(path: Path) -> str:
+    """sha() of a reference clip, read once per sync rather than once per chunk."""
+    st = path.stat()
+    return _clip_hash(path, st.st_mtime_ns, st.st_size)
+
+
+@functools.lru_cache(maxsize=16)
+def _clip_hash(path: Path, mtime_ns: int, size: int) -> str:
+    return sha(path)
 
 
 def chatterbox_ref(script: Script) -> Path | None:
@@ -334,15 +347,49 @@ def chatterbox_ref(script: Script) -> Path | None:
     return path
 
 
-def text_groups(text: str, max_chars: int) -> list[str]:
-    """Split text at sentence ends into groups of whole sentences up to max_chars."""
-    groups: list[str] = []
+def text_groups(text: str, max_chars: int) -> list[tuple[str, bool]]:
+    """Split text into groups of up to max_chars: whole sentences where they fit, else a long sentence's
+    clauses (then words). Each group comes with whether it ends a sentence, for the pause after it."""
+    groups: list[tuple[str, bool]] = []
     for sent in SENTENCE_END.split(" ".join(text.split())):
-        if groups and len(groups[-1]) + 1 + len(sent) <= max_chars:
-            groups[-1] += " " + sent
+        if len(sent) > max_chars:
+            pieces = pack(CLAUSE_END.split(sent), max_chars)
+            pieces = [w for p in pieces for w in (pack(p.split(), max_chars) if len(p) > max_chars else [p])]
+            groups += [(p, False) for p in pieces[:-1]] + [(pieces[-1], True)]
+        elif groups and groups[-1][1] and len(groups[-1][0]) + 1 + len(sent) <= max_chars:
+            groups[-1] = (groups[-1][0] + " " + sent, True)
         else:
-            groups.append(sent)
+            groups.append((sent, True))
     return groups
+
+
+def pack(pieces: list[str], max_chars: int) -> list[str]:
+    """Join consecutive pieces with spaces into runs of up to max_chars."""
+    runs: list[str] = []
+    for piece in pieces:
+        if runs and len(runs[-1]) + 1 + len(piece) <= max_chars:
+            runs[-1] += " " + piece
+        else:
+            runs.append(piece)
+    return runs
+
+
+def join_parts(parts: list[tuple[np.ndarray, float]], rate: int) -> np.ndarray:
+    """Concatenate (samples, pause after) parts with that much silence between them."""
+    out = []
+    for i, (samples, pause) in enumerate(parts):
+        out.append(samples)
+        if i < len(parts) - 1:
+            out.append(np.zeros(int(pause * rate), dtype=np.float32))
+    return np.concatenate(out)
+
+
+def finish(samples: np.ndarray, rate: int, dst: Path, fx: bool) -> None:
+    """The shared voice chain: resample to 48 kHz mono, with VOICE_FX if enabled."""
+    raw = dst.with_name(f".{dst.stem}.raw.wav")
+    sf.write(str(raw), samples, rate)
+    to_48k_mono(raw, dst, VOICE_FX if fx else "")
+    raw.unlink()
 
 
 def trim_silence(samples: np.ndarray, rate: int, floor_db: float = -45, margin: float = 0.03) -> np.ndarray:
@@ -484,7 +531,9 @@ def voice_scene(ep: Path, script: Script, scene: Scene, tts, table: dict,
                     info(f"  loading {script.setting('tts')}...")
                     tts = engine(script)
                 info(f"  tts  {scene.id}: {say[:70]}{'...' if len(say) > 70 else ''}")
+                started = time.monotonic()
                 tts.synth_to(say, cached, prev_text, next_text)
+                tts.seconds += time.monotonic() - started
             seg = read_mono(cached)
             pieces.append(seg)
             spans.append((w0, w0 + len(chunk.words), t, t + len(seg) / SAMPLE_RATE))
@@ -537,6 +586,7 @@ def voice_all(ep: Path, script: Script, only: set[str] | None = None) -> dict[st
                 records[scene.id] = json.loads(wf.read_text())
                 continue
         records[scene.id], tts = voice_scene(ep, script, scene, tts, table, ctx)
-    if isinstance(tts, ElevenLabs) and tts.chars:
-        info(f"  elevenlabs: {tts.chars} characters synthesised")
+    if tts is not None and tts.chars:
+        mins, secs = divmod(round(tts.seconds), 60)
+        info(f"  {script.setting('tts')}: {tts.chars} characters synthesised in {mins}m {secs:02d}s")
     return records

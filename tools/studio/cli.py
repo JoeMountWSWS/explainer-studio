@@ -151,8 +151,12 @@ def cmd_voices(a):
     dst = OUT / "voice-samples"
     dst.mkdir(parents=True, exist_ok=True)
     if voice.engine_class(script) is voice.Chatterbox:
+        if a.speed:
+            info("  warning: --speed is ignored by Chatterbox (pacing comes from the reference clip)")
         # One worker for every clip: the model loads once and only the conditioning changes.
-        specs = a.voices or [str(p.relative_to(ROOT)) for p in sorted((BRAND / "voices").glob("*.wav"))] + ["default"]
+        # --voices paths are tried against the current directory first, then the studio root.
+        specs = [str(Path(v).resolve()) if Path(v).exists() else v for v in a.voices or []] or \
+            [str(p.relative_to(ROOT)) for p in sorted((BRAND / "voices").glob("*.wav"))] + ["default"]
         tts = voice.Chatterbox(Script({**script.meta, "voice": "default"}, script.scenes))
         for n, spec in enumerate(specs, 1):
             ref = voice.chatterbox_ref(Script({**script.meta, "voice": spec}, script.scenes))
