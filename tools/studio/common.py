@@ -18,11 +18,14 @@ OUT = ROOT / "out"
 
 # Pin the HyperFrames CLI so renders are reproducible. Bump deliberately, then run `studio check`.
 HF_VERSION = os.environ.get("STUDIO_HF_VERSION", "0.8.153")
+# Chatterbox TTS runs in its own uv environment (it pins torch and numpy<2); pinned for the same reason.
+CHATTERBOX_VERSION = os.environ.get("STUDIO_CHATTERBOX_VERSION", "0.1.7")
 
 # Episode defaults; any of these can be overridden in a script's front matter.
 DEFAULTS = {
-    "tts": "kokoro",           # TTS engine: kokoro (local) or elevenlabs (cloud; key in .env)
-    "voice": "bf_emma*0.6 + bf_isabella*0.4",  # Kokoro voice or weighted blend, or an ElevenLabs voice ID
+    "tts": "kokoro",           # TTS engine: kokoro (local), chatterbox (local, cloned) or elevenlabs (cloud; key in .env)
+    # Kokoro voice or weighted blend, an ElevenLabs voice ID, or a Chatterbox reference clip (or "default")
+    "voice": "bf_emma*0.6 + bf_isabella*0.4",
     "speed": 0.85,             # Kokoro voices differ: the default blend is ~165 wpm at 0.85, bm_george ~155 at 1.0
     "g2p": "misaki",           # Kokoro phonemizer: misaki (what Kokoro was trained on) or espeak
     "sentence_pause": 0.38,    # Kokoro: silence between sentences, seconds
@@ -30,6 +33,11 @@ DEFAULTS = {
     "voice_fx": True,          # Kokoro: gentle EQ/compression/room on the dry voice (voice.VOICE_FX)
     "tts_model": "eleven_multilingual_v2",  # ElevenLabs model
     "voice_settings": None,    # ElevenLabs: {stability, similarity_boost, style, use_speaker_boost}
+    "chatterbox_model": "turbo",  # Chatterbox: turbo (350M, faster) or standard (500M, honours the next two)
+    "exaggeration": 0.5,       # Chatterbox standard: emotional intensity (0.25-2)
+    "cfg_weight": 0.5,         # Chatterbox standard: lower is slower and more deliberate
+    "temperature": 0.8,        # Chatterbox: sampling temperature
+    "seed": 0,                 # Chatterbox: random seed, so a re-synthesis is repeatable
     "fps": 30,
     "pad_in": 0.6,             # silence before a scene's narration starts
     "pad_out": 0.9,            # silence after it ends (the exit fade lives here)
