@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v10.3.0
-      - name: Build (strict: broken links fail)
+      - name: Build (strict, so broken links fail)
         run: uvx --with "$MKDOCS_MATERIAL" mkdocs build
       - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
