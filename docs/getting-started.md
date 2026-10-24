@@ -23,6 +23,9 @@ Every command runs as `uv run studio …` from the repository root.
 
 ## Make a video
 
+These steps are the manual workflow. To have a coding agent do them for you, see
+[Working with a coding agent](coding-agents.md).
+
 ### 1. Scaffold an episode
 
 ```bash

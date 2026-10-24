@@ -30,6 +30,7 @@ script.md ──► narration (Kokoro, local; or Chatterbox / ElevenLabs) ──
 <div class="grid cards" markdown>
 
 - **[Getting started](getting-started.md)**: install the tools and make a first video.
+- **[Working with a coding agent](coding-agents.md)**: let Claude Code make the video, using the bundled skill.
 - **[Writing a script](script.md)**: the script format, cues and pauses.
 - **[Narration](narration.md)**: choose and tune a voice.
 - **[Designing scenes](scenes.md)**: templates, cues and the house style.
@@ -44,6 +45,6 @@ scenes). Open its `script.md` and `scenes/` next to these pages.
 ## Using it with a coding agent
 
 The studio is designed to be driven by [Claude Code](https://claude.com/claude-code) or another
-coding agent. [`AGENTS.md`](https://github.com/JoeMountWSWS/explainer-studio/blob/main/AGENTS.md)
-(loaded through `CLAUDE.md`) gives the agent the conventions it needs, and the HyperFrames skills
-cover the composition format and motion. These pages are written for people.
+coding agent. The repository includes `AGENTS.md` (loaded through `CLAUDE.md`) with the conventions,
+and a `make-explainer-video` Claude skill that walks the agent through the whole workflow, from
+script to final render. See [Working with a coding agent](coding-agents.md) for how to use them.
