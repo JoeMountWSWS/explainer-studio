@@ -32,6 +32,27 @@ The first `sync` downloads the Kokoro-82M model to `~/.cache/hyperframes/tts`.
 
 # Usage
 
+Making a video with the studio is a loop of writing and listening. You write the script as plain
+Markdown, and the studio reads it aloud, works out exactly when each word is spoken, and hands those
+timings to your scenes so the visuals move in step with the voice. Change a sentence and only that
+sentence is re-recorded and only the affected scenes are re-rendered, so you can refine a five-minute
+video in seconds rather than starting over. Everything runs from one command, `uv run studio`, and
+nothing leaves your machine unless you choose cloud narration.
+
+## Install
+
+With the [requirements](#requirements) in place, clone the repository and install its dependencies:
+
+```bash
+git clone git@github.com:JoeMountWSWS/explainer-studio.git
+cd explainer-studio
+uv sync
+```
+
+Run every command from the repository root. Confirm the install with `uv run studio --help`. The
+first `sync` of an episode downloads the Kokoro voice model, so it takes a little longer than later
+runs.
+
 ## Quick start
 
 ```bash
