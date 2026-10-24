@@ -41,6 +41,7 @@ jobs:
       - name: CLI smoke test
         run: |
           uv run studio --help
+          uv run studio music --help
           for script in episodes/*/script.md; do
             uv run studio status "$(basename "$(dirname "$script")")"
           done

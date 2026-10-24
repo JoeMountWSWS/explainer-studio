@@ -94,6 +94,31 @@ loudness-matched samples to `out/voice-samples/`.
 With no `--voices`, Kokoro auditions six built-in blends, and Chatterbox auditions every
 `brand/voices/*.wav` plus `default`.
 
+## `music`
+
+```bash
+uv run studio music <slug> --prompt "sombre cello and piano, slow, no percussion" [--variants N] [--out PATH]
+```
+
+Generates an instrumental music bed with [ElevenLabs Music](https://elevenlabs.io/music-api) and
+prints the `music:` line to put in `script.md`. Run `sync` first: the bed is sized to the episode's
+`timing.json` (length + 2 s). It uses the same `ELEVENLABS_API_KEY` as narration, but the key needs
+the `music_generation` permission, and a paid plan for commercial use (film and TV excluded).
+Cost is roughly $0.0083 a second, so a five-minute bed is about $2.50. Results are cached by prompt,
+length and model, so a re-run is free.
+
+| Flag | Meaning |
+| --- | --- |
+| `--prompt` | Genre, mood, tempo, instruments. Defaults to `music_prompt:` in the front matter. Don't name artists or songs |
+| `--name` | File name in `episodes/<slug>/audio/music/` (default `bed`) |
+| `--length` | Seconds (3–600). Defaults to the episode length + 2 s; a shorter bed loops |
+| `--model` | `music_v1`, `music_v2` (default) or `music_v2_5` |
+| `--variants` | Make 1–4 different takes, suffixed `-a`, `-b`…, to audition |
+| `--out` | Write here instead, such as `brand/music/my-bed.mp3` to share across episodes |
+
+Log the track in `brand/music/CREDITS.md` (source, prompt, date). Check
+[ElevenLabs' music rights](https://elevenlabs.io/music-rights) for your plan and use before publishing.
+
 ## HyperFrames directly
 
 The studio drives the [HyperFrames](https://www.npmjs.com/package/hyperframes) CLI at a pinned version

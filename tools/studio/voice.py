@@ -192,10 +192,7 @@ class ElevenLabs:
     URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice}?output_format=mp3_44100_128"
 
     def __init__(self, script: Script):
-        load_env()
-        self.key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
-        if not self.key:
-            die("tts: elevenlabs needs ELEVENLABS_API_KEY (put it in .env at the studio root)")
+        self.key = elevenlabs_key()
         _, self.voice, self.model, self.settings = self.cache_tag(script)
         self.chars, self.seconds = 0, 0.0
 
@@ -210,24 +207,7 @@ class ElevenLabs:
             body["previous_text"] = prev_text
         if next_text:
             body["next_text"] = next_text
-        req = urllib.request.Request(
-            self.URL.format(voice=self.voice), data=json.dumps(body).encode(), method="POST",
-            headers={"xi-api-key": self.key, "Content-Type": "application/json", "Accept": "audio/mpeg"})
-        for attempt in range(4):
-            try:
-                with urllib.request.urlopen(req, timeout=120) as resp:
-                    audio = resp.read()
-                break
-            except urllib.error.HTTPError as e:
-                if (e.code == 429 or e.code >= 500) and attempt < 3:
-                    time.sleep(2 ** attempt * 2)
-                    continue
-                die(f"ElevenLabs {e.code}: {_api_error(e)}")
-            except urllib.error.URLError as e:
-                if attempt < 3:
-                    time.sleep(2 ** attempt * 2)
-                    continue
-                die(f"ElevenLabs unreachable: {e.reason}")
+        audio = elevenlabs_post(self.URL.format(voice=self.voice), self.key, body)
         raw = dst.with_name(f".{dst.stem}.raw.mp3")
         raw.write_bytes(audio)
         to_48k_mono(raw, dst)
@@ -399,6 +379,35 @@ def trim_silence(samples: np.ndarray, rate: int, floor_db: float = -45, margin: 
         return samples
     pad = int(margin * rate)
     return samples[max(0, loud[0] - pad):loud[-1] + pad]
+
+
+def elevenlabs_key() -> str:
+    load_env()
+    key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
+    if not key:
+        die("ElevenLabs needs ELEVENLABS_API_KEY (put it in .env at the studio root)")
+    return key
+
+
+def elevenlabs_post(url: str, key: str, body: dict, timeout: int = 120) -> bytes:
+    """POST JSON to ElevenLabs and return the audio bytes, retrying rate limits, 5xx and network errors."""
+    req = urllib.request.Request(
+        url, data=json.dumps(body).encode(), method="POST",
+        headers={"xi-api-key": key, "Content-Type": "application/json", "Accept": "audio/mpeg"})
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.read()
+        except urllib.error.HTTPError as e:
+            if (e.code == 429 or e.code >= 500) and attempt < 3:
+                time.sleep(2 ** attempt * 2)
+                continue
+            die(f"ElevenLabs {e.code}: {_api_error(e)}")
+        except urllib.error.URLError as e:
+            if attempt < 3:
+                time.sleep(2 ** attempt * 2)
+                continue
+            die(f"ElevenLabs unreachable: {e.reason}")
 
 
 def _api_error(e: urllib.error.HTTPError) -> str:
