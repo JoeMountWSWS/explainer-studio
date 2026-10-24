@@ -1,6 +1,6 @@
 [project]
 name = "explainer-studio"
-version = "0.1.1"
+version = "0.1.2"
 description = "Command-line studio for narrated explainer videos (HyperFrames + Kokoro TTS + ffmpeg)"
 requires-python = ">=3.12,<3.14"
 license = "MIT"
