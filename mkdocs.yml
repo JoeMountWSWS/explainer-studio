@@ -1,0 +1,58 @@
+site_name: Explainer Studio
+site_description: Command-line studio for narrated explainer videos (HyperFrames + local TTS + ffmpeg)
+site_url: https://joemountwsws.github.io/explainer-studio/
+repo_url: https://github.com/JoeMountWSWS/explainer-studio
+repo_name: JoeMountWSWS/explainer-studio
+edit_uri: edit/main/docs/
+docs_dir: docs
+strict: true
+
+theme:
+  name: material
+  font:
+    text: Source Sans 3
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: red
+      toggle: { icon: material/weather-night, name: Switch to dark mode }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: red
+      toggle: { icon: material/weather-sunny, name: Switch to light mode }
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.action.edit
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc: { permalink: true }
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Guide:
+      - Getting started: getting-started.md
+      - Writing a script: script.md
+      - Narration: narration.md
+      - Designing scenes: scenes.md
+      - Rendering and publishing: rendering.md
+      - Reels (9:16): reels.md
+  - Reference:
+      - Commands: commands.md
+      - Settings: settings.md
+      - Troubleshooting: troubleshooting.md
+      - ElevenLabs voices: elevenlabs-voices.md
+  - Contributing: contributing.md
