@@ -3,7 +3,16 @@ name: CI
 on:
   push:
     branches: [main]
+    paths: &paths
+      - tools/**
+      - brand/**
+      - templates/**
+      - episodes/**
+      - pyproject.toml
+      - uv.lock
+      - .github/workflows/ci.yml
   pull_request:
+    paths: *paths
   workflow_dispatch:
 
 concurrency:
