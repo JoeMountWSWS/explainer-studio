@@ -66,7 +66,7 @@ starting pattern for the scene file (`title`, `stat`, `quote`, `points`, `outro`
 lines are visual notes and are never spoken. `{name}` marks a cue that the scene can animate on,
 and `{pause 1.5}` inserts a pause.
 
-[AGENTS.md](AGENTS.md) is the full reference: every front-matter setting, voice choice, the rules for
+The full documentation is at <https://joemountwsws.github.io/explainer-studio/>. [AGENTS.md](AGENTS.md) is the reference for coding agents: every front-matter setting, voice choice, the rules for
 authoring scenes, the render pipeline and known problems. Read [brand/frame.md](brand/frame.md)
 before designing scenes.
 
@@ -78,7 +78,7 @@ before designing scenes.
 | `brand/` | House style shared by every episode: design spec, CSS, fonts, GSAP, pronunciations |
 | `templates/` | Starter script, scene patterns and thumbnail |
 | `episodes/<slug>/` | One HyperFrames project per video. `script.md` is the source of truth |
-| `docs/` | Notes, such as British ElevenLabs voices |
+| `docs/` | The documentation site (MkDocs), including notes such as British ElevenLabs voices |
 | `out/` | Rendered deliverables (gitignored) |
 
 Worked examples: `episodes/demo-paris-commune` (Kokoro, 38s) and `episodes/demo-elevenlabs`
