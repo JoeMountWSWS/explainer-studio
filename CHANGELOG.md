@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.3](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.2...v0.1.3) (2026-10-24)
+
+
+### Bug fixes
+
+* **ci:** quote-free job name so docs.yml parses and Pages deploys ([#12](https://github.com/JoeMountWSWS/explainer-studio/issues/12)) ([75a9ea8](https://github.com/JoeMountWSWS/explainer-studio/commit/75a9ea82b4560e908d536b89d91f3a2f125786f2))
+
+
+### Documentation
+
+* add make-explainer-video Claude skill ([#11](https://github.com/JoeMountWSWS/explainer-studio/issues/11)) ([04fbbe3](https://github.com/JoeMountWSWS/explainer-studio/commit/04fbbe3952286b0e04706bd78863744b91c0077d))
+* add MkDocs documentation site published to GitHub Pages ([#9](https://github.com/JoeMountWSWS/explainer-studio/issues/9)) ([d24c052](https://github.com/JoeMountWSWS/explainer-studio/commit/d24c052aaa005c34d15ef3bac0f4212d0f2808b6))
+
 ## [0.1.2](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.1...v0.1.2) (2026-10-24)
 
 
