@@ -87,8 +87,11 @@ Worked examples: `episodes/demo-paris-commune` (Kokoro, 38s) and `episodes/demo-
 ## Working with coding agents
 
 The studio is designed to be driven by Claude Code or another coding agent. `AGENTS.md` (loaded
-through `CLAUDE.md`) gives the agent the conventions it needs, and the HyperFrames skills cover the
-composition format and motion.
+through `CLAUDE.md`) gives the agent the conventions it needs, the HyperFrames skills cover the
+composition format and motion, and the `make-explainer-video` skill
+(`.claude/skills/make-explainer-video/`) walks Claude through the whole workflow. Start `claude` in
+the repository root and ask for a video, or run `/make-explainer-video`. See
+[Working with a coding agent](https://joemountwsws.github.io/explainer-studio/coding-agents/).
 
 ## CI
 
