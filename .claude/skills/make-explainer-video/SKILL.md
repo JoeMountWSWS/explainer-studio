@@ -45,6 +45,10 @@ Default is Kokoro (local, free). `uv run studio voices <slug>` writes loudness-m
 - DNS errors on downloads: `resolvectl flush-caches`.
 - Commit `audio/vo/`, `timing.json` and `index.html` after `sync`, because CI never narrates. Commit messages use `episode:` for episode content and `brand:` for the house style.
 
+## Music
+
+Also write a song description for a music generation service such as Suno: genre, mood, tempo, instrumentation, and "instrumental, no vocals" for a bed under narration. Match the episode's tone and length, and give it to the user alongside the script.
+
 ## Done means
 
 `studio check` passes, a draft render has been made and its frames spot-checked, and the final render and `out/` files exist. Report the paths.
