@@ -14,6 +14,8 @@ script.md ──► narration (Kokoro, local; or ElevenLabs) ──► word timi
           ──► out/<slug>.mp4  (−14 LUFS)  +  out/<slug>.srt  +  out/<slug>.chapters.txt
 ```
 
+# Installation
+
 ## Requirements
 
 - Linux (developed on Arch with an AMD GPU; the render uses Chromium's GPU capture)
@@ -27,6 +29,8 @@ uv sync
 ```
 
 The first `sync` downloads the Kokoro-82M model to `~/.cache/hyperframes/tts`.
+
+# Usage
 
 ## Quick start
 
@@ -92,25 +96,3 @@ composition format and motion, and the `make-explainer-video` skill
 (`.claude/skills/make-explainer-video/`) walks Claude through the whole workflow. Start `claude` in
 the repository root and ask for a video, or run `/make-explainer-video`. See
 [Working with a coding agent](https://joemountwsws.github.io/explainer-studio/coding-agents/).
-
-## CI
-
-GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs on every push to
-`main` and on every pull request:
-
-- `uv sync --locked`, `ruff check`, and a CLI smoke test (`status` on every episode, plus `new`)
-- `hyperframes check` on every episode, at the pinned HyperFrames version
-
-CI doesn't narrate or render. It checks the narration, timings and scenes that are committed.
-
-## Releases
-
-Releases are automated with release-please from Conventional Commit messages. See
-[RELEASING.md](RELEASING.md) for the commit prefixes, the release PR and the repository setup.
-
-## Licence
-
-The studio software is released under the [MIT licence](LICENSE). Editorial content (everything
-under `episodes/` and `scripts/`) is © World Socialist Web Site, all rights reserved. Fonts (SIL OFL
-1.1), GSAP (GreenSock Standard License) and third-party photographs keep their own terms. See
-[LICENSE](LICENSE) for the details.
