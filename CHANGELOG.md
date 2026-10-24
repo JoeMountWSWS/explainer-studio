@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.4](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.3...v0.1.4) (2026-10-24)
+
+
+### Features
+
+* add studio music command for ElevenLabs Music beds ([#18](https://github.com/JoeMountWSWS/explainer-studio/issues/18)) ([090dc75](https://github.com/JoeMountWSWS/explainer-studio/commit/090dc75a35bbdf1e3d638c9a619071a1fa7f98b4))
+
+
+### Documentation
+
+* explain working with a coding agent and the make-explainer-video skill ([#19](https://github.com/JoeMountWSWS/explainer-studio/issues/19)) ([e68ef02](https://github.com/JoeMountWSWS/explainer-studio/commit/e68ef02a6820d1de1c2d7f59105ac2c92b99d54c))
+* move release workflow docs from README to RELEASING.md ([#13](https://github.com/JoeMountWSWS/explainer-studio/issues/13)) ([1f48249](https://github.com/JoeMountWSWS/explainer-studio/commit/1f48249fed64b07f30f6b35435ff578922e3cbf4))
+
 ## [0.1.3](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.2...v0.1.3) (2026-10-24)
 
 
