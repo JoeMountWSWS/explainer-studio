@@ -40,6 +40,16 @@
   font-family: var(--font-serif);
 }
 
+/* Reel (9:16, 1080x1920) content box. Platform UI covers the top ~200px, the right ~140px
+   (like/comment/share) and the bottom ~480px (caption, handle, audio). Burned captions sit
+   in the band y 1220-1440, so scene content ends by y 1180. */
+.stage-reel {
+  position: absolute;
+  inset: 220px 72px 740px 72px;
+  color: var(--ink-2);
+  font-family: var(--font-serif);
+}
+
 /* Heavy ink rule + uppercase label, like the site's "TOP STORIES" head.
    <div class="section-head"><div class="section-rule"></div><div class="label">History</div></div>
    Draw the rule on with scaleX (transform-origin is left). */
