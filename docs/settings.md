@@ -71,6 +71,7 @@ speed: 0.85
 | Setting | Default | Meaning |
 | --- | --- | --- |
 | `music` | none | Path to a music bed, relative to the studio root |
+| `music_prompt` | none | Default prompt for `studio music` |
 | `music_db` | `-24` | Level under narration, before ducking |
 | `music_fade_in` | `2` | Seconds. `0` keeps a hit on the bed's first beat |
 | `loudness` | `-14` | Integrated LUFS target |

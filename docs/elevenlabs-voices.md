@@ -14,7 +14,8 @@ voice: onwK4e9ZLuTAKqWW03F9   # Daniel
 ```
 
 The key is read from `ELEVENLABS_API_KEY` (environment or `.env`). See `AGENTS.md` for
-`tts_model`, `voice_settings` and `speed`.
+`tts_model`, `voice_settings` and `speed`. The same key also drives `studio music`, which needs the
+`music_generation` permission enabled on it.
 
 ## Built-in British voices (IDs confirmed via `GET /v1/voices`)
 

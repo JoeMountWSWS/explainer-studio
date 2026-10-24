@@ -47,7 +47,7 @@ Default is Kokoro (local, free). `uv run studio voices <slug>` writes loudness-m
 
 ## Music
 
-Also write a song description for a music generation service such as Suno: genre, mood, tempo, instrumentation, and "instrumental, no vocals" for a bed under narration. Match the episode's tone and length, and give it to the user alongside the script.
+After `sync`, generate the bed yourself: `uv run studio music <slug> --prompt "<genre, mood, tempo, instruments>" --variants 2`. It makes an instrumental ElevenLabs Music track as long as the episode (about $0.0083 a second, so tell the user the cost for long episodes) and prints the `music:` line. Match the prompt to the episode's tone, name no artists or songs, then set `music:` in `script.md`, listen or spot-check with a draft render, and log the track in `brand/music/CREDITS.md`. If it fails with a 401 naming `music_generation`, the API key lacks that permission: tell the user to enable it in ElevenLabs. If music is unavailable, fall back to writing a Suno-style song description (genre, mood, tempo, instrumentation, "instrumental, no vocals") for the user.
 
 ## Done means
 

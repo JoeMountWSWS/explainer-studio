@@ -117,6 +117,10 @@ The bed is ducked under the voice with a sidechain compressor. `music_db` sets i
 ducking, and `music_fade_in: 0` keeps a hit on the bed's first beat. Credit the track in the video
 description; `brand/music/CREDITS.md` has the line for the bundled tracks.
 
+To make a bed instead of finding one, run `uv run studio music <slug> --prompt "…"` after `sync`.
+It asks ElevenLabs Music for an instrumental track as long as the episode and prints the `music:`
+line to use. See [Commands](commands.md#music).
+
 ## Timing and loudness
 
 | Setting | Default | Meaning |
