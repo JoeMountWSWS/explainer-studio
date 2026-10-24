@@ -45,6 +45,7 @@ nav:
   - Home: index.md
   - Guide:
       - Getting started: getting-started.md
+      - Working with a coding agent: coding-agents.md
       - Writing a script: script.md
       - Narration: narration.md
       - Designing scenes: scenes.md
