@@ -45,7 +45,8 @@ DEFAULTS = {
     "pad_out": 0.9,            # silence after it ends (the exit fade lives here)
     "paragraph_gap": 0.45,     # pause between paragraphs inside a scene
     "music": None,             # path to a music bed, relative to the studio root
-    "music_db": -24,           # music level under narration, before ducking
+    "music_prompt": None,      # default prompt for `studio music` (ElevenLabs Music)
+    "music_db": -24,          # music level under narration, before ducking
     "music_fade_in": 2,        # seconds; 0 keeps a hit on the bed's first beat
     "loudness": -14,           # integrated LUFS target (YouTube normalises to -14)
     "true_peak": -1.5,

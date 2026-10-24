@@ -8,6 +8,7 @@
     uv run studio render <slug> [--draft] render changed scenes, assemble, master -> out/
     uv run studio thumbnail <slug>        screenshot thumbnail/thumbnail.html -> out/
     uv run studio voices <slug>           audition Kokoro blends or Chatterbox clips on one scene -> out/voice-samples/
+    uv run studio music <slug> --prompt   generate an instrumental music bed (ElevenLabs Music) sized to the episode
 """
 
 from __future__ import annotations
@@ -25,8 +26,8 @@ import numpy as np
 import soundfile as sf
 
 from . import build as builder
+from . import music, voice
 from . import render as renderer
-from . import voice
 from .common import BRAND, EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_tools
 from .script import Script, parse
 
@@ -170,6 +171,23 @@ def cmd_voices(a):
         audition(tts, scene, table, dst / f"{n}-{name}.wav")
 
 
+def cmd_music(a):
+    """Generate a music bed with ElevenLabs Music, sized to the synced episode, and print the `music:` line."""
+    ep = episode_dir(a.slug)
+    script = parse(ep / "script.md")
+    prompt = a.prompt or script.setting("music_prompt")
+    if not prompt:
+        die("give --prompt, or set music_prompt: in the script's front matter")
+    if not 1 <= a.variants <= 4:
+        die("--variants must be 1-4")
+    info(f"music ({a.model})")
+    out = Path(a.out).resolve() if a.out else None
+    paths = music.make_beds(ep, str(prompt), a.name, a.length, a.model, a.variants, out)
+    rel = [str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else str(p) for p in paths]
+    info(f"\n  audition, then set in script.md:  music: {rel[0]}")
+    info("  log the track in brand/music/CREDITS.md (source: ElevenLabs Music, prompt, date)")
+
+
 def audition(tts, scene, table: dict, out: Path) -> None:
     with tempfile.TemporaryDirectory() as tmp:
         pieces = []
@@ -228,6 +246,16 @@ def main():
     s.add_argument("--voices", nargs="+", metavar="SPEC", help="voices or blends, e.g. 'bf_emma*0.6 + bf_lily*0.4'; for Chatterbox, clip paths or 'default'")
     s.add_argument("--speed", type=float, help="override the script's speed for these samples")
     s.set_defaults(fn=cmd_voices)
+
+    s = sub.add_parser("music", help="generate an instrumental music bed (ElevenLabs Music) sized to the episode")
+    s.add_argument("slug")
+    s.add_argument("--prompt", help="style, instruments, mood (default: music_prompt: in the script); don't name artists or songs")
+    s.add_argument("--name", default="bed", help="file name in the episode's audio/music/ (default: bed)")
+    s.add_argument("--length", type=int, metavar="SEC", help="bed length (default: the synced episode length + 2s)")
+    s.add_argument("--model", default=music.MODEL, help=f"ElevenLabs Music model (default: {music.MODEL})")
+    s.add_argument("--variants", type=int, default=1, help="make N different takes (1-4) to audition, suffixed -a, -b…")
+    s.add_argument("--out", metavar="PATH", help="write here instead, e.g. brand/music/my-bed.mp3 to share across episodes")
+    s.set_defaults(fn=cmd_music)
 
     a = p.parse_args()
     a.fn(a)
