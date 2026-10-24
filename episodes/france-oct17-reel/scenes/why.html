@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #why-band { position: absolute; left: 0; right: 0; top: 1190px; bottom: 0; background: var(--tag); }
+        #why-stage { display: flex; flex-direction: column; }
+        #why-head { width: 420px; }
+        #why-head .label { font-size: 30px; }
+        .why-fig { margin-top: 44px; padding-top: 22px; border-top: var(--hairline); }
+        .why-fig .label { font-size: 30px; color: var(--ink-soft); }
+        .why-fig .num { font-family: var(--font-serif); font-weight: 700; font-size: 184px; line-height: 1; color: var(--ink); margin-top: 10px; }
+        .why-fig .what { font-family: var(--font-serif); font-size: 56px; line-height: 1.15; color: var(--ink-2); margin-top: 4px; }
+        #why-war .num { color: var(--red); }
+        #why-state { position: absolute; left: 72px; right: 72px; top: 220px; bottom: 740px; background: var(--paper); display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+        #why-state .headline { font-size: 112px; line-height: 1.08; }
+        #why-state .standfirst { font-size: 54px; }
+        #why-src { position: absolute; left: 72px; top: 1130px; font-size: 26px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-why" data-width="1080" data-height="1920">
+        <div class="paper"></div>
+        <div id="why-band"></div>
+        <div id="why-stage" class="stage-reel">
+          <div id="why-head" class="section-head"><div id="why-rule" class="section-rule"></div><div id="why-label" class="label">Why?</div></div>
+          <div id="why-cuts" class="why-fig">
+            <div class="label">Lecornu's budget</div>
+            <div class="num">€54bn</div>
+            <div class="what">of austerity</div>
+          </div>
+          <div id="why-war" class="why-fig">
+            <div class="label">“ReArm Europe”</div>
+            <div class="num">€800bn</div>
+            <div class="what">for war</div>
+          </div>
+        </div>
+        <div id="why-state">
+          <div class="tag">To impose them</div>
+          <h1 id="why-headline" class="headline">The ruling class needs a <span id="why-key" class="red">police state</span></h1>
+        </div>
+        <div id="why-src" class="byline">Source: WSWS, 19 October 2026</div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 10.7333, "voStart": 0.15, "voEnd": 10.274, "cues": {"cuts": 1.18, "war": 4.24, "state": 6.8}, "paragraphs": [0.15]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 40, d = 0.45) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.4) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const count = (s, to, t, fmt, d = 1.0) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power3.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+
+          tl.fromTo("#why-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, 0);
+          fade("#why-label", 0.1, 0.3);
+          rise("#why-cuts", cue("cuts", 1.0));
+          count("#why-cuts .num", 54, cue("cuts", 1.0), (v) => `€${Math.round(v)}bn`, 0.8);
+          rise("#why-war", cue("war", 3.8));
+          count("#why-war .num", 800, cue("war", 3.8), (v) => `€${Math.round(v)}bn`, 1.0);
+          fade("#why-src", cue("cuts", 1.0) + 0.4);
+
+          // Hard cut to the conclusion: the page clears and the headline lands.
+          const st = cue("state", 6.8);
+          tl.set("#why-state", { opacity: 0 }, 0);
+          tl.to("#why-stage", { opacity: 0, duration: 0.08 }, st - 0.05);
+          tl.to("#why-state", { opacity: 1, duration: 0.08 }, st - 0.05);
+          tl.fromTo("#why-headline", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, st);
+          tl.fromTo("#why-key", { opacity: 0.25 }, { opacity: 1, duration: 0.3 }, st + 1.4);
+
+          tl.to(["#why-state", "#why-src"], { opacity: 0, duration: 0.3, ease: "power2.in" }, T.duration - 0.35);
+          window.__timelines["scene-why"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

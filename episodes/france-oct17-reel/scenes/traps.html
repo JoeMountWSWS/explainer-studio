@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #traps-band { position: absolute; left: 0; right: 0; top: 1190px; bottom: 0; background: var(--tag); }
+        #traps-stage { display: flex; flex-direction: column; }
+        #traps-head { width: 560px; }
+        #traps-head .label { font-size: 30px; }
+        .traps-row { position: relative; display: flex; gap: 30px; align-items: center; padding: 22px 0; border-bottom: var(--hairline); }
+        .traps-row .face { width: 170px; height: 170px; flex: none; overflow: hidden; background: var(--panel); }
+        .traps-row .face img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+        .traps-row .who { font-family: var(--font-sans); font-weight: 700; font-size: 30px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+        .traps-row .says { font-family: var(--font-serif); font-weight: 700; font-size: 54px; line-height: 1.12; color: var(--ink); margin-top: 6px; }
+        .traps-row .x { position: absolute; left: 0; right: 0; top: 50%; height: 8px; background: var(--red); transform-origin: left center; }
+        #traps-lp .face img { object-position: 50% 20%; }
+        #traps-jlm .face img { object-position: 50% 25%; }
+        #traps-cgt .face img { object-position: 15% 60%; }
+        #traps-quote { margin-top: 34px; font-size: 50px; line-height: 1.22; }
+        #traps-quote .byline { display: block; font-size: 26px; margin-top: 10px; }
+        #traps-credit { position: absolute; left: 72px; right: 72px; top: 1194px; font-size: 20px; color: rgba(255,255,255,0.8); z-index: 1; }
+      </style>
+
+      <div id="root" data-composition-id="scene-traps" data-width="1080" data-height="1920">
+        <div class="paper"></div>
+        <div id="traps-band"></div>
+        <div id="traps-stage" class="stage-reel">
+          <div id="traps-head" class="section-head"><div id="traps-rule" class="section-rule"></div><div id="traps-label" class="label">No way out through them</div></div>
+          <div id="traps-lp" class="traps-row">
+            <div class="face"><img src="assets/media/lepen.jpg" alt="" /></div>
+            <div><div class="who">Le Pen · far right</div><div class="says">€140bn in cuts by 2032</div></div>
+            <div class="x" data-layout-allow-occlusion></div>
+          </div>
+          <div id="traps-jlm" class="traps-row">
+            <div class="face"><img src="assets/media/melenchon.jpg" alt="" /></div>
+            <div><div class="who">Mélenchon · LFI</div><div class="says">“End the movement”</div></div>
+            <div class="x" data-layout-allow-occlusion></div>
+          </div>
+          <div id="traps-cgt" class="traps-row">
+            <div class="face"><img src="assets/media/cgt.jpg" alt="" /></div>
+            <div><div class="who">CGT union</div><div class="says">Stalls until 5 November</div></div>
+            <div class="x" data-layout-allow-occlusion></div>
+          </div>
+          <blockquote id="traps-quote" class="quote">The alternative is not between Macron, Mélenchon and Le Pen.<span class="byline">WSWS, 19 October 2026</span></blockquote>
+        </div>
+        <div id="traps-credit" class="byline">Photos: Vox España / CC0 · Thomas Bresson / CC BY 4.0 · Lhoot graphy / CC BY-SA 4.0</div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 7.9333, "voStart": 0.15, "voEnd": 7.488, "cues": {"lp": 0.18, "jlm": 2.11, "cgt": 4.72}, "paragraphs": [0.15]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.4) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.4) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const strike = (s, t) => tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power2.inOut" }, t);
+
+          const lp = cue("lp", 0.15), jlm = cue("jlm", 2.2), cgt = cue("cgt", 5.0);
+          tl.fromTo("#traps-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, 0);
+          fade("#traps-label", 0.1, 0.3);
+          rise("#traps-lp", lp);
+          strike("#traps-lp .x", jlm - 0.45);
+          rise("#traps-jlm", jlm);
+          strike("#traps-jlm .x", cgt - 0.45);
+          rise("#traps-cgt", cgt);
+          strike("#traps-cgt .x", cgt + 1.6);
+          tl.fromTo("#traps-quote", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, cgt + 2.0);
+
+          tl.to("#traps-stage", { opacity: 0, duration: 0.3, ease: "power2.in" }, T.duration - 0.35);
+          window.__timelines["scene-traps"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

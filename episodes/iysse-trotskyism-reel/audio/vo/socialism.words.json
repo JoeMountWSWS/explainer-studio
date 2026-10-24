@@ -1,0 +1,21 @@
+{
+ "hash": "6370911cb5d6cff5d88c",
+ "source": "tts",
+ "duration": 1.672,
+ "words": [
+  {
+   "text": "The",
+   "start": 0.12,
+   "end": 0.4
+  },
+  {
+   "text": "socialism.",
+   "start": 0.4,
+   "end": 1.6
+  }
+ ],
+ "cues": {},
+ "paragraphs": [
+  0.0
+ ]
+}

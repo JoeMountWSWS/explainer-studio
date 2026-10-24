@@ -1,5 +1,8 @@
 {
  "fps": 30,
+ "format": "landscape",
+ "width": 1920,
+ "height": 1080,
  "duration": 36.56666666666667,
  "scenes": [
   {

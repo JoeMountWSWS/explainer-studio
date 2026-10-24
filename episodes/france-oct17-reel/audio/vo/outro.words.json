@@ -1,0 +1,59 @@
+{
+ "hash": "281f9af4b2bf2106a831",
+ "source": "tts",
+ "duration": 4.598,
+ "words": [
+  {
+   "text": "Join",
+   "start": 0.1,
+   "end": 0.26
+  },
+  {
+   "text": "the",
+   "start": 0.26,
+   "end": 0.39
+  },
+  {
+   "text": "Socialist",
+   "start": 0.53,
+   "end": 1.04
+  },
+  {
+   "text": "Equality",
+   "start": 1.04,
+   "end": 1.56
+  },
+  {
+   "text": "Party.",
+   "start": 1.56,
+   "end": 2.12
+  },
+  {
+   "text": "Read",
+   "start": 2.2,
+   "end": 2.51
+  },
+  {
+   "text": "more",
+   "start": 2.65,
+   "end": 3.0
+  },
+  {
+   "text": "at",
+   "start": 3.0,
+   "end": 3.19
+  },
+  {
+   "text": "wsws.org.",
+   "start": 3.24,
+   "end": 4.44
+  }
+ ],
+ "cues": {
+  "join": 0.1,
+  "read": 2.2
+ },
+ "paragraphs": [
+  0.0
+ ]
+}

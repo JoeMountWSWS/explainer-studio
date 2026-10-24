@@ -38,17 +38,21 @@ DEFAULTS = {
     "cfg_weight": 0.5,         # Chatterbox standard: lower is slower and more deliberate
     "temperature": 0.8,        # Chatterbox: sampling temperature
     "seed": 0,                 # Chatterbox: random seed, so a re-synthesis is repeatable
+    "format": "landscape",     # landscape (1920x1080, YouTube) or reel (1080x1920: Reels, TikTok, Shorts)
+    "burn_captions": False,    # burn word-highlighted captions into the video (on for reels; most autoplay muted)
     "fps": 30,
     "pad_in": 0.6,             # silence before a scene's narration starts
     "pad_out": 0.9,            # silence after it ends (the exit fade lives here)
     "paragraph_gap": 0.45,     # pause between paragraphs inside a scene
     "music": None,             # path to a music bed, relative to the studio root
     "music_db": -24,           # music level under narration, before ducking
+    "music_fade_in": 2,        # seconds; 0 keeps a hit on the bed's first beat
     "loudness": -14,           # integrated LUFS target (YouTube normalises to -14)
     "true_peak": -1.5,
 }
 
 SAMPLE_RATE = 48000
+FORMATS = {"landscape": (1920, 1080), "reel": (1080, 1920)}
 
 
 def die(msg: str) -> None:

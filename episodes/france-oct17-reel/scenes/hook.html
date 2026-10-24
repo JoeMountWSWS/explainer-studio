@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; background: var(--tag); }
+        .hook-bg { position: absolute; inset: 0; overflow: hidden; }
+        .hook-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.2) brightness(1.0); }
+        #hook-crowd { top: -470px; bottom: auto; height: 1650px; }
+        #hook-crowd img { object-position: 50% 50%; }
+        #hook-lyc img { object-position: 50% 30%; }
+        #hook-gilet img { object-position: 50% 40%; }
+        #hook-shade { position: absolute; inset: 0;
+          background: linear-gradient(to bottom, rgba(27,33,41,0.9) 0%, rgba(27,33,41,0.6) 24%, rgba(27,33,41,0.15) 40%, rgba(27,33,41,0.3) 58%, rgba(27,33,41,1) 63%, rgba(27,33,41,1) 100%); }
+        #hook-stage { display: flex; flex-direction: column; gap: 22px; }
+        #hook-kicker { display: flex; gap: 20px; align-items: center; }
+        #hook-kicker .tag { background: var(--red); font-size: 30px; }
+        #hook-date { color: #ffffff; font-size: 30px; }
+        #hook-num { font-family: var(--font-serif); font-weight: 700; font-size: 236px; line-height: 1; color: #ffffff; margin-top: 18px; letter-spacing: -0.02em; }
+        #hook-bar { height: 12px; width: 560px; background: var(--red); transform-origin: left center; }
+        #hook-sub { font-family: var(--font-serif); font-style: italic; font-size: 64px; line-height: 1.2; color: #ffffff; }
+        .hook-who { position: absolute; left: 72px; right: 140px; top: 900px; }
+        .hook-who .tag { font-size: 34px; padding: 12px 20px 11px; }
+        .hook-who p { margin: 14px 0 0; text-shadow: 0 2px 18px rgba(0,0,0,0.6); font-family: var(--font-serif); font-weight: 700; font-size: 76px; line-height: 1.1; color: #ffffff; }
+        .hook-credit { position: absolute; right: 72px; top: 1182px; font-size: 22px; color: rgba(255,255,255,0.75); }
+      </style>
+
+      <div id="root" data-composition-id="scene-hook" data-width="1080" data-height="1920">
+        <div id="hook-crowd" class="hook-bg"><img id="hook-crowd-img" data-layout-allow-overflow src="assets/media/crowd.jpg" alt="" /></div>
+        <div id="hook-lyc" class="hook-bg"><img id="hook-lyc-img" data-layout-allow-overflow src="assets/media/lyceens.jpg" alt="" /></div>
+        <div id="hook-gilet" class="hook-bg"><img id="hook-gilet-img" data-layout-allow-overflow src="assets/media/gilet.jpg" alt="" /></div>
+        <div id="hook-shade"></div>
+
+        <div id="hook-stage" class="stage-reel">
+          <div id="hook-kicker"><span class="tag">France</span><span id="hook-date" class="label">17 October 2026</span></div>
+          <div id="hook-num">550,000</div>
+          <div id="hook-bar"></div>
+          <div id="hook-sub">marched across France</div>
+        </div>
+
+        <div id="hook-who1" class="hook-who" data-layout-allow-overlap><span class="tag">School students</span><p>against cuts</p></div>
+        <div id="hook-who2" class="hook-who" data-layout-allow-overlap><span class="tag">Yellow vests</span><p>against soaring prices</p></div>
+
+        <div id="hook-c1" class="hook-credit byline" data-layout-allow-overlap>Paris, 17 Oct 2026. Photo: Silanoc / CC BY-SA 4.0</div>
+        <div id="hook-c2" class="hook-credit byline" data-layout-allow-overlap>Paris, 6 Oct 2026. Photo: Jules* / CC BY-SA 4.0</div>
+        <div id="hook-c3" class="hook-credit byline" data-layout-allow-overlap>17 Oct 2026. Photo: Florian Cuny / CC BY-SA 4.0</div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 7.9333, "voStart": 0.15, "voEnd": 7.488, "cues": {"n": 0.23, "lyc": 3.21, "yv": 4.91}, "paragraphs": [0.15]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.5) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.4) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const cut = (s, t) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: 0.08 }, t);
+          const hide = (s, t) => tl.to(s, { opacity: 0, duration: 0.08 }, t);
+          const count = (s, to, t, fmt, d = 1.4) => {
+            const el = document.querySelector(s), c = { v: 0 };
+            el.textContent = fmt(0);
+            tl.fromTo(c, { v: 0 }, { v: to, duration: d, ease: "power3.out", onUpdate: () => (el.textContent = fmt(c.v)) }, t);
+          };
+
+          const lyc = cue("lyc", 3.5), yv = cue("yv", 5.5);
+          // Photos: hard cuts on the cues, each with a slow push.
+          tl.fromTo("#hook-crowd-img", { scale: 1.12 }, { scale: 1.0, duration: lyc, ease: "none" }, 0);
+          tl.set(["#hook-lyc", "#hook-gilet", "#hook-who1", "#hook-who2", "#hook-c2", "#hook-c3"], { opacity: 0 }, 0);
+          cut("#hook-lyc", lyc); hide("#hook-c1", lyc); cut("#hook-c2", lyc);
+          tl.fromTo("#hook-lyc-img", { scale: 1.15 }, { scale: 1.02, duration: yv - lyc + 0.3, ease: "none" }, lyc);
+          cut("#hook-gilet", yv); hide("#hook-c2", yv); cut("#hook-c3", yv);
+          tl.fromTo("#hook-gilet-img", { scale: 1.15 }, { scale: 1.02, duration: T.duration - yv, ease: "none" }, yv);
+
+          fade("#hook-kicker", 0, 0.3);
+          tl.fromTo("#hook-num", { opacity: 0, scale: 0.92, transformOrigin: "left center" }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, cue("n", 0.2));
+          count("#hook-num", 550000, cue("n", 0.2), (v) => Math.round(v / 1000) * 1000 >= 550000 ? "550,000" : Math.round(v).toLocaleString("en-GB"), 1.3);
+          tl.fromTo("#hook-bar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.inOut" }, cue("n", 0.2) + 0.9);
+          rise("#hook-sub", cue("n", 0.2) + 1.0, 24);
+
+          rise("#hook-who1", lyc, 30, 0.35);
+          hide("#hook-who1", yv);
+          rise("#hook-who2", yv, 30, 0.35);
+
+          tl.to(["#hook-stage", "#hook-who2"], { opacity: 0, duration: 0.3, ease: "power2.in" }, T.duration - 0.35);
+          window.__timelines["scene-hook"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

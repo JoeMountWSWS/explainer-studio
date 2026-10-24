@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; background: var(--tag); }
+        .socialism-bg { position: absolute; left: 0; right: 0; top: 0; height: 1240px; overflow: hidden; }
+        .socialism-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15); }
+        #socialism-rmt img { object-position: 46% 50%; }
+        #socialism-ucu img { object-position: 50% 40%; }
+        #socialism-shade { position: absolute; inset: 0;
+          background: linear-gradient(to bottom, rgba(27,33,41,0.55) 0%, rgba(27,33,41,0) 18%, rgba(27,33,41,0.1) 28%, rgba(27,33,41,0.85) 39%, rgba(27,33,41,1) 47%, rgba(27,33,41,1) 100%); }
+        #socialism-prev { position: absolute; left: 72px; right: 140px; top: 740px; font-family: var(--font-serif); font-weight: 700; font-size: 56px; line-height: 1; color: rgba(255,255,255,0.6); }
+        #socialism-word { position: absolute; left: 72px; right: 140px; top: 820px; font-family: var(--font-serif); font-weight: 700; font-size: 132px; line-height: 1.02; color: #ffffff; letter-spacing: -0.01em; }
+        #socialism-word .dots { color: rgba(255,255,255,0.45); font-weight: 400; }
+        .socialism-credit { position: absolute; right: 72px; top: 1182px; font-size: 22px; color: rgba(255,255,255,0.75); }
+      </style>
+
+      <div id="root" data-composition-id="scene-socialism" data-width="1080" data-height="1920">
+        <div id="socialism-rmt" class="socialism-bg"><img id="socialism-rmt-img" data-layout-allow-overflow src="assets/media/rmt.jpg" alt="" /></div>
+        <div id="socialism-ucu" class="socialism-bg"><img id="socialism-ucu-img" data-layout-allow-overflow src="assets/media/ucu.jpg" alt="" /></div>
+        <div id="socialism-shade"></div>
+
+        <div id="socialism-prev">Trotskyism</div>
+        <div id="socialism-word" data-layout-allow-overlap><span class="dots">…</span>the<br />Socialism<span class="dots">…</span></div>
+
+        <div id="socialism-c1" class="socialism-credit byline" data-layout-allow-overlap>RMT picket, Euston, 2023. Photo: Alisdare Hickson / CC BY-SA 4.0</div>
+        <div id="socialism-c2" class="socialism-credit byline" data-layout-allow-overlap>UCU picket, 2022. Photo: Magnus Hagdorn / CC BY-SA 2.0</div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 2.4, "voStart": 0.15, "voEnd": 1.822, "cues": {}, "paragraphs": [0.15]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const cut = (s, t) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: 0.06 }, t);
+          const hide = (s, t) => tl.to(s, { opacity: 0, duration: 0.06 }, t);
+
+          // The hit lands on frame 0: the phrase stamps in over the first picket line.
+          tl.fromTo("#socialism-word", { opacity: 0, scale: 1.08, transformOrigin: "left center" }, { opacity: 1, scale: 1, duration: 0.22, ease: "power3.out" }, 0);
+
+          const swap = T.duration * 0.5;
+          tl.fromTo("#socialism-rmt-img", { scale: 1.12 }, { scale: 1.03, duration: swap + 0.1, ease: "none" }, 0);
+          tl.set(["#socialism-ucu", "#socialism-c2"], { opacity: 0 }, 0);
+          cut("#socialism-ucu", swap); hide("#socialism-c1", swap); cut("#socialism-c2", swap);
+          tl.fromTo("#socialism-ucu-img", { scale: 1.14 }, { scale: 1.04, duration: T.duration - swap, ease: "none" }, swap);
+
+          tl.to("#root > *", { opacity: 0, duration: 0.12, ease: "power2.in" }, T.duration - 0.12);
+          window.__timelines["scene-socialism"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

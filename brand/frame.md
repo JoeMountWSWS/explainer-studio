@@ -73,6 +73,18 @@ same typographic furniture a reader knows from the site.
   player chrome and captions sit there.
 - Minimum sizes: body 44px, headline 72px. Phones are the main screen.
 
+## Reel (9:16)
+
+Episodes with `format: reel` render at 1080x1920 for Instagram Reels, TikTok and YouTube Shorts.
+
+- Content box: `.stage-reel` (x 72-1008, y 220-1180). The platform's buttons sit on the right
+  edge and its caption, handle and audio line take the bottom ~480px, so keep both clear.
+- Caption band: y 1220-1440. `burn_captions: true` puts word-highlighted captions here (white
+  Source Sans on a `tag` box, the spoken word in red). Don't put content in this band.
+- Photos may run full-bleed behind everything, under an ink gradient so type stays legible.
+- Minimum sizes: headline 88px, body 52px, label 30px, byline 26px.
+- One statement per screen. Cut every 3-6s, on the narration's cues. Get the striking fact on screen in the first second.
+
 ## Composition rules
 
 - **One focal point.** Red goes on the single word, figure, line or arrow the

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        #answer-band { position: absolute; left: 0; right: 0; top: 1190px; bottom: 0; background: var(--tag); }
+        #answer-stage { display: flex; flex-direction: column; align-items: stretch; }
+        #answer-head { width: 520px; }
+        #answer-head .label { font-size: 30px; }
+        #answer-headline { font-size: 92px; line-height: 1.08; margin-top: 30px; }
+        #answer-nodes { display: flex; gap: 18px; margin-top: 44px; }
+        .answer-node { flex: 1; background: var(--panel); border-top: 6px solid var(--ink); padding: 18px 10px 16px; text-align: center; font-family: var(--font-sans); font-weight: 700; font-size: 32px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); }
+        .answer-arrow { height: 54px; display: flex; justify-content: center; }
+        .answer-arrow svg { height: 54px; width: 60px; }
+        #answer-comm { background: var(--tag); color: #ffffff; text-align: center; padding: 22px 0 20px; font-family: var(--font-sans); font-weight: 700; font-size: 46px; letter-spacing: 0.1em; text-transform: uppercase; }
+        #answer-indep { text-align: center; font-family: var(--font-serif); font-style: italic; font-size: 44px; color: var(--ink-soft); margin-top: 14px; }
+        #answer-strike { background: var(--red); color: #ffffff; text-align: center; padding: 22px 0 20px; font-family: var(--font-serif); font-weight: 700; font-size: 84px; line-height: 1; }
+        #answer-against { text-align: center; font-family: var(--font-sans); font-weight: 700; font-size: 30px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin-top: 14px; }
+      </style>
+
+      <div id="root" data-composition-id="scene-answer" data-width="1080" data-height="1920">
+        <div class="paper"></div>
+        <div id="answer-band"></div>
+        <div id="answer-stage" class="stage-reel">
+          <div id="answer-head" class="section-head"><div id="answer-rule" class="section-rule"></div><div id="answer-label" class="label">What is to be done</div></div>
+          <h1 id="answer-headline" class="headline">Take the fight into <span class="red">your own hands</span></h1>
+          <div id="answer-nodes">
+            <div id="answer-n1" class="answer-node">Schools</div>
+            <div id="answer-n2" class="answer-node">Workplaces</div>
+            <div id="answer-n3" class="answer-node">Neighbourhoods</div>
+          </div>
+          <div id="answer-a1" class="answer-arrow"><svg viewBox="0 0 60 54"><path d="M30 2 V44 M14 30 L30 48 L46 30" fill="none" stroke="#231f20" stroke-width="6"/></svg></div>
+          <div id="answer-comm">Action committees</div>
+          <div id="answer-indep">independent of the union bureaucracies</div>
+          <div id="answer-a2" class="answer-arrow"><svg viewBox="0 0 60 54"><path d="M30 2 V44 M14 30 L30 48 L46 30" fill="none" stroke="#e71e25" stroke-width="6"/></svg></div>
+          <div id="answer-strike">General strike</div>
+          <div id="answer-against">against austerity, repression and war</div>
+        </div>
+      </div>
+
+      <script>
+        (() => {
+          /* <studio:timing> */
+          const T = {"duration": 9.8, "voStart": 0.15, "voEnd": 9.345, "cues": {"comm": 3.85, "indep": 5.38, "strike": 7.45}, "paragraphs": [0.15]};
+          /* </studio:timing> */
+          const cue = (name, fallback = T.voStart) => T.cues[name] ?? fallback;
+          const tl = gsap.timeline({ paused: true });
+          const rise = (s, t, y = 30, d = 0.4) => tl.fromTo(s, { opacity: 0, y }, { opacity: 1, y: 0, duration: d, ease: "power3.out" }, t);
+          const fade = (s, t, d = 0.35) => tl.fromTo(s, { opacity: 0 }, { opacity: 1, duration: d, ease: "power1.out" }, t);
+          const pop = (s, t) => tl.fromTo(s, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.8)" }, t);
+
+          const comm = cue("comm", 3.7), indep = cue("indep", 5.0), strike = cue("strike", 7.1);
+          tl.fromTo("#answer-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.inOut" }, 0);
+          fade("#answer-label", 0.1, 0.3);
+          rise("#answer-headline", 0.2, 40, 0.5);
+          tl.fromTo(["#answer-n1", "#answer-n2", "#answer-n3"], { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out", stagger: 0.12 }, comm - 0.5);
+          fade("#answer-a1", comm);
+          pop("#answer-comm", comm + 0.1);
+          rise("#answer-indep", indep, 16);
+          fade("#answer-a2", strike - 0.2);
+          pop("#answer-strike", strike);
+          rise("#answer-against", strike + 0.4, 16);
+
+          tl.to("#answer-stage", { opacity: 0, duration: 0.3, ease: "power2.in" }, T.duration - 0.35);
+          window.__timelines["scene-answer"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+{
+ "hash": "a7afc8611e8429d39316",
+ "source": "tts",
+ "duration": 7.338,
+ "words": [
+  {
+   "text": "Le",
+   "start": 0.03,
+   "end": 0.1
+  },
+  {
+   "text": "Pen",
+   "start": 0.15,
+   "end": 0.38
+  },
+  {
+   "text": "demands",
+   "start": 0.38,
+   "end": 0.79
+  },
+  {
+   "text": "deeper",
+   "start": 0.93,
+   "end": 1.38
+  },
+  {
+   "text": "cuts.",
+   "start": 1.54,
+   "end": 1.96
+  },
+  {
+   "text": "M\u00e9lenchon",
+   "start": 1.96,
+   "end": 2.56
+  },
+  {
+   "text": "calls",
+   "start": 2.56,
+   "end": 2.75
+  },
+  {
+   "text": "for",
+   "start": 2.89,
+   "end": 3.09
+  },
+  {
+   "text": "an",
+   "start": 3.09,
+   "end": 3.22
+  },
+  {
+   "text": "end",
+   "start": 3.22,
+   "end": 3.34
+  },
+  {
+   "text": "to",
+   "start": 3.46,
+   "end": 3.55
+  },
+  {
+   "text": "the",
+   "start": 3.55,
+   "end": 3.74
+  },
+  {
+   "text": "movement.",
+   "start": 3.95,
+   "end": 4.45
+  },
+  {
+   "text": "The",
+   "start": 4.57,
+   "end": 4.73
+  },
+  {
+   "text": "CGT",
+   "start": 4.73,
+   "end": 4.91
+  },
+  {
+   "text": "stalls",
+   "start": 4.91,
+   "end": 5.29
+  },
+  {
+   "text": "until",
+   "start": 5.29,
+   "end": 5.58
+  },
+  {
+   "text": "5",
+   "start": 5.58,
+   "end": 6.53
+  },
+  {
+   "text": "November.",
+   "start": 6.53,
+   "end": 6.96
+  }
+ ],
+ "cues": {
+  "lp": 0.03,
+  "jlm": 1.96,
+  "cgt": 4.57
+ },
+ "paragraphs": [
+  0.0
+ ]
+}
