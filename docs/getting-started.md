@@ -11,15 +11,33 @@
 
 ## Install
 
+### From PyPI
+
+```bash
+uv tool install explainer-studio   # or, without installing: uvx --from explainer-studio studio …
+mkdir my-videos && cd my-videos
+```
+
+The folder you run `studio` in is the workspace: it holds `episodes/`, `out/` and `.env`. `studio`
+finds it from any folder below it, or you can point at it with `STUDIO_ROOT`. The house style and
+scene templates ship with the package. To customise them, copy `brand/` or `templates/` from the
+repository into the workspace, and the studio uses your copy instead. Music beds and voice clips go
+in the workspace's `brand/music/` and `brand/voices/`.
+
+With an installed tool, type `studio …` wherever these docs say `uv run studio …`.
+
+### From a clone
+
 ```bash
 git clone git@github.com:JoeMountWSWS/explainer-studio.git
 cd explainer-studio
 uv sync
 ```
 
-The first `sync` of an episode downloads the Kokoro-82M model to `~/.cache/hyperframes/tts`.
+Every command runs as `uv run studio …` from the repository root, or from any folder below it.
 
-Every command runs as `uv run studio …` from the repository root.
+The first `sync` of an episode downloads the Kokoro-82M model to `~/.cache/hyperframes/tts` and
+spaCy's `en_core_web_sm` to `~/.cache/hyperframes/spacy`.
 
 ## Make a video
 

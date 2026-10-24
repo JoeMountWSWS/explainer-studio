@@ -24,11 +24,8 @@ script.md ──► narration (Kokoro, local; or ElevenLabs) ──► word timi
 - ffmpeg and Chromium
 - Optional: an ElevenLabs API key in `.env` (`ELEVENLABS_API_KEY=…`) for cloud narration
 
-```bash
-uv sync
-```
-
-The first `sync` downloads the Kokoro-82M model to `~/.cache/hyperframes/tts`.
+The first `sync` downloads the Kokoro-82M model to `~/.cache/hyperframes/tts` and spaCy's
+`en_core_web_sm` to `~/.cache/hyperframes/spacy`.
 
 # Usage
 
@@ -41,7 +38,24 @@ nothing leaves your machine unless you choose cloud narration.
 
 ## Install
 
-With the [requirements](#requirements) in place, clone the repository and install its dependencies:
+With the [requirements](#requirements) in place, either install the `studio` command from PyPI or
+clone the repository.
+
+**From PyPI**, to make videos in a folder of your own:
+
+```bash
+uv tool install explainer-studio   # or run it without installing: uvx --from explainer-studio studio …
+mkdir my-videos && cd my-videos
+studio new my-video "My Video"
+```
+
+The folder you run `studio` in becomes the workspace. It holds `episodes/`, `out/` and `.env`, and
+`studio` finds it from any subdirectory (or set `STUDIO_ROOT`). The house style (`brand/`) and scene
+templates ship with the package. To customise them, copy `brand/` or `templates/` from this repository
+into the workspace, and the studio uses your copy instead. Music beds and voice clips go in the
+workspace's `brand/music/` and `brand/voices/`. Use `studio` wherever this README says `uv run studio`.
+
+**From a clone**, to work on the studio itself or to use the example episodes:
 
 ```bash
 git clone git@github.com:JoeMountWSWS/explainer-studio.git
@@ -49,9 +63,9 @@ cd explainer-studio
 uv sync
 ```
 
-Run every command from the repository root. Confirm the install with `uv run studio --help`. The
-first `sync` of an episode downloads the Kokoro voice model, so it takes a little longer than later
-runs.
+Run commands from the repository root (or any folder below it). Confirm the install with
+`uv run studio --help`. The first `sync` of an episode downloads the Kokoro voice model and the
+spaCy English model, so it takes a little longer than later runs.
 
 ## Quick start
 

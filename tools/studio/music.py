@@ -27,7 +27,7 @@ TAIL_S = 2  # beds run slightly past the narration so the final fade has music u
 def episode_length(ep: Path) -> float:
     path = ep / "timing.json"
     if not path.exists():
-        die(f"{path.relative_to(ROOT)} not found - run: uv run studio sync {ep.name}")
+        die(f"{path.relative_to(ROOT)} not found - run: studio sync {ep.name}")
     return float(json.loads(path.read_text())["duration"])
 
 

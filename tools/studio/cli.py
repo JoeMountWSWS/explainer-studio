@@ -28,7 +28,7 @@ import soundfile as sf
 from . import build as builder
 from . import music, voice
 from . import render as renderer
-from .common import BRAND, EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_tools
+from .common import EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_tools
 from .script import Script, parse
 
 AUDITION = [
@@ -55,7 +55,7 @@ def cmd_new(a):
     (ep / "script.md").write_text((TEMPLATES / "script.md").read_text().replace("__TITLE__", title))
     builder.ensure_project_files(ep)
     builder.sync_brand(ep)
-    info(f"created episodes/{slug}/  - write the script in episodes/{slug}/script.md, then: uv run studio sync {slug}")
+    info(f"created episodes/{slug}/  - write the script in episodes/{slug}/script.md, then: studio sync {slug}")
 
 
 def cmd_status(a):
@@ -157,7 +157,7 @@ def cmd_voices(a):
         # One worker for every clip: the model loads once and only the conditioning changes.
         # --voices paths are tried against the current directory first, then the studio root.
         specs = [str(Path(v).resolve()) if Path(v).exists() else v for v in a.voices or []] or \
-            [str(p.relative_to(ROOT)) for p in sorted((BRAND / "voices").glob("*.wav"))] + ["default"]
+            [str(p.relative_to(ROOT)) for p in sorted((ROOT / "brand" / "voices").glob("*.wav"))] + ["default"]
         tts = voice.Chatterbox(Script({**script.meta, "voice": "default"}, script.scenes))
         for n, spec in enumerate(specs, 1):
             ref = voice.chatterbox_ref(Script({**script.meta, "voice": spec}, script.scenes))

@@ -2,6 +2,7 @@
 name = "explainer-studio"
 version = "0.1.4"
 description = "Command-line studio for narrated explainer videos (HyperFrames + Kokoro TTS + ffmpeg)"
+readme = "README.md"
 requires-python = ">=3.12,<3.14"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -11,9 +12,8 @@ dependencies = [
     "pyyaml>=6.0",
     "numpy>=2.0",
     "misaki>=0.9",
-    "spacy>=3.7",
+    "spacy>=3.8,<3.9",  # en_core_web_sm 3.8.0 is fetched on first use (voice.ensure_spacy_model)
     "num2words>=0.5",
-    "en-core-web-sm",
 ]
 
 [project.scripts]
@@ -26,8 +26,27 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["tools/studio"]
 
-[tool.uv.sources]
-en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }
+# The house style ships inside the package (common.PKG_DATA); music beds and voice clips don't.
+[tool.hatch.build.targets.wheel.force-include]
+"brand/brand.css" = "studio/data/brand/brand.css"
+"brand/frame.md" = "studio/data/brand/frame.md"
+"brand/pronunciations.yaml" = "studio/data/brand/pronunciations.yaml"
+"brand/fonts" = "studio/data/brand/fonts"
+"brand/vendor" = "studio/data/brand/vendor"
+"templates" = "studio/data/templates"
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+    "tools/studio",
+    "brand/brand.css",
+    "brand/frame.md",
+    "brand/pronunciations.yaml",
+    "brand/fonts",
+    "brand/vendor",
+    "templates",
+    "README.md",
+    "LICENSE",
+]
 
 [tool.ruff]
 line-length = 120
