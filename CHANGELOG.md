@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.5](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.4...v0.1.5) (2026-10-25)
+
+
+### Features
+
+* publish to PyPI ([#22](https://github.com/JoeMountWSWS/explainer-studio/issues/22)) ([3da138c](https://github.com/JoeMountWSWS/explainer-studio/commit/3da138cd5053b0159a8a0024b5e7c8bfdba72c6a)), closes [#17](https://github.com/JoeMountWSWS/explainer-studio/issues/17)
+
+
+### Documentation
+
+* add intro and install steps to README usage section ([#20](https://github.com/JoeMountWSWS/explainer-studio/issues/20)) ([066aa91](https://github.com/JoeMountWSWS/explainer-studio/commit/066aa91f44019c656a43c2be3ee302778d8cc133))
+
 ## [0.1.4](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.3...v0.1.4) (2026-10-24)
 
 
