@@ -1,0 +1,74 @@
+name: Bug report
+description: A `studio` command fails, crashes or produces the wrong output.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Check the [docs](https://joemountwsws.github.io/explainer-studio/) and the Gotchas section of `AGENTS.md` first (DNS errors, leftover `_render_*.html` shells and GPU capture hangs are covered there).
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The exact commands you ran. If it's specific to one episode, include the relevant `script.md` front matter or scene HTML.
+      placeholder: |
+        uv run studio new demo "Demo"
+        uv run studio sync demo
+        ...
+      render: shell
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Pipeline stage
+      options:
+        - new / scaffolding
+        - sync (narration, alignment, stubs)
+        - check (lint, layout, contrast)
+        - preview
+        - render
+        - music
+        - thumbnail
+        - voices / install-skill / other
+    validations:
+      required: true
+  - type: dropdown
+    id: tts
+    attributes:
+      label: TTS engine
+      options:
+        - kokoro
+        - chatterbox
+        - elevenlabs
+        - not relevant
+  - type: textarea
+    id: logs
+    attributes:
+      label: Output or traceback
+      description: Paste the full terminal output. Remove any API keys.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: explainer-studio version
+      description: "`pip show explainer-studio`, or the commit hash if you run from a checkout."
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, ffmpeg version, GPU, and the HyperFrames version if you've overridden `STUDIO_HF_VERSION`.
+      placeholder: |
+        OS: Arch Linux
+        Python: 3.13
+        ffmpeg: 9.0
+        GPU: RX 580

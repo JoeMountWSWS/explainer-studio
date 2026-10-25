@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://joemountwsws.github.io/explainer-studio/
+    about: Setup, script format, scene authoring and rendering.
