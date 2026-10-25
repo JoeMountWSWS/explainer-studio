@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths: &paths
       - tools/**
+      - tests/**
       - brand/**
       - templates/**
       - episodes/**
@@ -39,7 +40,7 @@ jobs:
       - name: Install (lockfile must be current)
         run: uv sync --locked
       - name: Ruff
-        run: uvx ruff@0.17.0 check tools/
+        run: uvx ruff@0.17.0 check tools/ tests/
       - name: CLI smoke test
         run: |
           uv run studio --help
@@ -62,6 +63,39 @@ jobs:
           "$RUNNER_TEMP/venv/bin/studio" install-skill
           test -f .claude/skills/make-explainer-video/SKILL.md
           test -f .claude/skills/make-explainer-video/references/agents.md
+
+  # Unit tests need no TTS model, ffmpeg or HyperFrames: narration is faked and nothing is rendered.
+  # Coverage settings (and the fail_under floor) are in [tool.coverage] in pyproject.toml.
+  test:
+    name: Tests (Python ${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
+        with:
+          python-version: ${{ matrix.python }}
+          enable-cache: true
+          save-cache: false  # restore the cache the lint job saves; parallel saves race
+      - run: uv sync --locked
+      - name: pytest with coverage
+        run: uv run pytest --cov-report=xml --cov-report=html
+      - name: Coverage summary
+        if: always() && matrix.python == '3.12'
+        run: |
+          echo "## Coverage" >> "$GITHUB_STEP_SUMMARY"
+          uv run coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always() && matrix.python == '3.12'
+        with:
+          name: coverage
+          path: |
+            coverage.xml
+            htmlcov/
+          if-no-files-found: ignore
 
   episodes:
     name: Episodes
