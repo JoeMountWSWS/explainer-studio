@@ -23,8 +23,8 @@ cp brand/org/sep/logos/sep-roundel.png episodes/<slug>/assets/media/
 | `sep/logos/` | SEP red roundel (256 px) |
 | `sep/us/congress-2026/` | Ninth National Congress (Aug 2026) title card, 6 resolution cards, 6 report cards |
 | `sep/us/campaign-2024/` | Kishore/White 2024 campaign meeting cards |
-| `sep/us/events/`, `photos/`, `people/` | May Day 2026 rally card, rally photo, David North and Joseph Kishore portraits (1280 px) |
-| `sep/australia/` | 7th/8th congress cards, Victorian election card, video thumbnails, campaign/meeting photos, Cheryl Crisp and Max Boddy portraits |
+| `sep/us/events/`, `photos/` | May Day 2026 rally card, rally photo |
+| `sep/australia/` | 7th/8th congress cards, Victorian election card, video thumbnails, campaign/meeting photos |
 | `iysse/logos/` | IYSSE logo, 320 px and 1280 px |
 | `iysse/graphics/` | Dec 2022 rally card, "Thirty years of war" timeline card |
 | `sgp/logos/` | Sozialistische Gleichheitspartei square logo (256 px, from wsws.org/de) |
@@ -41,8 +41,7 @@ The ICFI has no separate logo on wsws.org: its pages use the WSWS masthead.
   `iysse-logo.png` is 320 px. Use `iysse-logo-large.png`, or redraw in SVG/CSS (the roundel is a red
   circle with white bold "SEP").
 - Three files are tagged `fair-use` on wsws.org although they're the organisation's own work (the large
-  IYSSE logo, the 2022 rally card, the Frankfurt School cover); `cheryl-crisp.png` is tagged
-  `public-domain`.
+  IYSSE logo, the 2022 rally card, the Frankfurt School cover).
 - Left out as not ours: AP photos, the 1619 Project cover, archival Lenin and Trotsky photos, and the
   agency/Wikimedia photos on the ICFI history and WSWS chronology pages.
 
