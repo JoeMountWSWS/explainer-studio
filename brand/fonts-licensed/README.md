@@ -5,8 +5,8 @@ gitignored: the repo is public and `brand/fonts/` ships in the PyPI wheel, so th
 committed or moved there.
 
 `studio sync` copies these into each episode's `assets/brand/fonts/` and appends their `@font-face`
-rules to the episode's copy of `brand.css`, whose `--font-sans` puts
-DINPro at the front of `--font-sans`. Without them, the sans text falls back to Source Sans 3.
+rules to the episode's copy of `brand.css`, which puts DINPro at the front of `--font-sans`. Without
+them, the sans text falls back to Source Sans 3.
 
 | File | Weight |
 | --- | --- |
