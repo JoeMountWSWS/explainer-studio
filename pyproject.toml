@@ -66,3 +66,29 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "W", "I"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["studio", "conftest"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--strict-markers", "--cov", "--cov-report=term-missing:skip-covered"]
+
+[tool.coverage.run]
+source = ["studio"]
+branch = true
+# Runs inside the separate Chatterbox venv (voice.Chatterbox), never in the studio's own process.
+omit = ["*/studio/chatterbox_worker.py"]
+
+[tool.coverage.report]
+show_missing = true
+# TTS engines, ffmpeg mixing and HyperFrames rendering need models and binaries CI doesn't have.
+# Raise this as coverage grows; never lower it to make a change pass.
+fail_under = 74
+exclude_also = ["if __name__ == .__main__.:"]

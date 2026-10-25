@@ -22,10 +22,29 @@ yourself, fork the repository, branch from `main` and open a
 | Path | What it is |
 | --- | --- |
 | `tools/studio/` | The Python CLI |
+| `tests/` | pytest suite for the CLI |
 | `brand/` | House style: design spec, CSS, fonts, GSAP, pronunciations |
 | `templates/` | Starter script, scene patterns and thumbnail |
 | `episodes/<slug>/` | One HyperFrames project per video |
 | `docs/` | This site |
+
+## Tests
+
+```bash
+uv run pytest                                    # all tests, with a coverage table
+uv run pytest --cov-report=html                  # browsable report in htmlcov/index.html
+uv run pytest tests/test_script.py -k pause      # one file, or tests matching a name
+```
+
+The suite needs no TTS model, ffmpeg or HyperFrames: narration goes through a fake engine
+(`fake_tts` in `tests/conftest.py`), transcripts are stubbed, and nothing is rendered. Paths in
+`studio.common` are fixed at import time, so tests that write files point the module attributes
+they use at `tmp_path` with `monkeypatch`. `test_demo_episode_timing_is_reproducible` checks that
+the committed `episodes/demo-paris-commune/timing.json` still follows from its script and
+narration, so a change to timing maths shows up as a failing test, not a silently re-timed video.
+
+Coverage settings are under `[tool.coverage]` in `pyproject.toml`. The run fails below the
+`fail_under` floor; raise it as coverage grows.
 
 ## Documentation site
 
@@ -46,7 +65,9 @@ The build is strict, so broken links fail it. In the repository settings, set **
 [`ci.yml`](https://github.com/JoeMountWSWS/explainer-studio/blob/main/.github/workflows/ci.yml) runs
 on every push to `main` and every pull request:
 
-- `uv sync --locked`, `ruff check tools/`, and a CLI smoke test (`status` on every episode, plus
+- `pytest` with coverage on Python 3.12 and 3.13; the coverage table goes in the run's summary,
+  and `coverage.xml` plus the HTML report are uploaded as the `coverage` artifact
+- `uv sync --locked`, `ruff check tools/ tests/`, and a CLI smoke test (`status` on every episode, plus
   `new`)
 - `hyperframes check` on every episode, at the pinned HyperFrames version
 
