@@ -66,7 +66,10 @@ The build is strict, so broken links fail it. In the repository settings, set **
 on every push to `main` and every pull request:
 
 - `pytest` with coverage on Python 3.12 and 3.13; the coverage table goes in the run's summary,
-  and `coverage.xml` plus the HTML report are uploaded as the `coverage` artifact
+  and `coverage.xml` plus the HTML report are uploaded as the `coverage` artifact. On pull requests
+  from this repository, [python-coverage-comment-action](https://github.com/py-cov-action/python-coverage-comment-action)
+  posts one comment with the total and the coverage of the changed lines (updated on each push), and
+  pushes to `main` refresh the README badge, stored on the `python-coverage-comment-action-data` branch
 - `uv sync --locked`, `ruff check tools/ tests/`, and a CLI smoke test (`status` on every episode, plus
   `new`)
 - `hyperframes check` on every episode, at the pinned HyperFrames version

@@ -1,6 +1,7 @@
 # Explainer Studio
 
 [![CI](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml)
+[![Coverage](https://raw.githubusercontent.com/JoeMountWSWS/explainer-studio/python-coverage-comment-action-data/badge.svg)](https://github.com/JoeMountWSWS/explainer-studio/tree/python-coverage-comment-action-data)
 [![PyPI](https://img.shields.io/pypi/v/explainer-studio)](https://pypi.org/project/explainer-studio/)
 
 A command-line studio for narrated explainer videos with a clean, editorial house style.

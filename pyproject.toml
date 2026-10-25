@@ -83,6 +83,8 @@ addopts = ["--strict-markers", "--cov", "--cov-report=term-missing:skip-covered"
 [tool.coverage.run]
 source = ["studio"]
 branch = true
+# The PR coverage comment (py-cov-action in ci.yml) needs repo-relative paths in .coverage.
+relative_files = true
 # Runs inside the separate Chatterbox venv (voice.Chatterbox), never in the studio's own process.
 omit = ["*/studio/chatterbox_worker.py"]
 
