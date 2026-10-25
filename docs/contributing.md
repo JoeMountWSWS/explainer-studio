@@ -1,5 +1,22 @@
 # Contributing
 
+## Get involved
+
+Start with an issue, so we can agree on the approach before you write code:
+
+| You want to… | Open |
+| --- | --- |
+| Report a `studio` command that fails, crashes or produces the wrong output | [Bug report](https://github.com/JoeMountWSWS/explainer-studio/issues/new?template=bug_report.yml) |
+| Suggest a new command, setting, scene template or house-style change | [Feature request](https://github.com/JoeMountWSWS/explainer-studio/issues/new?template=feature_request.yml) |
+| Ask a question or raise anything else | [Blank issue](https://github.com/JoeMountWSWS/explainer-studio/issues/new) |
+
+Or [pick from every template](https://github.com/JoeMountWSWS/explainer-studio/issues/new/choose).
+Check [Troubleshooting](troubleshooting.md) and the
+[open issues](https://github.com/JoeMountWSWS/explainer-studio/issues) first. To fix something
+yourself, fork the repository, branch from `main` and open a
+[pull request](https://github.com/JoeMountWSWS/explainer-studio/pulls). Use the commit prefixes
+[below](#commit-messages-and-releases), and make sure CI passes.
+
 ## Layout
 
 | Path | What it is |
