@@ -14,7 +14,7 @@ This works because everything is plain text and every step is a command:
 
 ## What the agent reads
 
-Open the agent in the repository root. It picks up three sources of guidance automatically:
+Open the agent in the repository root (or, for a pip install, your workspace after `studio install-skill`). It picks up three sources of guidance automatically:
 
 | Source | What it gives the agent |
 | --- | --- |
@@ -40,7 +40,7 @@ narrating, designing, previewing, checking, rendering or thumbnailing an episode
 ### Using it
 
 Start Claude Code in the repository root. A project skill in `.claude/skills/` is available with no
-installation.
+installation. (With a pip install, run [`studio install-skill`](#installing-it) first.)
 
 ```bash
 cd explainer-studio
@@ -86,11 +86,27 @@ The skill tells the agent to:
 - never read or print `.env`, where the ElevenLabs key lives (the project settings also deny it);
 - never hand-edit generated files (`index.html`, `timing.json`) or the synced `assets/brand/` copy.
 
-### Installing it for other projects
+### Installing it
 
-The skill refers to files in this repository (`AGENTS.md`, `brand/frame.md`, `templates/`), so it
-belongs here. To use the studio from somewhere else, open Claude Code in this repository and point it
-at the other project's source material, rather than copying the skill out.
+In a clone of the repository the skill is available with no installation. If you installed the studio
+from PyPI, install the skill into your workspace (the folder holding `episodes/`):
+
+```bash
+cd my-videos
+studio install-skill           # -> .claude/skills/make-explainer-video/
+```
+
+That copies `SKILL.md` and a `references/` folder (the studio guide, house-style spec and starter
+script, which the skill reads in place of `AGENTS.md` and `brand/frame.md`). Start `claude` in the
+workspace and ask for a video, or run `/make-explainer-video`.
+
+| Option | Effect |
+| --- | --- |
+| `--user` | Install to `~/.claude/skills/` so the skill is available in every project |
+| `--dir SKILLS_DIR` | Install into another skills folder, for an agent that reads skills from elsewhere |
+| `--force` | Replace an existing copy that differs. Run it after upgrading the package to refresh the skill |
+
+Without `--force` the command refuses to overwrite a changed copy, so local edits aren't lost.
 
 ## A good first session
 

@@ -9,6 +9,7 @@
     uv run studio thumbnail <slug>        screenshot thumbnail/thumbnail.html -> out/
     uv run studio voices <slug>           audition Kokoro blends or Chatterbox clips on one scene -> out/voice-samples/
     uv run studio music <slug> --prompt   generate an instrumental music bed (ElevenLabs Music) sized to the episode
+    uv run studio install-skill           install the make-explainer-video agent skill for Claude Code
 """
 
 from __future__ import annotations
@@ -26,7 +27,7 @@ import numpy as np
 import soundfile as sf
 
 from . import build as builder
-from . import music, voice
+from . import music, skill, voice
 from . import render as renderer
 from .common import EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_tools
 from .script import Script, parse
@@ -202,6 +203,10 @@ def audition(tts, scene, table: dict, out: Path) -> None:
     info(f"  {out.relative_to(ROOT)}")
 
 
+def cmd_install_skill(a):
+    skill.install(user=a.user, dest=a.dir, force=a.force)
+
+
 def main():
     p = argparse.ArgumentParser(prog="studio", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -256,6 +261,12 @@ def main():
     s.add_argument("--variants", type=int, default=1, help="make N different takes (1-4) to audition, suffixed -a, -b…")
     s.add_argument("--out", metavar="PATH", help="write here instead, e.g. brand/music/my-bed.mp3 to share across episodes")
     s.set_defaults(fn=cmd_music)
+
+    s = sub.add_parser("install-skill", help="install the make-explainer-video agent skill (Claude Code) into this workspace")
+    s.add_argument("--user", action="store_true", help="install for every project (~/.claude/skills) instead of this workspace")
+    s.add_argument("--dir", metavar="SKILLS_DIR", help="install into this skills folder instead, e.g. for another agent")
+    s.add_argument("--force", action="store_true", help="replace an existing, different copy")
+    s.set_defaults(fn=cmd_install_skill)
 
     a = p.parse_args()
     a.fn(a)

@@ -41,6 +41,9 @@ uv sync
 
 Every command runs as `uv run studio …` from the repository root, or from any folder below it.
 
+To drive the studio with Claude Code from a PyPI install, run `studio install-skill` in your workspace
+(see [Working with a coding agent](coding-agents.md#installing-it)).
+
 The first `sync` of an episode downloads the Kokoro-82M model to `~/.cache/hyperframes/tts` and
 spaCy's `en_core_web_sm` to `~/.cache/hyperframes/spacy`.
 
