@@ -1,7 +1,7 @@
 # Explainer video studio
 
 Command-line studio for narrated explainer videos (~5 min, 1920x1080 30fps, for YouTube),
-styled after **wsws.org**. Pipeline: `script.md` → local TTS narration → word-aligned timing →
+with a clean editorial house style. Pipeline: `script.md` → local TTS narration → word-aligned timing →
 one HyperFrames sub-composition per scene → cached per-scene renders → mastered MP4, captions
 and chapters in `out/`.
 
@@ -28,7 +28,7 @@ uv run studio thumbnail <slug>       # out/<slug>-thumbnail.jpg (edit thumbnail/
 - `brand/`: the house style, shared by every episode. **Edit here, never in an episode's copy.**
   - `frame.md`: design spec (tokens in front matter, rules in prose). Read before designing a scene.
   - `brand.css`: fonts, colour tokens and page furniture classes (`.section-head`, `.tag`, `.headline`, `.standfirst`, `.quote`, `.byline`, `.hl`…).
-  - `fonts/`: PT Serif + Source Sans 3 (as on wsws.org) and JetBrains Mono, all OFL. `vendor/gsap.min.js` (no CDN at render time).
+  - `fonts/`: PT Serif + Source Sans 3 and JetBrains Mono, all OFL. `vendor/gsap.min.js` (no CDN at render time).
   - `pronunciations.yaml`: studio-wide TTS respellings (acronyms, names).
   - `music/`: optional music beds (`studio music --out brand/music/<name>.mp3` generates one with ElevenLabs Music).
 - `templates/scenes/*.html`: scene patterns: `title`, `blank`, `stat`, `quote`, `points`, `outro`. `templates/script.md` is the starter script and `templates/thumbnail.html` the thumbnail.

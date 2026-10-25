@@ -21,7 +21,7 @@ The key is read from `ELEVENLABS_API_KEY` (environment or `.env`). See `AGENTS.m
 
 | Voice | ID | ElevenLabs' description | Fit for these videos |
 |---|---|---|---|
-| **Daniel** (male) | `onwK4e9ZLuTAKqWW03F9` | "Steady broadcaster", "professional broadcast or news story" | **First choice.** Measured news-reader delivery suits wsws-style political journalism. |
+| **Daniel** (male) | `onwK4e9ZLuTAKqWW03F9` | "Steady broadcaster", "professional broadcast or news story" | **First choice.** Measured news-reader delivery suits editorial and news-style explainers. |
 | **Lily** (female) | `pFZP5JQG7iQjIQuC4Bku` | "Velvety… news and narrations with warmth and clarity" | **Best female option.** Serious but warm. |
 | **George** (male) | `JBFqnCBsd6RMkjVDRZzb` | "Warm, captivating storyteller" | Good for history pieces; may be too gentle for polemic. |
 | **Alice** (female) | `Xb7hH8MSUJpSbSDYk0k2` | "Clear, engaging educator", for e-learning | Clear but brighter and friendlier, more like a tutorial. |

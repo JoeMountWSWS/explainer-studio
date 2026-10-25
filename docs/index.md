@@ -1,6 +1,6 @@
 # Explainer Studio
 
-A command-line studio for narrated explainer videos in the style of [wsws.org](https://www.wsws.org).
+A command-line studio for narrated explainer videos with a clean, editorial house style.
 
 You write a script in Markdown. The studio narrates it with text-to-speech, aligns every word to the
 audio, and turns each scene into a [HyperFrames](https://www.npmjs.com/package/hyperframes) HTML

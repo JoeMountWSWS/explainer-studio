@@ -3,7 +3,7 @@
 [![CI](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/explainer-studio)](https://pypi.org/project/explainer-studio/)
 
-A command-line studio for narrated explainer videos in the style of [wsws.org](https://www.wsws.org).
+A command-line studio for narrated explainer videos with a clean, editorial house style.
 You write a script in Markdown. The studio narrates it with local TTS, aligns every word to the audio,
 and turns each scene into a [HyperFrames](https://www.npmjs.com/package/hyperframes) HTML composition
 that is timed to the narration. It then renders a mastered 1920×1080 MP4 for YouTube, with captions
