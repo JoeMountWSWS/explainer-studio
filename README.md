@@ -1,6 +1,7 @@
 # Explainer Studio
 
 [![CI](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/explainer-studio)](https://pypi.org/project/explainer-studio/)
 
 A command-line studio for narrated explainer videos in the style of [wsws.org](https://www.wsws.org).
 You write a script in Markdown. The studio narrates it with local TTS, aligns every word to the audio,
