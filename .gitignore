@@ -229,3 +229,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Licensed (non-OFL) fonts: keep out of the public repo and the wheel
+brand/fonts-licensed/*
+!brand/fonts-licensed/README.md

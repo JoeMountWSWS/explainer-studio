@@ -11,7 +11,20 @@ import numpy as np
 import soundfile as sf
 
 from .build import render_shell
-from .common import BRAND, HF_VERSION, OUT, SAMPLE_RATE, die, ffprobe_duration, hf, info, run, sha, tree_hash
+from .common import (
+    BRAND,
+    HF_VERSION,
+    LICENSED_FONTS,
+    OUT,
+    SAMPLE_RATE,
+    die,
+    ffprobe_duration,
+    hf,
+    info,
+    run,
+    sha,
+    tree_hash,
+)
 from .script import Script
 
 # ---------------------------------------------------------------- video
@@ -191,14 +204,23 @@ def _ass_color(hexcolor: str) -> str:
     return f"&H00{b}{g}{r}".upper()
 
 
+def caption_font() -> tuple[str, Path]:
+    """(libass font name, fonts dir) for burned-in captions."""
+    if (LICENSED_FONTS / "DINPro-Bold.ttf").exists():
+        return "DINPro-Bold", LICENSED_FONTS
+    return "Source Sans 3 Bold", BRAND / "fonts"
+
+
 def ass_captions(ep: Path, timing: dict, dst: Path) -> int:
-    """Burn-in captions in house style: white Source Sans on a dark tag box, the spoken word in red.
+    """Burn-in captions in house style: white sans on a dark tag box, the spoken word in red.
     Short single-line cues (a few words), one event per word so the highlight follows the voice.
-    libass can't pick weights from the variable font, so this relies on the static brand/fonts/SourceSans3-Bold.ttf."""
+    libass can't pick weights from the variable font, so this relies on a static bold: DINPro-Bold from
+    brand/fonts-licensed/ when present, else brand/fonts/SourceSans3-Bold.ttf (see caption_font())."""
     w, h = timing["width"], timing["height"]
     portrait = h > w
     size, y = (72, int(h * 0.69)) if portrait else (52, int(h * 0.86))  # reel caption band / lower third
     ink, red, white = _ass_color("#1b2129"), _ass_color("#e71e25"), _ass_color("#ffffff")
+    font = caption_font()[0]
     head = [
         "[Script Info]", "ScriptType: v4.00+", f"PlayResX: {w}", f"PlayResY: {h}", "WrapStyle: 2",
         "ScaledBorderAndShadow: yes", "",
@@ -206,7 +228,7 @@ def ass_captions(ep: Path, timing: dict, dst: Path) -> int:
         "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
         "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, "
         "MarginL, MarginR, MarginV, Encoding",
-        f"Style: Cap,Source Sans 3 Bold,{size},{white},{white},{ink},{ink},-1,0,0,0,100,100,0,0,3,14,0,5,0,0,0,1",
+        f"Style: Cap,{font},{size},{white},{white},{ink},{ink},-1,0,0,0,100,100,0,0,3,14,0,5,0,0,0,1",
         "", "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
     ]
     cues = _caption_cues(ep, timing, max_chars=13 if portrait else 21, max_secs=2.5, max_words=4, min_sentence=0)
@@ -219,6 +241,8 @@ def ass_captions(ep: Path, timing: dict, dst: Path) -> int:
             b = cue[k + 1]["start"] if k + 1 < len(cue) else cue_end
             text = " ".join(("{\\c" + red + "&}" + x["text"] + "{\\c" + white + "&}") if j == k else x["text"]
                             for j, x in enumerate(cue))
+            if font == "DINPro-Bold":  # its fi/fl ligatures are broken; a zero-width non-joiner stops HarfBuzz forming them
+                text = re.sub(r"f(?=[il])", "f‌", text)
             events.append(f"Dialogue: 0,{_ts(a, '.')[1:-1]},{_ts(b, '.')[1:-1]},Cap,,0,0,0,,{{\\pos({w // 2},{y})}}{text}")
     dst.write_text("\n".join(head + events) + "\n")
     return len(cues)
@@ -251,7 +275,7 @@ def render_episode(ep: Path, script: Script, timing: dict, draft: bool, only: se
         ass = build / "captions.ass"
         ass_captions(ep, timing, ass)
         crf = "26" if draft else "16"
-        vcodec = ["-vf", f"ass={ass.name}:fontsdir={BRAND / 'fonts'}", "-c:v", "libx264", "-preset", "medium",
+        vcodec = ["-vf", f"ass={ass.name}:fontsdir={caption_font()[1]}", "-c:v", "libx264", "-preset", "medium",
                   "-crf", crf, "-pix_fmt", "yuv420p"]
     run(["ffmpeg", "-v", "error", "-y", "-i", str(video.resolve()), "-i", str(master.resolve()), "-map", "0:v", "-map", "1:a",
          *vcodec, "-c:a", "aac", "-b:a", "384k", "-ar", str(SAMPLE_RATE),

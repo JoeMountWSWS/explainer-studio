@@ -28,6 +28,8 @@ PKG_DATA = _HERE / "data" if (_HERE / "data").is_dir() else _HERE.parents[1]
 ROOT = _workspace()
 BRAND = ROOT / "brand" if (ROOT / "brand" / "brand.css").exists() else PKG_DATA / "brand"
 TEMPLATES = ROOT / "templates" if (ROOT / "templates" / "script.md").exists() else PKG_DATA / "templates"
+# Commercial fonts (e.g. DINPro) the user holds a licence for: gitignored, never shipped in the wheel.
+LICENSED_FONTS = ROOT / "brand" / "fonts-licensed"
 EPISODES = ROOT / "episodes"
 OUT = ROOT / "out"
 
