@@ -1,6 +1,5 @@
 ---
-name: Explainer house style (after wsws.org)
-reference: https://www.wsws.org — typography, palette and page furniture are taken from the site
+name: Explainer house style
 canvas:
   width: 1920
   height: 1080
@@ -40,11 +39,11 @@ motion:
   stagger: 0.12s
 ---
 
-# Explainer house style (after wsws.org)
+# Explainer house style
 
 ## Overview
 
-The videos should look like a WSWS article set in motion: a white page, serious
+The videos should look like a serious news article set in motion: a white page, serious
 serif headlines, small uppercase section labels, thin rules, and one red. Plain
 and authoritative, not "content-marketing". The narrator carries the argument. The
 frame shows its structure (claims, evidence, quotations, dates, figures) with the

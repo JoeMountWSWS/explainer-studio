@@ -1,4 +1,4 @@
-/* Explainer house style, after wsws.org. Tokens mirror brand/frame.md.
+/* Explainer house style. Tokens mirror brand/frame.md.
    `studio sync` copies this file (with fonts/ and gsap) into each episode's assets/brand/. */
 
 @font-face { font-family: "PT Serif"; src: url("fonts/PTSerif-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
