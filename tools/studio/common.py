@@ -156,6 +156,24 @@ def episode_dir(slug: str) -> Path:
     return d
 
 
+LFS_POINTER = b"version https://git-lfs.github.com/spec/"
+
+
+def require_media(ep: Path, extra: list[Path] = ()) -> None:
+    """Stop with a fix if episode media are Git LFS pointers (cloned without LFS, or not pulled yet)."""
+    files = [p for d in ("audio/vo", "audio/recorded", "assets/media") for p in (ep / d).rglob("*")]
+    pointers = []
+    for p in [*files, *extra]:
+        if p.is_file() and p.stat().st_size < 1024:
+            with p.open("rb") as f:
+                if f.read(len(LFS_POINTER)) == LFS_POINTER:
+                    pointers.append(p.relative_to(ROOT) if p.is_relative_to(ROOT) else p)
+    if pointers:
+        listed = "\n  ".join(map(str, pointers[:5])) + (f"\n  … and {len(pointers) - 5} more" if len(pointers) > 5 else "")
+        die(f"{len(pointers)} media file(s) are Git LFS pointers, not the real files:\n  {listed}\n"
+            f"fetch them with: git lfs install && git lfs pull --include \"episodes/{ep.name}/**,brand/music/**\"")
+
+
 def require_tools() -> None:
     for tool in ("ffmpeg", "ffprobe", "npx"):
         if not shutil.which(tool):
