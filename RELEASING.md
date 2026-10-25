@@ -4,8 +4,7 @@
 ([`.github/workflows/release-please.yml`](.github/workflows/release-please.yml)) reads the
 [Conventional Commit](https://www.conventionalcommits.org/) messages on `main` and keeps a release
 PR open that bumps the version in `pyproject.toml` and `uv.lock` and updates `CHANGELOG.md`.
-Merging it tags `vX.Y.Z`, publishes a GitHub release with the source bundle attached (the repo without the non-demo
-episodes and music beds, which are `export-ignore` in `.gitattributes` and live in Git LFS), and uploads
+Merging it tags `vX.Y.Z`, publishes a GitHub release with the source bundle attached, and uploads
 the wheel and sdist to [PyPI](https://pypi.org/project/explainer-studio/).
 
 | Prefix | Changelog section | Bump (while < 1.0) |

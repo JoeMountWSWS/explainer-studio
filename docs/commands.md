@@ -119,6 +119,18 @@ length and model, so a re-run is free.
 Log the track in `brand/music/CREDITS.md` (source, prompt, date). Check
 [ElevenLabs' music rights](https://elevenlabs.io/music-rights) for your plan and use before publishing.
 
+## `archive`
+
+```bash
+uv run studio archive <slug> [--remote gdrive:explainer-masters]
+```
+
+Copies the finished deliverables (`out/<slug>.mp4`, `.srt`, `.chapters.txt` and
+`-thumbnail.jpg`) to `<remote>/<slug>/` with [rclone](https://rclone.org/), so masters live in cloud
+storage rather than in git. The remote defaults to `STUDIO_ARCHIVE` in the environment or `.env`.
+Set one up once with `rclone config` (Google Drive, Backblaze B2, S3, Dropbox…). Re-running only
+uploads files that changed.
+
 ## HyperFrames directly
 
 The studio drives the [HyperFrames](https://www.npmjs.com/package/hyperframes) CLI at a pinned version

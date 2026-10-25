@@ -35,4 +35,5 @@ Minimum sizes: headline 88px, body 52px, label 30px, byline 26px.
 - Cut every 3–6 seconds, on the narration's cues.
 - Get the striking fact on screen in the first second.
 
-`episodes/france-oct17-reel/` and `episodes/iysse-trotskyism-reel/` are worked examples.
+Start from `format: reel` in a new script: `studio new` stubs scenes from the same templates, and
+`sync` switches them to `.stage-reel`.
