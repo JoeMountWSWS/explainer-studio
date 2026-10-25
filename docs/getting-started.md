@@ -14,9 +14,14 @@
 ### From PyPI
 
 ```bash
-uv tool install explainer-studio   # or, without installing: uvx --from explainer-studio studio …
+pip install explainer-studio       # or: uv tool install explainer-studio
 mkdir my-videos && cd my-videos
 ```
+
+The package is on [PyPI](https://pypi.org/project/explainer-studio/). `uv tool install` puts
+`studio` on your PATH in its own isolated environment, and `uvx --from explainer-studio studio …`
+runs it without installing. With `pip`, install into a virtual environment (or use `pipx install
+explainer-studio`) so its dependencies stay separate from your system Python.
 
 The folder you run `studio` in is the workspace: it holds `episodes/`, `out/` and `.env`. `studio`
 finds it from any folder below it, or you can point at it with `STUDIO_ROOT`. The house style and

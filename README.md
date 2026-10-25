@@ -45,10 +45,15 @@ clone the repository.
 **From PyPI**, to make videos in a folder of your own:
 
 ```bash
-uv tool install explainer-studio   # or run it without installing: uvx --from explainer-studio studio …
+pip install explainer-studio       # or: uv tool install explainer-studio
 mkdir my-videos && cd my-videos
 studio new my-video "My Video"
 ```
+
+The package is on [PyPI](https://pypi.org/project/explainer-studio/). `uv tool install` puts
+`studio` on your PATH in its own isolated environment, and `uvx --from explainer-studio studio …`
+runs it without installing. With `pip`, install into a virtual environment (or use `pipx install
+explainer-studio`) so its dependencies stay separate from your system Python.
 
 The folder you run `studio` in becomes the workspace. It holds `episodes/`, `out/` and `.env`, and
 `studio` finds it from any subdirectory (or set `STUDIO_ROOT`). The house style (`brand/`) and scene
