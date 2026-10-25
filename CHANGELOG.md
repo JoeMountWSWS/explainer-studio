@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.1.6](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.5...v0.1.6) (2026-10-25)
+
+
+### Features
+
+* add 'studio install-skill' to install the agent skill from a pip install ([#31](https://github.com/JoeMountWSWS/explainer-studio/issues/31)) ([389a7b1](https://github.com/JoeMountWSWS/explainer-studio/commit/389a7b1b879229eea6e510e17f0b4399e8c066bb))
+
+
+### Documentation
+
+* add pip install instructions now that the package is on PyPI ([#30](https://github.com/JoeMountWSWS/explainer-studio/issues/30)) ([580f005](https://github.com/JoeMountWSWS/explainer-studio/commit/580f005dd93c3630f4401546223b60e344f0f7fe))
+* add project URLs to pyproject.toml ([7d6d785](https://github.com/JoeMountWSWS/explainer-studio/commit/7d6d785e51fb64d361b9e0de4588a93a42786cc8))
+* add PyPI badge to README ([16832b2](https://github.com/JoeMountWSWS/explainer-studio/commit/16832b2ed8b74605078babbbed08a6d02258cdd5))
+* link issue templates from the contributing guide ([6f4f6be](https://github.com/JoeMountWSWS/explainer-studio/commit/6f4f6be16d423576420072c41941b61a2177f9fa))
+* remove wsws.org references from docs and brand spec ([6905fa4](https://github.com/JoeMountWSWS/explainer-studio/commit/6905fa409920c15e0a451a1272b3c292217d25b2))
+
+
+### House style
+
+* add org assets (brand/org) and DINPro sans font ([#29](https://github.com/JoeMountWSWS/explainer-studio/issues/29)) ([06151d8](https://github.com/JoeMountWSWS/explainer-studio/commit/06151d89e44aafe12bca200886517352a8e7eb65))
+
+
+### Dependencies
+
+* bump certifi to 2026.10.23 ([#23](https://github.com/JoeMountWSWS/explainer-studio/issues/23)) ([845763e](https://github.com/JoeMountWSWS/explainer-studio/commit/845763e9dd4e9174b2b292d717f2b81559eb0a3b))
+* bump setuptools to 84.2.1 ([#25](https://github.com/JoeMountWSWS/explainer-studio/issues/25)) ([2312fe9](https://github.com/JoeMountWSWS/explainer-studio/commit/2312fe94fa6a385b3f883def21b0a6589d6d271a))
+
 ## [0.1.5](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.4...v0.1.5) (2026-10-25)
 
 
