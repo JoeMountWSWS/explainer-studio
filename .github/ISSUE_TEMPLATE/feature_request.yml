@@ -1,0 +1,36 @@
+name: Feature request
+description: Suggest a new command, setting, scene template or house-style change.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do that the studio makes hard or impossible?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: How it could work, e.g. a new `script.md` setting, CLI flag or scene template.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - CLI / pipeline
+        - Narration (TTS, alignment, pronunciation)
+        - Scenes and templates
+        - Brand / house style
+        - Rendering and output
+        - Music
+        - Docs
+        - Other
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and workarounds
+      description: Anything you've tried or considered instead.
