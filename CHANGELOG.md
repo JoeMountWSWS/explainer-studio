@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.6...v0.1.7) (2026-10-25)
+
+
+### Documentation
+
+* link the coverage badge to the HTML report ([0ca7b97](https://github.com/JoeMountWSWS/explainer-studio/commit/0ca7b9760f29dfc2b85a3a4009a4e625b878d357))
+
 ## [0.1.6](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.5...v0.1.6) (2026-10-25)
 
 
