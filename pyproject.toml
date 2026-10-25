@@ -41,6 +41,9 @@ packages = ["tools/studio"]
 "brand/fonts" = "studio/data/brand/fonts"
 "brand/vendor" = "studio/data/brand/vendor"
 "templates" = "studio/data/templates"
+# The agent skill (`studio install-skill`); it also installs brand/frame.md and templates/script.md as references.
+".claude/skills/make-explainer-video/SKILL.md" = "studio/data/skills/make-explainer-video/SKILL.md"
+"AGENTS.md" = "studio/data/skills/make-explainer-video/references/agents.md"
 
 [tool.hatch.build.targets.sdist]
 only-include = [
@@ -51,6 +54,8 @@ only-include = [
     "brand/fonts",
     "brand/vendor",
     "templates",
+    ".claude/skills/make-explainer-video/SKILL.md",
+    "AGENTS.md",
     "README.md",
     "LICENSE",
 ]
