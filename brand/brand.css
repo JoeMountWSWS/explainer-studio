@@ -8,6 +8,12 @@
 @font-face { font-family: "Source Sans 3"; src: url("fonts/SourceSans3.ttf") format("truetype"); font-weight: 200 900; font-style: normal; }
 @font-face { font-family: "Source Sans 3"; src: url("fonts/SourceSans3-Italic.ttf") format("truetype"); font-weight: 200 900; font-style: italic; }
 @font-face { font-family: "JetBrains Mono"; src: url("fonts/JetBrainsMono.ttf") format("truetype"); font-weight: 100 800; }
+/* DINPro is licensed, not OFL: it lives in brand/fonts-licensed/ (gitignored). `sync` copies it into the
+   episode and appends its @font-face rules to this file's copy, so without it there are no 404s and the sans
+   stack falls back to Source Sans 3. No 400/600 cuts: those map to Medium/Bold.
+   This DINPro build's fi/fl ligatures point at the wrong glyphs ("five" renders "(ve"), and Chromium ignores
+   the @font-face font-feature-settings descriptor, so ligatures are off everywhere. */
+* { font-variant-ligatures: no-common-ligatures; }
 
 :root {
   --paper: #ffffff;
@@ -21,7 +27,7 @@
   --tag: #1b2129;
 
   --font-serif: "PT Serif", Georgia, serif;
-  --font-sans: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "DINPro", "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --safe-x: 192px;   /* title-safe inset (10%) */

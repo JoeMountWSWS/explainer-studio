@@ -8,7 +8,7 @@ import re
 import shutil
 from pathlib import Path
 
-from .common import BRAND, FORMATS, HF_VERSION, ROOT, TEMPLATES, die, info
+from .common import BRAND, FORMATS, HF_VERSION, LICENSED_FONTS, ROOT, TEMPLATES, die, info
 from .script import Script
 
 TIMING_RE = re.compile(r"(/\* <studio:timing> \*/)(.*?)(/\* </studio:timing> \*/)", re.S)
@@ -49,6 +49,9 @@ def compute_timing(script: Script, vo: dict[str, dict]) -> dict:
             "duration": t_frames / fps, "scenes": scenes}
 
 
+DINPRO_WEIGHTS = {"Light": 300, "Regular": 400, "Medium": 500, "Bold": 700, "Black": 900}
+
+
 def sync_brand(ep: Path) -> None:
     """Copy the studio's shared look into the episode (edit brand/, not these copies)."""
     dst = ep / "assets" / "brand"
@@ -56,6 +59,17 @@ def sync_brand(ep: Path) -> None:
     shutil.copy2(BRAND / "brand.css", dst / "brand.css")
     shutil.copy2(BRAND / "vendor" / "gsap.min.js", dst / "gsap.min.js")
     shutil.copytree(BRAND / "fonts", dst / "fonts", dirs_exist_ok=True)
+    # Licensed fonts are optional, so their @font-face rules are only written when the files exist.
+    faces = []
+    for font in sorted(LICENSED_FONTS.glob("DINPro-*.ttf")):
+        weight = DINPRO_WEIGHTS.get(font.stem.removeprefix("DINPro-"))
+        if weight:
+            shutil.copy2(font, dst / "fonts" / font.name)
+            faces.append(f'@font-face {{ font-family: "DINPro"; src: url("fonts/{font.name}") format("truetype"); '
+                         f"font-weight: {weight}; font-style: normal; }}")
+    if faces:
+        with (dst / "brand.css").open("a") as f:
+            f.write("\n/* Added by `studio sync` from brand/fonts-licensed/ */\n" + "\n".join(faces) + "\n")
     shutil.copy2(BRAND / "frame.md", ep / "frame.md")
 
 
