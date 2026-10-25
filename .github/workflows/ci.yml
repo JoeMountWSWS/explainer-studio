@@ -57,6 +57,9 @@ jobs:
           "$RUNNER_TEMP/venv/bin/studio" new smoke "Smoke"
           "$RUNNER_TEMP/venv/bin/studio" status smoke
           test -f episodes/smoke/script.md
+          "$RUNNER_TEMP/venv/bin/studio" install-skill
+          test -f .claude/skills/make-explainer-video/SKILL.md
+          test -f .claude/skills/make-explainer-video/references/agents.md
 
   episodes:
     name: Episodes

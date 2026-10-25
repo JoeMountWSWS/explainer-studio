@@ -28,16 +28,7 @@ script.md ──► narration (Kokoro, local; or ElevenLabs) ──► word timi
 The first `sync` downloads the Kokoro-82M model to `~/.cache/hyperframes/tts` and spaCy's
 `en_core_web_sm` to `~/.cache/hyperframes/spacy`.
 
-# Usage
-
-Making a video with the studio is a loop of writing and listening. You write the script as plain
-Markdown, and the studio reads it aloud, works out exactly when each word is spoken, and hands those
-timings to your scenes so the visuals move in step with the voice. Change a sentence and only that
-sentence is re-recorded and only the affected scenes are re-rendered, so you can refine a five-minute
-video in seconds rather than starting over. Everything runs from one command, `uv run studio`, and
-nothing leaves your machine unless you choose cloud narration.
-
-## Install
+## Install the studio
 
 With the [requirements](#requirements) in place, either install the `studio` command from PyPI or
 clone the repository.
@@ -72,6 +63,31 @@ uv sync
 Run commands from the repository root (or any folder below it). Confirm the install with
 `uv run studio --help`. The first `sync` of an episode downloads the Kokoro voice model and the
 spaCy English model, so it takes a little longer than later runs.
+
+### Install the agent skill
+
+To have Claude Code drive the studio, install the `make-explainer-video` skill into your workspace:
+
+```bash
+cd my-videos
+studio install-skill           # -> .claude/skills/make-explainer-video/
+studio install-skill --user    # or for every project: ~/.claude/skills/
+```
+
+It installs the skill plus the references it reads (the studio guide, house-style spec and starter
+script). Start `claude` in the workspace and ask for a video, or run `/make-explainer-video`. Re-run
+the command with `--force` after upgrading the package to refresh it. From a clone the skill is
+already available with no installation. See
+[Working with a coding agent](https://joemountwsws.github.io/explainer-studio/coding-agents/).
+
+# Usage
+
+Making a video with the studio is a loop of writing and listening. You write the script as plain
+Markdown, and the studio reads it aloud, works out exactly when each word is spoken, and hands those
+timings to your scenes so the visuals move in step with the voice. Change a sentence and only that
+sentence is re-recorded and only the affected scenes are re-rendered, so you can refine a five-minute
+video in seconds rather than starting over. Everything runs from one command, `uv run studio`, and
+nothing leaves your machine unless you choose cloud narration.
 
 ## Quick start
 
@@ -134,6 +150,7 @@ Worked examples: `episodes/demo-paris-commune` (Kokoro, 38s) and `episodes/demo-
 The studio is designed to be driven by Claude Code or another coding agent. `AGENTS.md` (loaded
 through `CLAUDE.md`) gives the agent the conventions it needs, the HyperFrames skills cover the
 composition format and motion, and the `make-explainer-video` skill
-(`.claude/skills/make-explainer-video/`) walks Claude through the whole workflow. Start `claude` in
-the repository root and ask for a video, or run `/make-explainer-video`. See
+(`.claude/skills/make-explainer-video/`, or `studio install-skill` for a pip install) walks Claude
+through the whole workflow. Start `claude` in the repository root or your workspace and ask for a
+video, or run `/make-explainer-video`. See
 [Working with a coding agent](https://joemountwsws.github.io/explainer-studio/coding-agents/).
