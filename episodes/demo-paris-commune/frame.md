@@ -19,8 +19,8 @@ typography:
   headline: { family: "PT Serif", weight: 700, line-height: 1.12, min-size: 72px }
   standfirst: { family: "PT Serif", style: italic, weight: 400, color: ink-soft }
   body: { family: "PT Serif", weight: 400, size: 46px, line-height: 1.4 }
-  label: { family: "Source Sans 3", weight: 700, size: 26px, tracking: "0.12em", case: uppercase }
-  ui: { family: "Source Sans 3", weight: 600 }
+  label: { family: "DINPro", fallback: "Source Sans 3", weight: 700, size: 26px, tracking: "0.12em", case: uppercase }
+  ui: { family: "DINPro", fallback: "Source Sans 3", weight: 600 }   # DINPro cuts: 300, 500, 700, 900 (600 renders Bold)
   mono: { family: "JetBrains Mono", weight: 500 }   # formulae, data, code
 spacing:
   safe-title: 192px 108px   # 10% inset: key text stays inside this box
@@ -29,7 +29,7 @@ spacing:
 components:
   section-rule: "6px solid ink above an uppercase label (the site's 'TOP STORIES' head)"
   hairline: "2px solid rule"
-  tag: "tag-coloured box, white uppercase Source Sans label"
+  tag: "tag-coloured box, white uppercase DINPro label"
   blockquote: "PT Serif, indented, 6px red rule on the left"
   corners: 0
   shadow: none
@@ -61,7 +61,7 @@ same typographic furniture a reader knows from the site.
 - **Standfirst**: PT Serif Italic in `ink-soft` under a headline.
 - **Blockquote**: PT Serif with a red left rule (`.quote`), attribution in `label`
   style. Used for documents, speeches and historical sources.
-- **Byline/date line**: Source Sans, `ink-soft`, small. Use it for sources and
+- **Byline/date line**: DINPro, `ink-soft`, small. Use it for sources and
   citations on screen ("Source: Bureau of Labor Statistics, 2025").
 
 ## The frame
@@ -73,6 +73,18 @@ same typographic furniture a reader knows from the site.
   player chrome and captions sit there.
 - Minimum sizes: body 44px, headline 72px. Phones are the main screen.
 
+## Reel (9:16)
+
+Episodes with `format: reel` render at 1080x1920 for Instagram Reels, TikTok and YouTube Shorts.
+
+- Content box: `.stage-reel` (x 72-1008, y 220-1180). The platform's buttons sit on the right
+  edge and its caption, handle and audio line take the bottom ~480px, so keep both clear.
+- Caption band: y 1220-1440. `burn_captions: true` puts word-highlighted captions here (white
+  DINPro on a `tag` box, the spoken word in red). Don't put content in this band.
+- Photos may run full-bleed behind everything, under an ink gradient so type stays legible.
+- Minimum sizes: headline 88px, body 52px, label 30px, byline 26px.
+- One statement per screen. Cut every 3-6s, on the narration's cues. Get the striking fact on screen in the first second.
+
 ## Composition rules
 
 - **One focal point.** Red goes on the single word, figure, line or arrow the
@@ -81,7 +93,7 @@ same typographic furniture a reader knows from the site.
   and charts carry the argument. Always show a source line for a figure or quote.
 - **Charts**: flat, ink and grey with the key series in red. Hairline axes, Source
   Sans labels, no gridline clutter, no 3D.
-- **Lists**: at most 4 items, numbered in red Source Sans, with hairlines between.
+- **Lists**: at most 4 items, numbered in red DINPro, with hairlines between.
 - No stock photos used as decoration, emoji, drop shadows, rounded "app" cards,
   gradients or glow. Photos are allowed only as evidence (archival images, news
   photos with credit), set full-width with a caption, as on the site.

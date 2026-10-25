@@ -114,3 +114,4 @@ Read `brand/frame.md` first, and use the `hyperframes-core` and `hyperframes-ani
 - Only one root-level HTML file may carry `data-composition-id`. `render` creates `_render_<id>.html` shells temporarily and deletes them; if a crash leaves one behind, delete it.
 - If package or model downloads fail with DNS errors (NordVPN + DNSSEC "signature-expired"), run `resolvectl flush-caches`.
 - If a render hangs or reports empty frames under GPU capture, add `--no-browser-gpu` in `render_scenes()` (`tools/studio/render.py`).
+- **DINPro** (the sans: labels, tags, bylines, captions) is a licensed FontFont, not OFL. Its TTFs live in gitignored `brand/fonts-licensed/` and must never be committed or moved into `brand/fonts/` (the repo is public and `brand/fonts/` ships in the wheel). Without them everything falls back to Source Sans 3. This build's `fi`/`fl` ligatures are broken, so `brand.css` turns common ligatures off and burned-in captions insert a zero-width non-joiner.
