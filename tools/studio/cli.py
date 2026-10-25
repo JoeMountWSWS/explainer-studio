@@ -9,6 +9,7 @@
     uv run studio thumbnail <slug>        screenshot thumbnail/thumbnail.html -> out/
     uv run studio voices <slug>           audition Kokoro blends or Chatterbox clips on one scene -> out/voice-samples/
     uv run studio music <slug> --prompt   generate an instrumental music bed (ElevenLabs Music) sized to the episode
+    uv run studio archive <slug>          copy the finished master, captions and thumbnail to $STUDIO_ARCHIVE (rclone)
     uv run studio install-skill           install the make-explainer-video agent skill for Claude Code
 """
 
@@ -17,6 +18,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -29,7 +31,7 @@ import soundfile as sf
 from . import build as builder
 from . import music, skill, voice
 from . import render as renderer
-from .common import EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_media, require_tools
+from .common import EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, load_env, require_media, require_tools
 from .script import Script, parse
 
 AUDITION = [
@@ -191,6 +193,29 @@ def cmd_music(a):
     info("  log the track in brand/music/CREDITS.md (source: ElevenLabs Music, prompt, date)")
 
 
+def cmd_archive(a):
+    """Copy the deliverables in out/ to an rclone remote: <remote>/<slug>/."""
+    episode_dir(a.slug)
+    load_env()
+    remote = (a.remote or os.environ.get("STUDIO_ARCHIVE", "")).strip().rstrip("/")
+    if not remote:
+        die("set STUDIO_ARCHIVE (in .env or the environment) to an rclone path, e.g. gdrive:explainer-masters, or pass --remote")
+    if not shutil.which("rclone"):
+        die("'rclone' not found on PATH (install it, then run `rclone config` to add the remote)")
+    names = [f"{a.slug}.mp4", f"{a.slug}.srt", f"{a.slug}.chapters.txt", f"{a.slug}-thumbnail.jpg"]
+    files = [OUT / n for n in names if (OUT / n).exists()]
+    if not files or files[0].name != f"{a.slug}.mp4":
+        die(f"no final render at out/{a.slug}.mp4: run `studio render {a.slug}` first")
+    with tempfile.NamedTemporaryFile("w", suffix=".txt") as lst:
+        lst.write("\n".join(f.name for f in files))
+        lst.flush()
+        info(f"archive -> {remote}/{a.slug}/")
+        subprocess.run(["rclone", "copy", "--progress", "--files-from", lst.name, str(OUT), f"{remote}/{a.slug}"],
+                       check=True)
+    for f in files:
+        info(f"  {f.name}")
+
+
 def audition(tts, scene, table: dict, out: Path) -> None:
     with tempfile.TemporaryDirectory() as tmp:
         pieces = []
@@ -263,6 +288,11 @@ def main():
     s.add_argument("--variants", type=int, default=1, help="make N different takes (1-4) to audition, suffixed -a, -b…")
     s.add_argument("--out", metavar="PATH", help="write here instead, e.g. brand/music/my-bed.mp3 to share across episodes")
     s.set_defaults(fn=cmd_music)
+
+    s = sub.add_parser("archive", help="copy out/<slug>.mp4, .srt, .chapters.txt and thumbnail to $STUDIO_ARCHIVE (rclone)")
+    s.add_argument("slug")
+    s.add_argument("--remote", help="rclone path to copy to (default: $STUDIO_ARCHIVE), e.g. gdrive:explainer-masters")
+    s.set_defaults(fn=cmd_archive)
 
     s = sub.add_parser("install-skill", help="install the make-explainer-video agent skill (Claude Code) into this workspace")
     s.add_argument("--user", action="store_true", help="install for every project (~/.claude/skills) instead of this workspace")

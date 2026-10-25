@@ -19,6 +19,7 @@ uv run studio render <slug> --draft  # fast review copy -> out/<slug>-draft.mp4
 uv run studio render <slug>          # final -> out/<slug>.mp4 + .srt + .chapters.txt
 uv run studio music <slug> --prompt "..."  # ElevenLabs Music bed sized to the synced episode (after sync)
 uv run studio thumbnail <slug>       # out/<slug>-thumbnail.jpg (edit thumbnail/thumbnail.html)
+uv run studio archive <slug>         # copy the master, captions and thumbnail to $STUDIO_ARCHIVE (rclone)
 ```
 
 `episodes/demo-paris-commune/` is a complete worked example (38s, 4 scenes).
@@ -30,7 +31,6 @@ uv run studio thumbnail <slug>       # out/<slug>-thumbnail.jpg (edit thumbnail/
   - `brand.css`: fonts, colour tokens and page furniture classes (`.section-head`, `.tag`, `.headline`, `.standfirst`, `.quote`, `.byline`, `.hl`…).
   - `fonts/`: PT Serif + Source Sans 3 and JetBrains Mono, all OFL. `vendor/gsap.min.js` (no CDN at render time).
   - `pronunciations.yaml`: studio-wide TTS respellings (acronyms, names).
-  - `music/`: optional music beds (`studio music --out brand/music/<name>.mp3` generates one with ElevenLabs Music).
 - `templates/scenes/*.html`: scene patterns: `title`, `blank`, `stat`, `quote`, `points`, `outro`. `templates/script.md` is the starter script and `templates/thumbnail.html` the thumbnail.
 - `tools/studio/`: the Python CLI (`uv run studio …`).
 - `episodes/<slug>/`: one HyperFrames project per video.
@@ -42,8 +42,8 @@ uv run studio thumbnail <slug>       # out/<slug>-thumbnail.jpg (edit thumbnail/
   - `assets/brand/`: synced copy of `brand/`. `assets/media/`: episode images and footage.
   - `build/`: render cache (safe to delete).
 - `out/`: deliverables.
-- **Media storage.** Episode audio, images and footage (`episodes/**/*.{wav,mp3,flac,m4a,mp4,mov,webm,jpg,jpeg,png,webp}`) and the `brand/music/` beds are in **Git LFS** (`.gitattributes`); the `demo-*` episodes stay in plain git so they work without LFS. Run `git lfs install` once per machine; `git add` then stores new takes as LFS objects automatically. Fetch one episode with `git lfs pull --include "episodes/<slug>/**,brand/music/**"` (or clone with `GIT_LFS_SKIP_SMUDGE=1` to skip all media). `sync`, `preview`, `check` and `render` stop with that command if an episode's media are still LFS pointers (`require_media()` in `common.py`). History before the switch still holds the old blobs; shrinking it needs `git lfs migrate import` and a force-push.
-- **Workspace.** `ROOT` (`tools/studio/common.py`) is `$STUDIO_ROOT`, else the nearest folder at or above the cwd that has `episodes/`, else the cwd. `BRAND` and `TEMPLATES` are the workspace's `brand/` and `templates/` when present (as in this repo), else the copies bundled in the package (`PKG_DATA`, `studio/data/` in the wheel). `brand/music/` and `brand/voices/` are always workspace paths.
+- **Content workspace.** This repo is public and holds only the tool, the house style, templates and the `demo-*` episodes. Real episodes, draft scripts, music beds (`brand/music/`) and org assets (`brand/org/`, `brand/logo/`) live in the private `JoeMountWSWS/sep-episodes`, cloned next to this one (`../sep-episodes`). It runs this checkout as an editable path dependency, keeps its media in Git LFS, and archives finished masters with `studio archive`. Never add episode content here. `require_media()` (`common.py`) stops `sync`, `preview`, `check` and `render` with a `git lfs pull` hint when a workspace's media are still LFS pointers.
+- **Workspace.** `ROOT` (`tools/studio/common.py`) is `$STUDIO_ROOT`, else the nearest folder at or above the cwd that has `episodes/`, else the cwd. `BRAND` and `TEMPLATES` are the workspace's `brand/` and `templates/` when present (as in this repo), else the copies bundled in the package (`PKG_DATA`, `studio/data/` in the wheel). `brand/music/`, `brand/voices/` and `brand/fonts-licensed/` are always workspace paths.
 
 ## Script format (`episodes/<slug>/script.md`)
 
@@ -107,7 +107,7 @@ Read `brand/frame.md` first, and use the `hyperframes-core` and `hyperframes-ani
 - **Chatterbox** (optional local TTS, `tts: chatterbox`): pins torch and numpy<2, so it can't share the studio venv. On first use, `voice.Chatterbox` builds a separate venv at `~/.cache/hyperframes/chatterbox/<version>` (`uv pip install --torch-backend cpu`, plus `setuptools<81` for the watermarker's `pkg_resources` import) and drives `tools/studio/chatterbox_worker.py` over JSON lines on stdin/stdout. The version is pinned at `CHATTERBOX_VERSION` in `common.py` (override with `STUDIO_CHATTERBOX_VERSION`), and the weights are cached in `~/.cache/huggingface`. Delete the venv folder to rebuild it. No GPU: the RX 580 has no CUDA, and ROCm doesn't support it.
 - **ElevenLabs** (optional cloud TTS, `tts: elevenlabs`): stdlib HTTPS calls from `tools/studio/voice.py`, sending each paragraph with its neighbours' text so the delivery stays continuous.
 - **Tests**: `uv run pytest` (`tests/`, with coverage; settings and the `fail_under` floor in `[tool.coverage]` in `pyproject.toml`). No TTS, ffmpeg or HyperFrames needed: the `fake_tts` fixture narrates, and `monkeypatch` points `studio.common` paths at `tmp_path`. Add or update tests with every CLI change. See `docs/contributing.md`.
-- **CI** (`.github/workflows/ci.yml`): `uv sync --locked`, ruff (`[tool.ruff]` in `pyproject.toml`), pytest with coverage (3.12 and 3.13; table in the run summary, `coverage` artifact), a CLI smoke test, and `hyperframes check` on every episode. It never narrates or renders, so commit `audio/vo/`, `timing.json` and `index.html` after `sync`. The check jobs pull only their episode's `assets/media/` from LFS.
+- **CI** (`.github/workflows/ci.yml`): `uv sync --locked`, ruff (`[tool.ruff]` in `pyproject.toml`), pytest with coverage (3.12 and 3.13; table in the run summary, `coverage` artifact), a CLI smoke test, and `hyperframes check` on every episode. It never narrates or renders, so commit `audio/vo/`, `timing.json` and `index.html` after `sync`.
 - **Releases** (`.github/workflows/release-please.yml`, `release-please-config.json`): release-please turns Conventional Commit messages into a release PR (version in `pyproject.toml` + `uv.lock`, `CHANGELOG.md`); merging it tags, publishes the GitHub release and uploads to PyPI (trusted publishing; see `RELEASING.md`). Only `brand/` files listed under `force-include` in `pyproject.toml` ship in the wheel. Write commit messages as `feat:`, `fix:`, `perf:`, `episode:` (episode content), `brand:` (house style), `docs:`, `deps:`, or `refactor:`/`test:`/`ci:`/`chore:` (not in the changelog). Never hand-edit the version or `CHANGELOG.md`.
 - ffmpeg 9, Chromium (thumbnails), uv (Python 3.12–3.13; `kokoro-onnx` needs <3.14).
 
