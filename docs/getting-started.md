@@ -31,6 +31,28 @@ in the workspace's `brand/music/` and `brand/voices/`.
 
 With an installed tool, type `studio …` wherever these docs say `uv run studio …`.
 
+To keep your episodes in their own (for instance private) repository while working on the studio
+itself, clone the studio next to the workspace and add it as an editable path dependency in the
+workspace's `pyproject.toml`:
+
+```toml
+[project]
+name = "my-videos"
+version = "0"
+requires-python = ">=3.12,<3.14"
+dependencies = ["explainer-studio"]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+explainer-studio = { path = "../explainer-studio", editable = true }
+```
+
+`uv run studio …` in the workspace then uses the clone's code, `brand/` and `templates/`, so a
+house-style change applies to every episode at once. Episode media are large: keep them in
+[Git LFS](https://git-lfs.com/) in that repository.
+
 ### From a clone
 
 ```bash
