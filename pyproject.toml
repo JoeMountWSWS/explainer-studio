@@ -1,6 +1,6 @@
 [project]
 name = "explainer-studio"
-version = "0.1.4"
+version = "0.1.5"
 description = "Command-line studio for narrated explainer videos (HyperFrames + Kokoro TTS + ffmpeg)"
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
@@ -15,6 +15,13 @@ dependencies = [
     "spacy>=3.8,<3.9",  # en_core_web_sm 3.8.0 is fetched on first use (voice.ensure_spacy_model)
     "num2words>=0.5",
 ]
+
+[project.urls]
+Homepage = "https://joemountwsws.github.io/explainer-studio/"
+Documentation = "https://joemountwsws.github.io/explainer-studio/"
+Repository = "https://github.com/JoeMountWSWS/explainer-studio"
+Issues = "https://github.com/JoeMountWSWS/explainer-studio/issues"
+Changelog = "https://github.com/JoeMountWSWS/explainer-studio/blob/main/CHANGELOG.md"
 
 [project.scripts]
 studio = "studio.cli:main"

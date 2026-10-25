@@ -69,7 +69,7 @@ Cue names are free-form. The `points` template, for instance, expects `{p1}` to 
 Write numbers and abbreviations as they should be **spoken** when the voice gets them wrong ("nineteen
 seventeen" rather than "1917"), or add a respelling:
 
-- Studio-wide respellings go in `brand/pronunciations.yaml` (for example `WSWS: W S W S`).
+- Studio-wide respellings go in `brand/pronunciations.yaml` (for example `NATO: Nay-toe`).
 - Episode-specific ones go under `pronounce:` in the front matter.
 
 Respellings only affect the voice. **Captions and on-screen text keep the script's spelling.** Test a
