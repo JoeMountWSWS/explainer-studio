@@ -13,7 +13,8 @@ permissions:
 # release-please keeps a "chore(main): release x.y.z" PR open that bumps the version in
 # pyproject.toml and uv.lock and updates CHANGELOG.md from Conventional Commit messages.
 # Merging that PR tags vX.Y.Z and publishes the GitHub release. The `publish` job then attaches
-# the studio bundle (a git archive of the whole repo) to that release, and the `pypi` job builds
+# the studio bundle (a git archive of the repo, minus the non-demo episodes and music beds marked
+# export-ignore in .gitattributes, which live in Git LFS) to that release, and the `pypi` job builds
 # the wheel and sdist, smoke-tests the wheel outside the repo and uploads both to PyPI with
 # trusted publishing (no token; see RELEASING.md for the one-time PyPI setup).
 
