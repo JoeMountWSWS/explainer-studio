@@ -29,7 +29,7 @@ import soundfile as sf
 from . import build as builder
 from . import music, skill, voice
 from . import render as renderer
-from .common import EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_tools
+from .common import EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, require_media, require_tools
 from .script import Script, parse
 
 AUDITION = [
@@ -83,6 +83,8 @@ def cmd_status(a):
 def _sync(slug: str, only: set[str] | None = None):
     ep = episode_dir(slug)
     script = parse(ep / "script.md")
+    music = script.setting("music")
+    require_media(ep, [ep / music, ROOT / music] if music else [])
     info(f"narration ({script.setting('tts')}:{script.setting('voice')})")
     vo = voice.voice_all(ep, script, only)
     info("building project")
