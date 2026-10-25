@@ -1,4 +1,4 @@
-"""The commands that need no TTS, browser or HyperFrames: new, status, install-skill, music (cached)."""
+"""The commands that need no TTS, browser or HyperFrames: new, status, install-skill, music (cached), archive."""
 
 import json
 import sys
@@ -141,3 +141,60 @@ def test_install_skill_into_its_own_checkout_is_a_no_op(monkeypatch, capsys):
     monkeypatch.setattr(skill, "ROOT", skill.PKG_DATA)
     skill.install()
     assert "already available here" in capsys.readouterr().out
+
+
+@pytest.fixture
+def archive_ws(workspace, monkeypatch):
+    """A workspace with episode `ep`, an out/ folder, no .env and a fake rclone that records its argv."""
+    studio(monkeypatch, "new", "ep")
+    out = workspace / "out"
+    out.mkdir()
+    monkeypatch.setattr(cli, "OUT", out)
+    monkeypatch.setattr(cli, "load_env", lambda: None)
+    monkeypatch.delenv("STUDIO_ARCHIVE", raising=False)
+    monkeypatch.setattr(cli.shutil, "which", lambda tool: f"/usr/bin/{tool}")
+    calls = []
+
+    def fake_run(cmd, check):
+        calls.append((cmd, open(cmd[cmd.index("--files-from") + 1]).read().split()))
+    monkeypatch.setattr(cli.subprocess, "run", fake_run)
+    return out, calls
+
+
+def test_archive_copies_deliverables(archive_ws, monkeypatch, capsys):
+    out, calls = archive_ws
+    for name in ("ep.mp4", "ep.srt", "ep-thumbnail.jpg", "ep-draft.mp4"):
+        (out / name).write_text("x")
+    monkeypatch.setenv("STUDIO_ARCHIVE", "gdrive:masters/")
+    studio(monkeypatch, "archive", "ep")
+    [(cmd, files)] = calls
+    assert cmd[0] == "rclone" and cmd[-2:] == [str(out), "gdrive:masters/ep"]
+    assert files == ["ep.mp4", "ep.srt", "ep-thumbnail.jpg"]  # no draft, no missing chapters file
+    assert "archive -> gdrive:masters/ep/" in capsys.readouterr().out
+
+
+def test_archive_remote_flag_overrides_env(archive_ws, monkeypatch):
+    out, calls = archive_ws
+    (out / "ep.mp4").write_text("x")
+    monkeypatch.setenv("STUDIO_ARCHIVE", "gdrive:masters")
+    studio(monkeypatch, "archive", "ep", "--remote", "b2:other")
+    assert calls[0][0][-1] == "b2:other/ep"
+
+
+@pytest.mark.parametrize("setup, error", [
+    ("no-remote", "set STUDIO_ARCHIVE"),
+    ("no-rclone", "'rclone' not found"),
+    ("no-render", "no final render at out/ep.mp4"),
+])
+def test_archive_errors(archive_ws, monkeypatch, capsys, setup, error):
+    out, calls = archive_ws
+    if setup != "no-remote":
+        monkeypatch.setenv("STUDIO_ARCHIVE", "gdrive:masters")
+    if setup == "no-rclone":
+        monkeypatch.setattr(cli.shutil, "which", lambda tool: None)
+    if setup != "no-render":
+        (out / "ep.mp4").write_text("x")
+    (out / "ep.srt").write_text("x")
+    with pytest.raises(SystemExit):
+        studio(monkeypatch, "archive", "ep")
+    assert error in capsys.readouterr().err and not calls
