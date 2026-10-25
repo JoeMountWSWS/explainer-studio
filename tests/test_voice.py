@@ -241,3 +241,83 @@ def test_read_mono_rejects_other_rates(tmp_path):
     voice.sf.write(str(tmp_path / "x.wav"), np.zeros(10, np.float32), 22050)
     with pytest.raises(SystemExit):
         voice.read_mono(tmp_path / "x.wav")
+
+
+def test_recording_replaces_tts_for_its_scene(write_script, tmp_path, fake_tts, monkeypatch):
+    script = write_script("""
+        ## a: A
+        Read by a person. Twice over.
+
+        ## b: B
+        Read by the machine.
+    """)
+    ep = tmp_path / "ep"
+    rec = ep / "audio" / "recorded" / "a.wav"
+    rec.parent.mkdir(parents=True)
+    voice.sf.write(str(rec), np.full(3 * voice.SAMPLE_RATE, 0.1, np.float32), voice.SAMPLE_RATE)
+    monkeypatch.setattr(voice, "to_48k_mono", lambda src, dst, fx="": dst.write_bytes(src.read_bytes()))
+    records = voice.voice_all(ep, script)
+    assert fake_tts.calls == ["Read by the machine."]
+    a = records["a"]
+    assert a["source"] == "recorded:a.wav" and a["duration"] == 3.0
+    # With no transcript the words spread over the whole recording.
+    assert a["words"][0]["start"] == 0.0 and a["words"][-1]["end"] == 3.0
+    assert not list((ep / "audio" / "vo").glob(".*"))  # the resampled temp file is gone
+
+
+def test_make_g2p_falls_back_to_espeak(monkeypatch, capsys):
+    assert voice.make_g2p("espeak", "en-gb") is None
+    assert voice.make_g2p("misaki", "fr-fr") is None  # misaki here is English only
+    with pytest.raises(SystemExit):
+        voice.make_g2p("phonemizer", "en-gb")
+
+    def broken():
+        raise ImportError("no spaCy model")
+    monkeypatch.setattr(voice, "ensure_spacy_model", broken)
+    assert voice.make_g2p("misaki", "en-gb") is None
+    assert "misaki unavailable (no spaCy model)" in capsys.readouterr().out
+
+
+def _chatterbox(*replies: str):
+    tts = object.__new__(voice.Chatterbox)
+    tts.proc = type("Proc", (), {"stdin": io.StringIO(), "stdout": io.StringIO("".join(replies))})()
+    return tts
+
+
+def test_chatterbox_request_round_trip():
+    tts = _chatterbox('{"ready": true}\n', '{"ok": true}\n')
+    assert tts.request(None) == {"ready": True}
+    assert tts.request({"text": "Hi."}) == {"ok": True}
+    assert json.loads(tts.proc.stdin.getvalue()) == {"text": "Hi."}
+
+
+@pytest.mark.parametrize("reply, message", [
+    ("", "worker exited"),
+    ("Traceback (most recent call last):\n", "non-JSON reply"),
+    ('{"error": "reference clip too short"}\n', "Chatterbox: reference clip too short"),
+])
+def test_chatterbox_request_errors(reply, message, capsys):
+    with pytest.raises(SystemExit):
+        _chatterbox(reply).request({"text": "Hi."})
+    assert message in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("prev, nxt, context", [
+    ("", "", {}),
+    ("Before.", "", {"previous_text": "Before."}),
+    ("Before.", "After.", {"previous_text": "Before.", "next_text": "After."}),
+])
+def test_elevenlabs_sends_only_the_context_it_has(tmp_path, monkeypatch, prev, nxt, context):
+    script = Script({"tts": "elevenlabs", "voice": "v1", "voice_settings": {"stability": 0.4}}, [])
+    monkeypatch.setattr(voice, "elevenlabs_key", lambda: "k")
+    sent = []
+    monkeypatch.setattr(voice, "elevenlabs_post", lambda url, key, body: sent.append((url, body)) or b"mp3")
+    monkeypatch.setattr(voice, "to_48k_mono", lambda src, dst, fx="": dst.write_bytes(src.read_bytes()))
+    tts = voice.ElevenLabs(script)
+    tts.synth_to("Hello.", tmp_path / "x.wav", prev, nxt)
+    url, body = sent[0]
+    assert "/text-to-speech/v1?" in url
+    assert body == {"text": "Hello.", "model_id": "eleven_multilingual_v2",
+                    "voice_settings": {"stability": 0.4, "speed": 0.85}, **context}
+    assert (tmp_path / "x.wav").read_bytes() == b"mp3" and not (tmp_path / ".x.raw.mp3").exists()
+    assert tts.chars == 6

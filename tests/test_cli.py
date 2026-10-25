@@ -1,6 +1,7 @@
 """The commands that need no TTS, browser or HyperFrames: new, status, install-skill, music (cached), archive."""
 
 import json
+import subprocess
 import sys
 
 import pytest
@@ -198,3 +199,16 @@ def test_archive_errors(archive_ws, monkeypatch, capsys, setup, error):
     with pytest.raises(SystemExit):
         studio(monkeypatch, "archive", "ep")
     assert error in capsys.readouterr().err and not calls
+
+
+@pytest.mark.parametrize("code", [0, 3])
+def test_check_exits_with_hyperframes_status(workspace, monkeypatch, code):
+    """`studio check` gates rendering, so a failing hyperframes check must fail the command."""
+    calls = []
+    monkeypatch.setattr(cli, "_sync", lambda slug: (workspace / "episodes" / slug, None, None))
+    monkeypatch.setattr(cli.subprocess, "run",
+                        lambda cmd, cwd: calls.append(cmd) or subprocess.CompletedProcess(cmd, code))
+    with pytest.raises(SystemExit) as exit:
+        studio(monkeypatch, "check", "ep", "--json")
+    assert exit.value.code == code
+    assert calls[0][-2:] == ["check", "--json"]
