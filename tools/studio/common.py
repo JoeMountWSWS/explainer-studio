@@ -10,9 +10,24 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-BRAND = ROOT / "brand"
-TEMPLATES = ROOT / "templates"
+
+def _workspace() -> Path:
+    """$STUDIO_ROOT, else the nearest directory at or above the cwd holding episodes/, else the cwd."""
+    if env := os.environ.get("STUDIO_ROOT"):
+        return Path(env).expanduser().resolve()
+    cwd = Path.cwd().resolve()
+    return next((d for d in (cwd, *cwd.parents) if (d / "episodes").is_dir()), cwd)
+
+
+# House style bundled with the package: studio/data/ in a wheel, the source tree in a checkout.
+_HERE = Path(__file__).resolve().parent
+PKG_DATA = _HERE / "data" if (_HERE / "data").is_dir() else _HERE.parents[1]
+
+# The workspace holds episodes/, out/, .env and any brand/music or brand/voices. A workspace brand/
+# or templates/ (as in a repo checkout) overrides the bundled copy.
+ROOT = _workspace()
+BRAND = ROOT / "brand" if (ROOT / "brand" / "brand.css").exists() else PKG_DATA / "brand"
+TEMPLATES = ROOT / "templates" if (ROOT / "templates" / "script.md").exists() else PKG_DATA / "templates"
 EPISODES = ROOT / "episodes"
 OUT = ROOT / "out"
 

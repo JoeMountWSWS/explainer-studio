@@ -19,15 +19,18 @@ from __future__ import annotations
 import atexit
 import difflib
 import functools
+import importlib
 import json
 import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 import urllib.error
 import urllib.request
+import zipfile
 from pathlib import Path
 
 import numpy as np
@@ -103,6 +106,34 @@ def voice_spec(spec: str) -> str:
     return " + ".join(f"{n}*{w:.3f}".rstrip("0").rstrip(".") for n, w in blend)
 
 
+SPACY_MODEL = "en_core_web_sm-3.8.0"  # matches the spacy>=3.8,<3.9 pin in pyproject.toml
+SPACY_MODEL_URL = f"https://github.com/explosion/spacy-models/releases/download/{SPACY_MODEL}/{SPACY_MODEL}-py3-none-any.whl"
+
+
+def ensure_spacy_model() -> None:
+    """Make en_core_web_sm importable for misaki, unpacking its wheel into the cache on first use.
+
+    It can't be a dependency (PyPI rejects direct-URL requirements), and misaki's own fallback,
+    `spacy download`, needs pip, which uv environments don't have.
+    """
+    import spacy.util
+
+    if spacy.util.is_package("en_core_web_sm"):
+        return
+    dst = Path.home() / ".cache" / "hyperframes" / "spacy" / SPACY_MODEL
+    if not dst.exists():
+        info(f"  downloading spaCy model {SPACY_MODEL} (~13 MB, once)")
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=dst.parent) as tmp:
+            whl = Path(tmp) / "model.whl"
+            urllib.request.urlretrieve(SPACY_MODEL_URL, whl)
+            with zipfile.ZipFile(whl) as z:
+                z.extractall(Path(tmp) / "pkg")
+            (Path(tmp) / "pkg").rename(dst)
+    sys.path.insert(0, str(dst))
+    importlib.invalidate_caches()
+
+
 def make_g2p(name: str, lang: str):
     """misaki (the G2P Kokoro was trained with) for English; None means kokoro-onnx's espeak."""
     if name == "espeak" or lang not in ("en-us", "en-gb"):
@@ -110,6 +141,7 @@ def make_g2p(name: str, lang: str):
     if name != "misaki":
         die(f"unknown g2p '{name}' (choose: misaki, espeak)")
     try:
+        ensure_spacy_model()
         from misaki import en, espeak
         british = lang == "en-gb"
         return en.G2P(trf=False, british=british, fallback=espeak.EspeakFallback(british=british))

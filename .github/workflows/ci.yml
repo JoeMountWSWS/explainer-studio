@@ -47,6 +47,16 @@ jobs:
           done
           uv run studio new ci-smoke "CI smoke"
           uv run studio status ci-smoke
+      - name: Build and smoke-test the wheel outside the repo
+        run: |
+          uv build
+          uv venv "$RUNNER_TEMP/venv"
+          uv pip install --python "$RUNNER_TEMP/venv/bin/python" dist/*.whl
+          mkdir "$RUNNER_TEMP/ws" && cd "$RUNNER_TEMP/ws"
+          "$RUNNER_TEMP/venv/bin/studio" --help
+          "$RUNNER_TEMP/venv/bin/studio" new smoke "Smoke"
+          "$RUNNER_TEMP/venv/bin/studio" status smoke
+          test -f episodes/smoke/script.md
 
   episodes:
     name: Episodes
