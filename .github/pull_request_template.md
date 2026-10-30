@@ -17,7 +17,7 @@
 
 - [ ] Tests added or updated for any CLI change
 - [ ] `AGENTS.md` and `docs/` updated if commands, settings or the script format changed
-- [ ] No episode content, music beds, org assets or licensed fonts (DINPro) added: those belong in the private `sep-episodes` workspace or are gitignored
+- [ ] No episode content, music beds, org assets or licensed fonts (DINPro) added: those belong in a private content workspace or are gitignored
 - [ ] No API keys, `.env` or personal paths committed
 - [ ] Version and `CHANGELOG.md` not hand-edited (release-please owns them)
 

@@ -10,17 +10,17 @@ from studio.script import Script
 
 
 def test_respell_whole_words_longest_first():
-    table = {"IYSSE": "eye why ess ess ee", "SEP": "S E P", "SEP members": "ess ee pee members"}
-    assert voice.respell("The SEP and the IYSSE.", table) == "The S E P and the eye why ess ess ee."
-    assert voice.respell("SEP members met", table) == "ess ee pee members met"
-    assert voice.respell("SEPTEMBER and SEP-led", table) == "SEPTEMBER and SEP-led"  # not inside words
+    table = {"NATO": "nay toe", "ACE": "A C E", "ACE members": "ack mee members"}
+    assert voice.respell("The ACE and the NATO.", table) == "The A C E and the nay toe."
+    assert voice.respell("ACE members met", table) == "ack mee members met"
+    assert voice.respell("ACEFOO and ACE-led", table) == "ACEFOO and ACE-led"  # not inside words
 
 
 def test_load_pronunciations_script_overrides_brand(tmp_path, monkeypatch):
-    (tmp_path / "pronunciations.yaml").write_text("Engels: Engles\nWSWS: W S W S\n", encoding="utf-8")
+    (tmp_path / "pronunciations.yaml").write_text("Engels: Engles\nNATO: N A T O\n", encoding="utf-8")
     monkeypatch.setattr(voice, "BRAND", tmp_path)
     table = voice.load_pronunciations(Script({"pronounce": {"Engels": "Eng-gels"}}, []))
-    assert table == {"Engels": "Eng-gels", "WSWS": "W S W S"}
+    assert table == {"Engels": "Eng-gels", "NATO": "N A T O"}
 
 
 def test_parse_voice_normalises_weights():
@@ -75,7 +75,7 @@ def test_trim_silence_keeps_margin():
 
 
 def test_align_uses_transcript_and_interpolates_the_rest():
-    script_words = ["The", "IYSSE", "met", "in", "1871."]
+    script_words = ["The", "NATO", "met", "in", "1871."]
     asr = [
         {"text": "the", "start": 0.0, "end": 0.2},
         {"text": "eye", "start": 0.2, "end": 0.4},  # respelled acronym: no match
@@ -85,7 +85,7 @@ def test_align_uses_transcript_and_interpolates_the_rest():
     words = voice.align(script_words, asr, [(0, 5, 0.0, 2.0)])
     assert [w["text"] for w in words] == script_words
     assert words[0] == {"text": "The", "start": 0.0, "end": 0.2}
-    assert words[1] == {"text": "IYSSE", "start": 0.2, "end": 0.6}  # between its matched neighbours
+    assert words[1] == {"text": "NATO", "start": 0.2, "end": 0.6}  # between its matched neighbours
     assert words[2] == {"text": "met", "start": 0.6, "end": 0.9}
     # "in 1871." are unmatched up to the chunk end, split by length (2 : 5 characters)
     assert words[3]["start"] == 0.9 and words[4]["end"] == 2.0
@@ -207,10 +207,10 @@ def test_elevenlabs_post_gives_up_after_retries(monkeypatch, capsys):
 def test_voice_all_synthesises_caches_and_aligns(write_script, tmp_path, fake_tts, capsys):
     script = write_script("""
         ---
-        pronounce: {SEP: S E P}
+        pronounce: {ACE: A C E}
         ---
         ## a: A
-        The SEP {cue} met. {pause 0.5} Then left.
+        The ACE {cue} met. {pause 0.5} Then left.
 
         Second paragraph.
 
@@ -219,12 +219,12 @@ def test_voice_all_synthesises_caches_and_aligns(write_script, tmp_path, fake_tt
     """)
     ep = tmp_path / "ep"
     records = voice.voice_all(ep, script)
-    assert fake_tts.calls == ["The S E P met.", "Then left.", "Second paragraph."]
+    assert fake_tts.calls == ["The A C E met.", "Then left.", "Second paragraph."]
     a = records["a"]
-    # 5 + 2 + 2 words at 0.1s each (the respelled SEP is three), plus the 0.5s pause and 0.45s paragraph gap
+    # 5 + 2 + 2 words at 0.1s each (the respelled ACE is three), plus the 0.5s pause and 0.45s paragraph gap
     assert a["duration"] == pytest.approx(0.5 + 0.5 + 0.2 + 0.45 + 0.2)
     assert a["paragraphs"] == [0.0, 1.0, 1.65]
-    assert [w["text"] for w in a["words"]] == ["The", "SEP", "met.", "Then", "left.", "Second", "paragraph."]
+    assert [w["text"] for w in a["words"]] == ["The", "ACE", "met.", "Then", "left.", "Second", "paragraph."]
     assert a["cues"]["cue"] == a["words"][2]["start"]
     assert records["card"] == {"hash": "silent", "duration": 0.0, "words": [], "cues": {}, "paragraphs": []}
     assert (ep / "audio" / "vo" / "a.wav").exists() and not (ep / "audio" / "vo" / "card.wav").exists()

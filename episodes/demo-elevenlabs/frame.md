@@ -1,18 +1,17 @@
 ---
-name: Explainer house style (after wsws.org)
-reference: https://www.wsws.org — typography, palette and page furniture are taken from the site
+name: Explainer house style
 canvas:
   width: 1920
   height: 1080
   fps: 30
 colors:
-  paper: "#ffffff"       # ground of every scene, as on the site
+  paper: "#ffffff"       # ground of every scene
   panel: "#f4f4f4"       # cards, diagram fills, sidebar-style boxes
-  ink: "#231f20"         # headlines, primary text, heavy section rules (logo ink)
+  ink: "#231f20"         # headlines, primary text, heavy section rules
   ink-2: "#333333"       # body copy
   ink-soft: "#555555"    # standfirsts, bylines, captions, axis labels
   rule: "#cccccc"        # hairlines between items
-  red: "#e71e25"         # logo red: the single accent; ration it
+  red: "#e71e25"         # the single accent; ration it
   red-wash: "#ffdfdf"    # highlight wash behind a key phrase
   tag: "#1b2129"         # dark tag box ("PERSPECTIVE") with white label text
 typography:
@@ -27,7 +26,7 @@ spacing:
   safe-action: 96px 54px    # 5% inset: nothing visible outside this box
   unit: 8px
 components:
-  section-rule: "6px solid ink above an uppercase label (the site's 'TOP STORIES' head)"
+  section-rule: "6px solid ink above an uppercase label (a news-site section head)"
   hairline: "2px solid rule"
   tag: "tag-coloured box, white uppercase Source Sans label"
   blockquote: "PT Serif, indented, 6px red rule on the left"
@@ -40,22 +39,22 @@ motion:
   stagger: 0.12s
 ---
 
-# Explainer house style (after wsws.org)
+# Explainer house style
 
 ## Overview
 
-The videos should look like a WSWS article set in motion: a white page, serious
+The videos should look like a serious news article set in motion: a white page, serious
 serif headlines, small uppercase section labels, thin rules, and one red. Plain
 and authoritative, not "content-marketing". The narrator carries the argument. The
 frame shows its structure (claims, evidence, quotations, dates, figures) with the
-same typographic furniture a reader knows from the site.
+same typographic furniture a reader knows from a news article.
 
 ## Page furniture (reuse these in every scene)
 
 - **Section head**: a heavy 6px `ink` rule with an uppercase `label` beneath it
   (`.section-head` in `brand.css`). Use it to name the chapter at the top of a scene.
-- **Tag**: a dark `tag` box with a white uppercase label (`.tag`), like the
-  site's "PERSPECTIVE" marker. Use it for categories: *Perspective*, *History*,
+- **Tag**: a dark `tag` box with a white uppercase label (`.tag`), like a
+  news site's "PERSPECTIVE" marker. Use it for categories: *Perspective*, *History*,
   *Documents*, *Statistic*.
 - **Headline**: PT Serif Bold in `ink`. Sentence case, never all caps.
 - **Standfirst**: PT Serif Italic in `ink-soft` under a headline.
@@ -84,7 +83,7 @@ same typographic furniture a reader knows from the site.
 - **Lists**: at most 4 items, numbered in red Source Sans, with hairlines between.
 - No stock photos used as decoration, emoji, drop shadows, rounded "app" cards,
   gradients or glow. Photos are allowed only as evidence (archival images, news
-  photos with credit), set full-width with a caption, as on the site.
+  photos with credit), set full-width with a caption.
 
 ## Motion
 
