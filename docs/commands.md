@@ -16,6 +16,10 @@ an optional ElevenLabs API key (tested online without spending credits) and an o
 Enter skips or keeps the current value, so it is safe to re-run. Keys are typed without echo, never printed back, and
 saved with owner-only permissions; it refuses to write `.env` if a git repository doesn't ignore it.
 
+Each missing tool comes with an install hint for your system (`winget` on Windows, `apt` or `pacman` on
+Linux, `brew` on macOS). The [Install](install.md) page has the full list. A browser for thumbnails can be
+Chrome, Chromium or Edge.
+
 `--check` only prints the report, one `ok|missing|optional  name  hint` line per item, and exits 1 if a required tool
 is missing. It is also what runs when input isn't a terminal, so scripts and coding agents can use it as a health check.
 

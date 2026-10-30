@@ -28,6 +28,7 @@ theme:
     - navigation.top
     - navigation.footer
     - content.code.copy
+    - content.tabs.link
     - content.action.edit
     - search.highlight
 
@@ -40,10 +41,12 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.details
+  - pymdownx.tabbed: { alternate_style: true }
 
 nav:
   - Home: index.md
   - Guide:
+      - Install: install.md
       - Getting started: getting-started.md
       - Working with a coding agent: coding-agents.md
       - Writing a script: script.md
@@ -51,6 +54,7 @@ nav:
       - Designing scenes: scenes.md
       - Rendering and publishing: rendering.md
       - Reels (9:16): reels.md
+      - Your first reel (tutorial): reels-tutorial.md
   - Reference:
       - Commands: commands.md
       - Settings: settings.md

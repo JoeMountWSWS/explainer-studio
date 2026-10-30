@@ -25,7 +25,7 @@ not technical: explain each step in plain words, one at a time, and don't dump c
 ```bash
 uv run studio setup                  # first run: check tools, ask questions, write .env (`--check` = report only)
 uv run studio new <slug> "Title"     # scaffold episodes/<slug>/
-$EDITOR episodes/<slug>/script.md    # write the script (format below)
+# open episodes/<slug>/script.md in any editor and write the script (format below)
 uv run studio sync <slug>            # narrate + align + stub scenes + write index.html
 uv run studio status <slug>          # word counts, est vs actual length, cues per scene
 # design each scenes/<id>.html (see "Authoring scenes")
@@ -131,6 +131,6 @@ Read `brand/frame.md` first, and use the `hyperframes-core` and `hyperframes-ani
 ## Gotchas
 
 - Only one root-level HTML file may carry `data-composition-id`. `render` creates `_render_<id>.html` shells temporarily and deletes them; if a crash leaves one behind, delete it.
-- If package or model downloads fail with DNS errors (NordVPN + DNSSEC "signature-expired"), run `resolvectl flush-caches`.
+- **Linux:** if package or model downloads fail with DNS errors (NordVPN + DNSSEC "signature-expired"), run `resolvectl flush-caches`.
 - If a render hangs or reports empty frames under GPU capture, add `--no-browser-gpu` in `render_scenes()` (`tools/studio/render.py`).
 - **Licensed fonts** (e.g. DINPro) are not OFL. Their TTFs live in gitignored `brand/fonts-licensed/` and must never be committed or moved into `brand/fonts/` (the repo is public and `brand/fonts/` ships in the wheel). `sync` copies `DINPro-*.ttf` from there and appends their `@font-face` rules, but only a workspace `brand.css` that names DINPro in `--font-sans` uses them; the default style is Source Sans 3. A DINPro build's `fi`/`fl` ligatures can be broken, so burned-in captions insert a zero-width non-joiner.

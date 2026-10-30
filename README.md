@@ -3,12 +3,13 @@
 [![CI](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/JoeMountWSWS/explainer-studio/actions/workflows/ci.yml)
 [![Coverage](https://raw.githubusercontent.com/JoeMountWSWS/explainer-studio/python-coverage-comment-action-data/badge.svg)](https://htmlpreview.github.io/?https://github.com/JoeMountWSWS/explainer-studio/blob/python-coverage-comment-action-data/htmlcov/index.html)
 [![PyPI](https://img.shields.io/pypi/v/explainer-studio)](https://pypi.org/project/explainer-studio/)
+[![Docs](https://img.shields.io/badge/docs-mkdocs-blue)](https://joemountwsws.github.io/explainer-studio/)
 
 A command-line studio for narrated explainer videos with a clean, editorial house style.
 You write a script in Markdown. The studio narrates it with local TTS, aligns every word to the audio,
 and turns each scene into a [HyperFrames](https://www.npmjs.com/package/hyperframes) HTML composition
 that is timed to the narration. It then renders a mastered 1920×1080 MP4 for YouTube, with captions
-and chapter markers.
+and chapter markers. It runs on Windows, Linux and macOS (macOS is untested).
 
 ```
 script.md ──► narration (Kokoro, local; or ElevenLabs) ──► word timings (Whisper)
@@ -20,10 +21,10 @@ script.md ──► narration (Kokoro, local; or ElevenLabs) ──► word timi
 
 ## Requirements
 
-- Linux (developed on Arch with an AMD GPU; the render uses Chromium's GPU capture)
+- Windows, Linux or macOS (macOS is untested). Per-system install commands: [Install](https://joemountwsws.github.io/explainer-studio/install/)
 - [uv](https://docs.astral.sh/uv/), with Python 3.12 or 3.13 (`kokoro-onnx` doesn't support 3.14 yet)
 - Node.js with `npx`. The HyperFrames CLI is fetched on demand at the version pinned in `tools/studio/common.py`.
-- ffmpeg and Chromium
+- ffmpeg, and Chrome, Chromium or Edge for thumbnails
 - Optional: an ElevenLabs API key in `.env` (`ELEVENLABS_API_KEY=…`) for cloud narration
 
 Run `uv run studio setup` (or `studio setup` once installed) to check these and create your `.env` interactively.
@@ -58,7 +59,7 @@ workspace's `brand/music/` and `brand/voices/`. Use `studio` wherever this READM
 **From a clone**, to work on the studio itself or to use the example episodes:
 
 ```bash
-git clone git@github.com:JoeMountWSWS/explainer-studio.git
+git clone https://github.com/JoeMountWSWS/explainer-studio.git
 cd explainer-studio
 uv sync
 ```
@@ -96,7 +97,7 @@ nothing leaves your machine unless you choose cloud narration.
 
 ```bash
 uv run studio new my-video "My Video"   # scaffold episodes/my-video/
-$EDITOR episodes/my-video/script.md     # write the script
+# open episodes/my-video/script.md in any editor and write the script
 uv run studio sync my-video             # narrate, align, stub scene files, write index.html
 uv run studio status my-video           # words, estimated vs actual length, cues per scene
 # design each episodes/my-video/scenes/<id>.html

@@ -62,6 +62,11 @@ uvx --with mkdocs-material==9.7.7 mkdocs build    # strict build into ./site
 The build is strict, so broken links fail it. In the repository settings, set **Pages → Source** to
 **GitHub Actions** once.
 
+Development works the same way on Windows, Linux and macOS: [install the tools](install.md), clone,
+and `uv sync`. Keep both platforms working: pass `encoding="utf-8"` to every text read and write, run
+`npx` through `hf()` in `common.py`, and keep absolute paths out of ffmpeg filter arguments
+(a drive colon splits options).
+
 ## CI
 
 [`ci.yml`](https://github.com/JoeMountWSWS/explainer-studio/blob/main/.github/workflows/ci.yml) runs

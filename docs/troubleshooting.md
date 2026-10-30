@@ -1,17 +1,13 @@
 # Troubleshooting
 
-## Package or model downloads fail with DNS errors
-
-With NordVPN and DNSSEC you may see "signature-expired". Flush the resolver cache and retry:
-
-```bash
-resolvectl flush-caches
-```
+Start with `uv run studio setup --check`, which reports missing tools and says how to install them.
+Problems that only happen on one system are at the [end of the page](#problems-on-one-system).
 
 ## A render hangs or reports empty frames
 
-The render uses Chromium's GPU capture. If it hangs, add `--no-browser-gpu` in `render_scenes()` in
-`tools/studio/render.py`.
+The render uses Chromium's GPU capture on Linux. If it hangs, add `--no-browser-gpu` in
+`render_scenes()` in `tools/studio/render.py`. On Windows and macOS frames are captured by screenshot
+instead, so a render is slower but doesn't hit this.
 
 ## "Only one root-level HTML file may carry `data-composition-id`"
 
@@ -45,10 +41,53 @@ the cache. Changing one paragraph re-synthesises only that paragraph.
 
 ## Chatterbox fails to start
 
-Delete `~/.cache/hyperframes/chatterbox/<version>` to rebuild its environment. There is no GPU
-support on the reference machine (no CUDA on the RX 580, and ROCm doesn't support it), so it runs
-on the CPU.
+Delete `~/.cache/hyperframes/chatterbox/<version>` to rebuild its environment (`C:\Users\<you>\.cache\...`
+on Windows). It runs on the CPU, which is slow: about 4–5× slower than real time on the reference
+machine, which has no CUDA GPU.
 
-## Windows or macOS
+## Problems on one system
 
-Not supported. The studio is developed and tested on Linux.
+=== "Windows"
+
+    **`'studio' is not recognized`, or `winget`-installed tools are not found.** Close and reopen
+    PowerShell so the new PATH applies. With `uv tool install`, run `uv tool update-shell` once.
+
+    **`running scripts is disabled on this system`.** PowerShell is blocking a script. Allow your own
+    scripts with `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
+
+    **`npx` fails to start.** On Windows it is `npx.cmd`. The studio handles this itself, so the cause
+    is usually Node.js missing from PATH. Check `node --version`.
+
+    **ffmpeg errors that mention a drive letter or `C:`.** The studio keeps absolute paths out of ffmpeg
+    filter arguments because the colon splits options. If you add your own filter, use relative paths.
+
+    **Garbled characters in a script or scene file.** Save files as UTF-8. Windows Notepad does by
+    default today; older editors may use cp1252.
+
+    **Renders are slow.** Windows captures frames by screenshot. Use `render --draft` while you work.
+
+    **A path is too long.** Keep the studio close to the drive root, or enable long paths in Windows.
+
+    **Thumbnail can't find a browser.** The studio looks for Chrome, Chromium or Edge on PATH. Install
+    one, or add its folder to PATH.
+
+=== "Linux"
+
+    **Package or model downloads fail with DNS errors.** With NordVPN and DNSSEC you may see
+    "signature-expired". Flush the resolver cache and retry:
+
+    ```bash
+    resolvectl flush-caches
+    ```
+
+    **`studio thumbnail` finds no browser.** Install `chromium` or `google-chrome` so it is on PATH.
+
+=== "macOS (untested)"
+
+    **`brew`-installed tools are not found.** Add Homebrew to your shell's PATH (`brew shellenv`
+    prints the line to use) and reopen the terminal.
+
+    **macOS blocks a downloaded program.** Open System Settings → Privacy & Security and allow it.
+
+    These are generic fixes. We haven't run the studio on macOS, so please
+    [report](https://github.com/JoeMountWSWS/explainer-studio/issues) anything else you hit.

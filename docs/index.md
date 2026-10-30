@@ -5,7 +5,7 @@ A command-line studio for narrated explainer videos with a clean, editorial hous
 You write a script in Markdown. The studio narrates it with text-to-speech, aligns every word to the
 audio, and turns each scene into a [HyperFrames](https://www.npmjs.com/package/hyperframes) HTML
 composition timed to the narration. It then renders a mastered 1920×1080 MP4 for YouTube, with
-captions and chapter markers.
+captions and chapter markers. It runs on Windows, Linux and macOS (macOS is untested).
 
 ```
 script.md ──► narration (Kokoro, local; or Chatterbox / ElevenLabs) ──► word timings (Whisper)
@@ -29,7 +29,9 @@ script.md ──► narration (Kokoro, local; or Chatterbox / ElevenLabs) ──
 
 <div class="grid cards" markdown>
 
-- **[Getting started](getting-started.md)**: install the tools and make a first video.
+- **[Install](install.md)**: set up the tools on Windows, Linux or macOS.
+- **[Getting started](getting-started.md)**: make a first video.
+- **[Your first reel](reels-tutorial.md)**: a beginner's walkthrough for a 9:16 reel.
 - **[Working with a coding agent](coding-agents.md)**: let Claude Code make the video, using the bundled skill.
 - **[Writing a script](script.md)**: the script format, cues and pauses.
 - **[Narration](narration.md)**: choose and tune a voice.
