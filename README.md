@@ -26,6 +26,8 @@ script.md ──► narration (Kokoro, local; or ElevenLabs) ──► word timi
 - ffmpeg and Chromium
 - Optional: an ElevenLabs API key in `.env` (`ELEVENLABS_API_KEY=…`) for cloud narration
 
+Run `uv run studio setup` (or `studio setup` once installed) to check these and create your `.env` interactively.
+
 The first `sync` downloads the Kokoro-82M model to `~/.cache/hyperframes/tts` and spaCy's
 `en_core_web_sm` to `~/.cache/hyperframes/spacy`.
 

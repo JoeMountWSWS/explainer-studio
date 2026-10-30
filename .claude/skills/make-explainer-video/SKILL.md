@@ -9,6 +9,10 @@ Pipeline: `script.md` → local TTS → word timings → one HyperFrames scene p
 
 The full reference (script settings, TTS engines, gotchas) is `AGENTS.md` in a clone, or `references/agents.md` beside this file when the skill was installed with `studio install-skill`. The design spec is `brand/frame.md` or `references/frame.md`, and the starter script is `templates/script.md` or `references/script-template.md`. (In a pip-installed workspace there is no `brand/` or `templates/` folder unless you copied one in; the house style then ships with the package.) Read the design spec before designing any scene, and load the `hyperframes-core` and `hyperframes-animation` skills for the composition contract and motion. Don't restate them from memory.
 
+## Before anything else
+
+On a fresh checkout or install, run `studio setup --check`. If it exits non-zero or `.env` is missing and the user wants cloud narration or archiving, follow "First-time setup" in `AGENTS.md` (or `references/agents.md`): ask the user to run `! studio setup` themselves, and never read or print `.env`.
+
 ## Workflow
 
 1. **Scaffold**: `studio new <slug> "Title"` creates `episodes/<slug>/`. Read the starter script and, if present, the worked example `episodes/demo-paris-commune/`.

@@ -9,6 +9,9 @@
 - ffmpeg and Chromium.
 - Optional: an ElevenLabs API key for cloud narration (see [Narration](narration.md#elevenlabs-cloud)).
 
+Not sure what you have? Run `studio setup --check` after installing for a one-line-per-tool report, or
+`studio setup` to be walked through API keys and the archive remote.
+
 ## Install
 
 ### From PyPI
