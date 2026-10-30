@@ -78,6 +78,12 @@ The skill walks the agent through the same steps as [Getting started](getting-st
 It finishes by reporting the paths of the files in `out/`. It also writes a song description you can
 paste into a music generator such as Suno, for an instrumental bed under the narration.
 
+### First-time setup
+
+For a new user the agent starts with `studio setup --check`, explains anything missing in plain language,
+and asks you to run the interactive wizard yourself (`! studio setup` in Claude Code), so your API key never
+passes through the agent. It then offers a guided first episode.
+
 ### What it won't do without asking
 
 The skill tells the agent to:

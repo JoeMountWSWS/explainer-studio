@@ -5,9 +5,25 @@ with a clean editorial house style. Pipeline: `script.md` → local TTS narratio
 one HyperFrames sub-composition per scene → cached per-scene renders → mastered MP4, captions
 and chapters in `out/`.
 
+## First-time setup (start here)
+
+The goal is to take someone who has never used this tool from zero to a finished video, so assume they are
+not technical: explain each step in plain words, one at a time, and don't dump command output on them.
+
+1. Run `uv run studio setup --check` yourself. Each line is `ok|missing|optional  <name>  <hint>`, and it exits 1 only if
+   ffmpeg, ffprobe or npx is missing. Explain what is missing and why, and offer to run the install command (ask first).
+2. The interactive wizard asks about API keys and the archive remote, which you cannot answer and must never see. Ask the
+   user to run it themselves by typing `! uv run studio setup`. It tests an ElevenLabs key without spending credits, writes
+   `.env` (owner-only) and offers to download the narration models. Never read, print or ask them to paste `.env` or a key.
+3. Re-run `studio setup --check` to confirm. No ElevenLabs key is fine: Kokoro narration is local and free, so don't
+   push the paid engine.
+4. Then offer a guided first episode: look at `episodes/demo-paris-commune/` together, `studio new <slug> "Title"`,
+   help write `script.md` (see "Writing for this format"), `sync`, `preview`, `check`, a `--draft` render, then the final render.
+
 ## Quick start
 
 ```bash
+uv run studio setup                  # first run: check tools, ask questions, write .env (`--check` = report only)
 uv run studio new <slug> "Title"     # scaffold episodes/<slug>/
 $EDITOR episodes/<slug>/script.md    # write the script (format below)
 uv run studio sync <slug>            # narrate + align + stub scenes + write index.html

@@ -1,5 +1,6 @@
 """studio: script -> narration -> HyperFrames scenes -> mastered MP4 + captions + chapters.
 
+    uv run studio setup [--check]         first-time setup: check tools, ask questions, write .env
     uv run studio new <slug> "Title"      scaffold episodes/<slug>/ with a starter script
     uv run studio status <slug>           scenes, word counts, estimated vs actual length
     uv run studio sync <slug>             narrate (cached), align, stub scenes, write index.html
@@ -29,7 +30,7 @@ import numpy as np
 import soundfile as sf
 
 from . import build as builder
-from . import music, skill, voice
+from . import music, setup, skill, voice
 from . import render as renderer
 from .common import (
     EPISODES,
@@ -263,6 +264,12 @@ def cmd_install_skill(a):
 def main():
     p = argparse.ArgumentParser(prog="studio", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
+
+    s = sub.add_parser("setup", help="first-time setup: check tools, ask a few questions, write .env")
+    s.add_argument("--check", action="store_true", help="only report prerequisites (exit 1 if a required tool is missing)")
+    s.add_argument("--no-verify", action="store_true", help="don't test the ElevenLabs key online")
+    s.add_argument("--no-download", action="store_true", help="don't offer to download the narration models")
+    s.set_defaults(fn=setup.cmd_setup)
 
     s = sub.add_parser("new", help="scaffold a new episode")
     s.add_argument("slug")
