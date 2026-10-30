@@ -1,6 +1,6 @@
 [project]
 name = "explainer-studio"
-version = "0.1.6"
+version = "0.1.7"
 description = "Command-line studio for narrated explainer videos (HyperFrames + Kokoro TTS + ffmpeg)"
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
