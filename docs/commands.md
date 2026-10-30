@@ -74,7 +74,7 @@ Runs `sync`, then `hyperframes check`: lint, layout and contrast audits. Exits n
 ## `render`
 
 ```bash
-uv run studio render <slug> [--draft] [--force [ID ...]]
+uv run studio render <slug> [--draft] [--force [ID ...]] [--no-verify]
 ```
 
 Runs `sync`, renders changed scenes, assembles and masters the episode into `out/`.
@@ -84,8 +84,29 @@ Runs `sync`, renders changed scenes, assembles and masters the episode into `out
 | `--draft` | Fast, lower-quality render to `out/<slug>-draft.mp4` |
 | `--force` | Re-render every scene |
 | `--force ID …` | Re-render only the named scenes |
+| `--no-verify` | Skip the [`verify`](#verify) pass that otherwise runs on the finished master |
 
 Requires ffmpeg. See [Rendering and publishing](rendering.md).
+
+## `verify`
+
+```bash
+uv run studio verify <slug> [--draft] [--no-speech]
+```
+
+QA of the file you would upload (`out/<slug>.mp4`), also run at the end of `render`. It checks the
+resolution, frame rate and length against `timing.json`; integrated loudness and true peak against
+`loudness` and `true_peak`; black frames (error) and long frozen video (warning); silences longer than the
+script's own pauses; that a transcript of the mastered audio matches the script (so the music bed isn't
+burying the voice, and it lists the words it didn't hear); and that the `.srt` and `.chapters.txt` exist
+with chapters that meet YouTube's rules. Exits 1 if anything is an error; warnings don't fail it.
+
+| Flag | Meaning |
+| --- | --- |
+| `--draft` | Check `out/<slug>-draft.mp4`, without the captions and chapters |
+| `--no-speech` | Skip the transcription check, the slowest step |
+
+It reads `timing.json` and the existing render, so it doesn't re-sync: after editing the script, `render` first.
 
 ## `thumbnail`
 

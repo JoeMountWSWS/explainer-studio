@@ -7,6 +7,7 @@
     uv run studio preview <slug>          open HyperFrames Studio on the episode
     uv run studio check <slug>            HyperFrames lint + layout/contrast audits
     uv run studio render <slug> [--draft] render changed scenes, assemble, master -> out/
+    uv run studio verify <slug>           QA the finished master: loudness, black frames, silences, speech, captions
     uv run studio thumbnail <slug>        screenshot thumbnail/thumbnail.html -> out/
     uv run studio voices <slug>           audition Kokoro blends or Chatterbox clips on one scene -> out/voice-samples/
     uv run studio music <slug> --prompt   generate an instrumental music bed (ElevenLabs Music) sized to the episode
@@ -30,7 +31,7 @@ import numpy as np
 import soundfile as sf
 
 from . import build as builder
-from . import music, setup, skill, voice
+from . import music, setup, skill, verify, voice
 from . import render as renderer
 from .common import (
     EPISODES,
@@ -128,7 +129,26 @@ def cmd_render(a):
     require_tools()
     ep, script, timing = _sync(a.slug)
     info("rendering")
-    renderer.render_episode(ep, script, timing, a.draft, set(a.force) if a.force else None, a.force is not None)
+    master = renderer.render_episode(ep, script, timing, a.draft, set(a.force) if a.force else None,
+                                     a.force is not None)
+    if not a.no_verify:
+        info("\nverifying")
+        if verify.report(verify.verify_master(ep, script, timing, master, deliverables=not a.draft)):
+            raise SystemExit(1)
+
+
+def cmd_verify(a):
+    require_tools()
+    ep = episode_dir(a.slug)
+    script = parse(ep / "script.md")
+    if not (ep / "timing.json").exists():
+        die(f"no timing.json: run `studio sync {a.slug}` and `studio render {a.slug}` first")
+    timing = json.loads((ep / "timing.json").read_text(encoding="utf-8"))
+    master = OUT / f"{a.slug}{'-draft' if a.draft else ''}.mp4"
+    info(f"verifying {master.relative_to(ROOT)}")
+    findings = verify.verify_master(ep, script, timing, master, speech=not a.no_speech, deliverables=not a.draft)
+    if verify.report(findings):
+        raise SystemExit(1)
 
 
 def find_browser() -> str:
@@ -299,7 +319,14 @@ def main():
     s.add_argument("slug")
     s.add_argument("--draft", action="store_true", help="fast draft quality -> out/<slug>-draft.mp4")
     s.add_argument("--force", nargs="*", metavar="SCENE", help="re-render these scenes (or all, if none named)")
+    s.add_argument("--no-verify", action="store_true", help="skip the automated QA of the finished master")
     s.set_defaults(fn=cmd_render)
+
+    s = sub.add_parser("verify", help="QA the finished master in out/: loudness, black frames, silences, speech, captions")
+    s.add_argument("slug")
+    s.add_argument("--draft", action="store_true", help="check out/<slug>-draft.mp4 (skips the captions and chapters)")
+    s.add_argument("--no-speech", action="store_true", help="skip the transcription check (the slowest step)")
+    s.set_defaults(fn=cmd_verify)
 
     s = sub.add_parser("thumbnail", help="render thumbnail/thumbnail.html to out/<slug>-thumbnail.jpg")
     s.add_argument("slug")

@@ -36,6 +36,14 @@ The cache lives in `episodes/<slug>/build/` and is safe to delete.
 - `studio render` warns if the chapters don't meet YouTube's rules: at least 3 chapters, each at
   least 10 seconds.
 
+## Verification
+
+After mastering, `render` runs `studio verify` on the file it just wrote and exits 1 if anything is
+an error: wrong resolution, frame rate or length, loudness or true peak off target, black frames, a
+silence longer than the script plans, a transcript that no longer matches the script (the music bed is
+too loud), or missing captions and chapters. Skip it with `--no-verify`, or run it alone later with
+`uv run studio verify <slug>`.
+
 ## Outputs
 
 | File | Use |
