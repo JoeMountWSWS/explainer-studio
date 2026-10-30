@@ -68,7 +68,7 @@ def sync_brand(ep: Path) -> None:
             faces.append(f'@font-face {{ font-family: "DINPro"; src: url("fonts/{font.name}") format("truetype"); '
                          f"font-weight: {weight}; font-style: normal; }}")
     if faces:
-        with (dst / "brand.css").open("a") as f:
+        with (dst / "brand.css").open("a", encoding="utf-8") as f:
             f.write("\n/* Added by `studio sync` from brand/fonts-licensed/ */\n" + "\n".join(faces) + "\n")
     shutil.copy2(BRAND / "frame.md", ep / "frame.md")
 
@@ -81,20 +81,20 @@ def stub_scene(ep: Path, script: Script, scene: dict, size: tuple[int, int]) -> 
     if not tpl.exists():
         choices = ", ".join(p.stem for p in (TEMPLATES / "scenes").glob("*.html"))
         die(f"scene '{scene['id']}': unknown template '{scene['template']}' (have: {choices})")
-    text = tpl.read_text()
+    text = tpl.read_text(encoding="utf-8")
     text = text.replace("__ID__", scene["id"])
     text = text.replace("__TITLE__", html.escape(scene["title"]))
     text = text.replace("__EPISODE__", html.escape(str(script.meta.get("title", "Untitled"))))
     text = text.replace('data-width="1920" data-height="1080"', f'data-width="{size[0]}" data-height="{size[1]}"')
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text)
+    path.write_text(text, encoding="utf-8")
     info(f"  new scene file scenes/{scene['id']}.html (from {scene['template']} template)")
     return True
 
 
 def inject_timing(ep: Path, scene: dict) -> None:
     path = ep / "scenes" / f"{scene['id']}.html"
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
     data = {k: scene[k] for k in ("duration", "voStart", "voEnd", "cues", "paragraphs")}
     data["duration"] = round(data["duration"], 4)
     block = f"\n          const T = {json.dumps(data)};\n          "
@@ -103,7 +103,7 @@ def inject_timing(ep: Path, scene: dict) -> None:
         info(f"  warning: scenes/{scene['id']}.html has no /* <studio:timing> */ block; cues not updated")
         return
     if new != text:
-        path.write_text(new)
+        path.write_text(new, encoding="utf-8")
 
 
 def _host(scene: dict, start: float, size: tuple[int, int]) -> str:
@@ -166,14 +166,14 @@ def write_index(ep: Path, script: Script, timing: dict) -> None:
             f'      <audio id="music" src="assets/music{ext}" data-start="0" data-duration="{timing["duration"]:.4f}" '
             f'data-track-index="11" data-volume="{vol}"></audio>'
         )
-    (ep / "index.html").write_text(page(str(script.meta.get("title", "Untitled")), timing["duration"], "\n".join(parts), size))
+    (ep / "index.html").write_text(page(str(script.meta.get("title", "Untitled")), timing["duration"], "\n".join(parts), size), encoding="utf-8")
 
 
 def render_shell(ep: Path, scene: dict, timing: dict) -> Path:
     """A temporary root page hosting one scene at t=0 (silent), so scenes render independently."""
     shell = ep / f"_render_{scene['id']}.html"
     size = (timing["width"], timing["height"])
-    shell.write_text(page(scene["id"], scene["duration"], _host(scene, 0.0, size), size))
+    shell.write_text(page(scene["id"], scene["duration"], _host(scene, 0.0, size), size), encoding="utf-8")
     return shell
 
 
@@ -187,7 +187,7 @@ def ensure_project_files(ep: Path) -> None:
             "dev": f"npx --yes hyperframes@{HF_VERSION} preview",
             "check": f"npx --yes hyperframes@{HF_VERSION} check",
         },
-    }, indent=2) + "\n")
+    }, indent=2) + "\n", encoding="utf-8")
     hfj = ep / "hyperframes.json"
     if not hfj.exists():
         hfj.write_text(json.dumps({
@@ -195,7 +195,7 @@ def ensure_project_files(ep: Path) -> None:
             "registry": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
             "paths": {"blocks": "compositions", "components": "compositions/components", "assets": "assets"},
             "media": {"autoProxy": True},
-        }, indent=2) + "\n")
+        }, indent=2) + "\n", encoding="utf-8")
 
 
 def build(ep: Path, script: Script, vo: dict[str, dict]) -> dict:
@@ -206,5 +206,5 @@ def build(ep: Path, script: Script, vo: dict[str, dict]) -> dict:
         stub_scene(ep, script, s, (timing["width"], timing["height"]))
         inject_timing(ep, s)
     write_index(ep, script, timing)
-    (ep / "timing.json").write_text(json.dumps(timing, indent=1))
+    (ep / "timing.json").write_text(json.dumps(timing, indent=1), encoding="utf-8")
     return timing

@@ -53,7 +53,7 @@ def load_pronunciations(script: Script) -> dict[str, str]:
     table: dict[str, str] = {}
     global_file = BRAND / "pronunciations.yaml"
     if global_file.exists():
-        table.update(yaml.safe_load(global_file.read_text()) or {})
+        table.update(yaml.safe_load(global_file.read_text(encoding="utf-8")) or {})
     table.update(script.meta.get("pronounce") or {})
     return table
 
@@ -265,23 +265,25 @@ class Chatterbox:
         python = self.ensure_env()
         info(f"  starting Chatterbox {self.model} on the CPU (first run downloads the model)...")
         self.proc = subprocess.Popen([str(python), "-I", str(self.WORKER), self.model],
-                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, bufsize=1)
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, encoding="utf-8",
+                                     bufsize=1, env={**os.environ, "PYTHONUTF8": "1"})
         atexit.register(self.close)
         self.request(None)  # wait for the model to load
 
     @staticmethod
     def ensure_env() -> Path:
-        python, stamp = CHATTERBOX_DIR / "bin" / "python", CHATTERBOX_DIR / ".installed"
+        venv_bin = ("Scripts", "python.exe") if os.name == "nt" else ("bin", "python")
+        python, stamp = CHATTERBOX_DIR.joinpath(*venv_bin), CHATTERBOX_DIR / ".installed"
         # resemble-perth (the watermarker) still imports pkg_resources, which setuptools 81 dropped.
         reqs = [f"chatterbox-tts=={CHATTERBOX_VERSION}", "soundfile", "setuptools<81"]
-        if stamp.exists() and stamp.read_text().split() == reqs:
+        if stamp.exists() and stamp.read_text(encoding="utf-8").split() == reqs:
             return python
         if not shutil.which("uv"):
             die("tts: chatterbox needs uv on PATH to build its environment")
         info(f"  installing chatterbox-tts {CHATTERBOX_VERSION} with CPU torch into {CHATTERBOX_DIR} (first run only)...")
         run(["uv", "venv", "--clear", "--python", "3.12", str(CHATTERBOX_DIR)])
         run(["uv", "pip", "install", "--python", str(python), "--torch-backend", "cpu", *reqs])
-        stamp.write_text("\n".join(reqs))
+        stamp.write_text("\n".join(reqs), encoding="utf-8")
         return python
 
     @staticmethod
@@ -462,8 +464,14 @@ def engine_class(script: Script):
     return ENGINES[name]
 
 
+@functools.cache
+def resampler() -> str:
+    """soxr when this ffmpeg has it; some builds (gyan.dev "essentials" on Windows) don't."""
+    return ":resampler=soxr" if "--enable-libsoxr" in run(["ffmpeg", "-hide_banner", "-buildconf"]) else ""
+
+
 def to_48k_mono(src: Path, dst: Path, fx: str = "") -> None:
-    chain = f"aresample={SAMPLE_RATE}:resampler=soxr" + (f",{fx}" if fx else "")
+    chain = f"aresample={SAMPLE_RATE}{resampler()}" + (f",{fx}" if fx else "")
     run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-ac", "1", "-ar", str(SAMPLE_RATE),
          "-af", chain, "-c:a", "pcm_s16le", str(dst)])
 
@@ -529,7 +537,7 @@ def align(script_words: list[str], asr: list[dict], chunk_spans: list[tuple[int,
 def transcribe(wav: Path) -> list[dict]:
     with tempfile.TemporaryDirectory() as tmp:
         run(hf("transcribe", str(wav), "-d", tmp, "--language", "en", "--json"), env=hf_env())
-        return json.loads((Path(tmp) / "transcript.json").read_text())
+        return json.loads((Path(tmp) / "transcript.json").read_text(encoding="utf-8"))
 
 
 # ---------------------------------------------------------------- per-scene
@@ -545,7 +553,7 @@ def voice_scene(ep: Path, script: Script, scene: Scene, tts, table: dict,
     if not scene.chunks:  # silent scene
         out_wav.unlink(missing_ok=True)
         rec = {"hash": "silent", "duration": 0.0, "words": [], "cues": {}, "paragraphs": []}
-        out_words.write_text(json.dumps(rec, indent=1))
+        out_words.write_text(json.dumps(rec, indent=1), encoding="utf-8")
         return rec, tts
 
     recording = find_recording(ep, scene.id)
@@ -588,7 +596,7 @@ def voice_scene(ep: Path, script: Script, scene: Scene, tts, table: dict,
 
     digest = sha(audio.tobytes(), scene.words, list(scene.cues.items()))[:20]
     if out_words.exists() and out_wav.exists():
-        prev = json.loads(out_words.read_text())
+        prev = json.loads(out_words.read_text(encoding="utf-8"))
         if prev.get("hash") == digest:
             return prev, tts
 
@@ -607,7 +615,7 @@ def voice_scene(ep: Path, script: Script, scene: Scene, tts, table: dict,
         "cues": cues,
         "paragraphs": [round(s[2], 3) for s in spans],
     }
-    out_words.write_text(json.dumps(rec, indent=1))
+    out_words.write_text(json.dumps(rec, indent=1), encoding="utf-8")
     return rec, tts
 
 
@@ -624,7 +632,7 @@ def voice_all(ep: Path, script: Script, only: set[str] | None = None) -> dict[st
         if only and scene.id not in only:
             wf = ep / "audio" / "vo" / f"{scene.id}.words.json"
             if wf.exists():
-                records[scene.id] = json.loads(wf.read_text())
+                records[scene.id] = json.loads(wf.read_text(encoding="utf-8"))
                 continue
         records[scene.id], tts = voice_scene(ep, script, scene, tts, table, ctx)
     if tts is not None and tts.chars:

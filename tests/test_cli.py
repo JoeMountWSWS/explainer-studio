@@ -31,7 +31,7 @@ def studio(monkeypatch, *argv):
 def test_new_then_status(workspace, monkeypatch, capsys):
     studio(monkeypatch, "new", "paris-commune", "The Paris Commune")
     ep = workspace / "episodes" / "paris-commune"
-    assert "title: The Paris Commune" in (ep / "script.md").read_text()
+    assert "title: The Paris Commune" in (ep / "script.md").read_text(encoding="utf-8")
     for d in ("scenes", "audio/recorded", "assets/media", "assets/brand"):
         assert (ep / d).is_dir()
     assert "created episodes/paris-commune/" in capsys.readouterr().out
@@ -58,7 +58,7 @@ def test_status_after_sync_shows_actual_length(workspace, monkeypatch, capsys):
     ep = workspace / "episodes" / "ep"
     script = parse(ep / "script.md")
     vo = {sc.id: vo_record([(w, i * 0.4, i * 0.4 + 0.4) for i, w in enumerate(sc.words)]) for sc in script.scenes}
-    (ep / "timing.json").write_text(json.dumps(build.compute_timing(script, vo)))
+    (ep / "timing.json").write_text(json.dumps(build.compute_timing(script, vo)), encoding="utf-8")
     capsys.readouterr()
     studio(monkeypatch, "status", "ep")
     assert "actual" in capsys.readouterr().out.splitlines()[-1]
@@ -68,7 +68,7 @@ def test_sync_narrates_and_builds(workspace, monkeypatch, capsys, fake_tts):
     studio(monkeypatch, "new", "ep")
     studio(monkeypatch, "sync", "ep")
     ep = workspace / "episodes" / "ep"
-    timing = json.loads((ep / "timing.json").read_text())
+    timing = json.loads((ep / "timing.json").read_text(encoding="utf-8"))
     assert fake_tts.calls and timing["duration"] > 0
     for s in timing["scenes"]:
         assert (ep / "scenes" / f"{s['id']}.html").exists()
@@ -85,7 +85,7 @@ def test_music_uses_cached_bed(workspace, monkeypatch, capsys):
         studio(monkeypatch, "music", "ep", "--prompt", "calm piano")
     assert "studio sync ep" in capsys.readouterr().err
 
-    (ep / "timing.json").write_text(json.dumps({"duration": 30.2}))
+    (ep / "timing.json").write_text(json.dumps({"duration": 30.2}), encoding="utf-8")
     length = 33  # ceil(30.2) + TAIL_S
     cached = ep / "audio" / "music" / f"{music.sha('calm piano', length, music.MODEL, 0)[:20]}.mp3"
     cached.parent.mkdir(parents=True)
@@ -130,12 +130,12 @@ def test_install_skill(tmp_path, monkeypatch, capsys):
         assert (target / rel).is_file()
     assert "installed the" in capsys.readouterr().out
 
-    (target / "SKILL.md").write_text("local edits")
+    (target / "SKILL.md").write_text("local edits", encoding="utf-8")
     with pytest.raises(SystemExit):
         studio(monkeypatch, "install-skill", "--dir", str(tmp_path))
     assert "--force" in capsys.readouterr().err
     studio(monkeypatch, "install-skill", "--dir", str(tmp_path), "--force")
-    assert (target / "SKILL.md").read_text() != "local edits"
+    assert (target / "SKILL.md").read_text(encoding="utf-8") != "local edits"
 
 
 def test_install_skill_into_its_own_checkout_is_a_no_op(monkeypatch, capsys):
@@ -157,7 +157,7 @@ def archive_ws(workspace, monkeypatch):
     calls = []
 
     def fake_run(cmd, check):
-        calls.append((cmd, open(cmd[cmd.index("--files-from") + 1]).read().split()))
+        calls.append((cmd, open(cmd[cmd.index("--files-from") + 1], encoding="utf-8").read().split()))
     monkeypatch.setattr(cli.subprocess, "run", fake_run)
     return out, calls
 
@@ -165,7 +165,7 @@ def archive_ws(workspace, monkeypatch):
 def test_archive_copies_deliverables(archive_ws, monkeypatch, capsys):
     out, calls = archive_ws
     for name in ("ep.mp4", "ep.srt", "ep-thumbnail.jpg", "ep-draft.mp4"):
-        (out / name).write_text("x")
+        (out / name).write_text("x", encoding="utf-8")
     monkeypatch.setenv("STUDIO_ARCHIVE", "gdrive:masters/")
     studio(monkeypatch, "archive", "ep")
     [(cmd, files)] = calls
@@ -176,7 +176,7 @@ def test_archive_copies_deliverables(archive_ws, monkeypatch, capsys):
 
 def test_archive_remote_flag_overrides_env(archive_ws, monkeypatch):
     out, calls = archive_ws
-    (out / "ep.mp4").write_text("x")
+    (out / "ep.mp4").write_text("x", encoding="utf-8")
     monkeypatch.setenv("STUDIO_ARCHIVE", "gdrive:masters")
     studio(monkeypatch, "archive", "ep", "--remote", "b2:other")
     assert calls[0][0][-1] == "b2:other/ep"
@@ -194,8 +194,8 @@ def test_archive_errors(archive_ws, monkeypatch, capsys, setup, error):
     if setup == "no-rclone":
         monkeypatch.setattr(cli.shutil, "which", lambda tool: None)
     if setup != "no-render":
-        (out / "ep.mp4").write_text("x")
-    (out / "ep.srt").write_text("x")
+        (out / "ep.mp4").write_text("x", encoding="utf-8")
+    (out / "ep.srt").write_text("x", encoding="utf-8")
     with pytest.raises(SystemExit):
         studio(monkeypatch, "archive", "ep")
     assert error in capsys.readouterr().err and not calls
@@ -212,3 +212,31 @@ def test_check_exits_with_hyperframes_status(workspace, monkeypatch, code):
         studio(monkeypatch, "check", "ep", "--json")
     assert exit.value.code == code
     assert calls[0][-2:] == ["check", "--json"]
+
+
+def test_find_browser_prefers_path(monkeypatch):
+    monkeypatch.setattr(cli.shutil, "which", lambda tool: "/usr/bin/msedge" if tool == "msedge" else None)
+    assert cli.find_browser() == "/usr/bin/msedge"
+
+
+def test_find_browser_falls_back_to_hyperframes_chrome(monkeypatch, tmp_path):
+    # Windows: Chrome and Edge are installed but rarely on PATH, so use the browser HyperFrames renders with.
+    shell = tmp_path / "chrome-headless-shell.exe"
+    shell.write_bytes(b"")
+    calls = []
+
+    def fake_run(cmd, **kw):
+        calls.append(cmd[-1])
+        return f"{shell}\n" if cmd[-1] == "path" else "Ready to render."
+    monkeypatch.setattr(cli.shutil, "which", lambda tool: None)
+    monkeypatch.setattr(cli, "run", fake_run)
+    assert cli.find_browser() == str(shell)
+    assert calls == ["ensure", "path"]
+
+
+def test_find_browser_gives_up(monkeypatch, capsys):
+    monkeypatch.setattr(cli.shutil, "which", lambda tool: None)
+    monkeypatch.setattr(cli, "run", lambda cmd, **kw: "")
+    with pytest.raises(SystemExit):
+        cli.find_browser()
+    assert "no browser found" in capsys.readouterr().err

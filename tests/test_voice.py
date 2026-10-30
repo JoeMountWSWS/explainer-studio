@@ -17,7 +17,7 @@ def test_respell_whole_words_longest_first():
 
 
 def test_load_pronunciations_script_overrides_brand(tmp_path, monkeypatch):
-    (tmp_path / "pronunciations.yaml").write_text("Engels: Engles\nWSWS: W S W S\n")
+    (tmp_path / "pronunciations.yaml").write_text("Engels: Engles\nWSWS: W S W S\n", encoding="utf-8")
     monkeypatch.setattr(voice, "BRAND", tmp_path)
     table = voice.load_pronunciations(Script({"pronounce": {"Engels": "Eng-gels"}}, []))
     assert table == {"Engels": "Eng-gels", "WSWS": "W S W S"}
@@ -321,3 +321,18 @@ def test_elevenlabs_sends_only_the_context_it_has(tmp_path, monkeypatch, prev, n
                     "voice_settings": {"stability": 0.4, "speed": 0.85}, **context}
     assert (tmp_path / "x.wav").read_bytes() == b"mp3" and not (tmp_path / ".x.raw.mp3").exists()
     assert tts.chars == 6
+
+
+@pytest.mark.parametrize("buildconf, chain", [
+    ("  --enable-libsoxr\n  --enable-libmp3lame", "aresample=48000:resampler=soxr,highpass=f=70"),
+    ("  --enable-libmp3lame", "aresample=48000,highpass=f=70"),  # e.g. gyan.dev essentials on Windows
+])
+def test_to_48k_mono_uses_soxr_only_when_available(monkeypatch, tmp_path, buildconf, chain):
+    calls = []
+    monkeypatch.setattr(voice, "run", lambda cmd: buildconf if "-buildconf" in cmd else calls.append(cmd))
+    voice.resampler.cache_clear()
+    try:
+        voice.to_48k_mono(tmp_path / "in.wav", tmp_path / "out.wav", "highpass=f=70")
+    finally:
+        voice.resampler.cache_clear()
+    assert calls[0][calls[0].index("-af") + 1] == chain

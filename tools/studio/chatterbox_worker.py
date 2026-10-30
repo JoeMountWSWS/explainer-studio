@@ -18,7 +18,7 @@ import traceback
 
 # Keep library chatter off the reply channel: replies go to a private copy of fd 1, and fd 1 itself
 # (what native code and child processes write to) is pointed at stderr.
-replies = os.fdopen(os.dup(1), "w", buffering=1)
+replies = os.fdopen(os.dup(1), "w", buffering=1, encoding="utf-8")
 os.dup2(2, 1)
 sys.stdout = sys.stderr
 

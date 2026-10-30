@@ -38,16 +38,21 @@ def answers(monkeypatch, *lines, key=""):
     monkeypatch.setattr(sys, "stdin", Tty())
 
 
+def owner_only(path):
+    """POSIX permission bits don't exist on Windows (every file reports 0o666), so only check elsewhere."""
+    return sys.platform == "win32" or stat.S_IMODE(path.stat().st_mode) == 0o600
+
+
 def test_write_env_keeps_comments_and_other_keys(ws):
     (ws / ".env").write_text("# mine\nOTHER=1\nexport ELEVENLABS_API_KEY=old\n")
     path = common.write_env({"ELEVENLABS_API_KEY": "new", "STUDIO_ARCHIVE": "gd:x"})
     assert path.read_text() == "# mine\nOTHER=1\nELEVENLABS_API_KEY=new\nSTUDIO_ARCHIVE=gd:x\n"
-    assert stat.S_IMODE(path.stat().st_mode) == 0o600
+    assert owner_only(path)
 
 
 def test_write_env_creates_owner_only_file(ws):
     path = common.write_env({"A": "b"})
-    assert path.read_text() == "A=b\n" and stat.S_IMODE(path.stat().st_mode) == 0o600
+    assert path.read_text() == "A=b\n" and owner_only(path)
 
 
 def test_check_reports_ok_and_exits_zero(ws, monkeypatch, capsys):

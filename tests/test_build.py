@@ -61,28 +61,28 @@ def test_build_writes_a_complete_project(write_script, tmp_path, monkeypatch):
           "card": vo_record([])}
     timing = build.build(ep, script, vo)
 
-    assert json.loads((ep / "timing.json").read_text()) == timing
-    assert json.loads((ep / "package.json").read_text())["scripts"]["check"].endswith(f"@{build.HF_VERSION} check")
+    assert json.loads((ep / "timing.json").read_text(encoding="utf-8")) == timing
+    assert json.loads((ep / "package.json").read_text(encoding="utf-8"))["scripts"]["check"].endswith(f"@{build.HF_VERSION} check")
     assert (ep / "hyperframes.json").exists()
     for f in ("brand.css", "gsap.min.js"):
         assert (ep / "assets" / "brand" / f).exists()
     assert (ep / "frame.md").exists()
 
-    hook = (ep / "scenes" / "hook.html").read_text()
+    hook = (ep / "scenes" / "hook.html").read_text(encoding="utf-8")
     assert "__ID__" not in hook and "hook" in hook
     assert '"cues": {"two": 0.9}' in hook  # timing injected into the stub
 
-    index = (ep / "index.html").read_text()
+    index = (ep / "index.html").read_text(encoding="utf-8")
     assert "<title>Test &amp; Episode</title>" in index
     assert 'data-composition-src="scenes/card.html"' in index
     assert 'id="vo-hook"' in index and 'id="vo-card"' not in index  # silent scenes get no audio
     assert 'data-resolution="landscape"' in index
 
     # A second build keeps the edited scene file and only refreshes its timing block.
-    (ep / "scenes" / "hook.html").write_text(hook.replace("<div", "<div data-edited", 1))
+    (ep / "scenes" / "hook.html").write_text(hook.replace("<div", "<div data-edited", 1), encoding="utf-8")
     vo["hook"]["cues"] = {"two": 0.5}
     build.build(ep, script, vo)
-    hook = (ep / "scenes" / "hook.html").read_text()
+    hook = (ep / "scenes" / "hook.html").read_text(encoding="utf-8")
     assert "data-edited" in hook and '"cues": {"two": 1.1}' in hook
 
 
@@ -95,7 +95,7 @@ def test_stub_scene_unknown_template(write_script, tmp_path, capsys):
 
 def test_inject_timing_warns_without_block(tmp_path, capsys):
     (tmp_path / "scenes").mkdir()
-    (tmp_path / "scenes" / "a.html").write_text("<div></div>")
+    (tmp_path / "scenes" / "a.html").write_text("<div></div>", encoding="utf-8")
     scene = {"id": "a", "duration": 1, "voStart": 0, "voEnd": 1, "cues": {}, "paragraphs": []}
     build.inject_timing(tmp_path, scene)
     assert "no /* <studio:timing> */ block" in capsys.readouterr().out
@@ -109,8 +109,8 @@ def test_write_index_copies_music_bed(write_script, tmp_path, monkeypatch):
     timing = build.compute_timing(script, {"a": vo_record([("Hi.", 0.0, 0.5)])})
     build.write_index(ep, script, timing)
     assert (ep / "assets" / "music.mp3").read_bytes() == b"ID3"
-    assert 'src="assets/music.mp3"' in (ep / "index.html").read_text()
-    assert 'data-volume="0.1"' in (ep / "index.html").read_text()
+    assert 'src="assets/music.mp3"' in (ep / "index.html").read_text(encoding="utf-8")
+    assert 'data-volume="0.1"' in (ep / "index.html").read_text(encoding="utf-8")
 
     script.meta["music"] = "missing.mp3"
     monkeypatch.setattr(build, "ROOT", tmp_path)
@@ -126,7 +126,7 @@ def test_sync_brand_adds_licensed_font_faces(tmp_path, monkeypatch):
     monkeypatch.setattr(build, "LICENSED_FONTS", fonts)
     ep = tmp_path / "ep"
     build.sync_brand(ep)
-    css = (ep / "assets" / "brand" / "brand.css").read_text()
+    css = (ep / "assets" / "brand" / "brand.css").read_text(encoding="utf-8")
     assert 'url("fonts/DINPro-Bold.ttf") format("truetype"); font-weight: 700' in css
     assert "font-weight: 300" in css and "DINPro-Unknown" not in css
     assert (ep / "assets" / "brand" / "fonts" / "DINPro-Bold.ttf").exists()
@@ -136,7 +136,7 @@ def test_render_shell_hosts_one_scene_at_zero(tmp_path):
     timing = {"width": 1080, "height": 1920}
     scene = {"id": "hook", "duration": 3.0}
     shell = build.render_shell(tmp_path, scene, timing)
-    text = shell.read_text()
+    text = shell.read_text(encoding="utf-8")
     assert shell.name == "_render_hook.html"
     assert 'data-start="0.0000"' in text and 'data-resolution="portrait"' in text
 
@@ -144,5 +144,5 @@ def test_render_shell_hosts_one_scene_at_zero(tmp_path):
 def test_demo_episode_timing_is_reproducible():
     """The committed demo timing.json must follow from its script and narration records."""
     script = parse(DEMO / "script.md")
-    vo = {sc.id: json.loads((DEMO / "audio" / "vo" / f"{sc.id}.words.json").read_text()) for sc in script.scenes}
-    assert build.compute_timing(script, vo) == json.loads((DEMO / "timing.json").read_text())
+    vo = {sc.id: json.loads((DEMO / "audio" / "vo" / f"{sc.id}.words.json").read_text(encoding="utf-8")) for sc in script.scenes}
+    assert build.compute_timing(script, vo) == json.loads((DEMO / "timing.json").read_text(encoding="utf-8"))

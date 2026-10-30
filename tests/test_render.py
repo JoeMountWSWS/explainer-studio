@@ -55,7 +55,7 @@ def _episode(tmp_path):
 def test_captions_srt(tmp_path):
     ep, timing = _episode(tmp_path)
     n = render.captions(ep, timing, tmp_path / "out.srt", max_chars=20)
-    srt = (tmp_path / "out.srt").read_text()
+    srt = (tmp_path / "out.srt").read_text(encoding="utf-8")
     assert n == 3
     assert srt.split("\n\n") == [
         "1\n00:00:00,500 --> 00:00:02,460\nThe Commune lasted\nseventy-two days,",  # clause break; ends before the next
@@ -68,7 +68,7 @@ def test_ass_captions_highlight_each_word(tmp_path, monkeypatch):
     monkeypatch.setattr(render, "LICENSED_FONTS", tmp_path / "none")
     ep, timing = _episode(tmp_path)
     n = render.ass_captions(ep, timing, tmp_path / "out.ass")
-    ass = (tmp_path / "out.ass").read_text()
+    ass = (tmp_path / "out.ass").read_text(encoding="utf-8")
     events = [line for line in ass.splitlines() if line.startswith("Dialogue:")]
     assert n >= 3 and len(events) == 12  # one event per word
     assert "Source Sans 3 Bold" in ass and "PlayResY: 1080" in ass
@@ -83,7 +83,7 @@ def test_ass_captions_dinpro_breaks_ligatures(tmp_path, monkeypatch):
     ep = tmp_path / "ep"
     write_vo(ep, "a", vo_record([("final", 0.0, 0.5), ("flag.", 0.5, 1.0)]))
     render.ass_captions(ep, _timing(("a", "A", 3)) | {"width": 1080, "height": 1920}, tmp_path / "out.ass")
-    ass = (tmp_path / "out.ass").read_text()
+    ass = (tmp_path / "out.ass").read_text(encoding="utf-8")
     assert "DINPro-Bold" in ass and "f‌inal" in ass and "f‌lag." in ass
     assert "PlayResY: 1920" in ass
 
@@ -93,9 +93,9 @@ def test_ass_color_is_bgr():
 
 
 def test_demo_captions(tmp_path):
-    timing = json.loads((DEMO / "timing.json").read_text())
+    timing = json.loads((DEMO / "timing.json").read_text(encoding="utf-8"))
     n = render.captions(DEMO, timing, tmp_path / "demo.srt")
-    blocks = (tmp_path / "demo.srt").read_text().strip().split("\n\n")
+    blocks = (tmp_path / "demo.srt").read_text(encoding="utf-8").strip().split("\n\n")
     assert n == len(blocks) > 0
     for block in blocks:
         assert all(len(line) <= 42 for line in block.splitlines()[2:])
@@ -111,14 +111,14 @@ def scene_cache(tmp_path, monkeypatch):
     (ep / "scenes").mkdir(parents=True)
     (ep / "assets").mkdir()
     for sid in "ab":
-        (ep / "scenes" / f"{sid}.html").write_text(f"<div>{sid}</div>")
+        (ep / "scenes" / f"{sid}.html").write_text(f"<div>{sid}</div>", encoding="utf-8")
     timing = {"fps": 30, "width": 1920, "height": 1080,
               "scenes": [{"id": "a", "duration": 3.0}, {"id": "b", "duration": 2.0}]}
     rendered, shells = [], []
 
     def shell(ep, s, timing):
         p = ep / f"_render_{s['id']}.html"
-        p.write_text("shell")
+        p.write_text("shell", encoding="utf-8")
         shells.append(p)
         return p
 
@@ -161,7 +161,7 @@ def test_render_scenes_rerenders_a_changed_scene_and_drops_its_old_file(scene_ca
     ep, timing, rendered, _ = scene_cache
     render.render_scenes(ep, timing, "draft", None, False)
     if change == "html":
-        (ep / "scenes" / "a.html").write_text("<div>a, edited</div>")
+        (ep / "scenes" / "a.html").write_text("<div>a, edited</div>", encoding="utf-8")
     elif change == "asset":
         (ep / "assets" / "photo.jpg").write_bytes(b"jpg")
     elif change == "duration":
@@ -276,7 +276,7 @@ def assembly(tmp_path, monkeypatch):
     def go(front: str = "", draft: bool = False, fmt: str = "landscape"):
         ep, timing = _episode(tmp_path)
         timing["format"] = fmt
-        (tmp_path / "script.md").write_text(f"---\n{front}---\n## a: A\nHello.\n")
+        (tmp_path / "script.md").write_text(f"---\n{front}---\n## a: A\nHello.\n", encoding="utf-8")
         return render.render_episode(ep, parse(tmp_path / "script.md"), timing, draft, None, False)
     return go, calls
 
@@ -286,8 +286,8 @@ def test_render_episode_copies_the_video_and_writes_captions_and_chapters(assemb
     final = go(draft=True)
     assert final == tmp_path / "out" / "ep-draft.mp4" and final.exists()
     assert calls[-1][calls[-1].index("-c:v") + 1] == "copy"
-    assert (tmp_path / "out" / "ep.srt").read_text().startswith("1\n00:00:00,500")
-    assert (tmp_path / "out" / "ep.chapters.txt").read_text() == "0:00 Only\n0:10 Missing\n"
+    assert (tmp_path / "out" / "ep.srt").read_text(encoding="utf-8").startswith("1\n00:00:00,500")
+    assert (tmp_path / "out" / "ep.chapters.txt").read_text(encoding="utf-8") == "0:00 Only\n0:10 Missing\n"
     out = capsys.readouterr().out
     assert "loudness in -20.5 LUFS -> -14 LUFS target" in out
     assert "note: " in out  # too few chapters for YouTube
@@ -299,6 +299,14 @@ def test_render_episode_burns_captions_into_reels(assembly, tmp_path, capsys):
     assert final.name == "ep.mp4"
     argv = calls[-1]
     assert argv[argv.index("-c:v") + 1] == "libx264" and argv[argv.index("-crf") + 1] == "16"
-    assert argv[argv.index("-vf") + 1].startswith("ass=captions.ass:fontsdir=")
+    # A relative fontsdir (ffmpeg runs in build/): the colon of a Windows drive path would split the options.
+    assert argv[argv.index("-vf") + 1] == "ass=captions.ass:fontsdir=fonts"
+    assert any((tmp_path / "ep" / "build" / "fonts").glob("*.ttf"))
     assert (tmp_path / "ep" / "build" / "captions.ass").exists()
     assert "note: " not in capsys.readouterr().out  # chapters are a long-form feature
+
+
+def test_concat_list_uses_forward_slashes(tmp_path, monkeypatch):
+    monkeypatch.setattr(render, "run", lambda cmd: None)
+    render.concat([tmp_path / "a.mp4"], tmp_path / "v.mp4")
+    assert (tmp_path / "v.txt").read_text(encoding="utf-8") == f"file '{(tmp_path / 'a.mp4').resolve().as_posix()}'\n"

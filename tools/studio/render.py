@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -60,7 +61,7 @@ def render_scenes(ep: Path, timing: dict, quality: str, only: set[str] | None, f
 
 def concat(parts: list[Path], dst: Path) -> None:
     lst = dst.with_suffix(".txt")
-    lst.write_text("".join(f"file '{p.resolve()}'\n" for p in parts))
+    lst.write_text("".join(f"file '{p.resolve().as_posix()}'\n" for p in parts), encoding="utf-8")
     run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(dst)])
 
 
@@ -138,7 +139,7 @@ def _caption_cues(ep: Path, timing: dict, max_chars: int, max_secs: float, max_w
     cues = []
     for s in timing["scenes"]:
         wf = ep / "audio" / "vo" / f"{s['id']}.words.json"
-        words = json.loads(wf.read_text())["words"] if wf.exists() else []
+        words = json.loads(wf.read_text(encoding="utf-8"))["words"] if wf.exists() else []
         offset = s["start"] + s["voStart"]
         group: list[dict] = []
 
@@ -179,7 +180,7 @@ def captions(ep: Path, timing: dict, dst: Path, max_chars: int = 42, max_secs: f
                     best = (cut, k)
             text = " ".join(words[: best[1]]) + "\n" + " ".join(words[best[1]:])
         lines.append(f"{i}\n{_ts(a)} --> {_ts(b)}\n{text}\n")
-    dst.write_text("\n".join(lines))
+    dst.write_text("\n".join(lines), encoding="utf-8")
     return len(cues)
 
 
@@ -248,7 +249,7 @@ def ass_captions(ep: Path, timing: dict, dst: Path) -> int:
             if font == "DINPro-Bold":  # its fi/fl ligatures are broken; a zero-width non-joiner stops HarfBuzz forming them
                 text = re.sub(r"f(?=[il])", "f‌", text)
             events.append(f"Dialogue: 0,{_ts(a, '.')[1:-1]},{_ts(b, '.')[1:-1]},Cap,,0,0,0,,{{\\pos({w // 2},{y})}}{text}")
-    dst.write_text("\n".join(head + events) + "\n")
+    dst.write_text("\n".join(head + events) + "\n", encoding="utf-8")
     return len(cues)
 
 
@@ -279,7 +280,10 @@ def render_episode(ep: Path, script: Script, timing: dict, draft: bool, only: se
         ass = build / "captions.ass"
         ass_captions(ep, timing, ass)
         crf = "26" if draft else "16"
-        vcodec = ["-vf", f"ass={ass.name}:fontsdir={caption_font()[1]}", "-c:v", "libx264", "-preset", "medium",
+        # A relative fontsdir (ffmpeg runs in build/): the colon in a Windows drive path splits filter options.
+        fonts = build / "fonts"
+        shutil.copytree(caption_font()[1], fonts, dirs_exist_ok=True)
+        vcodec = ["-vf", f"ass={ass.name}:fontsdir={fonts.name}", "-c:v", "libx264", "-preset", "medium",
                   "-crf", crf, "-pix_fmt", "yuv420p"]
     run(["ffmpeg", "-v", "error", "-y", "-i", str(video.resolve()), "-i", str(master.resolve()), "-map", "0:v", "-map", "1:a",
          *vcodec, "-c:a", "aac", "-b:a", "384k", "-ar", str(SAMPLE_RATE),
@@ -289,7 +293,7 @@ def render_episode(ep: Path, script: Script, timing: dict, draft: bool, only: se
     chap, problems = chapters(timing)
     if timing.get("format") == "reel":
         problems = []  # chapters are a YouTube long-form feature
-    (OUT / f"{ep.name}.chapters.txt").write_text("\n".join(chap) + "\n")
+    (OUT / f"{ep.name}.chapters.txt").write_text("\n".join(chap) + "\n", encoding="utf-8")
 
     info(f"\n  {final.relative_to(OUT.parent)}  {ffprobe_duration(final):.1f}s")
     info(f"  loudness in {m['input_i']} LUFS -> {script.setting('loudness')} LUFS target")

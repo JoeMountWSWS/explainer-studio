@@ -109,7 +109,8 @@ def tree_hash(folder: Path) -> str:
 
 def run(cmd: list[str], cwd: Path | None = None, quiet: bool = False, env: dict | None = None) -> str:
     full_env = {**os.environ, **(env or {})}
-    proc = subprocess.run(cmd, cwd=cwd, env=full_env, text=True, capture_output=True)
+    proc = subprocess.run(cmd, cwd=cwd, env=full_env, text=True, encoding="utf-8", errors="replace",
+                          capture_output=True)
     if proc.returncode != 0:
         tail = (proc.stdout + proc.stderr).strip().splitlines()[-25:]
         die(f"command failed ({proc.returncode}): {' '.join(cmd[:6])} ...\n" + "\n".join(tail))
@@ -119,8 +120,8 @@ def run(cmd: list[str], cwd: Path | None = None, quiet: bool = False, env: dict 
 
 
 def hf(*args: str) -> list[str]:
-    """argv for the pinned HyperFrames CLI."""
-    return ["npx", "--yes", f"hyperframes@{HF_VERSION}", *args]
+    """argv for the pinned HyperFrames CLI. On Windows npx is npx.cmd, which subprocess only finds by full path."""
+    return [shutil.which("npx") or "npx", "--yes", f"hyperframes@{HF_VERSION}", *args]
 
 
 def hf_env() -> dict:
@@ -133,7 +134,7 @@ def load_env() -> None:
     path = ROOT / ".env"
     if not path.exists():
         return
-    for line in path.read_text().splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
