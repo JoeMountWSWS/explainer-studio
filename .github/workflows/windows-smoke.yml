@@ -91,7 +91,9 @@ jobs:
             "$f  $size  ${secs}s" >> $env:GITHUB_STEP_SUMMARY
             if ($LASTEXITCODE) { exit 1 }
           }
-          if (-not (Select-String -Path out/win-reel.srt -Pattern "“the dictatorship" -Encoding utf8)) { throw "captions lost the curly quotes" }
+          # PowerShell treats a literal curly quote as a string delimiter, so build it from its code point.
+          $open = [char]0x201C
+          if (-not (Select-String -Path out/win-reel.srt -Pattern "${open}the dictatorship" -Encoding utf8)) { throw "captions lost the curly quotes" }
           if (-not (Test-Path out/demo-paris-commune-thumbnail.jpg)) { throw "no thumbnail" }
 
       - uses: actions/upload-artifact@v7
