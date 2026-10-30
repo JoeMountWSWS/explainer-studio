@@ -50,6 +50,10 @@ jobs:
             ~/AppData/Local/npm-cache
           key: windows-smoke-${{ steps.hf.outputs.version }}
 
+      # Whisper (the default) is unavailable on a fresh runner ("whisper_unavailable"); Parakeet is used once installed.
+      - name: Install the Parakeet transcription model
+        run: npx --yes hyperframes@${{ steps.hf.outputs.version }} models install parakeet
+
       - name: Render the demo (committed narration)
         run: uv run studio render demo-paris-commune --draft
 
