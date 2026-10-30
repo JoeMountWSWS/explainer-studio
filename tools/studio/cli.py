@@ -212,7 +212,8 @@ def cmd_music(a):
     info(f"music ({a.model})")
     out = Path(a.out).resolve() if a.out else None
     paths = music.make_beds(ep, str(prompt), a.name, a.length, a.model, a.variants, out)
-    rel = [str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else str(p) for p in paths]
+    # Forward slashes: the path goes into script.md, which must work on every OS.
+    rel = [p.relative_to(ROOT).as_posix() if p.is_relative_to(ROOT) else p.as_posix() for p in paths]
     info(f"\n  audition, then set in script.md:  music: {rel[0]}")
     info("  log the track in brand/music/CREDITS.md (source: ElevenLabs Music, prompt, date)")
 
