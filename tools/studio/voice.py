@@ -464,8 +464,14 @@ def engine_class(script: Script):
     return ENGINES[name]
 
 
+@functools.cache
+def resampler() -> str:
+    """soxr when this ffmpeg has it; some builds (gyan.dev "essentials" on Windows) don't."""
+    return ":resampler=soxr" if "--enable-libsoxr" in run(["ffmpeg", "-hide_banner", "-buildconf"]) else ""
+
+
 def to_48k_mono(src: Path, dst: Path, fx: str = "") -> None:
-    chain = f"aresample={SAMPLE_RATE}:resampler=soxr" + (f",{fx}" if fx else "")
+    chain = f"aresample={SAMPLE_RATE}{resampler()}" + (f",{fx}" if fx else "")
     run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-ac", "1", "-ar", str(SAMPLE_RATE),
          "-af", chain, "-c:a", "pcm_s16le", str(dst)])
 

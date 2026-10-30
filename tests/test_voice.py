@@ -241,3 +241,18 @@ def test_read_mono_rejects_other_rates(tmp_path):
     voice.sf.write(str(tmp_path / "x.wav"), np.zeros(10, np.float32), 22050)
     with pytest.raises(SystemExit):
         voice.read_mono(tmp_path / "x.wav")
+
+
+@pytest.mark.parametrize("buildconf, chain", [
+    ("  --enable-libsoxr\n  --enable-libmp3lame", "aresample=48000:resampler=soxr,highpass=f=70"),
+    ("  --enable-libmp3lame", "aresample=48000,highpass=f=70"),  # e.g. gyan.dev essentials on Windows
+])
+def test_to_48k_mono_uses_soxr_only_when_available(monkeypatch, tmp_path, buildconf, chain):
+    calls = []
+    monkeypatch.setattr(voice, "run", lambda cmd: buildconf if "-buildconf" in cmd else calls.append(cmd))
+    voice.resampler.cache_clear()
+    try:
+        voice.to_48k_mono(tmp_path / "in.wav", tmp_path / "out.wav", "highpass=f=70")
+    finally:
+        voice.resampler.cache_clear()
+    assert calls[0][calls[0].index("-af") + 1] == chain
