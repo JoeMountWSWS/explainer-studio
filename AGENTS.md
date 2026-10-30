@@ -32,7 +32,8 @@ uv run studio status <slug>          # word counts, est vs actual length, cues p
 uv run studio preview <slug>         # HyperFrames Studio in the browser (with narration)
 uv run studio check <slug>           # lint + layout + contrast audits; must pass
 uv run studio render <slug> --draft  # fast review copy -> out/<slug>-draft.mp4
-uv run studio render <slug>          # final -> out/<slug>.mp4 + .srt + .chapters.txt
+uv run studio render <slug>          # final -> out/<slug>.mp4 + .srt + .chapters.txt, then verifies it (--no-verify)
+uv run studio verify <slug>          # QA the master: loudness, black frames, silences, speech vs script, captions
 uv run studio music <slug> --prompt "..."  # ElevenLabs Music bed sized to the synced episode (after sync)
 uv run studio thumbnail <slug>       # out/<slug>-thumbnail.jpg (edit thumbnail/thumbnail.html)
 uv run studio archive <slug>         # copy the master, captions and thumbnail to $STUDIO_ARCHIVE (rclone)

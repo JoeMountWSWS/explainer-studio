@@ -35,7 +35,7 @@ On a fresh checkout or install, run `studio setup --check`. If it exits non-zero
    - Edit `brand/` for house-style changes, never `episodes/<slug>/assets/brand/` (a synced copy).
 5. **Review**: `studio preview <slug>` opens HyperFrames Studio with narration. For a look without a browser, run `npx hyperframes snapshot episodes/<slug> --at 12.5,40` and view the frames.
 6. **Check**: `studio check <slug>` must pass with 0 errors (lint, layout, contrast) before any render.
-7. **Render**: `studio render <slug> --draft` for a review copy, then `studio render <slug>` for `out/<slug>.mp4`, `.srt` and `.chapters.txt`. Only changed scenes re-render, and `--force [ids]` forces them. A full render takes about real time. Optionally run `studio thumbnail <slug>` after editing `thumbnail/thumbnail.html`.
+7. **Render**: `studio render <slug> --draft` for a review copy, then `studio render <slug>` for `out/<slug>.mp4`, `.srt` and `.chapters.txt`. `render` then runs `studio verify` on the master (loudness, black frames, silences, speech vs script, captions, chapters) and exits 1 on errors; `--no-verify` skips it. Only changed scenes re-render, and `--force [ids]` forces them. A full render takes about real time. Optionally run `studio thumbnail <slug>` after editing `thumbnail/thumbnail.html`.
 
 ## Voice
 
