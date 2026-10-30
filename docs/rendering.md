@@ -18,9 +18,9 @@ uv run studio thumbnail my-video        # out/my-video-thumbnail.jpg
 ## Caching
 
 Each scene render is keyed on its HTML, assets, duration and quality, so only changed scenes are
-re-rendered. A single-scene change takes seconds; a full render runs at about real time on the
-reference machine (RX 580, GPU capture). On Windows (and macOS) HyperFrames captures frames by
-screenshot instead, which is slower.
+re-rendered. A single-scene change takes seconds; a full render runs at about real time on a
+Linux machine, where HyperFrames captures frames from the GPU. On Windows and macOS it captures by
+screenshot instead, which is slower, so lean on `--draft` while you work.
 
 ```bash
 uv run studio render my-video --force            # re-render every scene

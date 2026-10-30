@@ -2,22 +2,23 @@
 
 ## Requirements
 
-- Linux. It was developed on Arch with an AMD GPU; the render uses Chromium's GPU capture.
-- [uv](https://docs.astral.sh/uv/) with Python 3.12 or 3.13. `kokoro-onnx` doesn't support 3.14 yet.
-- Node.js with `npx`. The HyperFrames CLI is fetched on demand, at the version pinned in
-  `tools/studio/common.py`.
-- ffmpeg and Chromium.
+- Windows, Linux or macOS (macOS is untested).
+- [uv](https://docs.astral.sh/uv/), which fetches Python 3.12 or 3.13.
+- Node.js with `npx`, and ffmpeg.
 - Optional: an ElevenLabs API key for cloud narration (see [Narration](narration.md#elevenlabs-cloud)).
 
-Not sure what you have? Run `studio setup --check` after installing for a one-line-per-tool report, or
-`studio setup` to be walked through API keys and the archive remote.
+The [Install](install.md) page has the commands for each system. Not sure what you have? Run
+`studio setup --check` for a one-line-per-tool report, or `studio setup` to be walked through API keys
+and the archive remote.
 
 ## Install
+
+Follow [Install](install.md) first. This section covers the choices it leaves open.
 
 ### From PyPI
 
 ```bash
-pip install explainer-studio       # or: uv tool install explainer-studio
+uv tool install explainer-studio   # or: pip install explainer-studio
 mkdir my-videos && cd my-videos
 ```
 
@@ -59,7 +60,7 @@ house-style change applies to every episode at once. Episode media are large: ke
 ### From a clone
 
 ```bash
-git clone git@github.com:JoeMountWSWS/explainer-studio.git
+git clone https://github.com/JoeMountWSWS/explainer-studio.git
 cd explainer-studio
 uv sync
 ```
@@ -70,7 +71,7 @@ To drive the studio with Claude Code from a PyPI install, run `studio install-sk
 (see [Working with a coding agent](coding-agents.md#installing-it)).
 
 The first `sync` of an episode downloads the Kokoro-82M model to `~/.cache/hyperframes/tts` and
-spaCy's `en_core_web_sm` to `~/.cache/hyperframes/spacy`.
+spaCy's `en_core_web_sm` to `~/.cache/hyperframes/spacy` (`~` is your home folder on every system).
 
 ## Make a video
 
@@ -88,9 +89,25 @@ files HyperFrames needs.
 
 ### 2. Write the script
 
-```bash
-$EDITOR episodes/my-video/script.md
-```
+Open `episodes/my-video/script.md` in any text editor. For example:
+
+=== "Windows"
+
+    ```powershell
+    notepad episodes\my-video\script.md
+    ```
+
+=== "Linux"
+
+    ```bash
+    $EDITOR episodes/my-video/script.md
+    ```
+
+=== "macOS (untested)"
+
+    ```bash
+    open -e episodes/my-video/script.md
+    ```
 
 The starter script has five scenes and a comment explaining the format. Replace the placeholder
 text with your own. See [Writing a script](script.md).
@@ -109,7 +126,7 @@ video:
 uv run studio status my-video
 ```
 
-```
+```text
   scene             template   words   est s  actual s  cues
   hook              title         41    17.9      18.2  sub
   ...

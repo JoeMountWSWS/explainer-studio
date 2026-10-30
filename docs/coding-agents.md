@@ -47,6 +47,10 @@ cd explainer-studio
 claude
 ```
 
+This is the same in PowerShell, a Linux shell and macOS Terminal. If you haven't installed Claude
+Code yet, follow [its setup guide](https://docs.claude.com/en/docs/claude-code/setup), which has a
+PowerShell installer for Windows and a shell installer for Linux and macOS.
+
 Then either ask in plain language and let Claude pick the skill up:
 
 ```text
@@ -81,7 +85,7 @@ paste into a music generator such as Suno, for an instrumental bed under the nar
 ### First-time setup
 
 For a new user the agent starts with `studio setup --check`, explains anything missing in plain language,
-and asks you to run the interactive wizard yourself (`! studio setup` in Claude Code), so your API key never
+and asks you to run the interactive wizard yourself (type `! studio setup` in Claude Code; the `!` prefix runs a command in your own terminal session, on any system), so your API key never
 passes through the agent. It then offers a guided first episode.
 
 ### What it won't do without asking

@@ -15,14 +15,15 @@ from . import common, voice
 from .common import LICENSED_FONTS, ROOT, die, hf, hf_env, info, load_env, missing_tools, run
 
 ELEVENLABS_USER_URL = "https://api.elevenlabs.io/v1/user"
-CHROMIUMS = ("chromium", "google-chrome", "chrome")
+CHROMIUMS = ("chromium", "google-chrome", "chrome", "msedge")
 
 HINTS = {
-    "ffmpeg": "install ffmpeg (e.g. `sudo pacman -S ffmpeg`, `sudo apt install ffmpeg`, `brew install ffmpeg`)",
+    "ffmpeg": ("install ffmpeg (Windows: `winget install Gyan.FFmpeg`; Linux: `sudo apt install ffmpeg` or "
+               "`sudo pacman -S ffmpeg`; macOS: `brew install ffmpeg`)"),
     "ffprobe": "ships with ffmpeg",
     "npx": "install Node.js, which includes npx (https://nodejs.org)",
     "uv": "install uv (https://docs.astral.sh/uv/)",
-    "chromium": "needed for `studio thumbnail`; install Chromium or Chrome",
+    "chromium": "needed for `studio thumbnail`; install Chromium, Chrome or Edge",
     "rclone": "needed for `studio archive`; install rclone, then run `rclone config`",
     "git-lfs": "needed to fetch a media workspace; install git-lfs, then `git lfs install`",
     "dinpro-fonts": "licensed sans font, optional; without it Source Sans 3 is used (see brand/fonts-licensed/README.md)",

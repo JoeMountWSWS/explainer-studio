@@ -162,3 +162,15 @@ def test_check_remote(monkeypatch):
     assert "no remote called 's3:'" in setup.check_remote("s3:bucket")
     monkeypatch.setattr(setup.shutil, "which", lambda t: None)
     assert setup.check_remote("s3:bucket") is None
+
+
+def test_edge_counts_as_a_browser(monkeypatch):
+    monkeypatch.setattr(setup.shutil, "which", lambda t: "C:/edge/msedge.exe" if t == "msedge" else None)
+    assert setup.has_chromium()
+    monkeypatch.setattr(setup.shutil, "which", lambda t: None)
+    assert not setup.has_chromium()
+
+
+def test_ffmpeg_hint_names_every_platform():
+    hint = setup.HINTS["ffmpeg"]
+    assert "winget" in hint and "apt" in hint and "brew" in hint
