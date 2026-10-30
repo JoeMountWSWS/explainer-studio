@@ -26,7 +26,7 @@ HINTS = {
     "rclone": "needed for `studio archive`; install rclone, then run `rclone config`",
     "git-lfs": "needed to fetch a media workspace; install git-lfs, then `git lfs install`",
     "dinpro-fonts": "licensed sans font, optional; without it Source Sans 3 is used (see brand/fonts-licensed/README.md)",
-    "workspace": "optional; real episodes live in the private ../sep-episodes clone",
+    "workspace": "optional; a private content workspace for real episodes (see docs/getting-started.md)",
 }
 
 
@@ -55,7 +55,7 @@ def check_items() -> list[Item]:
         "rclone": bool(shutil.which("rclone")),
         "git-lfs": bool(shutil.which("git-lfs")),
         "dinpro-fonts": any(LICENSED_FONTS.glob("DINPro-*.ttf")),
-        "workspace": (ROOT.parent / "sep-episodes").is_dir() or (ROOT / "episodes").is_dir(),
+        "workspace": (ROOT / "episodes").is_dir(),
     }
     items += [Item("ok" if found else "optional", name, "found" if found else HINTS[name])
               for name, found in optional.items()]
