@@ -90,7 +90,8 @@ omit = ["*/studio/chatterbox_worker.py"]
 
 [tool.coverage.report]
 show_missing = true
-# TTS engines, ffmpeg mixing and HyperFrames rendering need models and binaries CI doesn't have.
+# TTS engines, the Chatterbox venv and HyperFrames rendering need models and binaries CI doesn't have.
+# Set so the suite passes without ffmpeg too (its mix tests then skip).
 # Raise this as coverage grows; never lower it to make a change pass.
-fail_under = 74
+fail_under = 85
 exclude_also = ["if __name__ == .__main__.:"]
