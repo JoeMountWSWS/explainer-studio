@@ -90,7 +90,7 @@ jobs:
           if (-not (Select-String -Path out/win-reel.srt -Pattern "“the dictatorship" -Encoding utf8)) { throw "captions lost the curly quotes" }
           if (-not (Test-Path out/demo-paris-commune-thumbnail.jpg)) { throw "no thumbnail" }
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: windows-renders

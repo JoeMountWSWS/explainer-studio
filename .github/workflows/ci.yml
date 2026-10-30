@@ -62,7 +62,8 @@ jobs:
           test -f .claude/skills/make-explainer-video/SKILL.md
           test -f .claude/skills/make-explainer-video/references/agents.md
 
-  # Unit tests need no TTS model, ffmpeg or HyperFrames: narration is faked and nothing is rendered.
+  # Unit tests need no TTS model or HyperFrames: narration is faked and scene renders are stubbed.
+  # ffmpeg is installed so the mixing tests can check real loudness mastering (they skip without it).
   # Coverage settings (and the fail_under floor) are in [tool.coverage] in pyproject.toml.
   test:
     name: Tests (Python ${{ matrix.python }}${{ matrix.os == 'windows-latest' && ', Windows' || '' }})
@@ -86,6 +87,12 @@ jobs:
           enable-cache: true
           save-cache: false  # restore the cache the lint job saves; parallel saves race
       - run: uv sync --locked
+      - name: Install ffmpeg
+        if: runner.os == 'Linux'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg
+      - name: Install ffmpeg (Windows)
+        if: runner.os == 'Windows'
+        run: choco install ffmpeg -y --no-progress
       - name: pytest with coverage
         run: uv run pytest --cov-report=xml --cov-report=html
       - name: Coverage summary
@@ -104,7 +111,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           MINIMUM_GREEN: 85
           MINIMUM_ORANGE: 70
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always() && matrix.python == '3.12' && runner.os == 'Linux'
         with:
           name: coverage

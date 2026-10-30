@@ -36,8 +36,10 @@ uv run pytest --cov-report=html                  # browsable report in htmlcov/i
 uv run pytest tests/test_script.py -k pause      # one file, or tests matching a name
 ```
 
-The suite needs no TTS model, ffmpeg or HyperFrames: narration goes through a fake engine
-(`fake_tts` in `tests/conftest.py`), transcripts are stubbed, and nothing is rendered. Paths in
+The suite needs no TTS model or HyperFrames: narration goes through a fake engine
+(`fake_tts` in `tests/conftest.py`), transcripts are stubbed, and scene renders are stubbed. The
+`mix` tests run real ffmpeg, mastering a test tone and measuring that it lands on the loudness target;
+they skip when ffmpeg isn't installed (CI installs it). Paths in
 `studio.common` are fixed at import time, so tests that write files point the module attributes
 they use at `tmp_path` with `monkeypatch`. `test_demo_episode_timing_is_reproducible` checks that
 the committed `episodes/demo-paris-commune/timing.json` still follows from its script and

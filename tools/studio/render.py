@@ -37,7 +37,8 @@ def render_scenes(ep: Path, timing: dict, quality: str, only: set[str] | None, f
     outputs = []
     for s in timing["scenes"]:
         scene_file = ep / "scenes" / f"{s['id']}.html"
-        key = sha(scene_file, assets_key, s["duration"], timing["fps"], quality, HF_VERSION)[:16]
+        key = sha(scene_file, assets_key, s["duration"], timing["fps"], timing["width"], timing["height"],
+                  quality, HF_VERSION)[:16]
         target = cache / f"{s['id']}.{quality}.{key}.mp4"
         outputs.append(target)
         # Cached scenes are reused unless --force names them; missing ones always render.
@@ -110,7 +111,10 @@ def mix(ep: Path, script: Script, timing: dict, vo: Path, dst: Path) -> dict:
     # Pass 1 measures (loudnorm prints its JSON on stderr); pass 2 applies a linear gain.
     proc = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(pre), "-af",
                            f"{ln}:print_format=json", "-f", "null", "-"], capture_output=True, text=True)
-    m = json.loads(re.search(r"\{[^{}]*\"input_i\"[^{}]*\}", proc.stderr, re.S).group(0))
+    found = re.search(r"\{[^{}]*\"input_i\"[^{}]*\}", proc.stderr, re.S)
+    if not found:
+        die("loudness measurement failed:\n" + "\n".join(proc.stderr.strip().splitlines()[-25:]))
+    m = json.loads(found.group(0))
     second = (f"{ln}:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}"
               f":measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
     run(["ffmpeg", "-v", "error", "-y", "-i", str(pre), "-af", second, "-ar", str(SAMPLE_RATE),
