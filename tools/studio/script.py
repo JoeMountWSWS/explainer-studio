@@ -94,7 +94,7 @@ def _parse_paragraph(text: str, scene: Scene, gap: float) -> None:
 
 
 def parse(path: Path) -> Script:
-    raw = path.read_text()
+    raw = path.read_text(encoding="utf-8-sig")  # -sig: Windows editors may add a byte-order mark
     raw = re.sub(r"<!--.*?-->", "", raw, flags=re.S)
     meta: dict = {}
     if raw.startswith("---"):

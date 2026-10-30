@@ -65,15 +65,19 @@ jobs:
   # Unit tests need no TTS model, ffmpeg or HyperFrames: narration is faked and nothing is rendered.
   # Coverage settings (and the fail_under floor) are in [tool.coverage] in pyproject.toml.
   test:
-    name: Tests (Python ${{ matrix.python }})
-    runs-on: ubuntu-latest
+    name: Tests (Python ${{ matrix.python }}${{ matrix.os == 'windows-latest' && ', Windows' || '' }})
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: write       # coverage badge and history on the python-coverage-comment-action-data branch
       pull-requests: write  # coverage comment on the PR
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest]
         python: ["3.12", "3.13"]
+        include:
+          - os: windows-latest  # cp1252 locale, npx.cmd, drive-letter paths (end to end: windows-smoke.yml)
+            python: "3.12"
     steps:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v10.3.2
@@ -85,7 +89,7 @@ jobs:
       - name: pytest with coverage
         run: uv run pytest --cov-report=xml --cov-report=html
       - name: Coverage summary
-        if: always() && matrix.python == '3.12'
+        if: always() && matrix.python == '3.12' && runner.os == 'Linux'
         run: |
           echo "## Coverage" >> "$GITHUB_STEP_SUMMARY"
           uv run coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY"
@@ -93,7 +97,7 @@ jobs:
       # README badge. Fork PRs get read-only tokens, so they skip this and keep the run summary.
       - name: Coverage comment and badge
         if: >-
-          matrix.python == '3.12' &&
+          matrix.python == '3.12' && runner.os == 'Linux' &&
           (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
         uses: py-cov-action/python-coverage-comment-action@e5fb2218463c3377f3504b0c5b5646ed53da7a2f  # v4.5
         with:
@@ -101,7 +105,7 @@ jobs:
           MINIMUM_GREEN: 85
           MINIMUM_ORANGE: 70
       - uses: actions/upload-artifact@v4
-        if: always() && matrix.python == '3.12'
+        if: always() && matrix.python == '3.12' && runner.os == 'Linux'
         with:
           name: coverage
           path: |

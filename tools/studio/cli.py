@@ -31,7 +31,20 @@ import soundfile as sf
 from . import build as builder
 from . import music, skill, voice
 from . import render as renderer
-from .common import EPISODES, OUT, ROOT, TEMPLATES, die, episode_dir, hf, info, load_env, require_media, require_tools
+from .common import (
+    EPISODES,
+    OUT,
+    ROOT,
+    TEMPLATES,
+    die,
+    episode_dir,
+    hf,
+    info,
+    load_env,
+    require_media,
+    require_tools,
+    run,
+)
 from .script import Script, parse
 
 AUDITION = [
@@ -55,7 +68,7 @@ def cmd_new(a):
     (ep / "audio" / "recorded").mkdir(parents=True)
     (ep / "assets" / "media").mkdir(parents=True)
     title = a.title or slug.replace("-", " ").title()
-    (ep / "script.md").write_text((TEMPLATES / "script.md").read_text().replace("__TITLE__", title))
+    (ep / "script.md").write_text((TEMPLATES / "script.md").read_text(encoding="utf-8").replace("__TITLE__", title), encoding="utf-8")
     builder.ensure_project_files(ep)
     builder.sync_brand(ep)
     info(f"created episodes/{slug}/  - write the script in episodes/{slug}/script.md, then: studio sync {slug}")
@@ -64,7 +77,7 @@ def cmd_new(a):
 def cmd_status(a):
     ep = episode_dir(a.slug)
     script = parse(ep / "script.md")
-    timing = json.loads((ep / "timing.json").read_text()) if (ep / "timing.json").exists() else None
+    timing = json.loads((ep / "timing.json").read_text(encoding="utf-8")) if (ep / "timing.json").exists() else None
     actual = {s["id"]: s for s in timing["scenes"]} if timing else {}
     total_words = 0
     info(f"{script.meta.get('title', a.slug)}   voice={script.setting('tts')}:{script.setting('voice')}\n")
@@ -117,6 +130,19 @@ def cmd_render(a):
     renderer.render_episode(ep, script, timing, a.draft, set(a.force) if a.force else None, a.force is not None)
 
 
+def find_browser() -> str:
+    """A Chromium on PATH, else the headless Chrome HyperFrames renders with (downloaded if missing).
+    The fallback covers Windows, where Chrome and Edge are rarely on PATH."""
+    for name in ("chromium", "google-chrome", "chrome", "msedge"):
+        if path := shutil.which(name):
+            return path
+    run(hf("browser", "ensure"))
+    path = run(hf("browser", "path")).strip().splitlines()
+    if not path or not Path(path[-1]).exists():
+        die("no browser found: install Chromium or Chrome, or run `npx hyperframes browser ensure`")
+    return path[-1]
+
+
 def cmd_thumbnail(a):
     ep = episode_dir(a.slug)
     script = parse(ep / "script.md")
@@ -125,12 +151,10 @@ def cmd_thumbnail(a):
     if not page.exists():
         page.parent.mkdir(exist_ok=True)
         title = html.escape(str(script.meta.get("title", a.slug)))
-        page.write_text((TEMPLATES / "thumbnail.html").read_text()
-                        .replace("__HEADLINE__", title).replace("__TAG__", "Explainer"))
+        page.write_text((TEMPLATES / "thumbnail.html").read_text(encoding="utf-8")
+                        .replace("__HEADLINE__", title).replace("__TAG__", "Explainer"), encoding="utf-8")
         info(f"created {page.relative_to(ROOT)} - edit it, then run this again")
-    browser = shutil.which("chromium") or shutil.which("google-chrome") or shutil.which("chrome")
-    if not browser:
-        die("chromium not found")
+    browser = find_browser()
     OUT.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         png = Path(tmp) / "t.png"
@@ -206,9 +230,10 @@ def cmd_archive(a):
     files = [OUT / n for n in names if (OUT / n).exists()]
     if not files or files[0].name != f"{a.slug}.mp4":
         die(f"no final render at out/{a.slug}.mp4: run `studio render {a.slug}` first")
-    with tempfile.NamedTemporaryFile("w", suffix=".txt") as lst:
+    # Closed before rclone reads it: Windows won't let another process open a file that's still open here.
+    with tempfile.NamedTemporaryFile("w", suffix=".txt", encoding="utf-8", delete_on_close=False) as lst:
         lst.write("\n".join(f.name for f in files))
-        lst.flush()
+        lst.close()
         info(f"archive -> {remote}/{a.slug}/")
         subprocess.run(["rclone", "copy", "--progress", "--files-from", lst.name, str(OUT), f"{remote}/{a.slug}"],
                        check=True)

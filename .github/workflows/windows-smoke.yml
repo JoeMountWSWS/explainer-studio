@@ -1,0 +1,98 @@
+name: Windows smoke test
+
+# End to end on native Windows: narrate (Kokoro, misaki, spaCy, transcribe), render with HyperFrames,
+# burn in captions, master the audio and make a thumbnail. The unit tests run on Windows in ci.yml; this
+# runs the real tools, so it is slow (model downloads, screenshot capture) and only runs when the code changes.
+
+on:
+  pull_request:
+    paths:
+      - tools/**
+      - pyproject.toml
+      - uv.lock
+      - .github/workflows/windows-smoke.yml
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Narrate and render on Windows
+    runs-on: windows-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+      - uses: astral-sh/setup-uv@v10.3.2
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - name: Install ffmpeg
+        run: choco install ffmpeg -y --no-progress
+      - run: uv sync --locked
+      - name: Pinned HyperFrames version
+        id: hf
+        run: echo "version=$(uv run python -c 'from studio.common import HF_VERSION; print(HF_VERSION)')" >> $env:GITHUB_OUTPUT
+      - uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cache/hyperframes
+            ~/AppData/Local/npm-cache
+          key: windows-smoke-${{ steps.hf.outputs.version }}
+
+      - name: Render the demo (committed narration)
+        run: uv run studio render demo-paris-commune --draft
+
+      - name: Narrate and render a reel with burned-in captions
+        run: |
+          uv run studio new win-reel "Windows smoke reel"
+          # utf8BOM: some Windows editors write a byte-order mark; curly quotes and dashes test the encoding.
+          @'
+          ---
+          title: Windows smoke reel
+          format: reel
+          burn_captions: true
+          ---
+          ## hook: Seventy-two days
+          > template: title
+          In eighteen seventy-one, Paris workers ran the city — for seventy-two days.
+
+          ## close: What it left
+          > template: outro
+          Engels called it “the dictatorship of the proletariat”.
+          '@ | Set-Content -Encoding utf8BOM episodes/win-reel/script.md
+          uv run studio sync win-reel
+          uv run studio status win-reel
+          uv run studio check win-reel
+          uv run studio render win-reel --draft
+
+      - name: Thumbnail
+        run: uv run studio thumbnail demo-paris-commune
+
+      - name: Check the outputs
+        run: |
+          foreach ($f in "out/demo-paris-commune-draft.mp4", "out/win-reel-draft.mp4") {
+            $size = ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 $f
+            $secs = ffprobe -v error -show_entries format=duration -of csv=p=0 $f
+            "$f  $size  ${secs}s" >> $env:GITHUB_STEP_SUMMARY
+            if ($LASTEXITCODE) { exit 1 }
+          }
+          if (-not (Select-String -Path out/win-reel.srt -Pattern "“the dictatorship" -Encoding utf8)) { throw "captions lost the curly quotes" }
+          if (-not (Test-Path out/demo-paris-commune-thumbnail.jpg)) { throw "no thumbnail" }
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-renders
+          path: out/
+          if-no-files-found: ignore

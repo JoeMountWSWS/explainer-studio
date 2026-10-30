@@ -49,7 +49,7 @@ def write_script(tmp_path):
     def _write(text: str, slug: str = "ep"):
         ep = tmp_path / slug
         ep.mkdir(parents=True, exist_ok=True)
-        (ep / "script.md").write_text(textwrap.dedent(text).lstrip())
+        (ep / "script.md").write_text(textwrap.dedent(text).lstrip(), encoding="utf-8")
         return parse(ep / "script.md")
     return _write
 
@@ -69,4 +69,4 @@ def vo_record(words: list[tuple[str, float, float]], cues: dict | None = None, p
 def write_vo(ep: Path, scene_id: str, rec: dict) -> None:
     vo = ep / "audio" / "vo"
     vo.mkdir(parents=True, exist_ok=True)
-    (vo / f"{scene_id}.words.json").write_text(json.dumps(rec))
+    (vo / f"{scene_id}.words.json").write_text(json.dumps(rec), encoding="utf-8")

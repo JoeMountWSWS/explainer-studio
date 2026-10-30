@@ -1,6 +1,7 @@
 import pytest
 
 from studio.common import DEFAULTS
+from studio.script import parse
 
 
 def test_parses_scenes_notes_cues_and_pauses(write_script):
@@ -72,6 +73,16 @@ def test_setting_falls_back_to_defaults(write_script):
     assert script.setting("speed") == 1.1
     assert script.setting("fps") == DEFAULTS["fps"]
     assert script.setting("no-such-setting") is None
+
+
+def test_byte_order_mark_and_non_ascii(tmp_path):
+    # Some Windows editors save UTF-8 with a BOM, which would otherwise hide the front matter.
+    (tmp_path / "ep").mkdir()
+    (tmp_path / "ep" / "script.md").write_bytes("---\ntitle: Engels’ “Anti-Dühring”\n---\n## a: A\nHello — again.\n"
+                                                .encode("utf-8-sig"))
+    script = parse(tmp_path / "ep" / "script.md")
+    assert script.meta["title"] == "Engels’ “Anti-Dühring”"
+    assert script.scenes[0].words == ["Hello", "—", "again."]
 
 
 def test_no_front_matter(write_script):

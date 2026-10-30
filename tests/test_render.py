@@ -47,7 +47,7 @@ def _episode(tmp_path):
 def test_captions_srt(tmp_path):
     ep, timing = _episode(tmp_path)
     n = render.captions(ep, timing, tmp_path / "out.srt", max_chars=20)
-    srt = (tmp_path / "out.srt").read_text()
+    srt = (tmp_path / "out.srt").read_text(encoding="utf-8")
     assert n == 3
     assert srt.split("\n\n") == [
         "1\n00:00:00,500 --> 00:00:02,460\nThe Commune lasted\nseventy-two days,",  # clause break; ends before the next
@@ -60,7 +60,7 @@ def test_ass_captions_highlight_each_word(tmp_path, monkeypatch):
     monkeypatch.setattr(render, "LICENSED_FONTS", tmp_path / "none")
     ep, timing = _episode(tmp_path)
     n = render.ass_captions(ep, timing, tmp_path / "out.ass")
-    ass = (tmp_path / "out.ass").read_text()
+    ass = (tmp_path / "out.ass").read_text(encoding="utf-8")
     events = [line for line in ass.splitlines() if line.startswith("Dialogue:")]
     assert n >= 3 and len(events) == 12  # one event per word
     assert "Source Sans 3 Bold" in ass and "PlayResY: 1080" in ass
@@ -75,7 +75,7 @@ def test_ass_captions_dinpro_breaks_ligatures(tmp_path, monkeypatch):
     ep = tmp_path / "ep"
     write_vo(ep, "a", vo_record([("final", 0.0, 0.5), ("flag.", 0.5, 1.0)]))
     render.ass_captions(ep, _timing(("a", "A", 3)) | {"width": 1080, "height": 1920}, tmp_path / "out.ass")
-    ass = (tmp_path / "out.ass").read_text()
+    ass = (tmp_path / "out.ass").read_text(encoding="utf-8")
     assert "DINPro-Bold" in ass and "f‌inal" in ass and "f‌lag." in ass
     assert "PlayResY: 1920" in ass
 
@@ -85,10 +85,37 @@ def test_ass_color_is_bgr():
 
 
 def test_demo_captions(tmp_path):
-    timing = json.loads((DEMO / "timing.json").read_text())
+    timing = json.loads((DEMO / "timing.json").read_text(encoding="utf-8"))
     n = render.captions(DEMO, timing, tmp_path / "demo.srt")
-    blocks = (tmp_path / "demo.srt").read_text().strip().split("\n\n")
+    blocks = (tmp_path / "demo.srt").read_text(encoding="utf-8").strip().split("\n\n")
     assert n == len(blocks) > 0
     for block in blocks:
         assert all(len(line) <= 42 for line in block.splitlines()[2:])
         assert len(block.splitlines()) <= 4  # index, time, at most two lines
+
+
+def test_burned_captions_use_a_relative_fontsdir(write_script, tmp_path, monkeypatch):
+    # An absolute fontsdir breaks on Windows: the drive colon splits ffmpeg filter options.
+    script = write_script("---\nformat: reel\nburn_captions: true\n---\n## a: A\nHi.\n")
+    ep = tmp_path / "ep"
+    write_vo(ep, "a", vo_record([("Hi.", 0.0, 0.5)]))
+    timing = _timing(("a", "A", 3)) | {"width": 1080, "height": 1920, "format": "reel"}
+    calls = []
+    monkeypatch.setattr(render, "OUT", tmp_path / "out")
+    monkeypatch.setattr(render, "render_scenes", lambda *a: [])
+    monkeypatch.setattr(render, "concat", lambda *a: None)
+    monkeypatch.setattr(render, "build_vo_track", lambda *a: None)
+    monkeypatch.setattr(render, "mix", lambda *a: {"input_i": "-20"})
+    monkeypatch.setattr(render, "ffprobe_duration", lambda p: 3.0)
+    monkeypatch.setattr(render, "run", lambda cmd, cwd=None: calls.append((cmd, cwd)))
+    render.render_episode(ep, script, timing, draft=True, only=None, force=False)
+    [(cmd, cwd)] = calls
+    assert cwd == ep / "build"
+    assert cmd[cmd.index("-vf") + 1] == "ass=captions.ass:fontsdir=fonts"
+    assert any((ep / "build" / "fonts").glob("*.ttf"))
+
+
+def test_concat_list_uses_forward_slashes(tmp_path, monkeypatch):
+    monkeypatch.setattr(render, "run", lambda cmd: None)
+    render.concat([tmp_path / "a.mp4"], tmp_path / "v.mp4")
+    assert (tmp_path / "v.txt").read_text(encoding="utf-8") == f"file '{(tmp_path / 'a.mp4').resolve().as_posix()}'\n"

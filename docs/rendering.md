@@ -19,7 +19,8 @@ uv run studio thumbnail my-video        # out/my-video-thumbnail.jpg
 
 Each scene render is keyed on its HTML, assets, duration and quality, so only changed scenes are
 re-rendered. A single-scene change takes seconds; a full render runs at about real time on the
-reference machine (RX 580, GPU capture).
+reference machine (RX 580, GPU capture). On Windows (and macOS) HyperFrames captures frames by
+screenshot instead, which is slower.
 
 ```bash
 uv run studio render my-video --force            # re-render every scene
@@ -47,7 +48,8 @@ The cache lives in `episodes/<slug>/build/` and is safe to delete.
 
 ## Thumbnail
 
-`studio thumbnail` renders `episodes/<slug>/thumbnail/thumbnail.html` with headless Chromium. The
+`studio thumbnail` renders `episodes/<slug>/thumbnail/thumbnail.html` with headless Chromium (the first
+of `chromium`, `google-chrome`, `chrome` or `msedge` on `PATH`, else the Chrome HyperFrames renders with). The
 first run creates that file from `templates/thumbnail.html`, using the episode title; edit it, then
 run the command again.
 

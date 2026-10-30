@@ -17,7 +17,7 @@ def test_respell_whole_words_longest_first():
 
 
 def test_load_pronunciations_script_overrides_brand(tmp_path, monkeypatch):
-    (tmp_path / "pronunciations.yaml").write_text("Engels: Engles\nWSWS: W S W S\n")
+    (tmp_path / "pronunciations.yaml").write_text("Engels: Engles\nWSWS: W S W S\n", encoding="utf-8")
     monkeypatch.setattr(voice, "BRAND", tmp_path)
     table = voice.load_pronunciations(Script({"pronounce": {"Engels": "Eng-gels"}}, []))
     assert table == {"Engels": "Eng-gels", "WSWS": "W S W S"}

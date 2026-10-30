@@ -28,7 +28,7 @@ def episode_length(ep: Path) -> float:
     path = ep / "timing.json"
     if not path.exists():
         die(f"{path.relative_to(ROOT)} not found - run: studio sync {ep.name}")
-    return float(json.loads(path.read_text())["duration"])
+    return float(json.loads(path.read_text(encoding="utf-8"))["duration"])
 
 
 def generate(ep: Path, prompt: str, length_s: int, model: str, variant: int = 0) -> Path:

@@ -1,4 +1,5 @@
 import os
+import sys
 
 import pytest
 
@@ -17,10 +18,10 @@ def test_sha_is_stable_and_type_aware(tmp_path):
 def test_tree_hash(tmp_path):
     assert common.tree_hash(tmp_path / "missing") == ""
     (tmp_path / "sub").mkdir()
-    (tmp_path / "sub" / "f.txt").write_text("one")
+    (tmp_path / "sub" / "f.txt").write_text("one", encoding="utf-8")
     first = common.tree_hash(tmp_path)
     assert first == common.tree_hash(tmp_path)
-    (tmp_path / "sub" / "f.txt").write_text("three")
+    (tmp_path / "sub" / "f.txt").write_text("three", encoding="utf-8")
     assert common.tree_hash(tmp_path) != first
 
 
@@ -44,7 +45,7 @@ def test_load_env_without_file(tmp_path, monkeypatch):
 def test_episode_dir(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(common, "EPISODES", tmp_path)
     (tmp_path / "ok").mkdir()
-    (tmp_path / "ok" / "script.md").write_text("")
+    (tmp_path / "ok" / "script.md").write_text("", encoding="utf-8")
     assert common.episode_dir("ok") == tmp_path / "ok"
     with pytest.raises(SystemExit):
         common.episode_dir("missing")
@@ -69,15 +70,28 @@ def test_require_media_flags_lfs_pointers(tmp_path, monkeypatch, capsys):
 
 
 def test_run_returns_stdout_and_dies_on_failure(capsys):
-    assert common.run(["python3", "-c", "print('hi')"]) == "hi\n"
+    assert common.run([sys.executable, "-c", "print('hi')"]) == "hi\n"
     with pytest.raises(SystemExit):
-        common.run(["python3", "-c", "import sys; print('boom', file=sys.stderr); sys.exit(3)"])
+        common.run([sys.executable, "-c", "import sys; print('boom', file=sys.stderr); sys.exit(3)"])
     assert "command failed (3)" in capsys.readouterr().err
 
 
-def test_hf_pins_the_version():
+def test_run_decodes_utf8_whatever_the_locale():
+    # Windows decodes child output as cp1252 unless told otherwise; HyperFrames prints ✓ and ◇.
+    code = "import sys; sys.stdout.buffer.write('✓ “done” — ok'.encode())"
+    assert common.run([sys.executable, "-c", code]) == "✓ “done” — ok"
+
+
+def test_hf_pins_the_version(monkeypatch):
+    monkeypatch.setattr(common.shutil, "which", lambda tool: None)
     assert common.hf("check") == ["npx", "--yes", f"hyperframes@{common.HF_VERSION}", "check"]
     assert "HYPERFRAMES_PYTHON" in common.hf_env()
+
+
+def test_hf_runs_npx_by_full_path(monkeypatch):
+    # On Windows npx is npx.cmd, which subprocess can't find from the bare name.
+    monkeypatch.setattr(common.shutil, "which", lambda tool: r"C:\Program Files\nodejs\npx.CMD")
+    assert common.hf("check")[0] == r"C:\Program Files\nodejs\npx.CMD"
 
 
 def test_require_tools(monkeypatch, capsys):
