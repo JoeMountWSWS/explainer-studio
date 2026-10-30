@@ -81,6 +81,7 @@ speed: 0.85
 
 | Variable | Meaning |
 | --- | --- |
-| `ELEVENLABS_API_KEY` | ElevenLabs key. Also read from `.env` at the studio root |
+| `ELEVENLABS_API_KEY` | ElevenLabs key. Also read from `.env` at the studio root (`studio setup` writes it) |
+| `STUDIO_ARCHIVE` | rclone path for `studio archive`. Also read from `.env` (`studio setup` writes it) |
 | `STUDIO_HF_VERSION` | Override the pinned HyperFrames version |
 | `STUDIO_CHATTERBOX_VERSION` | Override the pinned Chatterbox version |

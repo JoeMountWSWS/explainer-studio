@@ -144,6 +144,23 @@ def load_env() -> None:
         os.environ.setdefault(key, value)
 
 
+def write_env(updates: dict[str, str]) -> Path:
+    """Set KEY=value lines in ROOT/.env, keeping comments and other keys; created owner-only (0600)."""
+    path = ROOT / ".env"
+    lines = path.read_text().splitlines() if path.exists() else []
+    pending = dict(updates)
+    for i, line in enumerate(lines):
+        key = line.strip().removeprefix("export ").partition("=")[0].strip()
+        if "=" in line and not line.lstrip().startswith("#") and key in pending:
+            lines[i] = f"{key}={pending.pop(key)}"
+    lines += [f"{k}={v}" for k, v in pending.items()]
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, "w") as f:
+        f.write("\n".join(lines) + "\n")
+    path.chmod(0o600)
+    return path
+
+
 def ffprobe_duration(path: Path) -> float:
     out = run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)])
     return float(out.strip())
@@ -174,7 +191,13 @@ def require_media(ep: Path, extra: list[Path] = ()) -> None:
             f"fetch them with: git lfs install && git lfs pull --include \"episodes/{ep.name}/**,brand/music/**\"")
 
 
+REQUIRED_TOOLS = ("ffmpeg", "ffprobe", "npx")
+
+
+def missing_tools() -> list[str]:
+    return [t for t in REQUIRED_TOOLS if not shutil.which(t)]
+
+
 def require_tools() -> None:
-    for tool in ("ffmpeg", "ffprobe", "npx"):
-        if not shutil.which(tool):
-            die(f"'{tool}' not found on PATH")
+    for tool in missing_tools():
+        die(f"'{tool}' not found on PATH (run `studio setup` to check your install)")

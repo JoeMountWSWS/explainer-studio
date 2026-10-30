@@ -3,6 +3,22 @@
 Every command is `uv run studio <command> <slug>`, run from the repository root. `<slug>` is the
 folder name under `episodes/`. `uv run studio --help` lists them all.
 
+## `setup`
+
+```bash
+uv run studio setup [--check] [--no-verify] [--no-download]
+```
+
+First-time setup. It reports which tools are installed (ffmpeg, ffprobe and npx are required; uv, Chromium,
+rclone, git-lfs, the DINPro fonts and a workspace are optional), then asks a few questions and writes `.env`:
+an optional ElevenLabs API key (tested online without spending credits) and an optional rclone path for
+`studio archive`. It can also download the narration models so the first `sync` doesn't stall. Pressing
+Enter skips or keeps the current value, so it is safe to re-run. Keys are typed without echo, never printed back, and
+saved with owner-only permissions; it refuses to write `.env` if a git repository doesn't ignore it.
+
+`--check` only prints the report, one `ok|missing|optional  name  hint` line per item, and exits 1 if a required tool
+is missing. It is also what runs when input isn't a terminal, so scripts and coding agents can use it as a health check.
+
 ## `new`
 
 ```bash
