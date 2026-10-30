@@ -291,6 +291,7 @@ def test_render_episode_copies_the_video_and_writes_captions_and_chapters(assemb
     out = capsys.readouterr().out
     assert "loudness in -20.5 LUFS -> -14 LUFS target" in out
     assert "note: " in out  # too few chapters for YouTube
+    assert "YouTube chapter rules" in out
 
 
 def test_render_episode_burns_captions_into_reels(assembly, tmp_path, capsys):

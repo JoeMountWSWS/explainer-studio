@@ -18,14 +18,15 @@ Follow [Install](install.md) first. This section covers the choices it leaves op
 ### From PyPI
 
 ```bash
-uv tool install explainer-studio   # or: pip install explainer-studio
+uv tool install explainer-studio   # or: pipx install explainer-studio (Python 3.12 or 3.13 only)
 mkdir my-videos && cd my-videos
 ```
 
 The package is on [PyPI](https://pypi.org/project/explainer-studio/). `uv tool install` puts
 `studio` on your PATH in its own isolated environment, and `uvx --from explainer-studio studio …`
-runs it without installing. With `pip`, install into a virtual environment (or use `pipx install
-explainer-studio`) so its dependencies stay separate from your system Python.
+runs it without installing. `pip` and `pipx` need Python 3.12 or 3.13 (see [Troubleshooting](troubleshooting.md#pip-cant-find-explainer-studio));
+`uv` fetches a suitable Python itself, so prefer it. With `pip`, install into a virtual environment so the
+dependencies stay separate from your system Python.
 
 The folder you run `studio` in is the workspace: it holds `episodes/`, `out/` and `.env`. `studio`
 finds it from any folder below it, or you can point at it with `STUDIO_ROOT`. The house style and

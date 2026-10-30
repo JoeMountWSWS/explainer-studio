@@ -40,7 +40,7 @@ clone the repository.
 **From PyPI**, to make videos in a folder of your own:
 
 ```bash
-pip install explainer-studio       # or: uv tool install explainer-studio
+uv tool install explainer-studio   # or: pipx install explainer-studio (Python 3.12 or 3.13 only)
 mkdir my-videos && cd my-videos
 studio new my-video "My Video"
 ```

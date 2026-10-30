@@ -108,7 +108,8 @@ There are two ways in. Most people want the first.
     mkdir my-videos && cd my-videos
     ```
 
-Then type `studio …` wherever the docs say `uv run studio …`.
+Then type `studio …` wherever the docs say `uv run studio …`. `studio setup` (step 3) needs release 0.1.7
+or later; if it says `invalid choice`, run `uv tool upgrade explainer-studio`.
 
 **From a clone** (to work on the studio itself, or to use the bundled demo episode):
 

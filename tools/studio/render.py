@@ -298,6 +298,8 @@ def render_episode(ep: Path, script: Script, timing: dict, draft: bool, only: se
     info(f"\n  {final.relative_to(OUT.parent)}  {ffprobe_duration(final):.1f}s")
     info(f"  loudness in {m['input_i']} LUFS -> {script.setting('loudness')} LUFS target")
     info(f"  captions: out/{ep.name}.srt ({n} cues)    chapters: out/{ep.name}.chapters.txt")
+    if problems:
+        info("  YouTube chapter rules (only matter when you upload; normal for a short script):")
     for p in problems:
         info(f"  note: {p}")
     return final
