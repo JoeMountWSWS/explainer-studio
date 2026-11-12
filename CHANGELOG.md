@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.1.7](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.6...v0.1.7) (2026-10-30)
+
+
+### Features
+
+* add studio setup wizard for first-time configuration ([#60](https://github.com/JoeMountWSWS/explainer-studio/issues/60)) ([4ec89f2](https://github.com/JoeMountWSWS/explainer-studio/commit/4ec89f224dfefb30f83c8e0cd0845691d88e3839))
+* run natively on Windows ([#59](https://github.com/JoeMountWSWS/explainer-studio/issues/59)) ([fa8bf5f](https://github.com/JoeMountWSWS/explainer-studio/commit/fa8bf5f338a48456a3612412c53ed751827a89c4))
+* studio verify: automated QA of the finished master ([#76](https://github.com/JoeMountWSWS/explainer-studio/issues/76)) ([b743595](https://github.com/JoeMountWSWS/explainer-studio/commit/b743595dde0eea77434eff3e7b926178c9b7a5f1))
+
+
+### Bug fixes
+
+* clarify pip/Python 3.14 limits and first-run notes in install docs ([#65](https://github.com/JoeMountWSWS/explainer-studio/issues/65)) ([13e7a25](https://github.com/JoeMountWSWS/explainer-studio/commit/13e7a25f9ce17d730f292da52e02a90657b06bc5))
+
+
+### Documentation
+
+* add install guide and first-reel tutorial, make setup hints cross-platform ([#63](https://github.com/JoeMountWSWS/explainer-studio/issues/63)) ([ac14cad](https://github.com/JoeMountWSWS/explainer-studio/commit/ac14cad781dfccce0681c2c2ba85659530e4ce57))
+* link the coverage badge to the HTML report ([cc7bbdc](https://github.com/JoeMountWSWS/explainer-studio/commit/cc7bbdcab52f1a6471f4feffe048050849fc9d40))
+
+
+### House style
+
+* remove organisation-specific content from the public repo ([#62](https://github.com/JoeMountWSWS/explainer-studio/issues/62)) ([0b5add4](https://github.com/JoeMountWSWS/explainer-studio/commit/0b5add4ec3cc38278e5ad530efb4628616417bb1))
+
 ## [0.1.6](https://github.com/JoeMountWSWS/explainer-studio/compare/v0.1.5...v0.1.6) (2026-10-25)
 
 
